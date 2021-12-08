@@ -14,7 +14,7 @@ public class DashboardHomePage {
 	}
 	
 	@GetMapping("sign_up")
-	public String showSingUpPage() {
+	public String showSignUpPage() {
 		return "sign_up";
 	}
 	
