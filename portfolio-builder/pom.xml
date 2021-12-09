@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.unical.demacs.informatica</groupId>
-	<artifactId>portfolio-builder</artifactId>
+	<artifactId>digital-es</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>portfolio-builder</name>
-	<description>A portfolio builder</description>
+	<name>digital-es</name>
+	<description>A portfolio builder and recruitment service</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
