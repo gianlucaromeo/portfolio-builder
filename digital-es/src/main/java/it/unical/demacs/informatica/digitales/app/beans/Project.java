@@ -6,7 +6,7 @@ public class Project {
 	private long userId;
 	private String title;
 	private String description;
-	private byte[] picture;
+	private String picture;
 	private String linkRef;
 	
 	public Project() {
@@ -36,10 +36,10 @@ public class Project {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public byte[] getPicture() {
+	public String getPicture() {
 		return picture;
 	}
-	public void setPicture(byte[] picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 	public String getLinkRef() {
