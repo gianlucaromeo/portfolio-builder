@@ -1,6 +1,6 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
-public class RemovedProjects {
+public class RemovedProject {
 	
 	private long id;
 	private long moderatorId;
@@ -8,7 +8,7 @@ public class RemovedProjects {
 	private String reason;
 	private boolean seenByUser;
 	
-	public RemovedProjects() {
+	public RemovedProject() {
 	}
 
 	public long getId() {

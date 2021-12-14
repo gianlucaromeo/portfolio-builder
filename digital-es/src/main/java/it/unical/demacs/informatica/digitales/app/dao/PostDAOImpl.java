@@ -9,7 +9,6 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	
-	
 	@Override
 	public String create(Post post) {
 
