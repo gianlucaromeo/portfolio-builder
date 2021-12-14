@@ -32,8 +32,8 @@ private int SALT = 12;
 			
 			p.setNull(1, Types.INTEGER);
 			p.setString(2,moderator.getUsername());
-			p.setString(4, BCrypt.hashpw(moderator.getPassword(), BCrypt.gensalt(SALT)));
-			p.setString(5, moderator.getEmail());
+			p.setString(3, BCrypt.hashpw(moderator.getPassword(), BCrypt.gensalt(SALT)));
+			p.setString(4, moderator.getEmail());
 			
 			p.executeUpdate(query);
 			
