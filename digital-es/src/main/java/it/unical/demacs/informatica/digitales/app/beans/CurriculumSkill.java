@@ -1,6 +1,6 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
-public class CurriculumSkills {
+public class CurriculumSkill {
 	
 	private long id;
 	private long userId;
@@ -9,7 +9,7 @@ public class CurriculumSkills {
 	private int level;
 	
 	
-	public CurriculumSkills(long id, long userId, long curriculumId, String title, int level) {
+	public CurriculumSkill(long id, long userId, long curriculumId, String title, int level) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -19,7 +19,7 @@ public class CurriculumSkills {
 	}
 	
 	
-	public CurriculumSkills() {
+	public CurriculumSkill() {
 		// TODO Auto-generated constructor stub
 	}
 	
