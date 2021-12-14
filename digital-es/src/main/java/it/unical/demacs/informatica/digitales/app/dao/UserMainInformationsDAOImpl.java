@@ -13,7 +13,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 	public String create(UserMainInformations userMainInfo) {
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO users_main_informations VALUES(?,?,?,?,?,?,?,?,?);";
+		String query = "INSERT INTO users_main_informations VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		
 		try {
 			
@@ -30,11 +30,17 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			p.setString(9, userMainInfo.getSpecialSkillName1());
 			p.setString(10, userMainInfo.getSpecialSkillName2());
 			p.setString(11, userMainInfo.getSpecialSkillName3());
+			p.setString(12, userMainInfo.getSpecialSkillDescr1());
+			p.setString(13, userMainInfo.getSpecialSkillDescr2());
+			p.setString(14, userMainInfo.getSpecialSkillDescr3());
+			p.setString(15, userMainInfo.getFacebookLinkRef());
+			p.setString(16, userMainInfo.getInstagramLinkRef());
+			p.setString(17, userMainInfo.getTwitterLinkRef());
 			
 			p.executeUpdate(query);
 			
 		} catch (SQLException e) {
-			System.err.println("[CurriculumExperiencesDAOImpl] [create]: ");
+			System.err.println("[UserMainInformationsDAOImpl] [create]: ");
 			e.printStackTrace();
 			return Protocol.ERROR;
 		} finally {
