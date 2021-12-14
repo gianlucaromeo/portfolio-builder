@@ -6,7 +6,7 @@ import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSkill>{
+public class CurriculumSkillDAO extends DAOImpl implements DAO<CurriculumSkill>{
 
 	@Override
 	public String create(CurriculumSkill curriculumSkill) {

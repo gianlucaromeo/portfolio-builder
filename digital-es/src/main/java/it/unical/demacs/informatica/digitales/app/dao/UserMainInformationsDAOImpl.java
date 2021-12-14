@@ -27,9 +27,9 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			p.setString(6, userMainInfo.getPresentationPicture1());
 			p.setString(7, userMainInfo.getPresentationPicture2());
 			p.setString(8, userMainInfo.getPresentationPicture3());
-			p.setString(9, userMainInfo.getSk());
-			p.setString(10, userMainInfo.getPresentationPicture2());
-			p.setString(11, userMainInfo.getPresentationPicture3());
+			p.setString(9, userMainInfo.getSpecialSkillName1());
+			p.setString(10, userMainInfo.getSpecialSkillName2());
+			p.setString(11, userMainInfo.getSpecialSkillName3());
 			p.executeUpdate(query);
 			
 		} catch (SQLException e) {
