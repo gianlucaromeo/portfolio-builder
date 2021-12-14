@@ -1,8 +1,5 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
@@ -10,18 +7,15 @@ import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class PostDAOImpl implements DAO<Post> {
+public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	
-	private Connection con = null;
-	private PreparedStatement p = null;
-	private ResultSet rs = null;
 	
 	@Override
 	public String create(Post post) {
 
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO posts VALUES();";
+		String query = "INSERT INTO posts VALUES(?,?,?,?,?,?,?,?);";
 		
 		try {
 			
@@ -48,10 +42,6 @@ public class PostDAOImpl implements DAO<Post> {
 		
 		return Protocol.OK;
 		
-	}
-
-	private void closeAll() {
-		DBUtil.getInstance().closeAll(rs, p);
 	}
 	
 }

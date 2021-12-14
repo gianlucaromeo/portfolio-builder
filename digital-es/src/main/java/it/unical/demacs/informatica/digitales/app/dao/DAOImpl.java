@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.beans;
+package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
