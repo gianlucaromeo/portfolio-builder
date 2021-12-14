@@ -2,7 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
-import it.unical.demacs.informatica.digitales.app.beans.DAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 

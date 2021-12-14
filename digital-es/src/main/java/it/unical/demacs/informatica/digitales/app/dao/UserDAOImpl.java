@@ -8,7 +8,7 @@ import java.sql.Types;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import it.unical.demacs.informatica.digitales.app.beans.DAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
