@@ -1,6 +1,6 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
-public class CurriculumExperiences {
+public class CurriculumExperience {
 	private long id;
 	private long userId;
 	private long curriculumId;
@@ -11,23 +11,11 @@ public class CurriculumExperiences {
 	private String description;
 	private String type;
 	
-	public CurriculumExperiences(long id, long userId, long curriculumId, String title, String place, String startDate,
-			String endDate, String description, String type) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.curriculumId = curriculumId;
-		this.title = title;
-		this.place = place;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.description = description;
-		this.type = type;
-	}
+
 	
 	
 	
-	public CurriculumExperiences() {
+	public CurriculumExperience() {
 		// TODO Auto-generated constructor stub
 	}
 	

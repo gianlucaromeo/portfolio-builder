@@ -39,7 +39,7 @@ public class UserDAOImpl implements DAO<User> {
 			p.setString(6, user.getDateOfBirth().toString("YYYY-MM-dd"));
 			p.setString(7, user.getMainPhoneNumber());
 			p.setString(8, user.getSecondaryPhoneNumber());
-			p.setString(9, user.getEmail());
+			p.setString(9, user.getContactEmail());
 			p.setBoolean(10, user.isConfirmed());
 			
 			p.executeUpdate(query);

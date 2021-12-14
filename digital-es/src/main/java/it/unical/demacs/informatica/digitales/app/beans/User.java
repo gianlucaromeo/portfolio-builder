@@ -16,10 +16,9 @@ public class User {
 	private String contactEmail;
 	private boolean confirmed;
 	
-	
 	public User() {
 	}
-	
+
 	public long getId() {
 		return id;
 	}

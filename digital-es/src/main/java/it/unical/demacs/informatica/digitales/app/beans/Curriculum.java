@@ -5,13 +5,7 @@ public class Curriculum {
 	private long userId;
 	private String hobbiesDescription;
 	
-	
-	public Curriculum(long id, long userId, String hobbiesDescription) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.hobbiesDescription = hobbiesDescription;
-	}
+
 	
 	public Curriculum() {
 		// TODO Auto-generated constructor stub
