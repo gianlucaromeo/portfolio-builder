@@ -1,30 +1,20 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class ProjectDAOImpl implements DAO<Project>{
-	private int SALT = 12;
-	
-	private Connection con = null;
-	private PreparedStatement p = null;
-	private ResultSet rs = null;
-	
+public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 	@Override
 	public String create(Project project) {
 
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO projects VALUES(?,?,?,?);";
+		String query = "INSERT INTO projects VALUES(?,?,?,?,?,?);";
 		
 		try {
 			
@@ -51,7 +41,4 @@ public class ProjectDAOImpl implements DAO<Project>{
 		
 	}
 
-	private void closeAll() {
-		DBUtil.getInstance().closeAll(rs, p);
-	}
 }

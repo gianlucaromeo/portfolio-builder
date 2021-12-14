@@ -12,12 +12,9 @@ import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class ModeratorDAOImpl implements DAO<Moderator>{
-private int SALT = 12;
+public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	
-	private Connection con = null;
-	private PreparedStatement p = null;
-	private ResultSet rs = null;
+	private int SALT = 12;
 	
 	@Override
 	public String create(Moderator moderator) {
@@ -49,7 +46,4 @@ private int SALT = 12;
 		
 	}
 
-	private void closeAll() {
-		DBUtil.getInstance().closeAll(rs, p);
-	}
 }
