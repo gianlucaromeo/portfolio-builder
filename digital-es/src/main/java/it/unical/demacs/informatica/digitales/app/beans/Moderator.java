@@ -6,6 +6,9 @@ public class Moderator {
 	private String username;
 	private String password;
 	private String email;
+	
+	public Moderator() {}
+
 	public long getId() {
 		return id;
 	}
