@@ -1,0 +1,68 @@
+package it.unical.demacs.informatica.digitales.app.beans;
+
+public class Post {
+
+	private long id;
+	private String title;
+	private String description;
+	private byte[] picture;
+	private String pubblicationDate;
+	private String lastEditDate;
+	private String refLink;
+	private long userId;
+	
+	public Post() {
+	}
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public byte[] getPicture() {
+		return picture;
+	}
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+	public String getPubblicationDate() {
+		return pubblicationDate;
+	}
+	public void setPubblicationDate(String pubblicationDate) {
+		this.pubblicationDate = pubblicationDate;
+	}
+	public String getLastEditDate() {
+		return lastEditDate;
+	}
+	public void setLastEditDate(String lastEditDate) {
+		this.lastEditDate = lastEditDate;
+	}
+	public String getRefLink() {
+		return refLink;
+	}
+	public void setRefLink(String refLink) {
+		this.refLink = refLink;
+	}
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	
+	
+	
+}
