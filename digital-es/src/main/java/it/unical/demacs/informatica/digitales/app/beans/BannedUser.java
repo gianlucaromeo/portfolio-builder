@@ -6,8 +6,8 @@ public class BannedUser {
 	private long userId;
 	private long moderatorId;
 	private String reason;
-	private String startDate;
-	private String endDate;
+	private String dateStart;
+	private String dateEnd;
 	
 	
 	public BannedUser() {
@@ -38,17 +38,17 @@ public class BannedUser {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public String getStartDate() {
-		return startDate;
+	public String getDateEnd() {
+		return dateEnd;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setDateEnd(String dateEnd) {
+		this.dateEnd = dateEnd;
 	}
-	public String getEndDate() {
-		return endDate;
+	public String getDateStart() {
+		return dateStart;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setDateStart(String dateStart) {
+		this.dateStart = dateStart;
 	}
 	
 	
