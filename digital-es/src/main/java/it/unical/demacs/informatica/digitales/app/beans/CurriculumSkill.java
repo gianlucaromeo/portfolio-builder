@@ -8,22 +8,11 @@ public class CurriculumSkill {
 	private String title;
 	private int level;
 	
-	
-	public CurriculumSkill(long id, long userId, long curriculumId, String title, int level) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.curriculumId = curriculumId;
-		this.title = title;
-		this.level = level;
-	}
-	
+
 	
 	public CurriculumSkill() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 	
 	
 	public long getId() {
