@@ -46,7 +46,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 			p.setString(3, user.getUsername());
 			p.setString(4, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(SALT)));
 			p.setString(5, user.getEmail());
-			p.setString(6, user.getDateOfBirth().toString("YYYY-MM-dd"));
+			p.setString(6, user.getDateOfBirth());
 			p.setString(7, user.getMainPhoneNumber());
 			p.setString(8, user.getSecondaryPhoneNumber());
 			p.setString(9, user.getContactEmail());
