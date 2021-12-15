@@ -10,10 +10,17 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
-	private DateTime dateOfBirth; 
+	private String dateOfBirth; 
 	private String mainPhoneNumber;
 	private String secondaryPhoneNumber;
 	private String contactEmail;
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 	private boolean confirmed;
 	
 	public User() {
@@ -55,12 +62,7 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public DateTime getDateOfBirth() {
-		return dateOfBirth;
-	}
-	public void setDateOfBirth(DateTime dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+	
 	public String getMainPhoneNumber() {
 		return mainPhoneNumber;
 	}

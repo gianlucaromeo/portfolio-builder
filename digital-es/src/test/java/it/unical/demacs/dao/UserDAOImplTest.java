@@ -24,7 +24,7 @@ public class UserDAOImplTest {
 		user.setUsername("cristiandrami");
 		user.setPassword("MariaCristinaBellissima1234?");
 		user.setEmail("thebreakinggames0@outlook.it");
-		user.setDateOfBirth(new DateTime(2007, 1, 30, 0, 0));
+		user.setDateOfBirth("01-30-2007");
 		user.setMainPhoneNumber("3169981021");
 		user.setSecondaryPhoneNumber("0189556712");
 		user.setContactEmail("bellissima@me.it");
