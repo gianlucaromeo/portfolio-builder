@@ -11,7 +11,7 @@ import it.unical.demacs.informatica.digitales.app.dao.CurriculumSkillDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class UserMainINformationDAOImplTest {
+public class UserMainInformationDAOImplTest {
 	private static UserMainInformations userInfo;
 	private static UserMainInformationsDAOImpl userInfoDAOImpl = UserMainInformationsDAOImpl.getInstance();
 	

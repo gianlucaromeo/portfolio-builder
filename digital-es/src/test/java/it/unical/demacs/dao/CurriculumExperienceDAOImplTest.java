@@ -25,7 +25,7 @@ public class CurriculumExperienceDAOImplTest {
 		curriculumExperience.setPlace("Zurigo, Switzerland" );
 		curriculumExperience.setType("WORK");
 		curriculumExperience.setStartDate("2011-07-23");
-		curriculumExperience.setEndDate("2011-07-23");
+		curriculumExperience.setEndDate("2017-04-28");
 		
 		//vedere DB
 		curriculumExperience.setCurriculumId(1);
