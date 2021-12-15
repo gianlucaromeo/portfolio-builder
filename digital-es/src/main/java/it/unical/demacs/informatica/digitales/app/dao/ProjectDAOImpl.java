@@ -39,7 +39,7 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 			p.setString(4, project.getPicture());
 			p.setString(5, project.getLinkRef());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[ProjectDAOImpl] [create]: ");

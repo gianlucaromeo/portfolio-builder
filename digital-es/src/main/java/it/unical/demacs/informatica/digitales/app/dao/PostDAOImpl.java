@@ -41,7 +41,7 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 			p.setString(6, post.getRefLink());
 			p.setLong(7, post.getUserId());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[PostDAOImpl] [create]: ");

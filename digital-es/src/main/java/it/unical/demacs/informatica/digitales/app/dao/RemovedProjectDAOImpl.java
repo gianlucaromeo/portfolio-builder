@@ -39,7 +39,7 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 			p.setString(3, removedProject.getReason());
 			p.setBoolean(4, removedProject.isSeenByUser());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[RemovedProjectDAOImpl] [create]: ");

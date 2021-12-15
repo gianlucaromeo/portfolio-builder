@@ -38,7 +38,7 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 			p.setLong(4, removedPost.getPostId());
 			p.setBoolean(5, removedPost.isSeenByUser());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[RemovedPostDAOImpl] [create]: ");

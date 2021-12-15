@@ -39,7 +39,7 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 			p.setString(2, BCrypt.hashpw(moderator.getPassword(), BCrypt.gensalt(SALT)));
 			p.setString(3, moderator.getEmail());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[ModeratorDAOImpl] [create]: ");

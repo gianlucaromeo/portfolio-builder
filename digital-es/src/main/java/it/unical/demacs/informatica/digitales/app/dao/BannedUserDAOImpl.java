@@ -41,7 +41,7 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 			p.setString(4, bannedUser.getDateStart());
 			p.setString(5, bannedUser.getDateEnd());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[BanendUsersDAOImpl] [create]: ");
