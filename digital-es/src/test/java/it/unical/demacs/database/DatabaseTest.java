@@ -3,6 +3,8 @@ package it.unical.demacs.database;
 import static org.junit.Assert.assertNotEquals;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -18,15 +21,9 @@ import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 
 public class DatabaseTest {
 
-	@Rule
-	public MockitoRule mockitoRule = MockitoJUnit.rule();
-	
-	@Rule
-	public ExpectedException expectedEx = ExpectedException.none();
-
-	private static DBUtil dbUtil = null;
-	
+	private static DBUtil dbUtil = null;	
 	private static Connection con = null;
+	
 	
 	@BeforeClass
 	public static void beforeClass() {

@@ -15,23 +15,35 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 
+	private static UserDAOImpl instance = null;
+	
+	public static UserDAOImpl getInstance() {
+		if (instance == null) {
+			instance = new UserDAOImpl();
+		}
+		return instance;
+	}
+	
+	private UserDAOImpl() {
+		
+	}
+	
 	private int SALT = 12;
 
-	
 	@Override
 	public String create(User user) {
 
-		con = DBUtil.getInstance().getConnection();
+		con = DBUtil.getInstance().getConnection(); 
 		
-		String query = "INSERT INTO users VALUES(?,?,?,?,?,?,?,?,?,?);";
+		String query = "INSERT INTO users VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			
-			p.setNull(1, Types.INTEGER);
-			p.setString(2, user.getFirstName());
-			p.setString(3, user.getLastName());
+			p.setString(1, user.getFirstName());
+			p.setString(2, user.getLastName());
+			p.setString(3, user.getUsername());
 			p.setString(4, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(SALT)));
 			p.setString(5, user.getEmail());
 			p.setString(6, user.getDateOfBirth().toString("YYYY-MM-dd"));
@@ -40,7 +52,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 			p.setString(9, user.getContactEmail());
 			p.setBoolean(10, user.isConfirmed());
 			
-			p.executeUpdate(query);
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[UserDAOImpl] [create]: ");
