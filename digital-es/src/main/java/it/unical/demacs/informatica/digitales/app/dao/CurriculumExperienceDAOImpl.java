@@ -9,28 +9,38 @@ import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<CurriculumExperience>{
+	private static CurriculumExperienceDAOImpl instance= null;
+	
+	private CurriculumExperienceDAOImpl() {}
+	
+	public static CurriculumExperienceDAOImpl getInstance(){
+		if(instance==null)
+			instance= new CurriculumExperienceDAOImpl();
+		return instance;
+	}
+
 
 	@Override
 	public String create(CurriculumExperience curriculumExperience) {
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO curriculum_experiences VALUES(?,?,?,?,?,?,?,?,?);";
+		String query = "INSERT INTO curriculum_experiences VALUES(DEFAULT,?,?,?,?,?,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			
-			p.setNull(1, Types.INTEGER);
-			p.setLong(2, curriculumExperience.getUserId());
-			p.setString(3, curriculumExperience.getTitle());
-			p.setString(4, curriculumExperience.getPlace());
-			p.setString(5, curriculumExperience.getStartDate());
-			p.setString(6, curriculumExperience.getEndDate());
-			p.setString(7, curriculumExperience.getDescription());
-			p.setString(8, curriculumExperience.getType());
-			p.setLong(9, curriculumExperience.getCurriculumId());
 			
-			p.executeUpdate(query);
+			p.setLong(1, curriculumExperience.getUserId());
+			p.setString(2, curriculumExperience.getTitle());
+			p.setString(3, curriculumExperience.getPlace());
+			p.setString(4, curriculumExperience.getStartDate());
+			p.setString(5, curriculumExperience.getEndDate());
+			p.setString(6, curriculumExperience.getDescription());
+			p.setString(7, curriculumExperience.getType());
+			p.setLong(8, curriculumExperience.getCurriculumId());
+			
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[CurriculumExperiencesDAOImpl] [create]: ");

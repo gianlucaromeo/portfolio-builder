@@ -16,21 +16,29 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 
-
+	private static CurriculumDAOImpl instance= null;
+	
+	private CurriculumDAOImpl() {}
+	
+	public static CurriculumDAOImpl getInstance(){
+		if(instance==null)
+			instance= new CurriculumDAOImpl();
+		return instance;
+	}
 	@Override
 	public String create(Curriculum curriculum) {
 	con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO curriculum VALUES(?,?,?);";
+		String query = "INSERT INTO curriculum VALUES(DEFAULT,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			
-			p.setNull(1, Types.INTEGER);
-			p.setLong(2, curriculum.getUserId());
-			p.setString(3, curriculum.getHobbiesDescription());
-			p.executeUpdate(query);
+			
+			p.setLong(1, curriculum.getUserId());
+			p.setString(2, curriculum.getHobbiesDescription());
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[CurriculumDAOImpl] [create]: ");

@@ -10,7 +10,7 @@ import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject> {
-	
+
 	private static RemovedProjectDAOImpl instance = null;
 	
 	public static RemovedProjectDAOImpl getInstance() {
@@ -21,7 +21,6 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	}
 	
 	private RemovedProjectDAOImpl() {
-		
 	}
 	
 	@Override

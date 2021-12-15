@@ -9,6 +9,18 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 	
+	private static RemovedPostDAOImpl instance = null;
+	
+	public static RemovedPostDAOImpl getInstance() {
+		if (instance == null) {
+			instance = new RemovedPostDAOImpl();
+		}
+		return instance;
+	}
+	
+	private RemovedPostDAOImpl() {
+	}
+	
 	@Override
 	public String create(RemovedPost removedPost) {
 		

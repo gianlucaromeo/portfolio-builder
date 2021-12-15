@@ -7,24 +7,34 @@ import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSkill>{
+	
+	private static CurriculumSkillDAOImpl instance= null;
+	
+	private CurriculumSkillDAOImpl() {}
+	
+	public static CurriculumSkillDAOImpl getInstance(){
+		if(instance==null)
+			instance= new CurriculumSkillDAOImpl();
+		return instance;
+	}
 
 	@Override
 	public String create(CurriculumSkill curriculumSkill) {
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO curriculum_skills VALUES(?,?,?,?,?);";
+		String query = "INSERT INTO curriculum_skills VALUES(DEFAULT,?,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			
-			p.setNull(1, Types.INTEGER);
-			p.setLong(2, curriculumSkill.getUserId());
-			p.setString(3, curriculumSkill.getTitle());
-			p.setInt(4, curriculumSkill.getLevel());
-			p.setLong(5, curriculumSkill.getCurriculumId());
 			
-			p.executeUpdate(query);
+			p.setLong(1, curriculumSkill.getUserId());
+			p.setString(2, curriculumSkill.getTitle());
+			p.setInt(3, curriculumSkill.getLevel());
+			p.setLong(4, curriculumSkill.getCurriculumId());
+			
+			p.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.err.println("[CurriculumSkillDAOImpl] [create]: ");
