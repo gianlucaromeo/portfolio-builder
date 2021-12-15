@@ -4,6 +4,9 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.sql.Connection;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,6 +32,21 @@ public class DatabaseTest {
 	public static void beforeClass() {
 		System.out.println("[beforeClass]");
 		dbUtil = DBUtil.getInstance();
+	}
+	
+	@AfterClass
+	public static void afterClass() {
+		System.out.println("[afterClass]");
+	}
+	
+	@Before
+	public void before() {
+		System.out.println("[before]");
+	}
+	
+	@After
+	public void after() {
+		System.out.println("[after]");
 	}
 	
 	@Test
