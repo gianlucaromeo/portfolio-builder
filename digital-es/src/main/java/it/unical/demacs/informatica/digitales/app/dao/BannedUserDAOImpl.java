@@ -10,24 +10,36 @@ import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
-
+	
+	private static BannedUserDAOImpl instance = null;
+	
+	public static BannedUserDAOImpl getInstance() {
+		if (instance == null) {
+			instance = new BannedUserDAOImpl();
+		}
+		return instance;
+	}
+	
+	private BannedUserDAOImpl() {
+		
+	}
+	
 	@Override
 	public String create(BannedUser bannedUser) {
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO banned_users VALUES(?,?,?,?,?,?);";
+		String query = "INSERT INTO banned_users VALUES(DEFAULT,?,?,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			
-			p.setNull(1, Types.INTEGER);
-			p.setLong(2, bannedUser.getUserId());
-			p.setLong(3,bannedUser.getModeratorId());
-			p.setString(4, bannedUser.getReason());
-			p.setString(5, bannedUser.getDateStart());
-			p.setString(6, bannedUser.getDateEnd());
+			p.setLong(1, bannedUser.getUserId());
+			p.setLong(2,bannedUser.getModeratorId());
+			p.setString(3, bannedUser.getReason());
+			p.setString(4, bannedUser.getDateStart());
+			p.setString(5, bannedUser.getDateEnd());
 			
 			p.executeUpdate(query);
 			

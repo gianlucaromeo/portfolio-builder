@@ -1,11 +1,6 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
-
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
@@ -14,6 +9,19 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	
+	private static ModeratorDAOImpl instance = null;
+	
+	public static ModeratorDAOImpl getInstance() {
+		if (instance == null) {
+			instance = new ModeratorDAOImpl();
+		}
+		return instance;
+	}
+	
+	private ModeratorDAOImpl() {
+		
+	}
+	
 	private int SALT = 12;
 	
 	@Override
@@ -21,16 +29,15 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO moderators VALUES(?,?,?,?);";
+		String query = "INSERT INTO moderators VALUES(DEFAULT,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
-			
-			p.setNull(1, Types.INTEGER);
-			p.setString(2,moderator.getUsername());
-			p.setString(3, BCrypt.hashpw(moderator.getPassword(), BCrypt.gensalt(SALT)));
-			p.setString(4, moderator.getEmail());
+
+			p.setString(1,moderator.getUsername());
+			p.setString(2, BCrypt.hashpw(moderator.getPassword(), BCrypt.gensalt(SALT)));
+			p.setString(3, moderator.getEmail());
 			
 			p.executeUpdate(query);
 			
