@@ -61,7 +61,8 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 
 	@Override
 	public String update(UserMainInformations userMainInfo) {
-con = DBUtil.getInstance().getConnection();
+		
+		con = DBUtil.getInstance().getConnection();
 		
 		String query = "UPDATE user_main_informations SET user_id=?,profile_picture=?,logo_picture=?,logo_name=?,"
 				+ "bio=?, presentation_picture_1=?,presentation_picture_2=?,presentation_picture_3=?,"
@@ -102,6 +103,12 @@ con = DBUtil.getInstance().getConnection();
 		}
 		
 		return Protocol.OK;
+	}
+	
+	@Override
+	public long findId(UserMainInformations t) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

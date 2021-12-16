@@ -84,4 +84,10 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 		
 	}
 	
+	@Override
+	public long findId(RemovedProject t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 }

@@ -83,5 +83,11 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 		
 		return Protocol.OK;
 	}
+	
+	@Override
+	public long findId(Project t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

@@ -81,4 +81,10 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		return Protocol.OK;
 		
 	}
+	
+	@Override
+	public long findId(RemovedPost t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

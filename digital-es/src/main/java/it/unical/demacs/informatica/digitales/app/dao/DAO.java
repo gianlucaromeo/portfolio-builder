@@ -11,6 +11,7 @@ public interface DAO<T> {
 	String update(T t);
 	
 	// RETRIEVE
+	long findId(T t);
 	//T findById(long id);
 	//Set<T> findAll();
 	

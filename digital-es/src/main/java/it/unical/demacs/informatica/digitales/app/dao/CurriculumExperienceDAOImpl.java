@@ -83,5 +83,11 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 		
 		return Protocol.OK;
 	}
+	
+	@Override
+	public long findId(CurriculumExperience t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

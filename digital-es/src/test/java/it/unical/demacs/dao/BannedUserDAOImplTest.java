@@ -29,4 +29,5 @@ public class BannedUserDAOImplTest {
 		String res = bannedUserDAOImpl.create(bannedUser);
 		assertEquals(res, Protocol.OK);
 	}
+	
 }

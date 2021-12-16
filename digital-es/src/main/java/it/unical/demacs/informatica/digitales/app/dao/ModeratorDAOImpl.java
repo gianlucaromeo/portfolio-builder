@@ -82,5 +82,11 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 		return Protocol.OK;
 		
 	}
+	
+	@Override
+	public long findId(Moderator t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

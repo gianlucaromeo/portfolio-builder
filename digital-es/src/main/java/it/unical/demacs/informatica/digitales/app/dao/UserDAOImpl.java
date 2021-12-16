@@ -102,6 +102,12 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		return Protocol.OK;
 
 	}
+	
+	@Override
+	public long findId(User t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	
 }
