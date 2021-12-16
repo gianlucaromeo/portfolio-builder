@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
@@ -36,11 +37,19 @@ public class UserMainInformationDAOImplTest {
 		userInfo.setTwitterLinkRef("twitter.com/...");
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddCurriculumSkillToDatabase() {
 		System.out.println("[checkAddCurriculumSkillToDatabase]");
 		String res = userInfoDAOImpl.create(userInfo);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindBannedUserId() {
+		System.out.println("[checkUserMainInformationId]");
+		long id = userInfoDAOImpl.findId(userInfo);
+		assertEquals(-1, id);
 	}
 	
 

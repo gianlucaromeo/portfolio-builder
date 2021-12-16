@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
@@ -22,10 +23,18 @@ public class RemovedProjectDAOImplTest {
 		removedProject.setSeenByUser(false);
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddRemovedProjectToDatabase() {
 		System.out.println("[checkAddRemovedProjectToDatabase]");
 		String res = removedProjectDAOImpl.create(removedProject);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindRemovedProjectId() {
+		System.out.println("[checkFindRemovedProjectId]");
+		long id = removedProjectDAOImpl.findId(removedProject);
+		assertEquals(-1, id);
 	}
 }

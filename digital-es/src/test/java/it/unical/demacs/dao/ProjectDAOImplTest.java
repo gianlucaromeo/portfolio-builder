@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.Project;
@@ -11,7 +12,7 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class ProjectDAOImplTest {
 	private static Project project;
-	private static ProjectDAOImpl projetDAOImpl = ProjectDAOImpl.getInstance();
+	private static ProjectDAOImpl projectDAOImpl = ProjectDAOImpl.getInstance();
 	
 	@BeforeClass
 	public static void beforeClass() {
@@ -25,11 +26,19 @@ public class ProjectDAOImplTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddPostToDatabase() {
 		System.out.println("[checkAddProjectToDatabase]");
-		String res = projetDAOImpl.create(project);
+		String res = projectDAOImpl.create(project);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindProjectId() {
+		System.out.println("[checkFindProjectId]");
+		long id = projectDAOImpl.findId(project);
+		assertEquals(-1, id);
 	}
 
 }

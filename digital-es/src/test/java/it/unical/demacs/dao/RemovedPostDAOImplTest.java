@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
@@ -24,6 +25,7 @@ public class RemovedPostDAOImplTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddRemovedPostToDatabase() {
 		System.out.println("[checkAddRemovedPostToDatabase]");
@@ -31,11 +33,18 @@ public class RemovedPostDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+//	@Test
+//	public void checkUpdateRemovedPostToDatabase() {
+//		System.out.println("[checkUpdateRemovedPostToDatabase]");
+//		String res = remPostsDAOImpl.update(remPost);
+//		assertEquals(res, Protocol.OK);
+//	}
+	
 	@Test
-	public void checkUpdateRemovedPostToDatabase() {
-		System.out.println("[checkUpdateRemovedPostToDatabase]");
-		String res = remPostsDAOImpl.update(remPost);
-		assertEquals(res, Protocol.OK);
+	public void checkFindBannedUserId() {
+		System.out.println("[checkFindRemovedPostId]");
+		long id = remPostsDAOImpl.findId(remPost);
+		assertEquals(1, id);
 	}
 
 

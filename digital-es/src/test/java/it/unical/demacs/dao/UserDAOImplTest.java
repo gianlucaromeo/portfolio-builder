@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.User;
@@ -31,11 +32,19 @@ public class UserDAOImplTest {
 		user.setConfirmed(false);
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddUserToDatabase() {
 		System.out.println("[checkAddUserToDatabase]");
 		String res = userDAOImpl.create(user);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindBannedUserId() {
+		System.out.println("[checkFindUserId]");
+		long id = userDAOImpl.findId(user);
+		assertEquals(-1, id);
 	}
 	
 }
