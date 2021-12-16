@@ -85,9 +85,38 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 	}
 	
 	@Override
-	public long findId(CurriculumExperience t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(CurriculumExperience curriculumEx) {
+
+		long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from curriculum_experiences WHERE user_id=?, title=?, date_start=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, curriculumEx.getUserId());
+			p.setString(2, curriculumEx.getTitle());
+			p.setString(3, curriculumEx.getStartDate());
+			
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumExperienceDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
 	}
 
 }
