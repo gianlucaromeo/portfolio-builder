@@ -54,7 +54,33 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 	}
 
 	@Override
-	public String update(Project t) {
+	public String update(Project project) {
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE projects SET user_id=?, title=?, description=?, picture=?, link_ref=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1,project.getUserId());
+			p.setString(2,project.getTitle());
+			p.setString(3, project.getDescription());
+			p.setString(4, project.getPicture());
+			p.setString(5, project.getLinkRef());
+			p.setLong(6, project.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[ProjectDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
 	}
 

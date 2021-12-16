@@ -49,8 +49,33 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 	}
 
 	@Override
-	public String update(CurriculumSkill t) {
+	public String update(CurriculumSkill curriculumSkill) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE curriculum_skills SET user_id=?, title=?, level=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, curriculumSkill.getUserId());
+			p.setString(2, curriculumSkill.getTitle());
+			p.setInt(3, curriculumSkill.getLevel());
+			p.setLong(4, curriculumSkill.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumSkillDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
+		
 	}
 	
 

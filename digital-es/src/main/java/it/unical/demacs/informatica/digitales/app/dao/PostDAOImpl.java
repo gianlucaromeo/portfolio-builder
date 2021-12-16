@@ -56,8 +56,37 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	}
 
 	@Override
-	public String update(Post t) {
+	public String update(Post post) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE posts SET title=?, description=?, picture=?, publication_date=?, last_edit_date=?, ref_link=?, user_id=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setString(1, post.getTitle());
+			p.setString(2, post.getDescription());
+			p.setString(3, post.getPicture());
+			p.setString(4, post.getPubblicationDate());
+			p.setString(5, post.getLastEditDate());
+			p.setString(6, post.getRefLink());
+			p.setLong(7, post.getUserId());
+			p.setLong(8, post.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[PostDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
+		
 	}
 	
 }

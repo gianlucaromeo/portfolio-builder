@@ -34,7 +34,7 @@ public class RemovedPostDAOImplTest {
 	@Test
 	public void checkUpdateRemovedPostToDatabase() {
 		System.out.println("[checkUpdateRemovedPostToDatabase]");
-		Boolean res = remPostsDAOImpl.update(remPost);
+		String res = remPostsDAOImpl.update(remPost);
 		assertEquals(res, Protocol.OK);
 	}
 
