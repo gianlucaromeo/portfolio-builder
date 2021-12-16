@@ -18,6 +18,7 @@ public class UserMainInformationDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		userInfo=new UserMainInformations();
+		userInfo.setUserId(1);
 		userInfo.setLogoName("MyName");
 		userInfo.setBio("This is a biography");
 		userInfo.setProfilePicture("/profile.jpg");	

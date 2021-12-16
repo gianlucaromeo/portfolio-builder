@@ -22,6 +22,7 @@ public class ModeratorDAOImplTest {
 		moderator.setEmail("ModeratoreVero@a.it");
 	}
 	
+	/* Tested */
 	@Test
 	public void checkAddModeratorToDatabase() {
 		System.out.println("[checkAddModeratorToDatabase]");

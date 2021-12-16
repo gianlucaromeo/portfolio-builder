@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.beans;
 
 public class UserMainInformations {
 
+	private long userId; // also primary key
 	private String profilePicture;
 	private String logoPicture;
 	private String logoName;
@@ -20,6 +21,14 @@ public class UserMainInformations {
 	private String twitterLinkRef;
 	
 	public UserMainInformations() {
+	}
+	
+	public long getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 	
 	public String getProfilePicture() {

@@ -22,29 +22,29 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 	public String create(UserMainInformations userMainInfo) {
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO users_main_informations VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String query = "INSERT INTO users_main_informations VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
-			
 		
-			p.setString(1, userMainInfo.getProfilePicture());
-			p.setString(2, userMainInfo.getLogoPicture());
-			p.setString(3, userMainInfo.getLogoName());
-			p.setString(4, userMainInfo.getBio());
-			p.setString(5, userMainInfo.getPresentationPicture1());
-			p.setString(6, userMainInfo.getPresentationPicture2());
-			p.setString(7, userMainInfo.getPresentationPicture3());
-			p.setString(8, userMainInfo.getSpecialSkillName1());
-			p.setString(9, userMainInfo.getSpecialSkillName2());
-			p.setString(10, userMainInfo.getSpecialSkillName3());
-			p.setString(11, userMainInfo.getSpecialSkillDescr1());
-			p.setString(12, userMainInfo.getSpecialSkillDescr2());
-			p.setString(13, userMainInfo.getSpecialSkillDescr3());
-			p.setString(14, userMainInfo.getFacebookLinkRef());
-			p.setString(15, userMainInfo.getInstagramLinkRef());
-			p.setString(16, userMainInfo.getTwitterLinkRef());
+			p.setLong(1, userMainInfo.getUserId());
+			p.setString(2, userMainInfo.getProfilePicture());
+			p.setString(3, userMainInfo.getLogoPicture());
+			p.setString(4, userMainInfo.getLogoName());
+			p.setString(5, userMainInfo.getBio());
+			p.setString(6, userMainInfo.getPresentationPicture1());
+			p.setString(7, userMainInfo.getPresentationPicture2());
+			p.setString(8, userMainInfo.getPresentationPicture3());
+			p.setString(9, userMainInfo.getSpecialSkillName1());
+			p.setString(10, userMainInfo.getSpecialSkillName2());
+			p.setString(11, userMainInfo.getSpecialSkillName3());
+			p.setString(12, userMainInfo.getSpecialSkillDescr1());
+			p.setString(13, userMainInfo.getSpecialSkillDescr2());
+			p.setString(14, userMainInfo.getSpecialSkillDescr3());
+			p.setString(15, userMainInfo.getFacebookLinkRef());
+			p.setString(16, userMainInfo.getInstagramLinkRef());
+			p.setString(17, userMainInfo.getTwitterLinkRef());
 			
 			p.executeUpdate();
 			
