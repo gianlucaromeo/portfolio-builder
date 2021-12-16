@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
@@ -10,6 +11,7 @@ import it.unical.demacs.informatica.digitales.app.dao.BannedUserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class BannedUserDAOImplTest {
+	
 	private static BannedUser bannedUser;
 	private static BannedUserDAOImpl bannedUserDAOImpl = BannedUserDAOImpl.getInstance();
 	
@@ -23,11 +25,19 @@ public class BannedUserDAOImplTest {
 		bannedUser.setDateEnd("BannedUsereVero@a.it");
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddBannedUserToDatabase() {
 		System.out.println("[checkAddBannedUserToDatabase]");
 		String res = bannedUserDAOImpl.create(bannedUser);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindBannedUserId() {
+		System.out.println("[checkFindBannedUserId]");
+		long id = bannedUserDAOImpl.findId(bannedUser);
+		assertEquals(1, id);
 	}
 	
 }

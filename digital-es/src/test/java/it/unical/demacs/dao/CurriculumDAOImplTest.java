@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumDAOImpl;
@@ -20,11 +21,19 @@ public class CurriculumDAOImplTest {
 		curriculum.setUserId(2);
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddCurriculumToDatabase() {
 		System.out.println("[checkAddCurriculumToDatabase]");
 		String res = curriculumDAOImpl.create(curriculum);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkCurriculumId() {
+		System.out.println("[checkCurriculumId]");
+		long id = curriculumDAOImpl.findId(curriculum);
+		assertEquals(2, id);
 	}
 	
 
