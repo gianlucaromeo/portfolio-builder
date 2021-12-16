@@ -56,7 +56,32 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 	}
 
 	@Override
-	public String update(BannedUser t) {
+	public String update(BannedUser bannedUser) {
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE banned_users SET user_id=?, moderator_id=?, reason=?, date_start=?, date_end=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, bannedUser.getUserId());
+			p.setLong(2, bannedUser.getModeratorId());
+			p.setString(3, bannedUser.getReason());
+			p.setString(4, bannedUser.getDateStart());
+			p.setString(5, bannedUser.getDateEnd());
+			p.setLong(6, bannedUser.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[BannedUserDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
 	}
 	

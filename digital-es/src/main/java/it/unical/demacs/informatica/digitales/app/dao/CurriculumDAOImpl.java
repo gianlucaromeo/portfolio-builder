@@ -52,7 +52,29 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 	}
 
 	@Override
-	public String update(Curriculum t) {
+	public String update(Curriculum curriculum) {
+		
+		con = DBUtil.getInstance().getConnection();
+		String query = "UPDATE curriculum SET user_id=?, hobbies_descr=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, curriculum.getUserId());
+			p.setString(2, curriculum.getHobbiesDescription());
+			
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
 	}
 	

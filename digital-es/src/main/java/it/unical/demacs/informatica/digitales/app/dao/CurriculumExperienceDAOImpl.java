@@ -54,7 +54,34 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 	}
 
 	@Override
-	public String update(CurriculumExperience t) {
+	public String update(CurriculumExperience curriculumEx) {
+		con = DBUtil.getInstance().getConnection();
+		String query = "UPDATE curriculum_experiences SET user_id=?, title=?, place=?, date_start=?, end_date=?, description=?, type=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, curriculumEx.getUserId());
+			p.setString(2, curriculumEx.getTitle());
+			p.setString(3, curriculumEx.getPlace());
+			p.setString(4, curriculumEx.getStartDate());
+			p.setString(5, curriculumEx.getEndDate());
+			p.setString(6, curriculumEx.getDescription());
+			p.setString(7, curriculumEx.getType());
+			
+			
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumExperienceDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
 	}
 
