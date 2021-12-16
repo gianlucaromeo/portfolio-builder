@@ -83,8 +83,34 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 	}
 	
 	@Override
-	public long findId(RemovedPost t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(RemovedPost removedPost) {
+
+		long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from removed_posts WHERE post_id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, removedPost.getPostId());
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[RemovedPostDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
 	}
 }

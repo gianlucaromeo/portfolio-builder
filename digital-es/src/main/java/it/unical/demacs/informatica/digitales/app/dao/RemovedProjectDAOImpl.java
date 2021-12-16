@@ -85,9 +85,35 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	}
 	
 	@Override
-	public long findId(RemovedProject t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(RemovedProject removedProject) {
+
+		long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from removed_projects WHERE project_id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, removedProject.getProjectId());
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[RemovedProjectDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
 	}
 	
 }
