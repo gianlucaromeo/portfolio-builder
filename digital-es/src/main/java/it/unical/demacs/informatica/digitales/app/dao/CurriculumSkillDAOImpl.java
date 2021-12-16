@@ -79,9 +79,37 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 	}
 	
 	@Override
-	public long findId(CurriculumSkill t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(CurriculumSkill curriculumSkill) {
+long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from curriculum_skills WHERE user_id=?, title=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, curriculumSkill.getUserId());
+			p.setString(2, curriculumSkill.getTitle());
+			
+			
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumSkillDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
 	}
 	
 
