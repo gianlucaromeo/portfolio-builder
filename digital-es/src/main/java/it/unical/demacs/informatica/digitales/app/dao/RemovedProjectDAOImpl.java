@@ -54,8 +54,34 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	}
 
 	@Override
-	public String update(RemovedProject t) {
+	public String update(RemovedProject removedProject) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE removed_projects SET moderator_id=?,project_id=?,reason=?,seen_by_user=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, removedProject.getModeratorId());
+			p.setLong(2, removedProject.getProjectId());
+			p.setString(3, removedProject.getReason());
+			p.setBoolean(4, removedProject.isSeenByUser());
+			p.setLong(5, removedProject.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[RemovedProjectDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
+		
 	}
 	
 }
