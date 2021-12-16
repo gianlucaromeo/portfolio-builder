@@ -38,7 +38,7 @@ public class ProjectDAOImplTest {
 	public void checkFindProjectId() {
 		System.out.println("[checkFindProjectId]");
 		long id = projectDAOImpl.findId(project);
-		assertEquals(-1, id);
+		assertEquals(2, id);
 	}
 
 }

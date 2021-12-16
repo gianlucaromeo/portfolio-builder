@@ -96,7 +96,7 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "SELECT id from posts WHERE title=?, description=?, publication_date=?, user_id=?;";
+		String query = "SELECT id from posts WHERE title=? AND description=? AND publication_date=? AND user_id=?;";
 		
 		try {
 			

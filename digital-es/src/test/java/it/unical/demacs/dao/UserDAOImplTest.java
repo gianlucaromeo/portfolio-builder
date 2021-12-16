@@ -44,7 +44,7 @@ public class UserDAOImplTest {
 	public void checkFindBannedUserId() {
 		System.out.println("[checkFindUserId]");
 		long id = userDAOImpl.findId(user);
-		assertEquals(-1, id);
+		assertEquals(3, id);
 	}
 	
 }

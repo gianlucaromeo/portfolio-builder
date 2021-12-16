@@ -91,7 +91,7 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "SELECT id from curriculum_experiences WHERE user_id=?, title=?, date_start=?;";
+		String query = "SELECT id from curriculum_experiences WHERE user_id=? AND title=? AND date_start=?;";
 		
 		try {
 			

@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
@@ -22,11 +23,19 @@ public class ModeratorDAOImplTest {
 		moderator.setEmail("ModeratoreVero@a.it");
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddModeratorToDatabase() {
 		System.out.println("[checkAddModeratorToDatabase]");
 		String res = moderatorDAOImpl.create(moderator);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindModeratorId() {
+		System.out.println("[checkFindModeratorId]");
+		long id = moderatorDAOImpl.findId(moderator);
+		assertEquals(1, id);
 	}
 
 }

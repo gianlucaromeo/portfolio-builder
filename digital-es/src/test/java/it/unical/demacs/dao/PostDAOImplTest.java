@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
@@ -28,11 +29,19 @@ public class PostDAOImplTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddPostToDatabase() {
 		System.out.println("[checkAddPostToDatabase]");
 		String res = postDAOImpl.create(post);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindPostId() {
+		System.out.println("[checkFindPostId]");
+		long id = postDAOImpl.findId(post);
+		assertEquals(1, id);
 	}
 
 }

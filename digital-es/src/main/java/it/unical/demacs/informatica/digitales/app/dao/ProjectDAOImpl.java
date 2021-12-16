@@ -91,7 +91,7 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "SELECT id from projects WHERE title=?, description=?, user_id=?;";
+		String query = "SELECT id from projects WHERE title=? AND description=? AND user_id=?;";
 		
 		try {
 			
@@ -99,7 +99,7 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 			
 			p.setString(1, project.getTitle());
 			p.setString(2, project.getDescription());
-			p.setLong(4, project.getUserId());
+			p.setLong(3, project.getUserId());
 			
 			rs = p.executeQuery();
 			

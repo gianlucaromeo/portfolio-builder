@@ -3,6 +3,7 @@ package it.unical.demacs.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
@@ -24,11 +25,19 @@ public class CurriculumSkillDAOImplTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddCurriculumSkillToDatabase() {
 		System.out.println("[checkAddCurriculumSkillToDatabase]");
 		String res = curriculumSkillDAOImpl.create(curriculumSkill);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindCurriculumSkillId() {
+		System.out.println("[checkFindCurriculumSkillId]");
+		long id = curriculumSkillDAOImpl.findId(curriculumSkill);
+		assertEquals(1, id);
 	}
 	
 

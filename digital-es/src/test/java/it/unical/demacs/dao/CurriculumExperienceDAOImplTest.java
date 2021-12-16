@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
@@ -33,11 +34,19 @@ public class CurriculumExperienceDAOImplTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void checkAddCurriculumExperienceToDatabase() {
 		System.out.println("[checkAddCurriculumExperienceToDatabase]");
 		String res = curriculumExperienceDAOImpl.create(curriculumExperience);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkFindCurriculumExperienceId() {
+		System.out.println("[checkFindCurriculumExperienceId]");
+		long id = curriculumExperienceDAOImpl.findId(curriculumExperience);
+		assertEquals(id, 4);
 	}
 	
 

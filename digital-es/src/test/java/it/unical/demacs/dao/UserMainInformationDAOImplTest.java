@@ -49,7 +49,7 @@ public class UserMainInformationDAOImplTest {
 	public void checkFindBannedUserId() {
 		System.out.println("[checkUserMainInformationId]");
 		long id = userInfoDAOImpl.findId(userInfo);
-		assertEquals(-1, id);
+		assertEquals(userInfo.getUserId(), id);
 	}
 	
 
