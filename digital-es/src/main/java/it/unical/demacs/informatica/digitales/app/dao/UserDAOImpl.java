@@ -67,8 +67,40 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	}
 
 	@Override
-	public String update(User t) {
+	public String update(User user) {
+		
+		con = DBUtil.getInstance().getConnection(); 
+		
+		String query = "UPDATE users SET id=?, first_name=?, last_name=?, username=?, password=?, email=?, date_of_birth=?, main_phone_number=?, secondary_phone_number=?, contact_email=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setString(1, user.getFirstName());
+			p.setString(2, user.getLastName());
+			p.setString(3, user.getUsername());
+			p.setString(4, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(SALT)));
+			p.setString(5, user.getEmail());
+			p.setString(6, user.getDateOfBirth());
+			p.setString(7, user.getMainPhoneNumber());
+			p.setString(8, user.getSecondaryPhoneNumber());
+			p.setString(9, user.getContactEmail());
+			p.setBoolean(10, user.isConfirmed());
+			p.setLong(11, user.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
+
 	}
 
 	

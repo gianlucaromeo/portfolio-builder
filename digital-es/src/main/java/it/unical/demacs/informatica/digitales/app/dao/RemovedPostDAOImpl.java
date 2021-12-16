@@ -56,7 +56,7 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "UPDATE removed_posts SET moderator_id=?,reason=?,post_id=?,seen_by_user=? WHERE id=?);";
+		String query = "UPDATE removed_posts SET moderator_id=?,reason=?,post_id=?,seen_by_user=? WHERE id=?;";
 		
 		try {
 			
