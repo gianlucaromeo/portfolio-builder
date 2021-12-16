@@ -106,9 +106,10 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 	}
 	
 	@Override
-	public long findId(UserMainInformations t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(UserMainInformations userMainInfo) {
+		return userMainInfo.getUserId();
+	
 	}
+
 
 }

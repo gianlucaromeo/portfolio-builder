@@ -104,9 +104,37 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	}
 	
 	@Override
-	public long findId(User t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(User user) {
+		
+		long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from users WHERE username=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setString(1, user.getUsername());
+			
+			
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
 	}
 
 	
