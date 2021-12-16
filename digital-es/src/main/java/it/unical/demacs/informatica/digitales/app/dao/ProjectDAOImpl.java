@@ -85,9 +85,38 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 	}
 	
 	@Override
-	public long findId(Project t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(Project project) {
+
+		long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from projects WHERE title=?, description=?, user_id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setString(1, project.getTitle());
+			p.setString(2, project.getDescription());
+			p.setLong(4, project.getUserId());
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[ProjectDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
+		
 	}
 
 }

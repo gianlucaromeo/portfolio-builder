@@ -84,9 +84,36 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	}
 	
 	@Override
-	public long findId(Moderator t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long findId(Moderator moderator) {
+
+		long id = -1; // target
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT id from moderators WHERE username=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setString(1, moderator.getUsername());
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				id = rs.getLong("id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [findId]: ");
+			e.printStackTrace();
+			return id;
+		} finally {
+			closeAll();
+		}
+		
+		return id;
+		
 	}
 
 }

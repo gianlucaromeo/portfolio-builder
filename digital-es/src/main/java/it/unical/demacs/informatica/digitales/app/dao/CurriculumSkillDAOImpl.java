@@ -80,7 +80,8 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 	
 	@Override
 	public long findId(CurriculumSkill curriculumSkill) {
-long id = -1; // target
+		
+		long id = -1; // target
 		
 		con = DBUtil.getInstance().getConnection();
 		
@@ -92,8 +93,6 @@ long id = -1; // target
 			
 			p.setLong(1, curriculumSkill.getUserId());
 			p.setString(2, curriculumSkill.getTitle());
-			
-			
 			
 			rs = p.executeQuery();
 			
