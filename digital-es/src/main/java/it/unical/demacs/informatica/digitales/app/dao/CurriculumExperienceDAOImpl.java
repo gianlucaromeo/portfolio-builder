@@ -69,8 +69,7 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 			p.setString(5, curriculumEx.getEndDate());
 			p.setString(6, curriculumEx.getDescription());
 			p.setString(7, curriculumEx.getType());
-			
-			
+			p.setLong(8, curriculumEx.getId());
 			
 			p.executeUpdate();
 			

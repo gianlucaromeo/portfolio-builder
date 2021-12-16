@@ -25,6 +25,7 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 			instance= new CurriculumDAOImpl();
 		return instance;
 	}
+	
 	@Override
 	public String create(Curriculum curriculum) {
 	con = DBUtil.getInstance().getConnection();
@@ -63,6 +64,7 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 			
 			p.setLong(1, curriculum.getUserId());
 			p.setString(2, curriculum.getHobbiesDescription());
+			p.setLong(3, curriculum.getId());
 			
 			
 			p.executeUpdate();
