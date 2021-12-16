@@ -54,9 +54,8 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 	}
 
 	@Override
-	public boolean update(Project t) {
-		// TODO Auto-generated method stub
-		return false;
+	public String update(Project t) {
+		return Protocol.OK;
 	}
 
 }

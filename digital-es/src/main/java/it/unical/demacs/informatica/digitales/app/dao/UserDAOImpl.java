@@ -67,9 +67,8 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	}
 
 	@Override
-	public boolean update(User t) {
-		// TODO Auto-generated method stub
-		return false;
+	public String update(User t) {
+		return Protocol.OK;
 	}
 
 	

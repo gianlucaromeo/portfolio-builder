@@ -54,9 +54,8 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	}
 
 	@Override
-	public boolean update(RemovedProject t) {
-		// TODO Auto-generated method stub
-		return false;
+	public String update(RemovedProject t) {
+		return Protocol.OK;
 	}
 	
 }

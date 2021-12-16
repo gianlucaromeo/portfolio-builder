@@ -56,9 +56,8 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	}
 
 	@Override
-	public boolean update(Post t) {
-		// TODO Auto-generated method stub
-		return false;
+	public String update(Post t) {
+		return Protocol.OK;
 	}
 	
 }

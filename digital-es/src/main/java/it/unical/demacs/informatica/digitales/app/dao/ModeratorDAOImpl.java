@@ -54,9 +54,8 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	}
 
 	@Override
-	public boolean update(Moderator t) {
-		// TODO Auto-generated method stub
-		return false;
+	public String update(Moderator t) {
+		return Protocol.OK;
 	}
 
 }

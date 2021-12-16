@@ -52,9 +52,8 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 	}
 
 	@Override
-	public boolean update(Curriculum t) {
-		// TODO Auto-generated method stub
-		return false;
+	public String update(Curriculum t) {
+		return Protocol.OK;
 	}
 	
 

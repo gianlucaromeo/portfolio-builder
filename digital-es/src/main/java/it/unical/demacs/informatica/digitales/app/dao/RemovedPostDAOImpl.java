@@ -52,7 +52,7 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 	}
 	
 	@Override
-	public boolean update(RemovedPost removedPost) {
+	public String update(RemovedPost removedPost) {
 		
 		con = DBUtil.getInstance().getConnection();
 		
@@ -73,12 +73,12 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		} catch (SQLException e) {
 			System.err.println("[RemovedPostDAOImpl] [update]: ");
 			e.printStackTrace();
-			return true;
+			return Protocol.ERROR;
 		} finally {
 			closeAll();
 		}
 		
-		return false;
+		return Protocol.OK;
 		
 	}
 }
