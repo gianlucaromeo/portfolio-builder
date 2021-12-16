@@ -54,8 +54,33 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	}
 
 	@Override
-	public String update(Moderator t) {
+	public String update(Moderator moderator) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE moderators SET username=?,reason=?,password=?,email=? WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setString(1,moderator.getUsername());
+			p.setString(2, BCrypt.hashpw(moderator.getPassword(), BCrypt.gensalt(SALT)));
+			p.setString(3, moderator.getEmail());
+			p.setLong(4, moderator.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
 		return Protocol.OK;
+		
 	}
 
 }
