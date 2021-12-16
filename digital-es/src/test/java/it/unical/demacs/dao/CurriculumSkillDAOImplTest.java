@@ -16,11 +16,10 @@ public class CurriculumSkillDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		curriculumSkill=new CurriculumSkill();
-		curriculumSkill.setTitle("Java");
-		curriculumSkill.setLevel(80);
-		//vedere DB
-		curriculumSkill.setCurriculumId(1);
-		curriculumSkill.setUserId(1);
+		curriculumSkill.setTitle("Go");
+		curriculumSkill.setLevel(100);
+		
+		curriculumSkill.setUserId(2);
 		
 		
 	}

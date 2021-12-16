@@ -29,12 +29,11 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 	public String create(Curriculum curriculum) {
 	con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO curriculum VALUES(DEFAULT,?,?);";
+		String query = "INSERT INTO curriculum VALUES(?,?,DEFAULT);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
-			
 			
 			p.setLong(1, curriculum.getUserId());
 			p.setString(2, curriculum.getHobbiesDescription());

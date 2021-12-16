@@ -12,6 +12,7 @@ import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumExperienceDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
+import it.unical.demacs.informatica.digitales.app.settings.CurriculumSettings;
 
 public class CurriculumExperienceDAOImplTest {
 	private static CurriculumExperience curriculumExperience;
@@ -23,13 +24,12 @@ public class CurriculumExperienceDAOImplTest {
 		curriculumExperience.setTitle("Google Software Engineer" );
 		curriculumExperience.setDescription("I've worked for google as software engineer");
 		curriculumExperience.setPlace("Zurigo, Switzerland" );
-		curriculumExperience.setType("WORK");
+		curriculumExperience.setType(CurriculumSettings.WORK_EXPERIENCE);
 		curriculumExperience.setStartDate("2011-07-23");
 		curriculumExperience.setEndDate("2017-04-28");
 		
 		//vedere DB
-		curriculumExperience.setCurriculumId(1);
-		curriculumExperience.setUserId(1);
+		curriculumExperience.setUserId(2);
 		
 	}
 	

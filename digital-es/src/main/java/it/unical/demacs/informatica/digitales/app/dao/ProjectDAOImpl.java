@@ -33,7 +33,7 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 			
 			p = con.prepareStatement(query);
 			
-			p.setLong(1,project.getId());
+			p.setLong(1,project.getUserId());
 			p.setString(2,project.getTitle());
 			p.setString(3, project.getDescription());
 			p.setString(4, project.getPicture());

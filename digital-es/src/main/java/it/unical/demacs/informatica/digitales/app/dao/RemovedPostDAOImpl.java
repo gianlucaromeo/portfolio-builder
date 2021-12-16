@@ -26,17 +26,16 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO removed_projects VALUES(?,?,?,?,?);";
+		String query = "INSERT INTO removed_posts VALUES(DEFAULT,?,?,?,?);";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			
-			p.setNull(1, Types.INTEGER);
-			p.setLong(2, removedPost.getModeratorId());
-			p.setString(3, removedPost.getReason());
-			p.setLong(4, removedPost.getPostId());
-			p.setBoolean(5, removedPost.isSeenByUser());
+			p.setLong(1, removedPost.getModeratorId());
+			p.setString(2, removedPost.getReason());
+			p.setLong(3, removedPost.getPostId());
+			p.setBoolean(4, removedPost.isSeenByUser());
 			
 			p.executeUpdate();
 			

@@ -20,7 +20,7 @@ public class ProjectDAOImplTest {
 		project.setDescription("this is a project i've done when i've worked for Google");
 		project.setPicture("/img/...");
 		project.setLinkRef("www.github.com/...");
-		project.setUserId(1);
+		project.setUserId(2);
 		
 		
 	}

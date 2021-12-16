@@ -22,7 +22,7 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 	public String create(CurriculumSkill curriculumSkill) {
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO curriculum_skills VALUES(DEFAULT,?,?,?,?);";
+		String query = "INSERT INTO curriculum_skills VALUES(DEFAULT,?,?,?);";
 		
 		try {
 			
@@ -32,7 +32,6 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 			p.setLong(1, curriculumSkill.getUserId());
 			p.setString(2, curriculumSkill.getTitle());
 			p.setInt(3, curriculumSkill.getLevel());
-			p.setLong(4, curriculumSkill.getCurriculumId());
 			
 			p.executeUpdate();
 			

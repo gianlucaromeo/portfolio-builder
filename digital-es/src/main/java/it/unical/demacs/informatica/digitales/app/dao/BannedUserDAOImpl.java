@@ -29,7 +29,7 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO banned_users VALUES(DEFAULT,?,?,?,?,?);";
+		String query = "INSERT INTO banned_users VALUES(?,?,DEFAULT,?,?,?);";
 		
 		try {
 			

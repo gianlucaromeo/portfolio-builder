@@ -24,7 +24,7 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 	public String create(CurriculumExperience curriculumExperience) {
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "INSERT INTO curriculum_experiences VALUES(DEFAULT,?,?,?,?,?,?,?,?);";
+		String query = "INSERT INTO curriculum_experiences VALUES(DEFAULT,?,?,?,?,?,?,?);";
 		
 		try {
 			
@@ -38,7 +38,6 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 			p.setString(5, curriculumExperience.getEndDate());
 			p.setString(6, curriculumExperience.getDescription());
 			p.setString(7, curriculumExperience.getType());
-			p.setLong(8, curriculumExperience.getCurriculumId());
 			
 			p.executeUpdate();
 			

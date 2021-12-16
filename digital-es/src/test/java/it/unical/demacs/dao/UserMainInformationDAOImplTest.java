@@ -18,7 +18,7 @@ public class UserMainInformationDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		userInfo=new UserMainInformations();
-		userInfo.setUserId(1);
+		userInfo.setUserId(2);
 		userInfo.setLogoName("MyName");
 		userInfo.setBio("This is a biography");
 		userInfo.setProfilePicture("/profile.jpg");	
@@ -34,9 +34,6 @@ public class UserMainInformationDAOImplTest {
 		userInfo.setFacebookLinkRef("facebook.it/...");
 		userInfo.setInstagramLinkRef("Instagram.com/...");
 		userInfo.setTwitterLinkRef("twitter.com/...");
-		
-		
-		
 	}
 	
 	@Test

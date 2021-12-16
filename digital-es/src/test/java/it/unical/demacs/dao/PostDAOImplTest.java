@@ -24,8 +24,7 @@ public class PostDAOImplTest {
 		post.setPubblicationDate("2021-12-14");
 		post.setLastEditDate(null);
 		post.setRefLink(null);
-		post.setUserId(1);
-		
+		post.setUserId(2);
 		
 	}
 	

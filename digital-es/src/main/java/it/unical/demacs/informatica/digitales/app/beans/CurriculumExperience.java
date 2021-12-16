@@ -3,7 +3,6 @@ package it.unical.demacs.informatica.digitales.app.beans;
 public class CurriculumExperience {
 	private long id;
 	private long userId;
-	private long curriculumId;
 	private String title;
 	private String place;
 	private String startDate;
@@ -32,12 +31,6 @@ public class CurriculumExperience {
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
-	}
-	public long getCurriculumId() {
-		return curriculumId;
-	}
-	public void setCurriculumId(long curriculumId) {
-		this.curriculumId = curriculumId;
 	}
 	public String getTitle() {
 		return title;

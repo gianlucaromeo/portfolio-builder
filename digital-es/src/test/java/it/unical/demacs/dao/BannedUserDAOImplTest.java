@@ -16,7 +16,7 @@ public class BannedUserDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		bannedUser = new BannedUser();
-		bannedUser.setUserId(1);
+		bannedUser.setUserId(2);
 		bannedUser.setModeratorId(1);
 		bannedUser.setReason("BannedUsereVero@a.it");
 		bannedUser.setDateStart("BannedUsereVero@a.it");

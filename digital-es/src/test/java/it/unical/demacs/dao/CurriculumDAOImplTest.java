@@ -17,7 +17,7 @@ public class CurriculumDAOImplTest {
 		curriculum=new Curriculum();
 		curriculum.setHobbiesDescription("no one in particular");
 		//vedere DB
-		curriculum.setUserId(1);
+		curriculum.setUserId(2);
 	}
 	
 	@Test

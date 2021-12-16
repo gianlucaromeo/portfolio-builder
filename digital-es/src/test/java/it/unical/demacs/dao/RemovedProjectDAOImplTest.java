@@ -17,7 +17,7 @@ public class RemovedProjectDAOImplTest {
 	public static void beforeClass() {
 		removedProject = new RemovedProject();
 		removedProject.setModeratorId(1);
-		removedProject.setProjectId(1);
+		removedProject.setProjectId(2);
 		removedProject.setReason("RemovedProjecteVero@a.it");
 		removedProject.setSeenByUser(false);
 	}
