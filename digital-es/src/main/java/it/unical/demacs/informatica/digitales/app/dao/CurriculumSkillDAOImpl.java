@@ -47,6 +47,12 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 		
 	
 	}
+
+	@Override
+	public boolean update(CurriculumSkill t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }

@@ -50,4 +50,35 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		return Protocol.OK;
 		
 	}
+	
+	@Override
+	public boolean update(RemovedPost removedPost) {
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "UPDATE removed_posts SET moderator_id=?,reason=?,post_id=?,seen_by_user=? WHERE id=?);";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			p.setLong(1, removedPost.getModeratorId());
+			p.setString(2, removedPost.getReason());
+			p.setLong(3, removedPost.getPostId());
+			p.setBoolean(4, removedPost.isSeenByUser());
+			p.setLong(5, removedPost.getId());
+			
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[RemovedPostDAOImpl] [update]: ");
+			e.printStackTrace();
+			return true;
+		} finally {
+			closeAll();
+		}
+		
+		return false;
+		
+	}
 }

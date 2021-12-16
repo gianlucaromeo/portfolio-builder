@@ -54,5 +54,11 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 		return Protocol.OK;
 		
 	}
+
+	@Override
+	public boolean update(BannedUser t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

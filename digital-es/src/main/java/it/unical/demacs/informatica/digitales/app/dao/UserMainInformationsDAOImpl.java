@@ -59,4 +59,10 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		return Protocol.OK;
 	}
 
+	@Override
+	public boolean update(UserMainInformations t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

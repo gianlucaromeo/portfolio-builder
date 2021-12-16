@@ -53,4 +53,10 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 		
 	}
 
+	@Override
+	public boolean update(CurriculumExperience t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

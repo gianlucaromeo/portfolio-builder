@@ -8,7 +8,7 @@ public interface DAO<T> {
 	String create(T t);
 	
 	// UPDATE
-	//boolean update(T t);
+	boolean update(T t);
 	
 	// RETRIEVE
 	//T findById(long id);
