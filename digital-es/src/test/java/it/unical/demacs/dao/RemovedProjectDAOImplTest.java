@@ -33,12 +33,13 @@ public class RemovedProjectDAOImplTest {
 		String res = removedProjectDAOImpl.create(removedProject);
 		assertEquals(res, Protocol.OK);
 	}
+
 	@Ignore
 	@Test
 	public void checkFindRemovedProjectId() {
 		System.out.println("[checkFindRemovedProjectId]");
 		long id = removedProjectDAOImpl.findId(removedProject);
-		assertEquals(-1, id);
+		assertEquals(1, id);
 	}
 
 	@Test
@@ -47,6 +48,6 @@ public class RemovedProjectDAOImplTest {
 		RemovedProject removedProjectById = removedProjectDAOImpl.findById(1);
 		System.out.println(removedProjectById.toString());
 		System.out.println(removedProject.toString());
-		assertEquals(removedProjectById, removedProject);
+		assertEquals(removedProject, removedProjectById);
 	}
 }

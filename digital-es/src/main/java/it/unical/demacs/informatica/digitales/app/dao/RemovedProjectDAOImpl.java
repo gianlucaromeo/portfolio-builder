@@ -137,8 +137,8 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 				removedProject = new RemovedProject();
 				removedProject.setModeratorId(rs.getLong("moderator_id"));
 				removedProject.setReason(rs.getString("reason"));
-				removedProject.setProjectId(rs.getLong("post_id"));
-				removedProject.setSeenByUser(rs.getBoolean("is_seen_by_user"));
+				removedProject.setProjectId(rs.getLong("project_id"));
+				removedProject.setSeenByUser(rs.getBoolean("seen_by_user"));
 				removedProject.setId(id);
 			}
 	

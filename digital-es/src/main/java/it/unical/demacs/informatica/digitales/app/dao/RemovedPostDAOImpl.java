@@ -136,7 +136,7 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 				removedPost.setModeratorId(rs.getLong("moderator_id"));
 				removedPost.setReason(rs.getString("reason"));
 				removedPost.setPostId(rs.getLong("post_id"));
-				removedPost.setSeenByUser(rs.getBoolean("is_seen_by_user"));
+				removedPost.setSeenByUser(rs.getBoolean("seen_by_user"));
 				removedPost.setId(id);
 			}
 	

@@ -158,6 +158,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 				user.setId(id);
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
+				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
 				user.setDateOfBirth(rs.getString("date_of_birth"));

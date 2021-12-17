@@ -119,7 +119,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "SELECT * FROM users_main_informations WHERE id=?;";
+		String query = "SELECT * FROM users_main_informations WHERE user_id=?;";
 		
 		try {
 			

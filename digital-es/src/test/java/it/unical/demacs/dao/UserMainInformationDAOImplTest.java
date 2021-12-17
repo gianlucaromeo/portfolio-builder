@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
+import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumSkillDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
@@ -35,6 +36,7 @@ public class UserMainInformationDAOImplTest {
 		userInfo.setFacebookLinkRef("facebook.it/...");
 		userInfo.setInstagramLinkRef("Instagram.com/...");
 		userInfo.setTwitterLinkRef("twitter.com/...");
+		userInfo.setUserId(2);
 	}
 	
 	@Ignore
@@ -45,6 +47,7 @@ public class UserMainInformationDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindBannedUserId() {
 		System.out.println("[checkUserMainInformationId]");
@@ -52,5 +55,13 @@ public class UserMainInformationDAOImplTest {
 		assertEquals(userInfo.getUserId(), id);
 	}
 	
+	@Test
+	public void checkFindUserMainInformationsById() {
+		System.out.println("[checkFindUserMainInformationsById]");
+		UserMainInformations userInfoById = userInfoDAOImpl.findById(2);
+		System.out.println(userInfoById.toString());
+		System.out.println(userInfo.toString());
+		assertEquals(userInfo, userInfoById);
+	}
 
 }

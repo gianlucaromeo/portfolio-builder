@@ -52,7 +52,7 @@ public class PostDAOImplTest {
 		Post postById = postDAOImpl.findById(1);
 		System.out.println(postById.toString());
 		System.out.println(post.toString());
-		assertEquals(postById, post);
+		assertEquals(post, postById);
 	}
 
 }

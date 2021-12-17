@@ -22,6 +22,7 @@ public class CurriculumSkillDAOImplTest {
 		curriculumSkill.setLevel(100);
 		
 		curriculumSkill.setUserId(2);
+		curriculumSkill.setId(1);
 		
 		
 	}
@@ -48,7 +49,7 @@ public class CurriculumSkillDAOImplTest {
 		CurriculumSkill curriculumSkillById = curriculumSkillDAOImpl.findById(1);
 		System.out.println(curriculumSkillById.toString());
 		System.out.println(curriculumSkill.toString());
-		assertEquals(curriculumSkillById, curriculumSkill);
+		assertEquals(curriculumSkill, curriculumSkillById);
 	}
 
 	

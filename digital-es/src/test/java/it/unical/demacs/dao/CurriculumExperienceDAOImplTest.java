@@ -32,6 +32,7 @@ public class CurriculumExperienceDAOImplTest {
 		
 		//vedere DB
 		curriculumExperience.setUserId(2);
+		curriculumExperience.setId(4);
 		
 	}
 	
@@ -54,10 +55,10 @@ public class CurriculumExperienceDAOImplTest {
 	@Test
 	public void checkFindCurriculumExperienceById() {
 		System.out.println("[checkFindCurriculumExperienceById]");
-		CurriculumExperience curriculumExperienceById = curriculumExperienceDAOImpl.findById(1);
+		CurriculumExperience curriculumExperienceById = curriculumExperienceDAOImpl.findById(4);
 		System.out.println(curriculumExperienceById.toString());
 		System.out.println(curriculumExperience.toString());
-		assertEquals(curriculumExperienceById, curriculumExperience);
+		assertEquals(curriculumExperience, curriculumExperienceById);
 	}
 
 }

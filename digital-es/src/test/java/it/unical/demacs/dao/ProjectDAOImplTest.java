@@ -34,6 +34,7 @@ public class ProjectDAOImplTest {
 		String res = projectDAOImpl.create(project);
 		assertEquals(res, Protocol.OK);
 	}
+	
 	@Ignore
 	@Test
 	public void checkFindProjectId() {
@@ -45,9 +46,9 @@ public class ProjectDAOImplTest {
 	@Test
 	public void checkFindProjectById() {
 		System.out.println("[checkFindProjectById]");
-		Project projectById = projectDAOImpl.findById(1);
+		Project projectById = projectDAOImpl.findById(2);
 		System.out.println(projectById.toString());
 		System.out.println(project.toString());
-		assertEquals(projectById, project);
+		assertEquals(project, projectById);
 	}
 }
