@@ -23,6 +23,7 @@ public class BannedUserDAOImplTest {
 		bannedUser.setReason("BannedUsereVero@a.it");
 		bannedUser.setDateStart("BannedUsereVero@a.it");
 		bannedUser.setDateEnd("BannedUsereVero@a.it");
+		bannedUser.setId(1);
 	}
 	
 	@Ignore
@@ -45,6 +46,8 @@ public class BannedUserDAOImplTest {
 	public void checkFindBannedUserById() {
 		System.out.println("[checkFindBannedUserById]");
 		BannedUser bannedUserById = bannedUserDAOImpl.findById(1);
+//		System.out.println(bannedUserById.toString());
+//		System.out.println(bannedUser.toString());
 		assertEquals(bannedUser, bannedUserById);
 	}
 	

@@ -113,6 +113,14 @@ public class User {
 				&& Objects.equals(secondaryPhoneNumber, other.secondaryPhoneNumber)
 				&& Objects.equals(username, other.username);
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", email=" + email + ", dateOfBirth=" + dateOfBirth + ", mainPhoneNumber="
+				+ mainPhoneNumber + ", secondaryPhoneNumber=" + secondaryPhoneNumber + ", contactEmail=" + contactEmail
+				+ ", confirmed=" + confirmed + "]";
+	}
 	
 	
 	

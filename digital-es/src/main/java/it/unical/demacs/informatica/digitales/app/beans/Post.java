@@ -84,6 +84,13 @@ public class Post {
 				&& Objects.equals(pubblicationDate, other.pubblicationDate) && Objects.equals(refLink, other.refLink)
 				&& Objects.equals(title, other.title) && userId == other.userId;
 	}
+
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
+				+ ", pubblicationDate=" + pubblicationDate + ", lastEditDate=" + lastEditDate + ", refLink=" + refLink
+				+ ", userId=" + userId + "]";
+	}
 	
 	
 	

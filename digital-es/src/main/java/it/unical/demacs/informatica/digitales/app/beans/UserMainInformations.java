@@ -161,6 +161,18 @@ public class UserMainInformations {
 				&& Objects.equals(specialSkillName3, other.specialSkillName3)
 				&& Objects.equals(twitterLinkRef, other.twitterLinkRef) && userId == other.userId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserMainInformations [userId=" + userId + ", profilePicture=" + profilePicture + ", logoPicture="
+				+ logoPicture + ", logoName=" + logoName + ", bio=" + bio + ", presentationPicture1="
+				+ presentationPicture1 + ", presentationPicture2=" + presentationPicture2 + ", presentationPicture3="
+				+ presentationPicture3 + ", specialSkillName1=" + specialSkillName1 + ", specialSkillName2="
+				+ specialSkillName2 + ", specialSkillName3=" + specialSkillName3 + ", specialSkillDescr1="
+				+ specialSkillDescr1 + ", specialSkillDescr2=" + specialSkillDescr2 + ", specialSkillDescr3="
+				+ specialSkillDescr3 + ", facebookLinkRef=" + facebookLinkRef + ", instagramLinkRef=" + instagramLinkRef
+				+ ", twitterLinkRef=" + twitterLinkRef + "]";
+	}
 	
 	
 	

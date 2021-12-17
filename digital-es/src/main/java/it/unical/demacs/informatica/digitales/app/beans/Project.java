@@ -69,6 +69,12 @@ public class Project {
 				&& Objects.equals(linkRef, other.linkRef) && Objects.equals(picture, other.picture)
 				&& Objects.equals(title, other.title) && userId == other.userId;
 	}
+
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", userId=" + userId + ", title=" + title + ", description=" + description
+				+ ", picture=" + picture + ", linkRef=" + linkRef + "]";
+	}
 	
 	
 	
