@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class Post {
 
 	private long id;
@@ -61,6 +63,26 @@ public class Post {
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, id, lastEditDate, picture, pubblicationDate, refLink, title, userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Post other = (Post) obj;
+		return Objects.equals(description, other.description) && id == other.id
+				&& Objects.equals(lastEditDate, other.lastEditDate) && Objects.equals(picture, other.picture)
+				&& Objects.equals(pubblicationDate, other.pubblicationDate) && Objects.equals(refLink, other.refLink)
+				&& Objects.equals(title, other.title) && userId == other.userId;
 	}
 	
 	
