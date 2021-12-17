@@ -21,7 +21,7 @@ public class RemovedPostDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		remPost= new RemovedPost();
-		remPost.setReason("Offensive language");
+		remPost.setReason("UpdatedReason");
 		remPost.setSeenByUser(false);
 		//vedere DB
 		remPost.setModeratorId(1);
@@ -38,12 +38,13 @@ public class RemovedPostDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
-//	@Test
-//	public void checkUpdateRemovedPostToDatabase() {
-//		System.out.println("[checkUpdateRemovedPostToDatabase]");
-//		String res = remPostsDAOImpl.update(remPost);
-//		assertEquals(res, Protocol.OK);
-//	}
+	@Test
+	public void checkUpdateRemovedPostToDatabase() {
+		System.out.println("[checkUpdateRemovedPostToDatabase]");
+		remPost.setReason("UpdatedReason");
+		String res = remPostsDAOImpl.update(remPost);
+		assertEquals(res, Protocol.OK);
+	}
 	
 	@Ignore
 	@Test
@@ -61,7 +62,8 @@ public class RemovedPostDAOImplTest {
 		System.out.println(remPost.toString());
 		assertEquals(remPost, remPostById);
 	}
-
+	
+	@Ignore
 	@Test
 	public void checkFindAllRemovedPost() {
 		System.out.println("[checkFindAllRemovedPost]");

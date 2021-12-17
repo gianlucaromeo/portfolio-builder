@@ -22,7 +22,7 @@ public class ModeratorDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		moderator = new Moderator();
-		moderator.setUsername("ModeratoreVero1");
+		moderator.setUsername("UpdatedUsername");
 		moderator.setPassword("$2a$12$OohPDn/Uka7/4XfOwOI.g.UvGl5oOMpUXxT7w6mpdh/fU.sO/l9uS");
 		moderator.setEmail("ModeratoreVero@a.it");
 		
@@ -34,6 +34,14 @@ public class ModeratorDAOImplTest {
 	public void checkAddModeratorToDatabase() {
 		System.out.println("[checkAddModeratorToDatabase]");
 		String res = moderatorDAOImpl.create(moderator);
+		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkUpdateModeratorToDatabase() {
+		System.out.println("[checkUpdateModeratorToDatabase]");
+		moderator.setUsername("UpdatedUsername");
+		String res = moderatorDAOImpl.update(moderator);
 		assertEquals(res, Protocol.OK);
 	}
 	
@@ -55,6 +63,7 @@ public class ModeratorDAOImplTest {
 		assertEquals(moderator, moderatorById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllModerators() {
 		System.out.println("[checkFindAllModerators]");

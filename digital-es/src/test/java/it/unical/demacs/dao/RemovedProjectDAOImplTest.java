@@ -22,7 +22,7 @@ public class RemovedProjectDAOImplTest {
 		removedProject = new RemovedProject();
 		removedProject.setModeratorId(1);
 		removedProject.setProjectId(2);
-		removedProject.setReason("RemovedProjecteVero@a.it");
+		removedProject.setReason("UpdatedReason");
 		removedProject.setSeenByUser(false);
 		
 		removedProject.setId(1);
@@ -33,6 +33,14 @@ public class RemovedProjectDAOImplTest {
 	public void checkAddRemovedProjectToDatabase() {
 		System.out.println("[checkAddRemovedProjectToDatabase]");
 		String res = removedProjectDAOImpl.create(removedProject);
+		assertEquals(res, Protocol.OK);
+	}
+	
+	@Test
+	public void checkUpdateRemovedProjectToDatabase() {
+		System.out.println("[checkUpdateRemovedProjectToDatabase]");
+		removedProject.setReason("UpdatedReason");
+		String res = removedProjectDAOImpl.update(removedProject);
 		assertEquals(res, Protocol.OK);
 	}
 
@@ -53,6 +61,7 @@ public class RemovedProjectDAOImplTest {
 		assertEquals(removedProject, removedProjectById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllRemovedProject() {
 		System.out.println("[checkFindAllRemovedProject]");
