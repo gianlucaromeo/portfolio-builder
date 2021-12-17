@@ -184,5 +184,11 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 		
 		return curriculums;
 	}
+	
+	@Override
+	public String delete(CurriculumSkill t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

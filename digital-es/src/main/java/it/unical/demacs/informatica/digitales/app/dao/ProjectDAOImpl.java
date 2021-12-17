@@ -196,4 +196,10 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 		
 	}
 
+	@Override
+	public String delete(Project t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

@@ -179,5 +179,11 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 		
 		return curriculums;
 	}
+	
+	@Override
+	public String delete(Curriculum t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

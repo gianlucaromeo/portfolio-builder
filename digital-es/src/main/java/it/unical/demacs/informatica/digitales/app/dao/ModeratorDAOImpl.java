@@ -188,5 +188,11 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 		
 		return moderators;
 	}
+	
+	@Override
+	public String delete(Moderator t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

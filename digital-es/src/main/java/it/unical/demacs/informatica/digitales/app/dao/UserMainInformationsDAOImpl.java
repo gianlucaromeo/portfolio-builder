@@ -210,6 +210,12 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		return usersMainInfo;
 		
 	}
+	
+	@Override
+	public String delete(UserMainInformations t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

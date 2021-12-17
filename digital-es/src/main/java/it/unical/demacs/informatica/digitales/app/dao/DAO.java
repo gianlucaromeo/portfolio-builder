@@ -16,6 +16,6 @@ public interface DAO<T> {
 	Set<T> findAll();
 	
 	// DELETE
-	//boolean delete(T t);
+	String delete(T t);
 	
 }

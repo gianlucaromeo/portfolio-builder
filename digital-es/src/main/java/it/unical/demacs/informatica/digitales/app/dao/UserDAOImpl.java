@@ -221,6 +221,12 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		return users;
 		
 	}
+	
+	@Override
+	public String delete(User t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 }

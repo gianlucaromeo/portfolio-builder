@@ -190,4 +190,10 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 		return projects;
 	}
 	
+	@Override
+	public String delete(RemovedProject t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

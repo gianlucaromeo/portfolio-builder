@@ -194,4 +194,10 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 		
 	}
 	
+	@Override
+	public String delete(BannedUser t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

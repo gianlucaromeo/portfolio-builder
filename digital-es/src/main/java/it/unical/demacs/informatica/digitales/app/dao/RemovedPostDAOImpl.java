@@ -187,4 +187,10 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		return posts;
 	}
 	
+	@Override
+	public String delete(RemovedPost t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

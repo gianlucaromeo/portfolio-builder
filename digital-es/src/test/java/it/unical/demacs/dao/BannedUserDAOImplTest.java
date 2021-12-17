@@ -24,7 +24,7 @@ public class BannedUserDAOImplTest {
 		bannedUser.setModeratorId(1);
 		bannedUser.setReason("BannedUsereVero@a.it");
 		bannedUser.setDateStart("BannedUsereVero@a.it");
-		bannedUser.setDateEnd("BannedUsereVero@a.it");
+		bannedUser.setDateEnd("newDateEnd");
 		bannedUser.setId(1);
 	}
 	
@@ -34,6 +34,15 @@ public class BannedUserDAOImplTest {
 		System.out.println("[checkAddBannedUserToDatabase]");
 		String res = bannedUserDAOImpl.create(bannedUser);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Ignore
+	@Test
+	public void checkUpdateBannedUser() {
+		System.out.println("[checkUpdateBannedUser]");
+		bannedUser.setDateEnd("newDateEnd");
+		String res = bannedUserDAOImpl.update(bannedUser);
+		assertEquals(Protocol.OK, res);
 	}
 	
 	@Ignore
@@ -54,6 +63,7 @@ public class BannedUserDAOImplTest {
 		assertEquals(bannedUser, bannedUserById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllUsers() {
 		System.out.println("[checkFindAllUsers]");
