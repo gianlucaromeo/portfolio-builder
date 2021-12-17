@@ -36,6 +36,7 @@ public class RemovedProjectDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkUpdateRemovedProjectToDatabase() {
 		System.out.println("[checkUpdateRemovedProjectToDatabase]");
@@ -70,5 +71,12 @@ public class RemovedProjectDAOImplTest {
 			System.out.println(p.toString());
 		}
 		assertEquals(1, projects.size());
+	}
+	
+	@Test
+	public void checkDeleteRemovedProject() {
+		System.out.println("[checkDeleteRemovedProject]");
+		String res = removedProjectDAOImpl.delete(removedProject);
+		assertEquals(Protocol.OK, res);
 	}
 }

@@ -190,9 +190,27 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	}
 	
 	@Override
-	public String delete(Moderator t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(Moderator moderator) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from moderators WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, moderator.getId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("ModeratorDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
 	}
 
 }

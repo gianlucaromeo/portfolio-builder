@@ -37,7 +37,7 @@ public class RemovedPostDAOImplTest {
 		String res = remPostsDAOImpl.create(remPost);
 		assertEquals(res, Protocol.OK);
 	}
-	
+	@Ignore
 	@Test
 	public void checkUpdateRemovedPostToDatabase() {
 		System.out.println("[checkUpdateRemovedPostToDatabase]");
@@ -72,5 +72,12 @@ public class RemovedPostDAOImplTest {
 			System.out.println(p.toString());
 		}
 		assertEquals(1, posts.size());
+	}
+	
+	@Test
+	public void checkDeleteRemovedPost() {
+		System.out.println("[checkDeleteRemovedPost]");
+		String res = remPostsDAOImpl.delete(remPost);
+		assertEquals(Protocol.OK, res);
 	}
 }
