@@ -180,7 +180,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			
 			while (rs.next()) {
 				UserMainInformations userMainInfo = new UserMainInformations();
-				userMainInfo.setUserId(rs.getLong("id"));
+				userMainInfo.setUserId(rs.getLong("user_id"));
 				userMainInfo.setProfilePicture(rs.getString("profile_picture"));
 				userMainInfo.setLogoPicture(rs.getString("logo_picture"));
 				userMainInfo.setLogoName(rs.getString("logo_name"));

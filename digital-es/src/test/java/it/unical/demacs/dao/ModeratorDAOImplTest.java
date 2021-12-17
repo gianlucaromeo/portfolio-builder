@@ -56,7 +56,7 @@ public class ModeratorDAOImplTest {
 	}
 	
 	@Test
-	public void checkFindAllUsers() {
+	public void checkFindAllModerators() {
 		System.out.println("[checkFindAllModerators]");
 		Set<Moderator> moderators = moderatorDAOImpl.findAll();
 		for (Moderator m : moderators) {

@@ -57,11 +57,11 @@ public class CurriculumSkillDAOImplTest {
 	@Test
 	public void checkFindAllCurriculumSkill() {
 		System.out.println("[checkFindAllCurriculumSkill]");
-		Set<CurriculumSkill> curriculums = curriculumSkillDAOImpl.findAll();
-		for (CurriculumSkill c : curriculums) {
+		Set<CurriculumSkill> curriculumSkills = curriculumSkillDAOImpl.findAll();
+		for (CurriculumSkill c : curriculumSkills) {
 			System.out.println(c.toString());
 		}
-		assertEquals(1, curriculums.size());
+		assertEquals(1, curriculumSkills.size());
 	}
 
 	
