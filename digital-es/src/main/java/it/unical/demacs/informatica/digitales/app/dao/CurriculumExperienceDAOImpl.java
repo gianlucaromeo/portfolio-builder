@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
@@ -161,8 +162,39 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 	
 	@Override
 	public Set<CurriculumExperience> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<CurriculumExperience> curriculums = new HashSet<CurriculumExperience>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM curriculum_experiences;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				CurriculumExperience curriculumEx = new CurriculumExperience();
+				curriculumEx.setId(rs.getLong("id"));
+				curriculumEx.setUserId(rs.getLong("user_id"));
+				curriculumEx.setTitle(rs.getString("title"));
+				curriculumEx.setPlace(rs.getString("place"));
+				curriculumEx.setStartDate(rs.getString("date_start"));
+				curriculumEx.setEndDate(rs.getString("end_date"));
+				curriculumEx.setDescription(rs.getString("description"));
+				curriculumEx.setType(rs.getString("type"));
+				curriculums.add(curriculumEx);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumExperienceDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return curriculums;
 	}
 	
 }

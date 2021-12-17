@@ -2,9 +2,11 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
+import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -159,8 +161,39 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 	
 	@Override
 	public Set<Project> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Set<Project> projects = new HashSet<Project>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM projects;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Project project = new Project();
+				project.setId(rs.getLong("id"));
+				project.setUserId(rs.getLong("user_id"));
+				project.setTitle(rs.getString("title"));
+				project.setDescription(rs.getString("description"));
+				project.setPicture(rs.getString("picture"));
+				project.setLinkRef(rs.getString("link_ref"));
+				projects.add(project);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[ProjectDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return projects;
+		
 	}
 
 }

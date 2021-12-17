@@ -2,6 +2,8 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -42,7 +44,7 @@ public class CurriculumSkillDAOImplTest {
 		long id = curriculumSkillDAOImpl.findId(curriculumSkill);
 		assertEquals(1, id);
 	}
-	
+	@Ignore
 	@Test
 	public void checkFindCurriculumSkillById() {
 		System.out.println("[checkFindCurriculumSkillById]");
@@ -50,6 +52,16 @@ public class CurriculumSkillDAOImplTest {
 		System.out.println(curriculumSkillById.toString());
 		System.out.println(curriculumSkill.toString());
 		assertEquals(curriculumSkill, curriculumSkillById);
+	}
+	
+	@Test
+	public void checkFindAllCurriculumSkill() {
+		System.out.println("[checkFindAllCurriculumSkill]");
+		Set<CurriculumSkill> curriculums = curriculumSkillDAOImpl.findAll();
+		for (CurriculumSkill c : curriculums) {
+			System.out.println(c.toString());
+		}
+		assertEquals(1, curriculums.size());
 	}
 
 	

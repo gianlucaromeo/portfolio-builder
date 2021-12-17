@@ -2,6 +2,8 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.BeforeClass;
@@ -51,7 +53,7 @@ public class CurriculumExperienceDAOImplTest {
 		long id = curriculumExperienceDAOImpl.findId(curriculumExperience);
 		assertEquals(id, 4);
 	}
-	
+	@Ignore
 	@Test
 	public void checkFindCurriculumExperienceById() {
 		System.out.println("[checkFindCurriculumExperienceById]");
@@ -59,6 +61,17 @@ public class CurriculumExperienceDAOImplTest {
 		System.out.println(curriculumExperienceById.toString());
 		System.out.println(curriculumExperience.toString());
 		assertEquals(curriculumExperience, curriculumExperienceById);
+	}
+	
+
+	@Test
+	public void checkFindAllCurriculumExperience() {
+		System.out.println("[checkFindAllCurriculumExperience]");
+		Set<CurriculumExperience> curriculums = curriculumExperienceDAOImpl.findAll();
+		for (CurriculumExperience c : curriculums) {
+			System.out.println(c.toString());
+		}
+		assertEquals(1, curriculums.size());
 	}
 
 }

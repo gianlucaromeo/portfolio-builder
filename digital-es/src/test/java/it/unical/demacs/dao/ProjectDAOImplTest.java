@@ -2,10 +2,13 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
@@ -43,6 +46,7 @@ public class ProjectDAOImplTest {
 		assertEquals(2, id);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindProjectById() {
 		System.out.println("[checkFindProjectById]");
@@ -51,4 +55,15 @@ public class ProjectDAOImplTest {
 		System.out.println(project.toString());
 		assertEquals(project, projectById);
 	}
+	
+	@Test
+	public void checkFindAllProjects() {
+		System.out.println("[checkFindAllProjects]");
+		Set<Project> projects = projectDAOImpl.findAll();
+		for (Project p : projects) {
+			System.out.println(p.toString());
+		}
+		assertEquals(1, projects.size());
+	}
+	
 }

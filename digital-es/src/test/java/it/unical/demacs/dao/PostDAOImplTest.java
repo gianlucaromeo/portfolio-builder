@@ -2,10 +2,13 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
@@ -46,6 +49,7 @@ public class PostDAOImplTest {
 		assertEquals(1, id);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindPostById() {
 		System.out.println("[checkFindPostById]");
@@ -55,4 +59,14 @@ public class PostDAOImplTest {
 		assertEquals(post, postById);
 	}
 
+	@Test
+	public void checkFindAllPosts() {
+		System.out.println("[checkFindAllPosts]");
+		Set<Post> posts = postDAOImpl.findAll();
+		for (Post p : posts) {
+			System.out.println(p.toString());
+		}
+		assertEquals(1, posts.size());
+	}
+	
 }
