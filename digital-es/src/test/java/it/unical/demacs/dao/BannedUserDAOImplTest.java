@@ -46,8 +46,8 @@ public class BannedUserDAOImplTest {
 	public void checkFindBannedUserById() {
 		System.out.println("[checkFindBannedUserById]");
 		BannedUser bannedUserById = bannedUserDAOImpl.findById(1);
-//		System.out.println(bannedUserById.toString());
-//		System.out.println(bannedUser.toString());
+		System.out.println(bannedUserById.toString());
+		System.out.println(bannedUser.toString());
 		assertEquals(bannedUser, bannedUserById);
 	}
 	
