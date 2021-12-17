@@ -2,6 +2,8 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -55,6 +57,7 @@ public class UserMainInformationDAOImplTest {
 		assertEquals(userInfo.getUserId(), id);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindUserMainInformationsById() {
 		System.out.println("[checkFindUserMainInformationsById]");
@@ -62,6 +65,16 @@ public class UserMainInformationDAOImplTest {
 		System.out.println(userInfoById.toString());
 		System.out.println(userInfo.toString());
 		assertEquals(userInfo, userInfoById);
+	}
+	
+	@Test
+	public void checkFindAllUsersMainInfo() {
+		System.out.println("[checkFindAllUsersMainInfo]");
+		Set<UserMainInformations> usersInfo = userInfoDAOImpl.findAll();
+		for (UserMainInformations u : usersInfo) {
+			System.out.println(u.toString());
+		}
+		assertEquals(1, usersInfo.size());
 	}
 
 }

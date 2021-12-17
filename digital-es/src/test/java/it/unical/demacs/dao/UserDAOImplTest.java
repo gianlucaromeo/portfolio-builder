@@ -2,6 +2,8 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -9,6 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
+import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -50,6 +53,7 @@ public class UserDAOImplTest {
 		assertEquals(3, id);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindUserById() {
 		System.out.println("[checkFindUserById]");
@@ -59,5 +63,14 @@ public class UserDAOImplTest {
 		assertEquals(user, userById);
 	}
 	
+	@Test
+	public void checkFindAllUsers() {
+		System.out.println("[checkFindAllUsers]");
+		Set<User> users = userDAOImpl.findAll();
+		for (User u : users) {
+			System.out.println(u.toString());
+		}
+		assertEquals(3, users.size());
+	}
 	
 }

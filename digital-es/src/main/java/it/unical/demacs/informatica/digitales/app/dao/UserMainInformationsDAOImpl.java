@@ -2,9 +2,11 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
+import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -163,8 +165,50 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 	
 	@Override
 	public Set<UserMainInformations> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Set<UserMainInformations> usersMainInfo = new HashSet<UserMainInformations>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM users_main_informations;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				UserMainInformations userMainInfo = new UserMainInformations();
+				userMainInfo.setUserId(rs.getLong("id"));
+				userMainInfo.setProfilePicture(rs.getString("profile_picture"));
+				userMainInfo.setLogoPicture(rs.getString("logo_picture"));
+				userMainInfo.setLogoName(rs.getString("logo_name"));
+				userMainInfo.setBio(rs.getString("bio"));
+				userMainInfo.setPresentationPicture1(rs.getString("presentation_picture_1"));
+				userMainInfo.setPresentationPicture2(rs.getString("presentation_picture_2"));
+				userMainInfo.setPresentationPicture3(rs.getString("presentation_picture_3"));
+				userMainInfo.setSpecialSkillName1(rs.getString("special_skill_name_1"));
+				userMainInfo.setSpecialSkillName2(rs.getString("special_skill_name_2"));
+				userMainInfo.setSpecialSkillName3(rs.getString("special_skill_name_3"));
+				userMainInfo.setSpecialSkillDescr1(rs.getString("special_skill_descr_1"));
+				userMainInfo.setSpecialSkillDescr2(rs.getString("special_skill_descr_2"));
+				userMainInfo.setSpecialSkillDescr3(rs.getString("special_skill_descr_3"));
+				userMainInfo.setFacebookLinkRef(rs.getString("facebook_link_ref"));
+				userMainInfo.setInstagramLinkRef(rs.getString("instagram_link_ref"));
+				userMainInfo.setTwitterLinkRef(rs.getString("twitter_link_ref"));
+				usersMainInfo.add(userMainInfo);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[UserMainInformationsDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return usersMainInfo;
+		
 	}
 
 

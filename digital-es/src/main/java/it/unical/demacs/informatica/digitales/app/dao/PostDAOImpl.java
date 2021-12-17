@@ -2,8 +2,10 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -167,8 +169,41 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	
 	@Override
 	public Set<Post> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Set<Post> posts = new HashSet<Post>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM posts;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getLong("id"));
+				post.setTitle(rs.getString("title"));
+				post.setDescription(rs.getString("description"));
+				post.setPicture(rs.getString("picture"));
+				post.setPubblicationDate(rs.getString("publication_date"));
+				post.setLastEditDate(rs.getString("last_edit_date"));
+				post.setRefLink(rs.getString("ref_link"));
+				post.setUserId(rs.getLong("user_id"));
+				posts.add(post);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[PostDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return posts;
+		
 	}
 	
 }
