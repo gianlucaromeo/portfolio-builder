@@ -72,4 +72,12 @@ public class CurriculumDAOImplTest {
 	}
 	
 
+	@Ignore
+	@Test
+	public void checkDeleteCurriculum() {
+		System.out.println("[checkDeleteCurriculum]");
+		String res = curriculumDAOImpl.delete(curriculum);
+		assertEquals(Protocol.OK, res);
+	}
+
 }

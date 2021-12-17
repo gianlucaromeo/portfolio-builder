@@ -82,5 +82,13 @@ public class CurriculumExperienceDAOImplTest {
 		}
 		assertEquals(1, curriculumExs.size());
 	}
+	
+	@Ignore
+	@Test
+	public void checkDeleteCurriculumExperiences() {
+		System.out.println("[checkDeleteCurriculumExperiences]");
+		String res = curriculumExperienceDAOImpl.delete(curriculumExperience);
+		assertEquals(Protocol.OK, res);
+	}
 
 }

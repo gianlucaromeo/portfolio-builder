@@ -74,6 +74,14 @@ public class CurriculumSkillDAOImplTest {
 		}
 		assertEquals(1, curriculumSkills.size());
 	}
+	
+	@Ignore
+	@Test
+	public void checkDeleteCurriculumSkill() {
+		System.out.println("[checkDeleteCurriculumSkill]");
+		String res = curriculumSkillDAOImpl.delete(curriculumSkill);
+		assertEquals(Protocol.OK, res);
+	}
 
 	
 

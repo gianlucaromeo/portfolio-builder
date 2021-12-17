@@ -181,9 +181,26 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 	}
 	
 	@Override
-	public String delete(Curriculum t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(Curriculum curriculum) {
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from curriculum WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, curriculum.getId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
 	}
 
 }
