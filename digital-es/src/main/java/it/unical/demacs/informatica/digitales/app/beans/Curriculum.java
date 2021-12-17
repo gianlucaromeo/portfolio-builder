@@ -49,6 +49,11 @@ public class Curriculum {
 		return Objects.equals(hobbiesDescription, other.hobbiesDescription) && id == other.id && userId == other.userId;
 	}
 
+	@Override
+	public String toString() {
+		return "Curriculum [id=" + id + ", userId=" + userId + ", hobbiesDescription=" + hobbiesDescription + "]";
+	}
+
 	
 	
 
