@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -21,6 +22,8 @@ public class RemovedProjectDAOImplTest {
 		removedProject.setProjectId(2);
 		removedProject.setReason("RemovedProjecteVero@a.it");
 		removedProject.setSeenByUser(false);
+		
+		removedProject.setId(1);
 	}
 	
 	@Ignore
@@ -36,5 +39,12 @@ public class RemovedProjectDAOImplTest {
 		System.out.println("[checkFindRemovedProjectId]");
 		long id = removedProjectDAOImpl.findId(removedProject);
 		assertEquals(-1, id);
+	}
+	
+	@Test
+	public void checkFindRemovedProjectById() {
+		System.out.println("[checkFindRemovedProjectById]");
+		RemovedProject removedProjectById = removedProjectDAOImpl.findById(1);
+		assertEquals(removedProjectById, removedProject);
 	}
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
@@ -118,8 +119,36 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	
 	@Override
 	public Moderator findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Moderator moderator = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM moderators WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				moderator = new Moderator();
+				moderator.setId(id);
+				moderator.setUsername(rs.getString("username"));
+				moderator.setPassword(rs.getString("password"));
+				moderator.setEmail(rs.getString("email"));
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return moderator;
 	}
 
 }

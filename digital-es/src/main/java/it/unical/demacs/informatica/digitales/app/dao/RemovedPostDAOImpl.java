@@ -3,6 +3,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -116,8 +117,37 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 	
 	@Override
 	public RemovedPost findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		RemovedPost removedPost = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM removed_posts WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				removedPost = new RemovedPost();
+				removedPost.setModeratorId(rs.getLong("moderator_id"));
+				removedPost.setReason(rs.getString("reason"));
+				removedPost.setPostId(rs.getLong("post_id"));
+				removedPost.setSeenByUser(rs.getBoolean("is_seen_by_user"));
+				removedPost.setId(id);
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[RemovedPostDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return removedPost;
 	}
 	
 }

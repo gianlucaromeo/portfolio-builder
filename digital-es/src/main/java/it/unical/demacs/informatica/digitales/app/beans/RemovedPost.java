@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class RemovedPost {
 
 	private long id;
@@ -40,6 +42,30 @@ public class RemovedPost {
 	}
 	public void setSeenByUser(boolean seenByUser) {
 		this.seenByUser = seenByUser;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, moderatorId, postId, reason, seenByUser);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RemovedPost other = (RemovedPost) obj;
+		return id == other.id && moderatorId == other.moderatorId && postId == other.postId
+				&& Objects.equals(reason, other.reason) && seenByUser == other.seenByUser;
+	}
+
+	@Override
+	public String toString() {
+		return "RemovedPost [id=" + id + ", moderatorId=" + moderatorId + ", reason=" + reason + ", postId=" + postId
+				+ ", seenByUser=" + seenByUser + "]";
 	}
 	
 	
