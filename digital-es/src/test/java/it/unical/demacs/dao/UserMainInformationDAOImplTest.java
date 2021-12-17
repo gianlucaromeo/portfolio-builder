@@ -24,7 +24,7 @@ public class UserMainInformationDAOImplTest {
 		userInfo=new UserMainInformations();
 		userInfo.setUserId(2);
 		userInfo.setLogoName("MyName");
-		userInfo.setBio("This is a biography");
+		userInfo.setBio("newBio");
 		userInfo.setProfilePicture("/profile.jpg");	
 		userInfo.setPresentationPicture1("/img1.jpg");
 		userInfo.setPresentationPicture2("/img3.jpg");
@@ -47,6 +47,15 @@ public class UserMainInformationDAOImplTest {
 		System.out.println("[checkAddCurriculumSkillToDatabase]");
 		String res = userInfoDAOImpl.create(userInfo);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Ignore
+	@Test
+	public void checkUpdateUserMainInfo() {
+		System.out.println("[checkUpdateUserMainInfo]");
+		userInfo.setBio("newBio");
+		String res = userInfoDAOImpl.update(userInfo);
+		assertEquals(Protocol.OK, res);
 	}
 	
 	@Ignore
