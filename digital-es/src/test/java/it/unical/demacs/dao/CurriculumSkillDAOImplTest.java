@@ -37,6 +37,16 @@ public class CurriculumSkillDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+
+	@Ignore
+	@Test
+	public void checkUpdateCurriculumSkill() {
+		System.out.println("[checkUpdateCurriculumSkill]");
+		curriculumSkill.setTitle("newTitle");
+		String res = curriculumSkillDAOImpl.update(curriculumSkill);
+		assertEquals(Protocol.OK, res);
+	}
+	
 	@Ignore
 	@Test
 	public void checkFindCurriculumSkillId() {

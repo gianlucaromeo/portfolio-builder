@@ -48,6 +48,15 @@ public class CurriculumExperienceDAOImplTest {
 	
 	@Ignore
 	@Test
+	public void checkUpdateCurriculumExperience() {
+		System.out.println("[checkUpdateCurriculumExperience]");
+		curriculumExperience.setDescription("newFDescription");
+		String res = curriculumExperienceDAOImpl.update(curriculumExperience);
+		assertEquals(Protocol.OK, res);
+	}
+	
+	@Ignore
+	@Test
 	public void checkFindCurriculumExperienceId() {
 		System.out.println("[checkFindCurriculumExperienceId]");
 		long id = curriculumExperienceDAOImpl.findId(curriculumExperience);

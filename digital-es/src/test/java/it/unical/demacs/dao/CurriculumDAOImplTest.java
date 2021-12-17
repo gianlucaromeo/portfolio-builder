@@ -33,6 +33,15 @@ public class CurriculumDAOImplTest {
 		String res = curriculumDAOImpl.create(curriculum);
 		assertEquals(res, Protocol.OK);
 	}
+
+	@Ignore
+	@Test
+	public void checkUpdateCurriculum() {
+		System.out.println("[checkUpdateCurriculum]");
+		curriculum.setHobbiesDescription("newHobbies");
+		String res = curriculumDAOImpl.update(curriculum);
+		assertEquals(Protocol.OK, res);
+	}
 	
 	@Ignore
 	@Test
