@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -23,6 +24,7 @@ public class RemovedPostDAOImplTest {
 		remPost.setModeratorId(1);
 		remPost.setPostId(1);
 		
+		remPost.setId(1);
 	}
 	
 	@Ignore
@@ -47,5 +49,10 @@ public class RemovedPostDAOImplTest {
 		assertEquals(1, id);
 	}
 
-
+	@Test
+	public void checkFindRemovedPostById() {
+		System.out.println("[checkFindRemovedPostById]");
+		RemovedPost remPostById = remPostsDAOImpl.findById(1);
+		assertEquals(remPostById, remPost);
+	}
 }

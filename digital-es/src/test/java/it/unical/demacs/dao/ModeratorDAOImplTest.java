@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -21,6 +22,8 @@ public class ModeratorDAOImplTest {
 		moderator.setUsername("ModeratoreVero1");
 		moderator.setPassword("Password");
 		moderator.setEmail("ModeratoreVero@a.it");
+		
+		moderator.setId(1);
 	}
 	
 	@Ignore
@@ -36,6 +39,13 @@ public class ModeratorDAOImplTest {
 		System.out.println("[checkFindModeratorId]");
 		long id = moderatorDAOImpl.findId(moderator);
 		assertEquals(1, id);
+	}
+	
+	@Test
+	public void checkFindModeratorById() {
+		System.out.println("[checkFindModeratorById]");
+		Moderator moderatorById = moderatorDAOImpl.findById(1);
+		assertEquals(moderator, moderatorById);
 	}
 
 }

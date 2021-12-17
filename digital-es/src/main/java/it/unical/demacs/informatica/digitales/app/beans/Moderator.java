@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class Moderator {
 	
 	private long id;
@@ -33,5 +35,30 @@ public class Moderator {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, id, password, username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Moderator other = (Moderator) obj;
+		return Objects.equals(email, other.email) && id == other.id && Objects.equals(password, other.password)
+				&& Objects.equals(username, other.username);
+	}
+
+	@Override
+	public String toString() {
+		return "Moderator [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+	}
+	
+	
 	
 }

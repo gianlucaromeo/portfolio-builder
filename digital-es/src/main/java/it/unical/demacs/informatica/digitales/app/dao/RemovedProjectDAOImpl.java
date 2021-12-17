@@ -6,6 +6,7 @@ import java.sql.Types;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
+import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
@@ -118,8 +119,37 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	
 	@Override
 	public RemovedProject findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		RemovedProject removedProject = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM removed_projects WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				removedProject = new RemovedProject();
+				removedProject.setModeratorId(rs.getLong("moderator_id"));
+				removedProject.setReason(rs.getString("reason"));
+				removedProject.setProjectId(rs.getLong("post_id"));
+				removedProject.setSeenByUser(rs.getBoolean("is_seen_by_user"));
+				removedProject.setId(id);
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[RemovedProjectDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return removedProject;
 	}
 	
 }
