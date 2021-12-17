@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
@@ -152,8 +153,36 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 	
 	@Override
 	public Set<CurriculumSkill> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<CurriculumSkill> curriculums = new HashSet<CurriculumSkill>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM curriculum_skills;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				CurriculumSkill curriculumSkill = new CurriculumSkill();
+				curriculumSkill= new CurriculumSkill();
+				curriculumSkill.setId(rs.getLong("id"));
+				curriculumSkill.setUserId(rs.getLong("user_id"));
+				curriculumSkill.setTitle(rs.getString("title"));
+				curriculumSkill.setLevel(rs.getInt("level"));
+				curriculums.add(curriculumSkill);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumSkillDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return curriculums;
 	}
 
 }

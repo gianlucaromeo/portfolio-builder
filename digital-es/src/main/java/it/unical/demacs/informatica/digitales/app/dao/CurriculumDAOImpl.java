@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -149,8 +150,34 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 
 	@Override
 	public Set<Curriculum> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Curriculum> curriculums = new HashSet<Curriculum>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM curriculum;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Curriculum curriculum = new Curriculum();
+				curriculum.setId(rs.getLong("id"));
+				curriculum.setUserId(rs.getLong("user_id"));
+				curriculum.setHobbiesDescription(rs.getString("hobbies_descr"));
+				curriculums.add(curriculum);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[CurriculumDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return curriculums;
 	}
 
 }

@@ -2,9 +2,13 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -37,7 +41,7 @@ public class CurriculumDAOImplTest {
 		long id = curriculumDAOImpl.findId(curriculum);
 		assertEquals(2, id);
 	}
-	
+	@Ignore
 	@Test
 	public void checkFindCurriculumById() {
 		System.out.println("[checkFindCurriculumById]");
@@ -45,6 +49,17 @@ public class CurriculumDAOImplTest {
 		System.out.println(curriculumById.toString());
 		System.out.println(curriculum.toString());
 		assertEquals(curriculum, curriculumById);
+	}
+	
+
+	@Test
+	public void checkFindAllCurriculum() {
+		System.out.println("[checkFindAllCurriculum]");
+		Set<Curriculum> curriculums = curriculumDAOImpl.findAll();
+		for (Curriculum c : curriculums) {
+			System.out.println(c.toString());
+		}
+		assertEquals(1, curriculums.size());
 	}
 	
 
