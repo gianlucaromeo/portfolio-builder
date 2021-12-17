@@ -191,9 +191,27 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	}
 	
 	@Override
-	public String delete(RemovedProject t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(RemovedProject project) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from removed_projects WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, project.getId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("RemovedProjectDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
 	}
 	
 }

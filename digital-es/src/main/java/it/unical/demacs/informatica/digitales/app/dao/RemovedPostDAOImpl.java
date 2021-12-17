@@ -188,9 +188,27 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 	}
 	
 	@Override
-	public String delete(RemovedPost t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(RemovedPost post) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from removed_posts WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, post.getId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("RemovedPostDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
 	}
 	
 }
