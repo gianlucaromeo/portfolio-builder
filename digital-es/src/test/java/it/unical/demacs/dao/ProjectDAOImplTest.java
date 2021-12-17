@@ -22,7 +22,7 @@ public class ProjectDAOImplTest {
 	public static void beforeClass() {
 		project= new Project();
 		project.setTitle("Google Project");
-		project.setDescription("this is a project i've done when i've worked for Google");
+		project.setDescription("newDescription");
 		project.setPicture("/img/...");
 		project.setLinkRef("www.github.com/...");
 		project.setUserId(2);
@@ -36,6 +36,15 @@ public class ProjectDAOImplTest {
 		System.out.println("[checkAddProjectToDatabase]");
 		String res = projectDAOImpl.create(project);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	//@Ignore
+	@Test
+	public void checkUpdateProject() {
+		System.out.println("[checkUpdateProject]");
+		project.setDescription("newDescription");
+		String res = projectDAOImpl.update(project);
+		assertEquals(Protocol.OK, res);
 	}
 	
 	@Ignore
@@ -56,6 +65,7 @@ public class ProjectDAOImplTest {
 		assertEquals(project, projectById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllProjects() {
 		System.out.println("[checkFindAllProjects]");

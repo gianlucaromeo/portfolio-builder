@@ -49,7 +49,7 @@ public class UserMainInformationDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
-	@Ignore
+	
 	@Test
 	public void checkUpdateUserMainInfo() {
 		System.out.println("[checkUpdateUserMainInfo]");
@@ -76,6 +76,7 @@ public class UserMainInformationDAOImplTest {
 		assertEquals(userInfo, userInfoById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllUsersMainInfo() {
 		System.out.println("[checkFindAllUsersMainInfo]");

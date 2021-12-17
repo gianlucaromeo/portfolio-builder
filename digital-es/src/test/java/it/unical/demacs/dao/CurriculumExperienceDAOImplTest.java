@@ -26,7 +26,7 @@ public class CurriculumExperienceDAOImplTest {
 	public static void beforeClass() {
 		curriculumExperience=new CurriculumExperience();
 		curriculumExperience.setTitle("Google Software Engineer" );
-		curriculumExperience.setDescription("I've worked for google as software engineer");
+		curriculumExperience.setDescription("newFDescription");
 		curriculumExperience.setPlace("Zurigo, Switzerland" );
 		curriculumExperience.setType(CurriculumSettings.WORK_EXPERIENCE);
 		curriculumExperience.setStartDate("2011-07-23");
@@ -72,7 +72,7 @@ public class CurriculumExperienceDAOImplTest {
 		assertEquals(curriculumExperience, curriculumExperienceById);
 	}
 	
-
+	@Ignore
 	@Test
 	public void checkFindAllCurriculumExperience() {
 		System.out.println("[checkFindAllCurriculumExperience]");

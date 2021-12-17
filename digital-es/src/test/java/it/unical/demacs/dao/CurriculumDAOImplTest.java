@@ -20,7 +20,7 @@ public class CurriculumDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		curriculum=new Curriculum();
-		curriculum.setHobbiesDescription("no one in particular");
+		curriculum.setHobbiesDescription("newHobbies");
 		//vedere DB
 		curriculum.setUserId(2);
 		curriculum.setId(2);
@@ -60,7 +60,7 @@ public class CurriculumDAOImplTest {
 		assertEquals(curriculum, curriculumById);
 	}
 	
-
+	@Ignore
 	@Test
 	public void checkFindAllCurriculum() {
 		System.out.println("[checkFindAllCurriculum]");

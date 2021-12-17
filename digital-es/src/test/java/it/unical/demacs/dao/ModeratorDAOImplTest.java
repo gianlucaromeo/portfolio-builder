@@ -37,6 +37,7 @@ public class ModeratorDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkUpdateModeratorToDatabase() {
 		System.out.println("[checkUpdateModeratorToDatabase]");

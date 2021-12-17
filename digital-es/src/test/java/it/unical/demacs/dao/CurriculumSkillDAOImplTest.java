@@ -20,7 +20,7 @@ public class CurriculumSkillDAOImplTest {
 	@BeforeClass
 	public static void beforeClass() {
 		curriculumSkill=new CurriculumSkill();
-		curriculumSkill.setTitle("Go");
+		curriculumSkill.setTitle("newTitle");
 		curriculumSkill.setLevel(100);
 		
 		curriculumSkill.setUserId(2);
@@ -64,6 +64,7 @@ public class CurriculumSkillDAOImplTest {
 		assertEquals(curriculumSkill, curriculumSkillById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllCurriculumSkill() {
 		System.out.println("[checkFindAllCurriculumSkill]");

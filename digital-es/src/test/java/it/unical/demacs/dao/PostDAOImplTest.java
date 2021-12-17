@@ -24,7 +24,7 @@ public class PostDAOImplTest {
 	public static void beforeClass() {
 		post=new Post();
 		post.setTitle("Post number 1");
-		post.setDescription("This is my first post wooow lol xD");
+		post.setDescription("newDescription");
 		post.setPicture(null);
 		post.setPubblicationDate("2021-12-14");
 		post.setLastEditDate(null);
@@ -41,6 +41,16 @@ public class PostDAOImplTest {
 		String res = postDAOImpl.create(post);
 		assertEquals(res, Protocol.OK);
 	}
+	
+	@Ignore
+	@Test
+	public void checkUpdatePost() {
+		System.out.println("[checkUpdatePost]");
+		post.setDescription("newDescription");
+		String res = postDAOImpl.update(post);
+		assertEquals(Protocol.OK, res);
+	}
+	
 	@Ignore
 	@Test
 	public void checkFindPostId() {
@@ -59,6 +69,7 @@ public class PostDAOImplTest {
 		assertEquals(post, postById);
 	}
 
+	@Ignore
 	@Test
 	public void checkFindAllPosts() {
 		System.out.println("[checkFindAllPosts]");

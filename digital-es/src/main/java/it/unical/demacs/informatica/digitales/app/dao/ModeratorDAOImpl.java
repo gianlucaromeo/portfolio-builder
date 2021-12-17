@@ -63,7 +63,7 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "UPDATE moderators SET username=?,reason=?,password=?,email=? WHERE id=?;";
+		String query = "UPDATE moderators SET username=?, password=?,email=? WHERE id=?;";
 		
 		try {
 			

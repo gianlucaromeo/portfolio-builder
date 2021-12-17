@@ -29,7 +29,7 @@ public class UserDAOImplTest {
 		user.setUsername("cristiandrami");
 		user.setPassword("$2a$12$XcBMbnC3b7Bgf.g9LRmpre1Yrch53qXoJv1s/C8Qps483oSbIlNkS");
 		user.setEmail("thebreakinggames0@outlook.it");
-		user.setDateOfBirth("2007-01-30");
+		user.setDateOfBirth("newDateOfBirth");
 		user.setMainPhoneNumber("3169981021");
 		user.setSecondaryPhoneNumber("0189556712");
 		user.setContactEmail("bellissima@me.it");
@@ -43,6 +43,15 @@ public class UserDAOImplTest {
 		System.out.println("[checkAddUserToDatabase]");
 		String res = userDAOImpl.create(user);
 		assertEquals(res, Protocol.OK);
+	}
+	
+	@Ignore
+	@Test
+	public void checkUpdateUser() {
+		System.out.println("[checkUpdateUser]");
+		user.setDateOfBirth("newDateOfBirth");
+		String res = userDAOImpl.update(user);
+		assertEquals(Protocol.OK, res);
 	}
 	
 	@Ignore
@@ -63,6 +72,7 @@ public class UserDAOImplTest {
 		assertEquals(user, userById);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindAllUsers() {
 		System.out.println("[checkFindAllUsers]");

@@ -68,11 +68,11 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "UPDATE user_main_informations SET user_id=?,profile_picture=?,logo_picture=?,logo_name=?,"
+		String query = "UPDATE users_main_informations SET profile_picture=?,logo_picture=?,logo_name=?,"
 				+ "bio=?, presentation_picture_1=?,presentation_picture_2=?,presentation_picture_3=?,"
 				+ "special_skill_name_1=?,special_skill_name_2=?,special_skill_name_3=?,  "
 				+ "special_skill_descr_1=?,special_skill_descr_2=?,special_skill_descr_3=?,"
-				+ "facebook_link_ref=?,instagram_link_ref=?,twitter_link_ref=? WHERE id=?";
+				+ "facebook_link_ref=?,instagram_link_ref=?,twitter_link_ref=? WHERE user_id=?";
 		   
 		try {
 			
@@ -88,7 +88,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			p.setString(8, userMainInfo.getSpecialSkillName1());
 			p.setString(9, userMainInfo.getSpecialSkillName2());
 			p.setString(10, userMainInfo.getSpecialSkillName3());
-			p.setString(12, userMainInfo.getSpecialSkillDescr1());
+			p.setString(11, userMainInfo.getSpecialSkillDescr1());
 			p.setString(12, userMainInfo.getSpecialSkillDescr2());
 			p.setString(13, userMainInfo.getSpecialSkillDescr3());
 			p.setString(14, userMainInfo.getFacebookLinkRef());

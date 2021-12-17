@@ -74,7 +74,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 		con = DBUtil.getInstance().getConnection(); 
 		
-		String query = "UPDATE users SET id=?, first_name=?, last_name=?, username=?, password=?, email=?, date_of_birth=?, main_phone_number=?, secondary_phone_number=?, contact_email=? WHERE id=?;";
+		String query = "UPDATE users SET first_name=?, last_name=?, username=?, password=?, email=?, date_of_birth=?, main_phone_number=?, secondary_phone_number=?, contact_email=?, confirmed=? WHERE id=?;";
 		
 		try {
 			
