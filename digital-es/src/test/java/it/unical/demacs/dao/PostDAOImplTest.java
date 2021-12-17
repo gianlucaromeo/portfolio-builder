@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
+import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumSkillDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -27,6 +28,7 @@ public class PostDAOImplTest {
 		post.setRefLink(null);
 		post.setUserId(2);
 		
+		post.setId(1);
 	}
 	
 	@Ignore
@@ -36,12 +38,21 @@ public class PostDAOImplTest {
 		String res = postDAOImpl.create(post);
 		assertEquals(res, Protocol.OK);
 	}
-	
+	@Ignore
 	@Test
 	public void checkFindPostId() {
 		System.out.println("[checkFindPostId]");
 		long id = postDAOImpl.findId(post);
 		assertEquals(1, id);
+	}
+	
+	@Test
+	public void checkFindPostById() {
+		System.out.println("[checkFindPostById]");
+		Post postById = postDAOImpl.findById(1);
+		System.out.println(postById.toString());
+		System.out.println(post.toString());
+		assertEquals(postById, post);
 	}
 
 }
