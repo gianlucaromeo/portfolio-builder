@@ -3,7 +3,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 import java.sql.SQLException;
 import java.sql.Types;
 
-
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -121,8 +121,39 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 	
 	@Override
 	public Project findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Project project = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM projects WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				project= new Project();
+				project.setId(id);
+				project.setUserId(rs.getLong("user_id"));
+				project.setTitle(rs.getString("title"));
+				project.setDescription(rs.getString("description"));
+				project.setPicture(rs.getString("picture"));
+				project.setLinkRef(rs.getString("link_ref"));
+			
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[ProjectDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return project;
 	}
 
 }

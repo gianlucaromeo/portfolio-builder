@@ -1,7 +1,10 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
-import java.sql.Types;import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
+import java.sql.Types;
+
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -113,8 +116,37 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 	
 	@Override
 	public CurriculumSkill findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		CurriculumSkill curriculumSkill = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM curriculum_skills WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				curriculumSkill= new CurriculumSkill();
+				curriculumSkill.setId(id);
+				curriculumSkill.setUserId(rs.getLong("user_id"));
+				curriculumSkill.setTitle(rs.getString("title"));
+				curriculumSkill.setLevel(rs.getInt("level"));
+			
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[CurriculumSkillDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return curriculumSkill;
 	}
 
 }

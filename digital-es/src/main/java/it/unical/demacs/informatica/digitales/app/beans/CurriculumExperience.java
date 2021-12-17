@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class CurriculumExperience {
 	private long id;
 	private long userId;
@@ -67,6 +69,29 @@ public class CurriculumExperience {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, endDate, id, place, startDate, title, type, userId);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CurriculumExperience other = (CurriculumExperience) obj;
+		return Objects.equals(description, other.description) && Objects.equals(endDate, other.endDate)
+				&& id == other.id && Objects.equals(place, other.place) && Objects.equals(startDate, other.startDate)
+				&& Objects.equals(title, other.title) && Objects.equals(type, other.type) && userId == other.userId;
 	}
 	
 	

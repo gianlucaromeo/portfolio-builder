@@ -9,6 +9,7 @@ import java.sql.Types;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
+import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -139,8 +140,41 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	
 	@Override
 	public User findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM users WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				user= new User();
+				user.setId(id);
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setPassword(rs.getString("password"));
+				user.setEmail(rs.getString("email"));
+				user.setDateOfBirth(rs.getString("date_of_birth"));
+				user.setMainPhoneNumber(rs.getString("main_phone_number"));
+				user.setSecondaryPhoneNumber(rs.getString("secondary_phone_number"));
+				user.setContactEmail(rs.getString("contact_email"));
+				user.setConfirmed(rs.getBoolean("confirmed"));
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return user;
 	}
 
 	

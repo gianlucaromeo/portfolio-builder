@@ -3,6 +3,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
@@ -121,8 +122,40 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 
 	@Override
 	public CurriculumExperience findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		CurriculumExperience curriculumEx = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM curriculum_experiences WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				curriculumEx= new CurriculumExperience();
+				curriculumEx.setId(id);
+				curriculumEx.setUserId(rs.getLong("user_id"));
+				curriculumEx.setTitle(rs.getString("title"));
+				curriculumEx.setPlace(rs.getString("place"));
+				curriculumEx.setStartDate(rs.getString("date_start"));
+				curriculumEx.setEndDate(rs.getString("end_date"));
+				curriculumEx.setDescription(rs.getString("description"));
+				curriculumEx.setType(rs.getString("type"));
+			
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[CurriculumExperienceDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return curriculumEx;
 	}
 	
 }

@@ -8,6 +8,7 @@ import java.sql.Types;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
 import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.beans.User;
@@ -114,8 +115,35 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 	
 	@Override
 	public Curriculum findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Curriculum curriculum = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM curriculum WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				curriculum= new Curriculum();
+				curriculum.setId(id);
+				curriculum.setUserId(rs.getLong("user_id"));
+				curriculum.setHobbiesDescription(rs.getString("hobbies_descr"));
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[CurriculumDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return curriculum;
 	}
 
 

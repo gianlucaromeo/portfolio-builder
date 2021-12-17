@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class CurriculumSkill {
 	
 	private long id;
@@ -37,6 +39,25 @@ public class CurriculumSkill {
 	}
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, level, title, userId);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CurriculumSkill other = (CurriculumSkill) obj;
+		return id == other.id && level == other.level && Objects.equals(title, other.title) && userId == other.userId;
 	}
 	
 	

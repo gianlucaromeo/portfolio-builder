@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class Curriculum {
 	private long id; 
 	private long userId;
@@ -28,6 +30,23 @@ public class Curriculum {
 	}
 	public void setHobbiesDescription(String hobbiesDescription) {
 		this.hobbiesDescription = hobbiesDescription;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(hobbiesDescription, id, userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curriculum other = (Curriculum) obj;
+		return Objects.equals(hobbiesDescription, other.hobbiesDescription) && id == other.id && userId == other.userId;
 	}
 
 	
