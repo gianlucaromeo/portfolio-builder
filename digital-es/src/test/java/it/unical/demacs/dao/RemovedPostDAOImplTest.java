@@ -41,7 +41,7 @@ public class RemovedPostDAOImplTest {
 //		String res = remPostsDAOImpl.update(remPost);
 //		assertEquals(res, Protocol.OK);
 //	}
-	
+	@Ignore
 	@Test
 	public void checkFindBannedUserId() {
 		System.out.println("[checkFindRemovedPostId]");
@@ -53,6 +53,8 @@ public class RemovedPostDAOImplTest {
 	public void checkFindRemovedPostById() {
 		System.out.println("[checkFindRemovedPostById]");
 		RemovedPost remPostById = remPostsDAOImpl.findById(1);
+		System.out.println(remPostById.toString());
+		System.out.println(remPost.toString());
 		assertEquals(remPostById, remPost);
 	}
 }
