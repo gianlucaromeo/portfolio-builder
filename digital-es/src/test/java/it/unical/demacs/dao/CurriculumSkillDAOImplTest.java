@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumSkillDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -33,12 +34,23 @@ public class CurriculumSkillDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindCurriculumSkillId() {
 		System.out.println("[checkFindCurriculumSkillId]");
 		long id = curriculumSkillDAOImpl.findId(curriculumSkill);
 		assertEquals(1, id);
 	}
+	
+	@Test
+	public void checkFindCurriculumSkillById() {
+		System.out.println("[checkFindCurriculumSkillById]");
+		CurriculumSkill curriculumSkillById = curriculumSkillDAOImpl.findById(1);
+		System.out.println(curriculumSkillById.toString());
+		System.out.println(curriculumSkill.toString());
+		assertEquals(curriculumSkillById, curriculumSkill);
+	}
+
 	
 
 }

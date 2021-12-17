@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumDAOImpl;
@@ -42,6 +43,7 @@ public class CurriculumExperienceDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindCurriculumExperienceId() {
 		System.out.println("[checkFindCurriculumExperienceId]");
@@ -49,5 +51,13 @@ public class CurriculumExperienceDAOImplTest {
 		assertEquals(id, 4);
 	}
 	
+	@Test
+	public void checkFindCurriculumExperienceById() {
+		System.out.println("[checkFindCurriculumExperienceById]");
+		CurriculumExperience curriculumExperienceById = curriculumExperienceDAOImpl.findById(1);
+		System.out.println(curriculumExperienceById.toString());
+		System.out.println(curriculumExperience.toString());
+		assertEquals(curriculumExperienceById, curriculumExperience);
+	}
 
 }
