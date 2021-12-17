@@ -1,10 +1,12 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
@@ -155,8 +157,36 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 	
 	@Override
 	public Set<Moderator> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Set<Moderator> moderators = new HashSet<Moderator>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM moderators;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Moderator moderator = new Moderator();
+				moderator.setId(rs.getLong("id"));
+				moderator.setUsername(rs.getString("username"));
+				moderator.setPassword(rs.getString("password"));
+				moderator.setEmail(rs.getString("email"));
+				moderators.add(moderator);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return moderators;
 	}
 
 }

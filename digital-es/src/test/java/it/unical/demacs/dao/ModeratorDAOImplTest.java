@@ -2,6 +2,8 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,6 +45,7 @@ public class ModeratorDAOImplTest {
 		assertEquals(1, id);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindModeratorById() {
 		System.out.println("[checkFindModeratorById]");
@@ -50,6 +53,16 @@ public class ModeratorDAOImplTest {
 		System.out.println(moderatorById.toString());
 		System.out.println(moderator.toString());
 		assertEquals(moderator, moderatorById);
+	}
+	
+	@Test
+	public void checkFindAllUsers() {
+		System.out.println("[checkFindAllModerators]");
+		Set<Moderator> moderators = moderatorDAOImpl.findAll();
+		for (Moderator m : moderators) {
+			System.out.println(m.toString());
+		}
+		assertEquals(1, moderators.size());
 	}
 
 }

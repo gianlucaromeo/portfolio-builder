@@ -2,10 +2,13 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
@@ -49,7 +52,7 @@ public class RemovedPostDAOImplTest {
 		long id = remPostsDAOImpl.findId(remPost);
 		assertEquals(1, id);
 	}
-
+	@Ignore
 	@Test
 	public void checkFindRemovedPostById() {
 		System.out.println("[checkFindRemovedPostById]");
@@ -57,5 +60,15 @@ public class RemovedPostDAOImplTest {
 		System.out.println(remPostById.toString());
 		System.out.println(remPost.toString());
 		assertEquals(remPost, remPostById);
+	}
+
+	@Test
+	public void checkFindAllRemovedPost() {
+		System.out.println("[checkFindAllRemovedPost]");
+		Set<RemovedPost> posts = remPostsDAOImpl.findAll();
+		for (RemovedPost p : posts) {
+			System.out.println(p.toString());
+		}
+		assertEquals(1, posts.size());
 	}
 }

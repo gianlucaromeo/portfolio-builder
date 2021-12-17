@@ -2,10 +2,12 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
@@ -155,8 +157,37 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 	
 	@Override
 	public Set<RemovedProject> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Set<RemovedProject> projects = new HashSet<RemovedProject>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM removed_projects;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				RemovedProject removedProject = new RemovedProject();
+				removedProject.setModeratorId(rs.getLong("moderator_id"));
+				removedProject.setReason(rs.getString("reason"));
+				removedProject.setProjectId(rs.getLong("project_id"));
+				removedProject.setSeenByUser(rs.getBoolean("seen_by_user"));
+				removedProject.setId(rs.getLong("id"));
+				projects.add(removedProject);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[RemovedProjectDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return projects;
 	}
 	
 }

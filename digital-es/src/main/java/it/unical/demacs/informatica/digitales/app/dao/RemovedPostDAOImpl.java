@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
@@ -153,8 +154,37 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 	
 	@Override
 	public Set<RemovedPost> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Set<RemovedPost> posts = new HashSet<RemovedPost>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM removed_posts;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				RemovedPost removedPost = new RemovedPost();
+				removedPost.setModeratorId(rs.getLong("moderator_id"));
+				removedPost.setReason(rs.getString("reason"));
+				removedPost.setPostId(rs.getLong("post_id"));
+				removedPost.setSeenByUser(rs.getBoolean("seen_by_user"));
+				removedPost.setId(rs.getLong("id"));
+				posts.add(removedPost);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[RemovedPostDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return posts;
 	}
 	
 }
