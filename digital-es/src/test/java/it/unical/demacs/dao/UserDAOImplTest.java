@@ -83,4 +83,12 @@ public class UserDAOImplTest {
 		assertEquals(3, users.size());
 	}
 	
+	@Ignore
+	@Test
+	public void checkDeleteUser() {
+		System.out.println("[checkDeleteUser]");
+		String res = userDAOImpl.delete(user);
+		assertEquals(Protocol.OK, res);
+	}
+	
 }

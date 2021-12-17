@@ -80,4 +80,12 @@ public class PostDAOImplTest {
 		assertEquals(1, posts.size());
 	}
 	
+	@Ignore
+	@Test
+	public void checkDeletePost() {
+		System.out.println("[checkDeletePost]");
+		String res = postDAOImpl.delete(post);
+		assertEquals(Protocol.OK, res);
+	}
+	
 }

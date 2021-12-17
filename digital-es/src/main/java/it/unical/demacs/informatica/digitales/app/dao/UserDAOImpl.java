@@ -223,9 +223,28 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	}
 	
 	@Override
-	public String delete(User t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(User user) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from users WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, user.getId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
+		
 	}
 
 	

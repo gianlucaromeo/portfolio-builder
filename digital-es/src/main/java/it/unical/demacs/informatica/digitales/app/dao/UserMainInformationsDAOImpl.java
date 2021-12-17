@@ -212,9 +212,28 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 	}
 	
 	@Override
-	public String delete(UserMainInformations t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(UserMainInformations userMainInfo) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from users_main_informations WHERE user_id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, userMainInfo.getUserId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[UserMainInformationsDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
+		
 	}
 
 

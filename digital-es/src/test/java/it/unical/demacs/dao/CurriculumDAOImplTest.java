@@ -71,7 +71,6 @@ public class CurriculumDAOImplTest {
 		assertEquals(1, curriculums.size());
 	}
 	
-
 	@Ignore
 	@Test
 	public void checkDeleteCurriculum() {

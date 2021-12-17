@@ -38,7 +38,7 @@ public class ProjectDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
-	//@Ignore
+	@Ignore
 	@Test
 	public void checkUpdateProject() {
 		System.out.println("[checkUpdateProject]");
@@ -74,6 +74,14 @@ public class ProjectDAOImplTest {
 			System.out.println(p.toString());
 		}
 		assertEquals(1, projects.size());
+	}
+	
+	@Ignore
+	@Test
+	public void checkDeleteProject() {
+		System.out.println("[checkDeleteProject]");
+		String res = projectDAOImpl.delete(project);
+		assertEquals(Protocol.OK, res);
 	}
 	
 }

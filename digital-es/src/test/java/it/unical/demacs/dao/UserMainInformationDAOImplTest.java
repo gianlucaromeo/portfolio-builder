@@ -49,7 +49,7 @@ public class UserMainInformationDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
-	
+	@Ignore
 	@Test
 	public void checkUpdateUserMainInfo() {
 		System.out.println("[checkUpdateUserMainInfo]");
@@ -85,6 +85,14 @@ public class UserMainInformationDAOImplTest {
 			System.out.println(u.toString());
 		}
 		assertEquals(1, usersInfo.size());
+	}
+	
+	//@Ignore
+	@Test
+	public void checkDeleteUserMainInformations() {
+		System.out.println("[checkDeleteUserMainInformations]");
+		String res = userInfoDAOImpl.delete(userInfo);
+		assertEquals(Protocol.OK, res);
 	}
 
 }

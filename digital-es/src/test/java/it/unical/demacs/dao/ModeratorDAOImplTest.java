@@ -75,6 +75,7 @@ public class ModeratorDAOImplTest {
 		assertEquals(1, moderators.size());
 	}
 	
+	@Ignore
 	@Test
 	public void checkDeleteModerator() {
 		System.out.println("[checkDeleteModerator]");
