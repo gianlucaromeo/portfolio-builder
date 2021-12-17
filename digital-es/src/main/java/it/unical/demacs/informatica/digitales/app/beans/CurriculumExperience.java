@@ -93,6 +93,15 @@ public class CurriculumExperience {
 				&& id == other.id && Objects.equals(place, other.place) && Objects.equals(startDate, other.startDate)
 				&& Objects.equals(title, other.title) && Objects.equals(type, other.type) && userId == other.userId;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "CurriculumExperience [id=" + id + ", userId=" + userId + ", title=" + title + ", place=" + place
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", description=" + description + ", type="
+				+ type + "]";
+	}
 	
 	
 	

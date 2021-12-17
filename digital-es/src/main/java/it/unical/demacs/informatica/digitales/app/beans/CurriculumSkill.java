@@ -59,6 +59,12 @@ public class CurriculumSkill {
 		CurriculumSkill other = (CurriculumSkill) obj;
 		return id == other.id && level == other.level && Objects.equals(title, other.title) && userId == other.userId;
 	}
+
+
+	@Override
+	public String toString() {
+		return "CurriculumSkill [id=" + id + ", userId=" + userId + ", title=" + title + ", level=" + level + "]";
+	}
 	
 	
 	
