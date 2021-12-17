@@ -19,6 +19,7 @@ public class CurriculumDAOImplTest {
 		curriculum.setHobbiesDescription("no one in particular");
 		//vedere DB
 		curriculum.setUserId(2);
+		curriculum.setId(2);
 	}
 	
 	@Ignore
@@ -29,11 +30,21 @@ public class CurriculumDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkCurriculumId() {
 		System.out.println("[checkCurriculumId]");
 		long id = curriculumDAOImpl.findId(curriculum);
 		assertEquals(2, id);
+	}
+	
+	@Test
+	public void checkFindCurriculumById() {
+		System.out.println("[checkFindCurriculumById]");
+		Curriculum curriculumById = curriculumDAOImpl.findById(2);
+		System.out.println(curriculumById.toString());
+		System.out.println(curriculum.toString());
+		assertEquals(curriculum, curriculumById);
 	}
 	
 
