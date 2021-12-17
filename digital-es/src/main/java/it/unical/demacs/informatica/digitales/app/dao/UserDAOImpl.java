@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -176,6 +177,12 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		}
 		
 		return user;
+	}
+	
+	@Override
+	public Set<User> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

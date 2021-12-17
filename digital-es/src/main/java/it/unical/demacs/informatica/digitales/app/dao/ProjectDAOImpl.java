@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.beans.Project;
@@ -154,6 +155,12 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 		}
 		
 		return project;
+	}
+	
+	@Override
+	public Set<Project> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

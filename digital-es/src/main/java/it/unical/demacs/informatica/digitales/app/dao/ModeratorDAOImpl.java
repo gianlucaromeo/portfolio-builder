@@ -1,6 +1,8 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
+import java.util.Set;
+
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
@@ -149,6 +151,12 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 		}
 		
 		return moderator;
+	}
+	
+	@Override
+	public Set<Moderator> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

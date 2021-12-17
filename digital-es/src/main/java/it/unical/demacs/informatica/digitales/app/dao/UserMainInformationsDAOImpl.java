@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
@@ -158,6 +159,12 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		
 		return userMainInfo;
 		
+	}
+	
+	@Override
+	public Set<UserMainInformations> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

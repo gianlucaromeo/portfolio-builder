@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -146,5 +147,10 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 		return curriculum;
 	}
 
+	@Override
+	public Set<Curriculum> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

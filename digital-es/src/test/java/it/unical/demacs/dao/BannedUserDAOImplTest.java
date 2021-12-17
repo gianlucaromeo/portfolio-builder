@@ -2,6 +2,8 @@ package it.unical.demacs.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Set;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -42,6 +44,7 @@ public class BannedUserDAOImplTest {
 		assertEquals(1, id);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindBannedUserById() {
 		System.out.println("[checkFindBannedUserById]");
@@ -49,6 +52,16 @@ public class BannedUserDAOImplTest {
 		System.out.println(bannedUserById.toString());
 		System.out.println(bannedUser.toString());
 		assertEquals(bannedUser, bannedUserById);
+	}
+	
+	@Test
+	public void checkFindAllUsers() {
+		System.out.println("[checkFindAllUsers]");
+		Set<BannedUser> bannedUsers = bannedUserDAOImpl.findAll();
+		for (BannedUser b : bannedUsers) {
+			System.out.println(b.toString());
+		}
+		assertEquals(1, bannedUsers.size());
 	}
 	
 }

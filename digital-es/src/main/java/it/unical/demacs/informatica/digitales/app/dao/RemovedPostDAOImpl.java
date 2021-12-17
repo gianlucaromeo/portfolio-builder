@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
@@ -148,6 +149,12 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		}
 		
 		return removedPost;
+	}
+	
+	@Override
+	public Set<RemovedPost> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

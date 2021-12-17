@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
@@ -147,6 +148,12 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 		}
 		
 		return curriculumSkill;
+	}
+	
+	@Override
+	public Set<CurriculumSkill> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

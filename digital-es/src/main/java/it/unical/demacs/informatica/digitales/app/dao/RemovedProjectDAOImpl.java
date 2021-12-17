@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -150,6 +151,12 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 		}
 		
 		return removedProject;
+	}
+	
+	@Override
+	public Set<RemovedProject> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

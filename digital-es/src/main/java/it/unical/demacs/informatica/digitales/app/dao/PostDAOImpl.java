@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
@@ -162,6 +163,12 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 		return post;
 		
+	}
+	
+	@Override
+	public Set<Post> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

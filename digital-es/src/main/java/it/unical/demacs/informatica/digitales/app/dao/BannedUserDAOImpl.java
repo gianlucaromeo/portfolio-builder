@@ -2,6 +2,8 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -152,6 +154,43 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 		}
 		
 		return bannedUser;
+		
+	}
+	
+	@Override
+	public Set<BannedUser> findAll() {
+		
+		Set<BannedUser> users = new HashSet<BannedUser>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM banned_users;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				BannedUser bannedUser = new BannedUser();
+				bannedUser.setId(rs.getLong("id"));
+				bannedUser.setUserId(rs.getLong("user_id"));
+				bannedUser.setModeratorId(rs.getLong("moderator_id"));
+				bannedUser.setReason(rs.getString("reason"));
+				bannedUser.setDateStart(rs.getString("date_start"));
+				bannedUser.setDateEnd(rs.getString("date_end"));
+				users.add(bannedUser);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[BannedUserDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return users;
 		
 	}
 	
