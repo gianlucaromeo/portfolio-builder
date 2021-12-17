@@ -70,6 +70,12 @@ public class BannedUser {
 		return Objects.equals(dateEnd, other.dateEnd) && Objects.equals(dateStart, other.dateStart) && id == other.id
 				&& moderatorId == other.moderatorId && Objects.equals(reason, other.reason) && userId == other.userId;
 	}
+
+	@Override
+	public String toString() {
+		return "BannedUser [id=" + id + ", userId=" + userId + ", moderatorId=" + moderatorId + ", reason=" + reason
+				+ ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + "]";
+	}
 	
 	
 

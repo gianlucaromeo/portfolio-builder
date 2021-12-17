@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 import org.joda.time.DateTime;
 
 public class User {
@@ -86,6 +88,38 @@ public class User {
 	}
 	public void setConfirmed(boolean confirmed) {
 		this.confirmed = confirmed;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(confirmed, contactEmail, dateOfBirth, email, firstName, id, lastName, mainPhoneNumber,
+				password, secondaryPhoneNumber, username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return confirmed == other.confirmed && Objects.equals(contactEmail, other.contactEmail)
+				&& Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(email, other.email)
+				&& Objects.equals(firstName, other.firstName) && id == other.id
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(mainPhoneNumber, other.mainPhoneNumber)
+				&& Objects.equals(password, other.password)
+				&& Objects.equals(secondaryPhoneNumber, other.secondaryPhoneNumber)
+				&& Objects.equals(username, other.username);
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", email=" + email + ", dateOfBirth=" + dateOfBirth + ", mainPhoneNumber="
+				+ mainPhoneNumber + ", secondaryPhoneNumber=" + secondaryPhoneNumber + ", contactEmail=" + contactEmail
+				+ ", confirmed=" + confirmed + "]";
 	}
 	
 	

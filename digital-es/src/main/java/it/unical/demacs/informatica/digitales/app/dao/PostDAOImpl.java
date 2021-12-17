@@ -127,8 +127,41 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	
 	@Override
 	public Post findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Post post = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM posts WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				post = new Post();
+				post.setId(id);
+				post.setTitle(rs.getString("title"));
+				post.setDescription(rs.getString("description"));
+				post.setPicture(rs.getString("picture"));
+				post.setPubblicationDate(rs.getString("publication_date"));
+				post.setLastEditDate(rs.getString("last_edit_date"));
+				post.setRefLink(rs.getString("ref_link"));
+				post.setUserId(rs.getLong("user_id"));
+			}
+		
+		} catch (SQLException e) {
+			System.err.println("[PostDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return post;
+		
 	}
 	
 }

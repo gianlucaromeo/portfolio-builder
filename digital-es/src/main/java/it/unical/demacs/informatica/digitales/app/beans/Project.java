@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class Project {
 	
 	private long id;
@@ -47,6 +49,31 @@ public class Project {
 	}
 	public void setLinkRef(String linkRef) {
 		this.linkRef = linkRef;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, id, linkRef, picture, title, userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Project other = (Project) obj;
+		return Objects.equals(description, other.description) && id == other.id
+				&& Objects.equals(linkRef, other.linkRef) && Objects.equals(picture, other.picture)
+				&& Objects.equals(title, other.title) && userId == other.userId;
+	}
+
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", userId=" + userId + ", title=" + title + ", description=" + description
+				+ ", picture=" + picture + ", linkRef=" + linkRef + "]";
 	}
 	
 	

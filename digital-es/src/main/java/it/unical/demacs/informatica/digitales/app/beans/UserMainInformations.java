@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class UserMainInformations {
 
 	private long userId; // also primary key
@@ -126,6 +128,50 @@ public class UserMainInformations {
 	}
 	public void setTwitterLinkRef(String twitterLinkRef) {
 		this.twitterLinkRef = twitterLinkRef;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bio, facebookLinkRef, instagramLinkRef, logoName, logoPicture, presentationPicture1,
+				presentationPicture2, presentationPicture3, profilePicture, specialSkillDescr1, specialSkillDescr2,
+				specialSkillDescr3, specialSkillName1, specialSkillName2, specialSkillName3, twitterLinkRef, userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserMainInformations other = (UserMainInformations) obj;
+		return Objects.equals(bio, other.bio) && Objects.equals(facebookLinkRef, other.facebookLinkRef)
+				&& Objects.equals(instagramLinkRef, other.instagramLinkRef) && Objects.equals(logoName, other.logoName)
+				&& Objects.equals(logoPicture, other.logoPicture)
+				&& Objects.equals(presentationPicture1, other.presentationPicture1)
+				&& Objects.equals(presentationPicture2, other.presentationPicture2)
+				&& Objects.equals(presentationPicture3, other.presentationPicture3)
+				&& Objects.equals(profilePicture, other.profilePicture)
+				&& Objects.equals(specialSkillDescr1, other.specialSkillDescr1)
+				&& Objects.equals(specialSkillDescr2, other.specialSkillDescr2)
+				&& Objects.equals(specialSkillDescr3, other.specialSkillDescr3)
+				&& Objects.equals(specialSkillName1, other.specialSkillName1)
+				&& Objects.equals(specialSkillName2, other.specialSkillName2)
+				&& Objects.equals(specialSkillName3, other.specialSkillName3)
+				&& Objects.equals(twitterLinkRef, other.twitterLinkRef) && userId == other.userId;
+	}
+
+	@Override
+	public String toString() {
+		return "UserMainInformations [userId=" + userId + ", profilePicture=" + profilePicture + ", logoPicture="
+				+ logoPicture + ", logoName=" + logoName + ", bio=" + bio + ", presentationPicture1="
+				+ presentationPicture1 + ", presentationPicture2=" + presentationPicture2 + ", presentationPicture3="
+				+ presentationPicture3 + ", specialSkillName1=" + specialSkillName1 + ", specialSkillName2="
+				+ specialSkillName2 + ", specialSkillName3=" + specialSkillName3 + ", specialSkillDescr1="
+				+ specialSkillDescr1 + ", specialSkillDescr2=" + specialSkillDescr2 + ", specialSkillDescr3="
+				+ specialSkillDescr3 + ", facebookLinkRef=" + facebookLinkRef + ", instagramLinkRef=" + instagramLinkRef
+				+ ", twitterLinkRef=" + twitterLinkRef + "]";
 	}
 	
 	
