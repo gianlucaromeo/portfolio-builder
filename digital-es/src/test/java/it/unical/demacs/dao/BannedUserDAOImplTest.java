@@ -65,13 +65,21 @@ public class BannedUserDAOImplTest {
 	
 	@Ignore
 	@Test
-	public void checkFindAllUsers() {
+	public void checkFindAllBannedUsers() {
 		System.out.println("[checkFindAllUsers]");
 		Set<BannedUser> bannedUsers = bannedUserDAOImpl.findAll();
 		for (BannedUser b : bannedUsers) {
 			System.out.println(b.toString());
 		}
 		assertEquals(1, bannedUsers.size());
+	}
+	
+	@Ignore
+	@Test
+	public void checkDeleteBannedUser() {
+		System.out.println("[checkDeleteBannedUser]");
+		String res = bannedUserDAOImpl.delete(bannedUser);
+		assertEquals(Protocol.OK, res);
 	}
 	
 }

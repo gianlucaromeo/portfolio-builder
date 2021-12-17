@@ -195,9 +195,27 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 	}
 	
 	@Override
-	public String delete(BannedUser t) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(BannedUser bannedUser) {
+
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "DELETE from banned_users WHERE id=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, bannedUser.getId());
+			p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.err.println("[BannedUserDAOImpl] [delete]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+		
+		return Protocol.OK;
 	}
 	
 }
