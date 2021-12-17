@@ -113,4 +113,11 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost>{
 		
 		return id;
 	}
+	
+	@Override
+	public RemovedPost findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

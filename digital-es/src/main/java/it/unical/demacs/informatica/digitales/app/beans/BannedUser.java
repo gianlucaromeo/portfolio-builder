@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
+import java.util.Objects;
+
 public class BannedUser {
 	
 	private long id;
@@ -50,10 +52,24 @@ public class BannedUser {
 	public void setDateStart(String dateStart) {
 		this.dateStart = dateStart;
 	}
-	
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dateEnd, dateStart, id, moderatorId, reason, userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BannedUser other = (BannedUser) obj;
+		return Objects.equals(dateEnd, other.dateEnd) && Objects.equals(dateStart, other.dateStart) && id == other.id
+				&& moderatorId == other.moderatorId && Objects.equals(reason, other.reason) && userId == other.userId;
+	}
 	
 	
 

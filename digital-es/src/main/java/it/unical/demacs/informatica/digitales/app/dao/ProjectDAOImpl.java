@@ -118,5 +118,11 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 		return id;
 		
 	}
+	
+	@Override
+	public Project findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

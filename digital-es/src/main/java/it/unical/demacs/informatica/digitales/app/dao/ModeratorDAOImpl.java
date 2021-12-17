@@ -115,5 +115,11 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 		return id;
 		
 	}
+	
+	@Override
+	public Moderator findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -125,4 +125,10 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 	}
 	
+	@Override
+	public Post findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

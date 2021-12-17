@@ -136,6 +136,12 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 		return id;
 	}
+	
+	@Override
+	public User findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 }

@@ -12,7 +12,7 @@ public interface DAO<T> {
 	
 	// RETRIEVE
 	long findId(T t);
-	//T findById(long id);
+	T findById(long id);
 	//Set<T> findAll();
 	
 	// DELETE

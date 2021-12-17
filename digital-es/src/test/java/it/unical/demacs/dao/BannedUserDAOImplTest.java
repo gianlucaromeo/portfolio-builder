@@ -33,11 +33,19 @@ public class BannedUserDAOImplTest {
 		assertEquals(res, Protocol.OK);
 	}
 	
+	@Ignore
 	@Test
 	public void checkFindBannedUserId() {
 		System.out.println("[checkFindBannedUserId]");
 		long id = bannedUserDAOImpl.findId(bannedUser);
 		assertEquals(1, id);
+	}
+	
+	@Test
+	public void checkFindBannedUserById() {
+		System.out.println("[checkFindBannedUserById]");
+		BannedUser bannedUserById = bannedUserDAOImpl.findById(1);
+		assertEquals(bannedUser, bannedUserById);
 	}
 	
 }

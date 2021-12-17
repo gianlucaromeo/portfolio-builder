@@ -112,6 +112,11 @@ public class CurriculumDAOImpl extends DAOImpl implements DAO<Curriculum> {
 		return id;
 	}
 	
+	@Override
+	public Curriculum findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

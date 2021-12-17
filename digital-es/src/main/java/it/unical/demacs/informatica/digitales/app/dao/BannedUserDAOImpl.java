@@ -118,4 +118,41 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 		
 	}
 	
+	@Override
+	public BannedUser findById(long id) {
+
+		BannedUser bannedUser = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM banned_users WHERE id=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				bannedUser = new BannedUser();
+				bannedUser.setId(id);
+				bannedUser.setUserId(rs.getLong("user_id"));
+				bannedUser.setModeratorId(rs.getLong("moderator_id"));
+				bannedUser.setReason(rs.getString("reason"));
+				bannedUser.setDateStart(rs.getString("date_start"));
+				bannedUser.setDateEnd(rs.getString("date_end"));
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[BannedUserDAOImpl] [findById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return bannedUser;
+		
+	}
+	
 }

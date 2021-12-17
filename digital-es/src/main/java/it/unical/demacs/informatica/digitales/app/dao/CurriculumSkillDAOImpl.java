@@ -111,5 +111,10 @@ public class CurriculumSkillDAOImpl extends DAOImpl implements DAO<CurriculumSki
 		return id;
 	}
 	
+	@Override
+	public CurriculumSkill findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
