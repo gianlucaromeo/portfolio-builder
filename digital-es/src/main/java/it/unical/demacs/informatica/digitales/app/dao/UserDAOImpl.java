@@ -38,7 +38,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 
 		con = DBUtil.getInstance().getConnection(); 
 		
-		String query = "INSERT INTO users VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?);";
+		String query = "INSERT INTO users VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?,?);";
 		
 		try {
 			
@@ -54,6 +54,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 			p.setString(8, user.getSecondaryPhoneNumber());
 			p.setString(9, user.getContactEmail());
 			p.setBoolean(10, user.isConfirmed());
+			p.setString(11, user.getSignUpDate());
 			
 			p.executeUpdate();
 			
@@ -74,7 +75,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 		con = DBUtil.getInstance().getConnection(); 
 		
-		String query = "UPDATE users SET first_name=?, last_name=?, username=?, password=?, email=?, date_of_birth=?, main_phone_number=?, secondary_phone_number=?, contact_email=?, confirmed=? WHERE id=?;";
+		String query = "UPDATE users SET first_name=?, last_name=?, username=?, password=?, email=?, date_of_birth=?, main_phone_number=?, secondary_phone_number=?, contact_email=?, confirmed=?, sign_up_date=? WHERE id=?;";
 		
 		try {
 			
@@ -91,6 +92,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 			p.setString(9, user.getContactEmail());
 			p.setBoolean(10, user.isConfirmed());
 			p.setLong(11, user.getId());
+			p.setString(12, user.getSignUpDate());
 			
 			p.executeUpdate();
 			
@@ -168,6 +170,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 				user.setSecondaryPhoneNumber(rs.getString("secondary_phone_number"));
 				user.setContactEmail(rs.getString("contact_email"));
 				user.setConfirmed(rs.getBoolean("confirmed"));
+				user.setSignUpDate(rs.getString("sign_up_date"));
 			}
 	
 		} catch (SQLException e) {
@@ -208,6 +211,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 				user.setSecondaryPhoneNumber(rs.getString("secondary_phone_number"));
 				user.setContactEmail(rs.getString("contact_email"));
 				user.setConfirmed(rs.getBoolean("confirmed"));
+				user.setSignUpDate(rs.getString("sign_up_date"));
 				users.add(user);
 			}
 			

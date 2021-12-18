@@ -16,6 +16,17 @@ public class User {
 	private String mainPhoneNumber;
 	private String secondaryPhoneNumber;
 	private String contactEmail;
+	private boolean confirmed;
+	private String signUpDate;
+	
+	public String getSignUpDate() {
+		return signUpDate;
+	}
+
+	public void setSignUpDate(String signUpDate) {
+		this.signUpDate = signUpDate;
+	}
+
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -23,7 +34,7 @@ public class User {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	private boolean confirmed;
+	
 	
 	public User() {
 	}

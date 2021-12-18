@@ -34,6 +34,7 @@ public class UserDAOImplTest {
 		user.setSecondaryPhoneNumber("0189556712");
 		user.setContactEmail("bellissima@me.it");
 		user.setConfirmed(false);
+		user.setSignUpDate("2021-17-01");
 		user.setId(3);
 	}
 	

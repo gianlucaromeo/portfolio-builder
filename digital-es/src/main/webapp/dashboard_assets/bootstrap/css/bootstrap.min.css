@@ -10801,6 +10801,10 @@ form.user .form-control-user {
   border-radius: 10rem;
   padding: 1rem;
 }
+form.user .datePickerLabel {
+  font-size: 1rem;
+  padding-left: 1rem;	
+}
 form.user .btn-user {
   font-size: 0.8rem;
   border-radius: 10rem;
