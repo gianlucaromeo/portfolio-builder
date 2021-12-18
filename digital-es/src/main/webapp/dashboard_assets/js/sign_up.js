@@ -94,29 +94,59 @@ function sendData(fields) {
 	}).done(function(data) {
 		
 		fields.forEach(field => field.removeClass("is-invalid"));
+		var correctData=true;
 		
-		if(data.firstNameResp==="error")
+		if(data.firstNameResp==="error"){
 			firstName.addClass("is-invalid");
+			correctData=false;
+		}else if(data.firstNameResp==="ok")
+			firstName.addClass("is-valid");
 		
-		if(data.lastNameResp==="error")
+		if(data.lastNameResp==="error"){
 			lastName.addClass("is-invalid");
+			correctData=false;
+		}else if(data.lastNameResp==="ok")
+			lastName.addClass("is-valid");
+			
 		
-		if(data.dateOfBirthResp==="error")
+		if(data.dateOfBirthResp==="error"){
 			dateOfBirth.addClass("is-invalid");
+			correctData=false;
+		}else if(data.dateOfBirthResp==="ok")
+			dateOfBirth.addClass("is-valid");
+			
 		
-		if(data.emailResp==="error")
+		if(data.emailResp==="error"){
 			email.addClass("is-invalid");
+			correctData=false;
+		}else if(data.emailResp==="ok")
+			email.addClass("is-valid");
+			
 		
 		if(data.passwordResp==="error"){
 			password.addClass("is-invalid");
 			repeatPassword.addClass("is-invalid");
+			correctData=false;
+		}else if(data.passwordResp==="ok"){
+			password.addClass("is-valid");
+			repeatPassword.addClass("is-valid");
 		}
 			
+			
 		
-		if(data.usernameResp==="error")
+		if(data.usernameResp==="error"){
 			username.addClass("is-invalid");
-		
+			correctData=false;
+		}else if(data.usernameResp==="ok")
+			username.addClass("is-valid");
+			
+			
 		console.log(data);
+		
+		if(correctData)
+			form.submit();
+			
+		
 	})
 
 }
