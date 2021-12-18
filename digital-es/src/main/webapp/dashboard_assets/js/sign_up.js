@@ -61,6 +61,13 @@ signUpform.submit(function(e) {
 
 
 function sendData(fields) {
+	var firstName = $("#firstName");
+	var lastName = $("#lastName");
+	var dateOfBirth = $("#datePicker");
+	var email = $("#inputEmail");
+	var username = $("#username");
+	var password = $("#passwordInput");
+	var repeatPassword = $("#repeatPasswordInput");
 	
 	console.log(fields[0].val());
 	console.log(fields[1].val());
@@ -85,6 +92,30 @@ function sendData(fields) {
 		type: "post",
 		dataType: "json",
 	}).done(function(data) {
+		
+		fields.forEach(field => field.removeClass("is-invalid"));
+		
+		if(data.firstNameResp==="error")
+			firstName.addClass("is-invalid");
+		
+		if(data.lastNameResp==="error")
+			lastName.addClass("is-invalid");
+		
+		if(data.dateOfBirthResp==="error")
+			dateOfBirth.addClass("is-invalid");
+		
+		if(data.emailResp==="error")
+			email.addClass("is-invalid");
+		
+		if(data.passwordResp==="error"){
+			password.addClass("is-invalid");
+			repeatPassword.addClass("is-invalid");
+		}
+			
+		
+		if(data.usernameResp==="error")
+			username.addClass("is-invalid");
+		
 		console.log(data);
 	})
 
