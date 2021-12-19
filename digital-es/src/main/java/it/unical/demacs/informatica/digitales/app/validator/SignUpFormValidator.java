@@ -41,6 +41,34 @@ public class SignUpFormValidator {
 		return Protocol.ERROR;
 	}
 	
-	
+		//EMAIL CON CONTROLLO DOMAIN
+		//Pattern pattern=Pattern.compile("[a-zA-Z]+@(([a-zA-Z]+\\.)+([a-zA-Z]){2,3})");
+		//Matcher matcher=pattern.matcher(string);
+		//ArrayList<String> domains=new ArrayList<String>(); //prendere domini da qualche parte(https://gist.github.com/ammarshah/f5c2624d767f91a7cbdc4e54db8dd0bf)
+		//if(matcher.matches()&&domains.contains(matcher.group(1)))
+		//	  return Protocol.OK;
+		//return Protocol.ERROR;
+		
+		//SENZA CONTROLLO DOMAIN(togliere domains.contain e la parentesi in più messa per individuare il gruppo)
+		
+		//NOMI/COGNOMI solo con lettera maiuscola iniziale e possibili più nomi (Marco Antonio, Di Paolo, A B C D)
+		//mettere {n,m} per lunghezza min/max(e mettere parentesi)
+	    //Pattern pattern=Pattern.compile("[A-Z][a-z]*(\s[A-Z][a-z]*)*");
+	    //Matcher matcher=pattern.matcher(string);
+		
+		//Altri modi di fare duplicati sarebbe fare i methodi findUsername/findEmail
+		//USERNAME DUPLICATO
+	    //Set<User> s=UserDAOImpl.getInstance().findAll();
+		//for(User u:s) {
+		//	if(u.getUsername().equals(username))
+		//		return Protocol.ERROR;
+		//}
+		
+		//MAIL DUPLICATA
+		//Set<User> s=UserDAOImpl.getInstance().findAll();
+		//for(User u:s) {
+		//	if(u.getEmail().equals(email))
+		//		return Protocol.ERROR;
+		//}
 	
 }
