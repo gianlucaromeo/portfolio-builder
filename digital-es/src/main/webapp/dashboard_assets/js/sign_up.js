@@ -97,7 +97,9 @@ function sendData(fields) {
 		var correctData=true;
 		
 		
-		$("#passwordInvalid").remove()
+		$("#passwordInvalid").remove();
+		$("#usernameInvalid").remove();
+		
 		if(data.firstNameResp==="error"){
 			firstName.addClass("is-invalid");
 			correctData=false;
@@ -132,10 +134,10 @@ function sendData(fields) {
 			$("#passwordsContainer").append(
 			`<div id="passwordInvalid" class="text-danger">
 					Password must contain:
-					- at least eight characters and at most twenty caracters
-					- at least one number [0-9]
-					- both lower and uppercase letters 
-					- at least a special character [@$!%*?&]
+					<br>- at least eight characters and at most twenty caracters
+					<br>- at least one number [0-9]
+					<br>- both lower and uppercase letters 
+					<br>- at least a special character [@$!%*?&]
 			</div>`);
 		}else if(data.passwordResp==="ok"){
 			password.addClass("is-valid");
@@ -147,6 +149,12 @@ function sendData(fields) {
 		if(data.usernameResp==="error"){
 			username.addClass("is-invalid");
 			correctData=false;
+			$("#usernameContainer").append(
+			`<div id="usernameInvalid" class="text-danger">
+					Username must contain:
+					<br>- at least eight characters
+					<br>- only letters and numbers
+			</div>`);
 		}else if(data.usernameResp==="ok")
 			username.addClass("is-valid");
 			
