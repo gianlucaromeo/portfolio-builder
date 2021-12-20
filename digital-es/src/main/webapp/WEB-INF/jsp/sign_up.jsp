@@ -33,16 +33,19 @@
 								<h4 class="text-dark mb-4">Create an Account!</h4>
 							</div>
 							<form class="user" id="signUpForm">
+							<div class="row mb-3" id="nameContainer">
 								<div class="row mb-3">
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<input class="form-control form-control-user" type="text"
 											id="firstName" placeholder="First Name" name="first_name">
 									</div>
+							
 									<div class="col-sm-6">
 										<input class="form-control form-control-user" type="text"
 											id="lastName" placeholder="Last Name" name="last_name">
 									</div>
 								</div>
+							</div>
 								<div class="mb-3">
 									<div id="datePickerContainer"
 										class="md-form md-outline input-with-post-icon datepicker">
@@ -56,11 +59,13 @@
 										id="inputEmail" aria-describedby="emailHelp"
 										placeholder="Email Address" name="email">
 								</div>
+							<div class="row mb-3" id="usernameContainer">	
 								<div class="mb-3">
 									<input class="form-control form-control-user" type="text"
 										id="username" aria-describedby="usernameHelp"
 										placeholder="Username" name="username">
 								</div>
+							</div>
 								<div class="row mb-3" id="passwordsContainer">
 									<div class="row mb-3">
 										<div class="col-sm-6 mb-3 mb-sm-0">
