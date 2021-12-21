@@ -59,18 +59,18 @@
 								<div class="mb-3">
 									<input class="form-control form-control-user" type="text"
 										id="username" aria-describedby="usernameHelp"
-										placeholder="Username" name="username">
+										placeholder="Username" name="username" minlength="8" maxlength="20">
 								</div>
 								<div class="row mb-3" id="passwordsContainer">
 									<div class="row mb-3">
 										<div class="col-sm-6 mb-3 mb-sm-0">
 											<input class="form-control form-control-user" type="password"
-												id="passwordInput" placeholder="Password" name="password">
+												id="passwordInput" placeholder="Password" name="password" minlength="8" maxlength="20">
 										</div>
 										<div class="col-sm-6">
 											<input class="form-control form-control-user" type="password"
 												id="repeatPasswordInput" placeholder="Repeat Password"
-												name="password_repeat">
+												name="password_repeat" minlength="8" maxlength="20">
 										</div>
 									</div>
 								</div>

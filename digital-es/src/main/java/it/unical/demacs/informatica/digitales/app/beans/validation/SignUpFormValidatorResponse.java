@@ -10,7 +10,10 @@ public class SignUpFormValidatorResponse {
 	private String emailResp;
 	private String usernameResp;
 	private String passwordResp;
-
+	
+	public SignUpFormValidatorResponse() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public String getDateOfBirthResp() {
 		return dateOfBirthResp;
@@ -50,11 +53,6 @@ public class SignUpFormValidatorResponse {
 
 	public void setLastNameResp(String lastNameResp) {
 		this.lastNameResp = lastNameResp;
-	}
-
-
-	public SignUpFormValidatorResponse() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void setFirstNameResp(String firstNameResp) {

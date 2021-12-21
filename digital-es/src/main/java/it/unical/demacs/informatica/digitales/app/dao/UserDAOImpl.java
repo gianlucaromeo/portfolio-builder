@@ -251,5 +251,60 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 	}
 
+	public boolean checkUsernameExists(String username) {
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * from users WHERE username=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [checkUsernameExists]: ");
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeAll();
+		}
+		
+		return false;
+		
+	}
+	
+	public boolean checkEmailExists(String email) {
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * from users WHERE email=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setString(1, email);
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [checkEmailExists]: ");
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeAll();
+		}
+		
+		return false;
+		
+	}
 	
 }

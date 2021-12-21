@@ -12,7 +12,7 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
-	private String dateOfBirth; 
+	private String dateOfBirth; // YYYY-MM-DD
 	private String mainPhoneNumber;
 	private String secondaryPhoneNumber;
 	private String contactEmail;
