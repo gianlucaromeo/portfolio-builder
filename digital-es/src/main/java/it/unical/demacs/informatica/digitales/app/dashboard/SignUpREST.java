@@ -2,8 +2,13 @@ package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,29 +17,46 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.validator.SignUpFormValidator;
 
 @RestController
 public class SignUpREST {
 	
-	private static Gson gson = new Gson();
 
-	
-	/**
-	 * SignUpFormValidator controlla se i campi
-	 * dello User sono stati inseriti correttamente.
-	 * Questa classe produce una risposta sotto forma di
-	 * SignUpFormValidatorResponse, che viene poi trasformata
-	 * in json per essere spedita al client.
-	 * @throws IOException 
-	 * @throws JsonIOException 
-	 * @throws JsonSyntaxException 
-	 * */
-	@PostMapping("/sign_up_action")
+	@PostMapping("/sign_up_data_validation")
 	public String signUpAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
-		User user = gson.fromJson(req.getReader(), User.class);
-		System.out.println(user.toString());
-		return gson.toJson(SignUpFormValidator.validateUser(user));
+		
+		Gson gson = new Gson();
+		
+		User user = new User();
+		user = gson.fromJson(req.getReader(), User.class);
+	
+		String userToJSON = gson.toJson(SignUpFormValidator.validateUser(user));
+		return userToJSON;
+	
+	}
+	
+	@PostMapping("/dashboard/sign_up")
+	public void signUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		User user = new User();
+		user.setFirstName(req.getParameter("first_name"));
+		user.setLastName(req.getParameter("last_name"));
+		user.setUsername(req.getParameter("username"));
+		user.setEmail(req.getParameter("email"));
+		user.setPassword(req.getParameter("password"));
+		user.setDateOfBirth(req.getParameter("date_of_birth"));
+		user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
+		
+		String res = UserDAOImpl.getInstance().create(user);
+		if (res.equals(Protocol.OK)) {
+			user.setId(UserDAOImpl.getInstance().findId(user));
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/dashboard/" + user.getUsername() + "/admin-page");
+			dispatcher.forward(req, resp);
+		}
+		
 	}
 	
 }

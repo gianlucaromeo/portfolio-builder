@@ -32,17 +32,17 @@
 							<div class="text-center">
 								<h4 class="text-dark mb-4">Create an Account!</h4>
 							</div>
-							<form class="user" id="signUpForm">
+							<form class="user" id="signUpForm" action="sign_up" method="post">
 							<div class="row mb-3" id="nameContainer">
 								<div class="row mb-3">
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<input class="form-control form-control-user" type="text"
-											id="firstName" placeholder="First Name" name="first_name">
+											id="firstName" placeholder="First Name" name="first_name" value="Gianluca">
 									</div>
 							
 									<div class="col-sm-6">
 										<input class="form-control form-control-user" type="text"
-											id="lastName" placeholder="Last Name" name="last_name">
+											id="lastName" placeholder="Last Name" name="last_name" value="Romeo">
 									</div>
 								</div>
 							</div>
@@ -51,31 +51,31 @@
 										class="md-form md-outline input-with-post-icon datepicker">
 										 <label class="datePickerLabel" for="datePicker">Date of birth</label> <i class="fas fa-calendar input-prefix" tabindex=0></i>
 										<input placeholder="Select date" type="date" id="datePicker"
-											class="form-control form-control-user">
+											name="date_of_birth" class="form-control form-control-user" value="2000-02-02">
 									</div>
 								</div>
 								<div class="mb-3">
 									<input class="form-control form-control-user" type="email"
 										id="inputEmail" aria-describedby="emailHelp"
-										placeholder="Email Address" name="email">
+										placeholder="Email Address" name="email" value="gianlucaromeo@outlook.com">
 								</div>
 							<div class="row mb-3" id="usernameContainer">	
 								<div class="mb-3">
 									<input class="form-control form-control-user" type="text"
 										id="username" aria-describedby="usernameHelp"
-										placeholder="Username" name="username" minlength="8" maxlength="20">
+										placeholder="Username" name="username" minlength="8" maxlength="20" value="gianluca1234">
 								</div>
 							</div>
 								<div class="row mb-3" id="passwordsContainer">
 									<div class="row mb-3">
 										<div class="col-sm-6 mb-3 mb-sm-0">
 											<input class="form-control form-control-user" type="password"
-												id="passwordInput" placeholder="Password" name="password" minlength="8" maxlength="20">
+												id="passwordInput" placeholder="Password" name="password" minlength="8" maxlength="20" value="Password1234?">
 										</div>
 										<div class="col-sm-6">
 											<input class="form-control form-control-user" type="password"
 												id="repeatPasswordInput" placeholder="Repeat Password"
-												name="password_repeat" minlength="8" maxlength="20">
+												name="password_repeat" minlength="8" maxlength="20" value="Password1234?">
 										</div>
 									</div>
 								</div>

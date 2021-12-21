@@ -1,10 +1,12 @@
 //$('.datepicker').datepicker();
 
-signUpform = $("#signUpForm");
+signUpBtn = $("#signUpBtn");
+signUpForm = $("#signUpForm");
 
-console.log(signUpForm);
 
-signUpform.submit(function(e) {
+signUpBtn.submit(function(e) {
+	
+	console.log("ehfo");
 
 	e.preventDefault();
 
@@ -61,6 +63,7 @@ signUpform.submit(function(e) {
 
 
 function sendData(fields) {
+	
 	var firstName = $("#firstName");
 	var lastName = $("#lastName");
 	var dateOfBirth = $("#datePicker");
@@ -86,7 +89,7 @@ function sendData(fields) {
 	}
 
 	$.ajax({
-		url: "/sign_up_action",
+		url: "/sign_up_data_validation",
 		contentType: "application/json",
 		data: JSON.stringify(userData),
 		type: "post",
@@ -161,8 +164,8 @@ function sendData(fields) {
 			
 		console.log(data);
 		
-		if(correctData)
-			form.submit();
+		if(!correctData)
+			signUpForm.submit();
 	
 	})
 
