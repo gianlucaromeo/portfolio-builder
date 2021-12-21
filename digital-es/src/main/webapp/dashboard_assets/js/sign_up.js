@@ -32,7 +32,7 @@ signUpform.submit(function(e) {
 		repeatPassword.addClass("is-invalid");
 		$("#passwordsContainer").append(
 			`<div id="passwordsDontMatch" class="text-danger">
-					Please provide a valid city.
+					Passwords does't match
 			</div>`);
 	}
 
@@ -96,6 +96,10 @@ function sendData(fields) {
 		fields.forEach(field => field.removeClass("is-invalid"));
 		var correctData=true;
 		
+		
+		$("#passwordInvalid").remove();
+		$("#usernameInvalid").remove();
+		
 		if(data.firstNameResp==="error"){
 			firstName.addClass("is-invalid");
 			correctData=false;
@@ -127,6 +131,14 @@ function sendData(fields) {
 			password.addClass("is-invalid");
 			repeatPassword.addClass("is-invalid");
 			correctData=false;
+			$("#passwordsContainer").append(
+			`<div id="passwordInvalid" class="text-danger">
+					Password must contain:
+					<br>- at least eight characters and at most twenty caracters
+					<br>- at least one number [0-9]
+					<br>- both lower and uppercase letters 
+					<br>- at least a special character [@$!%*?&]
+			</div>`);
 		}else if(data.passwordResp==="ok"){
 			password.addClass("is-valid");
 			repeatPassword.addClass("is-valid");
@@ -137,6 +149,12 @@ function sendData(fields) {
 		if(data.usernameResp==="error"){
 			username.addClass("is-invalid");
 			correctData=false;
+			$("#usernameContainer").append(
+			`<div id="usernameInvalid" class="text-danger">
+					Username must contain:
+					<br>- at least eight characters
+					<br>- only letters and numbers
+			</div>`);
 		}else if(data.usernameResp==="ok")
 			username.addClass("is-valid");
 			
