@@ -132,13 +132,13 @@ function sendData(fields) {
 			repeatPassword.addClass("is-invalid");
 			correctData=false;
 			$("#passwordsContainer").append(
-			`<div id="passwordInvalid" class="text-danger">
-					Password must contain:
-					<br>- at least eight characters and at most twenty caracters
-					<br>- at least one number [0-9]
-					<br>- both lower and uppercase letters 
-					<br>- at least a special character [@$!%*?&]
-			</div>`);
+				`<div id="passwordInvalid" class="text-danger">
+						Password must contain:
+						<br>- at least eight characters and at most twenty caracters
+						<br>- at least one number [0-9]
+						<br>- both lower and uppercase letters 
+						<br>- at least a special character [@$!%*?&]
+				</div>`);
 		}else if(data.passwordResp==="ok"){
 			password.addClass("is-valid");
 			repeatPassword.addClass("is-valid");
@@ -163,8 +163,7 @@ function sendData(fields) {
 		
 		if(correctData)
 			form.submit();
-			
-		
+	
 	})
 
 }
