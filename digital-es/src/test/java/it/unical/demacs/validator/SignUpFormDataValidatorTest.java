@@ -49,6 +49,24 @@ public class SignUpFormDataValidatorTest {
 			{"cognomeMinuscola", expectedERROR},
 			{"Pino Pino Piono Piono Pino1", expectedERROR},
 			
+			/* USERNAME CHECK */
+			{"username", expectedOK},
+			{"aHKHdias87924uadi", expectedOK},
+			{"a b c d e", expectedERROR},
+			{"000", expectedERROR},
+			{"A", expectedOK},
+			{"a", expectedOK},
+			{"0", expectedERROR},
+			
+			/* PASSWORD CHECK */
+			{"aB0&password", expectedOK},
+			{"a", expectedERROR},
+			{"aB", expectedERROR},
+			{"aB0", expectedERROR},
+			{"aB0&", expectedERROR},
+			{"aB0&5678", expectedOK},
+			{"aB0&EFGHIJKLMNOPQRSTUVWXYZ", expectedERROR},
+			
 		});
 		
 	}
@@ -56,6 +74,16 @@ public class SignUpFormDataValidatorTest {
 	@Test
 	public void checkFirstNameWorks() {		
 		assertEquals(expected, SignUpFormValidator.checkName(actual));
+	}
+	
+	@Test
+	public void checkUsernameWorks() {		
+		assertEquals(expected, SignUpFormValidator.checkUsername(actual));
+	}
+	
+	@Test
+	public void checkPasswordWorks() {		
+		assertEquals(expected, SignUpFormValidator.checkPassword(actual));
 	}
 	
 	

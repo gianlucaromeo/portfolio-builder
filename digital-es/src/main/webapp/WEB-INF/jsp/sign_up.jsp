@@ -101,6 +101,7 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 	<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../../dashboard_assets/js/bs-init.js"></script>
 	<script src="../../dashboard_assets/js/theme.js"></script>
