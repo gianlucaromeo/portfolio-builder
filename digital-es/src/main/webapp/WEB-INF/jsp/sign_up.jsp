@@ -6,6 +6,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Register - Brand</title>
+
+
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -88,8 +90,9 @@
 								<hr>
 								<a
 									class="btn btn-primary d-block btn-google btn-user w-100 mb-2"
-									role="button"><i class="fab fa-google"></i>&nbsp; Register
-									with Google</a> <a
+									role="button" id="googleSignUpBtn"><i class="fab fa-google"></i>&nbsp; Register
+									with Google</a> 
+									<a
 									class="btn btn-primary d-block btn-facebook btn-user w-100"
 									role="button"><i class="fab fa-facebook-f"></i>&nbsp;
 									Register with Facebook</a>
@@ -112,7 +115,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/sign_up.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script> 
+		<script src="https://apis.google.com/js/client.js"></script>
+		<script src="https://apis.google.com/js/api:client.js"></script>
+		<script src="../../dashboard_assets/js/sign_up.js"></script>
+	
+	
 </body>
 
 </html>
