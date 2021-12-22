@@ -39,7 +39,7 @@
                                         <hr>
                                     </form>
                                     <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                                    <div class="text-center"><a class="small" href="sign_up">Create an Account!</a></div>
+                                    <div class="text-center"><a class="small" href="/dashboard/sign_up">Create an Account!</a></div>
                                 </div>
                             </div>
                         </div>

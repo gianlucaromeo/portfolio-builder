@@ -119,34 +119,56 @@ function sendData(fields) {
 		
 		$("#passwordInvalid").remove();
 		$("#usernameInvalid").remove();
+		$("#nameInvalid").remove();
+		$("#emailInvalid").remove();
+		$("#dateInvalid").remove();
 		
+		
+		//************************** */CHECK FIRST NAME AND LAST NAME ****************************************************//
 		if(data.firstNameResp==="error"){
 			firstName.addClass("is-invalid");
+			$("#nameContainer").append(
+			`<div id="nameInvalid" class="text-danger">
+					First name must start with a capital letter
+			</div>`);
 			correctData=false;
 		}else if(data.firstNameResp==="ok")
 			firstName.addClass("is-valid");
 		
 		if(data.lastNameResp==="error"){
 			lastName.addClass("is-invalid");
+			$("#nameContainer").append(
+			`<div id="nameInvalid" class="text-danger">
+					Last name must start with a capital letter
+			</div>`);
 			correctData=false;
 		}else if(data.lastNameResp==="ok")
 			lastName.addClass("is-valid");
 			
-		
+		//************************** */CHECK DATE OF BIRTH ****************************************************//
 		if(data.dateOfBirthResp==="error"){
 			dateOfBirth.addClass("is-invalid");
+			
+			$("#dateContainer").append(
+			`<div id="dateInvalid" class="text-danger">
+					You must be at least 18 years old
+			</div>`);
 			correctData=false;
 		}else if(data.dateOfBirthResp==="ok")
 			dateOfBirth.addClass("is-valid");
 			
-		
-		if(data.emailResp==="error"){
+		//************************** */CHECK EMAIL ****************************************************//
+		if(data.emailResp==="email duplicated error"){
 			email.addClass("is-invalid");
+			$("#emailContainer").append(
+				`<div id="emailInvalid" class="text-danger">
+						Email already used
+				</div>`);
 			correctData=false;
 		}else if(data.emailResp==="ok")
 			email.addClass("is-valid");
 			
-		
+		//************************** */CHECK PASSWORD ****************************************************//
 		if(data.passwordResp==="error"){
 			password.addClass("is-invalid");
 			repeatPassword.addClass("is-invalid");
@@ -165,23 +187,50 @@ function sendData(fields) {
 		}
 			
 			
-		
-		if(data.usernameResp==="error"){
+		//************************** */CHECK USERNAME ****************************************************//
+		switch(data.usernameResp){
+			case "error":
+				username.addClass("is-invalid");
+				correctData=false;
+				$("#usernameContainer").append(
+				`<div id="usernameInvalid" class="text-danger">
+						Username must contain:
+						<br>- at least eight characters
+						<br>- only letters and numbers
+				</div>`);
+			break;
+			
+			case "username duplicated error":
 			username.addClass("is-invalid");
-			correctData=false;
-			$("#usernameContainer").append(
-			`<div id="usernameInvalid" class="text-danger">
-					Username must contain:
-					<br>- at least eight characters
-					<br>- only letters and numbers
-			</div>`);
-		}else if(data.usernameResp==="ok")
+				correctData=false;
+				$("#usernameContainer").append(
+				`<div id="usernameInvalid" class="text-danger">
+						Username already exists
+				</div>`);
+			break;
+			
+			case "username length error":
+			username.addClass("is-invalid");
+				correctData=false;
+				$("#usernameContainer").append(
+				`<div id="usernameInvalid" class="text-danger">
+						Username must be at least 8 characters
+				</div>`);
+			break;
+			
+			case "ok":
 			username.addClass("is-valid");
+			break;
 			
-			
-		console.log(data);
-
-		if(!correctData)
+			default:
+			break;
+				
+		}
+		
+		
+	
+		//if data is correct we can do the registration
+		if(correctData)
 			signUpForm.submit();
 	
 	})
