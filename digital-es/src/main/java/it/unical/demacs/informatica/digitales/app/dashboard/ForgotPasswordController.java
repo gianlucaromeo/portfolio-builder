@@ -29,8 +29,8 @@ public class ForgotPasswordController {
 		//user=UserDAOImpl.getInstance().findByUsername(user.getUsername());
 		
 		//TEST because i don't have a database 
-		user.setEmail("pieroangela2000luigim@gmail.com");
-		user.setPassword("dddddddds0sdos0d");
+//		user.setEmail("mymail@gmail.com");
+//		user.setPassword("dddddddds0sdos0d");
 		
 		String userToJSON = gson.toJson(user);
 		return userToJSON;
