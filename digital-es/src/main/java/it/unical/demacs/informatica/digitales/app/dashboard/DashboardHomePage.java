@@ -18,4 +18,9 @@ public class DashboardHomePage {
 		return "sign_up";
 	}
 	
+	@GetMapping("forgot_password")
+	public String showForgotPasswordPage() {
+		return "forgot_password";
+	}
+	
 }
