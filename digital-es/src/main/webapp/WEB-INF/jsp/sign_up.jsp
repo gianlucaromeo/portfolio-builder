@@ -46,6 +46,7 @@
 									</div>
 								</div>
 							</div>
+							<div class="row mb-3" id="dateContainer">
 								<div class="mb-3">
 									<div id="datePickerContainer"
 										class="md-form md-outline input-with-post-icon datepicker">
@@ -54,11 +55,14 @@
 											name="date_of_birth" class="form-control form-control-user" value="2000-02-02">
 									</div>
 								</div>
+							</div>
+							<div class="row mb-3" id="emailContainer">
 								<div class="mb-3">
 									<input class="form-control form-control-user" type="email"
 										id="inputEmail" aria-describedby="emailHelp"
 										placeholder="Email Address" name="email" value="gianlucaromeo@outlook.com">
 								</div>
+							</div>
 							<div class="row mb-3" id="usernameContainer">	
 								<div class="mb-3">
 									<input class="form-control form-control-user" type="text"
