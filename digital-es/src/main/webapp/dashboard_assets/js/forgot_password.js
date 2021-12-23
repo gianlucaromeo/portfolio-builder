@@ -17,9 +17,8 @@ function sendEmail(receiver,password) {
 
 function sendForgotPassword(){
 	var user=$("#username");
-	console.log(user.value);
 	var values={
-		username: user.value,
+		username: user.val(),
 		email: "",
 		password: ""
 	};
@@ -29,8 +28,9 @@ function sendForgotPassword(){
 		data: JSON.stringify(values),
 		type: "post",
 		dataType: "json",
+		error: function() {alert("The selected username does not exist");},
 	}).done(function(data) {
-		alert(data.email);
-		//sendEmail(data.email,data.password);
+		if(data.email!="")
+			sendEmail(data.email,data.password);
 	});	
 };
