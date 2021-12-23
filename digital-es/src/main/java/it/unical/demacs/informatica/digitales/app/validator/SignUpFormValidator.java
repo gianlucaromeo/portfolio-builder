@@ -68,7 +68,7 @@ public class SignUpFormValidator {
 			return Protocol.ERROR;
 		}
 		
-		boolean usernameExists = UserDAOImpl.getInstance().checkEmailExists(username);
+		boolean usernameExists = UserDAOImpl.getInstance().checkUsernameExists(username);
 		return usernameExists ? Protocol.USERNAME_DUPLICATED_ERROR : Protocol.OK;
 		
 	}

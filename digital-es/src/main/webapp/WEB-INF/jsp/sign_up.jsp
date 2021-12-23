@@ -120,6 +120,7 @@
 		<script src="https://apis.google.com/js/api:client.js"></script>
 		<script src="../../dashboard_assets/js/sign_up.js"></script>
 		<script src="../../dashboard_assets/js/google_sign_up.js"></script>
+		<script src="../../dashboard_assets/js/confirmation_email.js"></script>
 	
 	
 </body>

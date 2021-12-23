@@ -33,8 +33,9 @@ public class SignUpREST {
 		User user = new User();
 		user = gson.fromJson(req.getReader(), User.class);
 	
-		String userToJSON = gson.toJson(SignUpFormValidator.validateUser(user));
-		return userToJSON;
+		String userDataResponseToJSON = gson.toJson(SignUpFormValidator.validateUser(user));
+		System.out.println(userDataResponseToJSON);
+		return userDataResponseToJSON;
 	
 	}
 	
@@ -55,6 +56,8 @@ public class SignUpREST {
 			user.setId(UserDAOImpl.getInstance().findId(user));
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/dashboard/" + user.getUsername() + "/admin-page");
 			dispatcher.forward(req, resp);
+		} else {
+			System.out.println(res);
 		}
 		
 	}
