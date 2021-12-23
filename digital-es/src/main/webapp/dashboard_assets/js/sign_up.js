@@ -68,7 +68,6 @@ function sendData(fields) {
 		password: fields[5].val()
 	}
 
-
 	/*
 	 * Invia una richiesta al Server per controllare
 	 * che i dati inseriti dall'Utente rispettino
@@ -103,7 +102,9 @@ function sendData(fields) {
 		checkEmailValidation(data);
 		
 		if (userDataValidated) {
+			// redirect
 			signUpForm.submit();
+			//window.location.href = "/dashboard/" + userData.username + "/admin-page";
 		}
 
 	})
@@ -123,7 +124,6 @@ function removeErrorLabels() {
 	$("#emailInvalid").remove();
 	$("#dateInvalid").remove();
 }
-
 
 function checkFirstNameValidation(data) {
 	
@@ -217,6 +217,7 @@ function checkPasswordValidation(data) {
 		}
 }
 
+// Nascondere tag
 
 function addPasswordDontMatchDiv() {
 	$("#passwordsContainer").append(

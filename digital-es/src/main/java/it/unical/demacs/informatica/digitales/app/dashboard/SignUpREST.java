@@ -2,11 +2,10 @@ package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,8 +53,13 @@ public class SignUpREST {
 		String res = UserDAOImpl.getInstance().create(user);
 		if (res.equals(Protocol.OK)) {
 			user.setId(UserDAOImpl.getInstance().findId(user));
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/dashboard/" + user.getUsername() + "/admin-page");
-			dispatcher.forward(req, resp);
+			Cookie cookie = new Cookie("logged_username", user.getUsername());
+		    cookie.setMaxAge(60 * 60 * 24);
+		    resp.addCookie(cookie);
+			resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+			resp.setHeader("Location", "/dashboard/admin-page");
+//			RequestDispatcher dispatcher = req.getRequestDispatcher("/dashboard/admin-page");
+//			dispatcher.forward(req, resp);
 		} else {
 			System.out.println(res);
 		}
