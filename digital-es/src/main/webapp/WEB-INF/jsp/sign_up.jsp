@@ -92,10 +92,12 @@
 									class="btn btn-primary d-block btn-google btn-user w-100 mb-2"
 									role="button" id="googleSignUpBtn"><i class="fab fa-google"></i>&nbsp; Register
 									with Google</a> 
+								<div id="fb-root">
 									<a
 									class="btn btn-primary d-block btn-facebook btn-user w-100"
-									role="button"><i class="fab fa-facebook-f"></i>&nbsp;
+									role="button" id="facebookSignUpBtn"><i class="fab fa-facebook-f"></i>&nbsp;
 									Register with Facebook</a>
+								</div>
 								<hr>
 							</form>
 							<div class="text-center">
@@ -120,9 +122,10 @@
 		<script src="https://apis.google.com/js/api:client.js"></script>
 		<script src="../../dashboard_assets/js/sign_up.js"></script>
 		<script src="../../dashboard_assets/js/google_sign_up.js"></script>
+		<script src="../../dashboard_assets/js/facebook_sign_up.js"></script>
 		<script src="../../dashboard_assets/js/confirmation_email.js"></script>
-	
-	
+
+
 </body>
 
 </html>
