@@ -2,28 +2,29 @@
 
 signUpBtn = $("#signUpBtn");
 signUpForm = $("#signUpForm");
+
 emailjs.init("user_8pSYeKRzRGlH0I3n8Mv49"); //please encrypted user id for malicious attacks
 function sendEmail(receiver) {
-		var templateParams = {
-	  			   from_name: "DigitalES",
-	  			   to_name: receiver,
-	  			   message: "Hello, if you want to confirm your registration, please click the link below",
-	  			   my_html: '<a href="https://www.google.com">Test</a>'
-	 			   //reply_to
-	  			};
-	  			
-	  		emailjs.send("service_p1x7zca","template_1cxbziq", templateParams)
-	  	    .then(function(response) {
-	        console.log('SUCCESS!', response.status, response.text);
-	  		}, function(error) {
-	  	       console.log('FAILED...', error);
-	  		});
-	   };
-	//sendEmail("mymail@gmail.com");  //testing if the email is sent when page loaded
-	
+	var templateParams = {
+		from_name: "DigitalES",
+		to_name: receiver,
+		message: "Hello, if you want to confirm your registration, please click the link below",
+		my_html: '<a href="https://www.google.com">Test</a>'
+		//reply_to
+	};
+
+	emailjs.send("service_p1x7zca", "template_1cxbziq", templateParams)
+		.then(function(response) {
+			console.log('SUCCESS!', response.status, response.text);
+		}, function(error) {
+			console.log('FAILED...', error);
+		});
+};
+//sendEmail("mymail@gmail.com");  //testing if the email is sent when page loaded
+
 
 signUpBtn.submit(function(e) {
-	console.log("ehfo");
+	console.log("signUpBtn on submit()");
 
 	e.preventDefault();
 
@@ -80,7 +81,7 @@ signUpBtn.submit(function(e) {
 
 
 function sendData(fields) {
-	
+
 	var firstName = $("#firstName");
 	var lastName = $("#lastName");
 	var dateOfBirth = $("#datePicker");
@@ -88,7 +89,7 @@ function sendData(fields) {
 	var username = $("#username");
 	var password = $("#passwordInput");
 	var repeatPassword = $("#repeatPasswordInput");
-	
+
 	console.log(fields[0].val());
 	console.log(fields[1].val());
 	console.log(fields[2].val());
@@ -112,67 +113,67 @@ function sendData(fields) {
 		type: "post",
 		dataType: "json",
 	}).done(function(data) {
-		
+
 		fields.forEach(field => field.removeClass("is-invalid"));
-		var correctData=true;
-		
-		
+		var correctData = true;
+
+
 		$("#passwordInvalid").remove();
 		$("#usernameInvalid").remove();
 		$("#nameInvalid").remove();
 		$("#emailInvalid").remove();
 		$("#dateInvalid").remove();
-		
-		
+
+
 		//************************** */CHECK FIRST NAME AND LAST NAME ****************************************************//
-		if(data.firstNameResp==="error"){
+		if (data.firstNameResp === "error") {
 			firstName.addClass("is-invalid");
 			$("#nameContainer").append(
-			`<div id="nameInvalid" class="text-danger">
+				`<div id="nameInvalid" class="text-danger">
 					First name must start with a capital letter
 			</div>`);
-			correctData=false;
-		}else if(data.firstNameResp==="ok")
+			correctData = false;
+		} else if (data.firstNameResp === "ok")
 			firstName.addClass("is-valid");
-		
-		if(data.lastNameResp==="error"){
+
+		if (data.lastNameResp === "error") {
 			lastName.addClass("is-invalid");
 			$("#nameContainer").append(
-			`<div id="nameInvalid" class="text-danger">
+				`<div id="nameInvalid" class="text-danger">
 					Last name must start with a capital letter
 			</div>`);
-			correctData=false;
-		}else if(data.lastNameResp==="ok")
+			correctData = false;
+		} else if (data.lastNameResp === "ok")
 			lastName.addClass("is-valid");
-			
+
 		//************************** */CHECK DATE OF BIRTH ****************************************************//
-		if(data.dateOfBirthResp==="error"){
+		if (data.dateOfBirthResp === "error") {
 			dateOfBirth.addClass("is-invalid");
-			
+
 			$("#dateContainer").append(
-			`<div id="dateInvalid" class="text-danger">
+				`<div id="dateInvalid" class="text-danger">
 					You must be at least 18 years old
 			</div>`);
-			correctData=false;
-		}else if(data.dateOfBirthResp==="ok")
+			correctData = false;
+		} else if (data.dateOfBirthResp === "ok")
 			dateOfBirth.addClass("is-valid");
-			
+
 		//************************** */CHECK EMAIL ****************************************************//
-		if(data.emailResp==="email duplicated error"){
+		if (data.emailResp === "email duplicated error") {
 			email.addClass("is-invalid");
 			$("#emailContainer").append(
 				`<div id="emailInvalid" class="text-danger">
 						Email already used
 				</div>`);
-			correctData=false;
-		}else if(data.emailResp==="ok")
+			correctData = false;
+		} else if (data.emailResp === "ok")
 			email.addClass("is-valid");
-			
+
 		//************************** */CHECK PASSWORD ****************************************************//
-		if(data.passwordResp==="error"){
+		if (data.passwordResp === "error") {
 			password.addClass("is-invalid");
 			repeatPassword.addClass("is-invalid");
-			correctData=false;
+			correctData = false;
 			$("#passwordsContainer").append(
 				`<div id="passwordInvalid" class="text-danger">
 						Password must contain:
@@ -181,58 +182,58 @@ function sendData(fields) {
 						<br>- both lower and uppercase letters 
 						<br>- at least a special character [@$!%*?&]
 				</div>`);
-		}else if(data.passwordResp==="ok"){
+		} else if (data.passwordResp === "ok") {
 			password.addClass("is-valid");
 			repeatPassword.addClass("is-valid");
 		}
-			
-			
+
+
 		//************************** */CHECK USERNAME ****************************************************//
-		switch(data.usernameResp){
+		switch (data.usernameResp) {
 			case "error":
 				username.addClass("is-invalid");
-				correctData=false;
+				correctData = false;
 				$("#usernameContainer").append(
-				`<div id="usernameInvalid" class="text-danger">
+					`<div id="usernameInvalid" class="text-danger">
 						Username must contain:
 						<br>- at least eight characters
 						<br>- only letters and numbers
 				</div>`);
-			break;
-			
+				break;
+
 			case "username duplicated error":
-			username.addClass("is-invalid");
-				correctData=false;
+				username.addClass("is-invalid");
+				correctData = false;
 				$("#usernameContainer").append(
-				`<div id="usernameInvalid" class="text-danger">
+					`<div id="usernameInvalid" class="text-danger">
 						Username already exists
 				</div>`);
-			break;
-			
+				break;
+
 			case "username length error":
-			username.addClass("is-invalid");
-				correctData=false;
+				username.addClass("is-invalid");
+				correctData = false;
 				$("#usernameContainer").append(
-				`<div id="usernameInvalid" class="text-danger">
+					`<div id="usernameInvalid" class="text-danger">
 						Username must be at least 8 characters
 				</div>`);
-			break;
-			
+				break;
+
 			case "ok":
-			username.addClass("is-valid");
-			break;
-			
+				username.addClass("is-valid");
+				break;
+
 			default:
-			break;
-				
+				break;
+
 		}
-		
-		
-	
+
+
+
 		//if data is correct we can do the registration
-		if(correctData)
+		if (correctData)
 			signUpForm.submit();
-	
+
 	})
 
 
@@ -241,44 +242,44 @@ function sendData(fields) {
 }
 
 
-	//login con google
-	
-	var googleUser = {};
-  	function start() {
-		console.log("start");
-	    gapi.load('auth2', function(){
-	      // Retrieve the singleton for the GoogleAuth library and set up the client.
-	      auth2 = gapi.auth2.init({
-	        client_id: '666216352369-98lhc8kqedb2mf28ssdknqfqmc4958fv.apps.googleusercontent.com',
-	        cookiepolicy: 'single_host_origin',
-	        // Request scopes in addition to 'profile' and 'email'
-	        //scope: 'additional_scope'
-	      });
-	      attachSignin(document.getElementById('googleSignUpBtn'));
-	    });
-  };
+//login con google
 
-  function attachSignin(element) {
-    console.log(element.id);
-    auth2.attachClickHandler(element, {},
-        function(googleUser) {
-		
-	
-			$("#firstName").val( googleUser.getBasicProfile().getGivenName ());
+var googleUser = {};
+function start() {
+	console.log("start");
+	gapi.load('auth2', function() {
+		// Retrieve the singleton for the GoogleAuth library and set up the client.
+		auth2 = gapi.auth2.init({
+			client_id: '666216352369-98lhc8kqedb2mf28ssdknqfqmc4958fv.apps.googleusercontent.com',
+			cookiepolicy: 'single_host_origin',
+			// Request scopes in addition to 'profile' and 'email'
+			//scope: 'additional_scope'
+		});
+		attachSignin(document.getElementById('googleSignUpBtn'));
+	});
+};
+
+function attachSignin(element) {
+	console.log(element.id);
+	auth2.attachClickHandler(element, {},
+		function(googleUser) {
+
+
+			$("#firstName").val(googleUser.getBasicProfile().getGivenName());
 			$("#lastName").val(googleUser.getBasicProfile().getFamilyName());
 			//$("#datePicker").val();
 			$("#inputEmail").val(googleUser.getBasicProfile().getEmail());
-			
-		
-         
-
-        }, function(error) {
-          alert(JSON.stringify(error, undefined, 2));
-        });
-  }
 
 
-	window.start();
+
+
+		}, function(error) {
+			alert(JSON.stringify(error, undefined, 2));
+		});
+}
+
+
+window.start();
 
 
 
