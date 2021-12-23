@@ -22,11 +22,12 @@ function sendEmail(receiver) {
 };
 //sendEmail("mymail@gmail.com");  //testing if the email is sent when page loaded
 
+console.log(signUpBtn);
 
-signUpBtn.submit(function(e) {
+signUpBtn.on("click",function(e){
 	console.log("signUpBtn on submit()");
 
-	e.preventDefault();
+	//e.preventDefault();
 
 	var firstName = $("#firstName");
 	var lastName = $("#lastName");
@@ -36,6 +37,7 @@ signUpBtn.submit(function(e) {
 	var password = $("#passwordInput");
 	var repeatPassword = $("#repeatPasswordInput");
 
+	console.log(password);
 	var fields = [
 		firstName,
 		lastName,
