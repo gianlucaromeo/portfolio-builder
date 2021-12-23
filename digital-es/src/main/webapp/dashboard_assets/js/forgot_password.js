@@ -16,9 +16,10 @@ function sendEmail(receiver,password) {
 	   };
 
 function sendForgotPassword(){
-	var username=$("#username");
+	var user=$("#username");
+	console.log(user.value);
 	var values={
-		user: username,
+		username: user.value,
 		email: "",
 		password: ""
 	};
@@ -29,6 +30,7 @@ function sendForgotPassword(){
 		type: "post",
 		dataType: "json",
 	}).done(function(data) {
-		sendEmail(data.email,data.password);
+		alert(data.email);
+		//sendEmail(data.email,data.password);
 	});	
 };

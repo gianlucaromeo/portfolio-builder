@@ -19,21 +19,19 @@ public class ForgotPasswordController {
 	
 	@PostMapping("/get_password_and_email_from_username")
 	public String signUpAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
-		System.out.println("it arrives");
-		Gson gson = new Gson();
-		
-		User user = new User();
-		user = gson.fromJson(req.getReader(), User.class);
-	
-		//TODO
+//		Gson gson = new Gson();
+//		
+//		User user = new User();
+//		user = gson.fromJson(req.getReader(), User.class);
+//		System.out.println(user);
+		System.out.println(req.getAttribute("username"));
 		//user=UserDAOImpl.getInstance().findByUsername(user.getUsername());
+//		user=UserDAOImpl.getInstance().findByUsername("pieroAngela2000");
+//		System.out.println(user);
 		
-		//TEST because i don't have a database 
-//		user.setEmail("mymail@gmail.com");
-//		user.setPassword("dddddddds0sdos0d");
-		
-		String userToJSON = gson.toJson(user);
-		return userToJSON;
+//		String userToJSON = gson.toJson(user);
+//		return userToJSON;
+		return "";
 	
 	}
 }

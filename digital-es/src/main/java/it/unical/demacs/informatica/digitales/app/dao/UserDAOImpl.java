@@ -307,4 +307,44 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 	}
 	
+	public User findByUsername(String username) {
+		User user = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM users WHERE username=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				user= new User();
+				user.setId(rs.getLong("id"));
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setEmail(rs.getString("email"));
+				user.setDateOfBirth(rs.getString("date_of_birth"));
+				user.setMainPhoneNumber(rs.getString("main_phone_number"));
+				user.setSecondaryPhoneNumber(rs.getString("secondary_phone_number"));
+				user.setContactEmail(rs.getString("contact_email"));
+				user.setConfirmed(rs.getBoolean("confirmed"));
+				user.setSignUpDate(rs.getString("sign_up_date"));
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [findByUsername]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return user;
+	}
+	
 }
