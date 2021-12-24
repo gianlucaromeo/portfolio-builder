@@ -354,18 +354,18 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "SELECT * FROM users WHERE username=? AND password=?;";
+		String query = "SELECT * FROM users WHERE username=?;";
 		
 		try {
 			
 			p = con.prepareStatement(query);
 			p.setString(1, username);
-			p.setString(2, password);
 			
 			rs = p.executeQuery();
-			
+
 			if (rs.next()) {
-				return userExists = true;
+				String hashPassword = rs.getString("password");
+				userExists = BCrypt.checkpw(password, hashPassword);
 			}
 	
 		} catch (SQLException e) {

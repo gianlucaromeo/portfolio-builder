@@ -10,12 +10,12 @@ public class LoginValidator {
 	public static LoginValidatorResponse validateUserAuth(UserAuthentication userAuth) {
 		
 		LoginValidatorResponse resp = new LoginValidatorResponse();
-	
+		
 		String username = userAuth.getUsername();
 		resp.setUsernameResp(checkUsername(userAuth.getUsername()));
 		
 		if (resp.getUsernameResp().equals(Protocol.OK)) {
-			resp.setPasswordResp(checkPassword(username, userAuth.getUsername()));
+			resp.setPasswordResp(checkPassword(username, userAuth.getPassword()));
 		} else {
 			resp.setPasswordResp(Protocol.LOGIN_ERROR);
 		}

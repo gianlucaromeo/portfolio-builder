@@ -27,7 +27,7 @@
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4">Welcome Back!</h4>
                                     </div>
-                                    <form class="user" id="loginForm">
+                                    <form class="user" id="loginForm" action="login" method="post">
                                         <div class="mb-3"><input class="form-control form-control-user" type="text" id="username" aria-describedby="usernameHelp" placeholder="Enter your username..." name="username"></div>
                                         <div class="mb-3"><input class="form-control form-control-user" type="password" id="passwordInput" placeholder="Password" name="password"></div>
                                         <div class="mb-3">
@@ -35,7 +35,7 @@
                                                 <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Remember Me</label></div>
                                             </div>
                                         </div><button class="btn btn-primary d-block btn-user w-100" type="submit" id="loginBtn">Login</button>
-                                        <hr><a class="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button"><i class="fab fa-google"></i>&nbsp; Login with Google</a><a class="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>
+                                        <hr><a class="btn btn-primary d-block btn-google btn-user w-100 mb-2" id="googleLoginBtn" role="button"><i class="fab fa-google"></i>&nbsp; Login with Google</a><a class="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>
                                         <hr>
                                     </form>
                                     <div class="text-center"><a class="small" href="forgot_password">Forgot Password?</a></div>
@@ -51,6 +51,15 @@
     <script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../dashboard_assets/js/bs-init.js"></script>
     <script src="../../dashboard_assets/js/theme.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
+    <script src="../../dashboard_assets/js/login.js"></script>
+    <script src="../../dashboard_assets/js/sign_up.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script> 
+	<script src="https://apis.google.com/js/client.js"></script>
+	<script src="https://apis.google.com/js/api:client.js"></script>
+	<script src="../../dashboard_assets/js/google_login.js"></script>
 </body>
 
 </html>
