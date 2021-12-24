@@ -81,20 +81,24 @@ function generatePassword() {
 	
 	var upperCase='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+	var numbers = '0123456789';
 	var specialChar='@$!%*?';
 		
 
-	for (i = 1; i <= 5; i++) {
+	for (i = 1; i <= 4; i++) {
 		var idx1 = Math.floor(Math.random()
 			* upperCase.length + 1);
 		var idx2 = Math.floor(Math.random()
 			* lowerCase.length + 1);
-		pass += str.charAt(char)
 		var idx3 = Math.floor(Math.random()
 			* specialChar.length + 1);
+		var idx4 = Math.floor(Math.random()
+			* numbers.length + 1);
 		pass += upperCase.charAt(idx1);
 		pass += lowerCase.charAt(idx2);
 		pass += specialChar.charAt(idx3);
+		pass += numbers.charAt(idx4);
+
 	}
 
 	return pass;
