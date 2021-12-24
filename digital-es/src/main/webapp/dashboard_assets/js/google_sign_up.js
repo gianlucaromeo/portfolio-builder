@@ -78,13 +78,23 @@ function setPasswordFields() {
 function generatePassword() {
 	
 	var pass = '';
-	var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
-		'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$!%*?';
+	
+	var upperCase='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+	var specialChar='@$!%*?';
+		
 
-	for (i = 1; i <= 12; i++) {
-		var char = Math.floor(Math.random()
-			* str.length + 1);
+	for (i = 1; i <= 5; i++) {
+		var idx1 = Math.floor(Math.random()
+			* upperCase.length + 1);
+		var idx2 = Math.floor(Math.random()
+			* lowerCase.length + 1);
 		pass += str.charAt(char)
+		var idx3 = Math.floor(Math.random()
+			* specialChar.length + 1);
+		pass += upperCase.charAt(idx1);
+		pass += lowerCase.charAt(idx2);
+		pass += specialChar.charAt(idx3);
 	}
 
 	return pass;
