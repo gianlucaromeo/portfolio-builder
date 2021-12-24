@@ -380,24 +380,27 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 	}
 	
-	public Integer getUsersNumber() {
+	public Integer getUsersCounter() {
+		
 		Integer count = null;
 		
 		con = DBUtil.getInstance().getConnection();
 		
-		String query = "SELECT count(*) as total FROM users";
+		String query = "SELECT count(*) as total FROM users;";
 		
 		try {
 			
+			p = con.prepareStatement(query);
 			rs = p.executeQuery();
 			
 			if (rs.next()) {
-				rs.getInt("total");
+				count = rs.getInt("total") + 1;
 			}
 	
 		} catch (SQLException e) {
 			System.err.println("[UserDAOImpl] [getUsersNumber]: ");
 			e.printStackTrace();
+			return count;
 		} finally {
 			closeAll();
 		}

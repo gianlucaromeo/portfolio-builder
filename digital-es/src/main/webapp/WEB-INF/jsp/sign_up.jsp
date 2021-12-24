@@ -90,7 +90,7 @@
 								<hr>
 								<a
 									class="btn btn-primary d-block btn-google btn-user w-100 mb-2"
-									role="button" id="googleSignUpBtn"><i class="fab fa-google"></i>&nbsp; Register
+									role="button" id="googleLoginBtn"><i class="fab fa-google"></i>&nbsp; Login
 									with Google</a> 
 								<div id="fb-root">
 									<a

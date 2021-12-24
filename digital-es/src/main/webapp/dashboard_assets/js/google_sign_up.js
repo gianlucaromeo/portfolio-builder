@@ -1,59 +1,58 @@
-/**
- * 
+
+/*
+ * ID Client della nostra App da Google Cloud Platform.
  */
+var CLIENT_ID = '666216352369-98lhc8kqedb2mf28ssdknqfqmc4958fv.apps.googleusercontent.com';
 
-//login con google
+var googleUser = {};
 
+/*
+ * Carica l'API tramite il nostro Client ID.
+ */
+function setGoogleSignUpAPI() {
 
-
-var CLIENT_ID='666216352369-98lhc8kqedb2mf28ssdknqfqmc4958fv.apps.googleusercontent.com';
-
-	var googleUser = {};
-  	function setGoogleSignUp() {
-		console.log("start");
-	    gapi.load('auth2', function(){
-	      // Retrieve the singleton for the GoogleAuth library and set up the client.
-	      	auth2 = gapi.auth2.init({
-	        client_id: CLIENT_ID,
-	        cookiepolicy: 'single_host_origin',
-	        // Request scopes in addition to 'profile' and 'email'
-	        //scope: "https://www.googleapis.com/auth/user.birthday.read", 
-
-	      });
-	      attachSignin(document.getElementById('googleSignUpBtn'));
-	    });
-  };
-
-  function attachSignin(element) {
-    console.log(element.id);
-    auth2.attachClickHandler(element, {},
-        function(googleUser) {
+	gapi.load('auth2', function() {
 		
+		// Retrieve the singleton for the GoogleAuth library and set up the client.
+		auth2 = gapi.auth2.init({
+			client_id: CLIENT_ID,
+			cookiepolicy: 'single_host_origin',
+			// Request scopes in addition to 'profile' and 'email'
+			//scope: "https://www.googleapis.com/auth/user.birthday.read", 
+		});
+
+		attachGoogleLogin(document.getElementById('googleLoginBtn'));
+
+	});
+
+};
+
+/*
+ * Collega il pop-up di Google per l'accesso
+ * al pulsante "Login With Google".
+ */
+function attachGoogleLogin(element) {
 	
-			$("#firstName").val( googleUser.getBasicProfile().getGivenName ());
+	auth2.attachClickHandler(element, {},
+		function(googleUser) {
+
+			$("#firstName").val(googleUser.getBasicProfile().getGivenName());
 			$("#lastName").val(googleUser.getBasicProfile().getFamilyName());
 			$("#inputEmail").val(googleUser.getBasicProfile().getEmail());
-			
+
 			setPasswordFields();
 			setUsernameField();
-			
-			
-			console.log(password);
-			
+
 			disableInputFields();
 			addLabelOnDatePicker();
-			
-			
 
-        }, function(error) {
-          alert(JSON.stringify(error, undefined, 2));
-        });
+		}, function(error) {
+			alert(JSON.stringify(error, undefined, 2));
+		});
 
-			
-         
-  }
+}
 
-function disableInputFields(){
+function disableInputFields() {
 	$("#inputEmail").prop('disabled', true);
 	$("#firstName").prop('disabled', true);
 	$("#lastName").prop('disabled', true);
@@ -61,6 +60,7 @@ function disableInputFields(){
 	$("#passwordInput").prop('disabled', true);
 	$("#repeatPasswordInput").prop('disabled', true);
 }
+
 function addLabelOnDatePicker() {
 	$("#dateContainer").append(`<div id="dateInvalid" class="text-danger">
 			Please enter your date of birth before continuing...
@@ -69,15 +69,14 @@ function addLabelOnDatePicker() {
 
 function setPasswordFields() {
 	let password = generatePassword();
+	console.log(password);
 	$("#passwordInput").val(password);
 	$("#repeatPasswordInput").val(password);
+	console.log("PSW: " + $("#passwordInput").val());
+}
 
-}
-function setUsernameField() {
-	let username = generateUsername();
-	$("#username").val(username);
-}
 function generatePassword() {
+	
 	var pass = '';
 	var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
 		'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$!%*?';
@@ -85,64 +84,31 @@ function generatePassword() {
 	for (i = 1; i <= 12; i++) {
 		var char = Math.floor(Math.random()
 			* str.length + 1);
-
 		pass += str.charAt(char)
 	}
 
 	return pass;
 
 }
+
+var generatedUsername = generateUsername();
+
+function setUsernameField() {
+	console.log("Generated username: " + generatedUsername);
+	$("#username").val(generatedUsername);
+}
+
 function generateUsername() {
 
-	let id='';
-	let username='';
-	
 	$.ajax({
-
-		url: "/sign_up_get_next_id_googleRest",
+		url: "/sign_up_get_new_google_username",
 		contentType: "application/json",
-		//data: ,
 		type: "post",
 		dataType: "json",
-
 	}).done(function(data) {
-		id= data;
-		
-		var tempUsername= 'googleUser'+id;
-		
-		let verified= false;
-		while (!verified) {
-			$.ajax({
-
-				url: "/sign_up_verify_username_exists_googleRest",
-				contentType: "application/json",
-				data: JSON.stringify(tempUsername),
-				type: "post",
-				dataType: "json",
-
-			}).done(function(data) {
-				if(data.username==="ok"){
-					verified=true;
-				}else{
-					id++;
-					tempUsername= 'googleUser'+id;
-				}
-
-
-
-			});
-		}
-		
-		username=tempUsername;
-		
-		
-
+		generatedUsername = data;		
 	});
-	
-	return username;
 
 }
 
-	window.setGoogleSignUp();
-
-
+window.setGoogleSignUpAPI();
