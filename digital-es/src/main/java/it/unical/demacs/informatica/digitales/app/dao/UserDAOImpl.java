@@ -408,6 +408,34 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		return count;
 		
 	}
+
+	public String getUsernameByEmail(String email) {
+		con = DBUtil.getInstance().getConnection();
+
+		String query = "SELECT username FROM users WHERE email=?;";
+		String username=null;
+
+		try {
+
+			p = con.prepareStatement(query);
+			p.setString(1, email);
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				username= rs.getString("username");
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [getUsernameByEmail]: ");
+			e.printStackTrace();
+			
+		} finally {
+			closeAll();
+		}
+
+		return username;
+
+	}
 	
 	
 	
