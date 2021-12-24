@@ -107,7 +107,7 @@ function sendData(fields) {
 			//window.location.href = "/dashboard/" + userData.username + "/admin-page";
 		}
 
-	})
+	});
 
 }
 

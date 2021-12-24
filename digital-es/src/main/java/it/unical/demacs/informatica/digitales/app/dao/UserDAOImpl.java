@@ -365,7 +365,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 			rs = p.executeQuery();
 			
 			if (rs.next()) {
-				return userExists = true;;
+				return userExists = true;
 			}
 	
 		} catch (SQLException e) {
@@ -379,5 +379,33 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		return userExists;
 		
 	}
+	
+	public Integer getUsersNumber() {
+		Integer count = null;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT count(*) as total FROM users";
+		
+		try {
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				rs.getInt("total");
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [getUsersNumber]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return count;
+		
+	}
+	
+	
 	
 }

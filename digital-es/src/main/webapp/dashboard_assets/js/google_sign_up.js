@@ -45,9 +45,15 @@ var CLIENT_ID='666216352369-98lhc8kqedb2mf28ssdknqfqmc4958fv.apps.googleusercont
 			  .then(response => console.log(response.json) )
 			  .then(data => console.log(data));
 			*/
+			
+			setPasswordFields();
+			setUsernameField();
+			
+			
+			console.log(password);
+			
 			disableInputFields();
 			addLabelOnDatePicker();
-			
 			
 			
 
@@ -73,6 +79,81 @@ function addLabelOnDatePicker() {
 		</div>`);
 }
 
+function setPasswordFields() {
+	let password = generatePassword();
+	$("#passwordInput").val(password);
+	$("#repeatPasswordInput").val(password);
+
+}
+function setUsernameField() {
+	let username = generateUsername();
+	$("#username").val(username);
+}
+function generatePassword() {
+	var pass = '';
+	var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+		'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$!%*?';
+
+	for (i = 1; i <= 12; i++) {
+		var char = Math.floor(Math.random()
+			* str.length + 1);
+
+		pass += str.charAt(char)
+	}
+
+	return pass;
+
+}
+function generateUsername() {
+
+	let id=0;
+	let username='';
+	
+	$.ajax({
+
+		url: "/sign_up_get_next_id_googleRest",
+		contentType: "application/json",
+		//data: ,
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+		id= data;
+		
+		var tempUsername= 'googleUser'+id;
+		
+		let verified= false;
+		while (!verified) {
+			$.ajax({
+
+				url: "/sign_up_verify_username_exists_googleRest",
+				contentType: "application/json",
+				data: JSON.stringify(tempUsername),
+				type: "post",
+				dataType: "json",
+
+			}).done(function(data) {
+				if(data.username==="ok"){
+					verified=true;
+				}else{
+					id++;
+					tempUsername= 'googleUser'+id;
+				}
+
+
+
+			});
+		}
+		
+		username=tempUsername;
+		
+		
+
+	});
+	
+	return username;
+
+}
 
 	window.setGoogleSignUp();
 
