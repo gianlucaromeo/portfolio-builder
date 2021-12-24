@@ -42,6 +42,28 @@ public class SignUpREST {
 	public void signUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		User user = new User();
+		fetchUserData(user, req);
+		
+		String res = UserDAOImpl.getInstance().create(user);
+		
+		if (res.equals(Protocol.OK)) {
+			
+			user.setId(UserDAOImpl.getInstance().findId(user));
+			
+			Cookie cookie = new Cookie("logged_username", user.getUsername());
+		    cookie.setMaxAge(60 * 60 * 24);
+		    
+		    resp.addCookie(cookie);
+			resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+			resp.setHeader("Location", "/dashboard/admin-page");
+			
+		} else {
+			System.out.println(res);
+		}
+		
+	}
+
+	private void fetchUserData(User user, HttpServletRequest req) {
 		user.setFirstName(req.getParameter("first_name"));
 		user.setLastName(req.getParameter("last_name"));
 		user.setUsername(req.getParameter("username"));
@@ -49,21 +71,6 @@ public class SignUpREST {
 		user.setPassword(req.getParameter("password"));
 		user.setDateOfBirth(req.getParameter("date_of_birth"));
 		user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
-		
-		String res = UserDAOImpl.getInstance().create(user);
-		if (res.equals(Protocol.OK)) {
-			user.setId(UserDAOImpl.getInstance().findId(user));
-			Cookie cookie = new Cookie("logged_username", user.getUsername());
-		    cookie.setMaxAge(60 * 60 * 24);
-		    resp.addCookie(cookie);
-			resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-			resp.setHeader("Location", "/dashboard/admin-page");
-//			RequestDispatcher dispatcher = req.getRequestDispatcher("/dashboard/admin-page");
-//			dispatcher.forward(req, resp);
-		} else {
-			System.out.println(res);
-		}
-		
 	}
 	
 }

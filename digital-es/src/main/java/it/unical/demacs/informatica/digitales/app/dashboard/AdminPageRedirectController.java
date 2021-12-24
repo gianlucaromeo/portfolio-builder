@@ -1,15 +1,12 @@
 package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -46,7 +43,8 @@ public class AdminPageRedirectController {
 		
 		for (Cookie c : cookies) {
 			if (c.getName().equals("logged_username")) {
-				fetchUserData(req, c.getValue());
+				String username = c.getValue();
+				fetchUserData(req, username);
 				return "admin_page";
 			}
 		}
@@ -64,6 +62,7 @@ public class AdminPageRedirectController {
 		req.setAttribute("firstName", user.getFirstName());
 		req.setAttribute("lastName", user.getLastName());
 		req.setAttribute("email", user.getEmail());
+		
 	}
 	
 }
