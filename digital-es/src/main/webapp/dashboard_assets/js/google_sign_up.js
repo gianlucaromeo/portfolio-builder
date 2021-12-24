@@ -32,19 +32,7 @@ var CLIENT_ID='666216352369-98lhc8kqedb2mf28ssdknqfqmc4958fv.apps.googleusercont
 	
 			$("#firstName").val( googleUser.getBasicProfile().getGivenName ());
 			$("#lastName").val(googleUser.getBasicProfile().getFamilyName());
-			//$("#datePicker").val();
 			$("#inputEmail").val(googleUser.getBasicProfile().getEmail());
-			
-			
-			var userIdToken=googleUser.getAuthResponse().id_token;
-			var userId=googleUser.getBasicProfile().getId();
-			console.log(userId);
-			console.log(userIdToken);
-			/*
-			fetch("https://people.googleapis.com/v1/people/"+userId+"?alt=json&personFields=names&key=AIzaSyCUCx5WXDu9ulW3i6tcmosJM7UsNlNddZo&access_token="+userIdToken)
-			  .then(response => console.log(response.json) )
-			  .then(data => console.log(data));
-			*/
 			
 			setPasswordFields();
 			setUsernameField();
@@ -106,7 +94,7 @@ function generatePassword() {
 }
 function generateUsername() {
 
-	let id=0;
+	let id='';
 	let username='';
 	
 	$.ajax({
