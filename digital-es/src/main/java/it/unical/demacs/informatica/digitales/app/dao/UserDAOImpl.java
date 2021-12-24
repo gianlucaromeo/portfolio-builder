@@ -308,6 +308,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	}
 	
 	public User findByUsername(String username) {
+		
 		User user = null;
 		
 		con = DBUtil.getInstance().getConnection();
@@ -345,6 +346,38 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		}
 		
 		return user;
+	}
+
+	public boolean checkUsernameAndPassword(String username, String password) {
+
+		boolean userExists = false;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM users WHERE username=? AND password=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+			p.setString(2, password);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				return userExists = true;;
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [checkUsernameAndPassword]: ");
+			e.printStackTrace();
+			userExists = false;
+		} finally {
+			closeAll();
+		}
+		
+		return userExists;
+		
 	}
 	
 }

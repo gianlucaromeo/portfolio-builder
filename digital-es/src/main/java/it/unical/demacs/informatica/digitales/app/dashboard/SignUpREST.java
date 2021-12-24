@@ -28,12 +28,11 @@ public class SignUpREST {
 	public String signUpAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		
 		Gson gson = new Gson();
-		
 		User user = new User();
 		user = gson.fromJson(req.getReader(), User.class);
 	
 		String userDataResponseToJSON = gson.toJson(SignUpFormValidator.validateUser(user));
-		System.out.println(userDataResponseToJSON);
+		
 		return userDataResponseToJSON;
 	
 	}
