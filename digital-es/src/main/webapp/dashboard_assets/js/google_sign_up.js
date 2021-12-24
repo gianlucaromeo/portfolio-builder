@@ -53,12 +53,12 @@ function attachGoogleLogin(element) {
 }
 
 function disableInputFields() {
-	$("#inputEmail").prop('disabled', true);
-	$("#firstName").prop('disabled', true);
-	$("#lastName").prop('disabled', true);
-	$("#username").prop('disabled', true);
-	$("#passwordInput").prop('disabled', true);
-	$("#repeatPasswordInput").prop('disabled', true);
+	$("#inputEmail").attr('readonly', true);
+	$("#firstName").attr('readonly', true);
+	$("#lastName").attr('readonly', true);
+	$("#username").attr('readonly', true);
+	$("#passwordInput").attr('readonly', true);
+	$("#repeatPasswordInput").attr('readonly', true);
 }
 
 function addLabelOnDatePicker() {
@@ -67,12 +67,11 @@ function addLabelOnDatePicker() {
 		</div>`);
 }
 
+var generatedPassword = generatePassword();
+
 function setPasswordFields() {
-	let password = generatePassword();
-	console.log(password);
-	$("#passwordInput").val(password);
-	$("#repeatPasswordInput").val(password);
-	console.log("PSW: " + $("#passwordInput").val());
+	$("#passwordInput").val(generatedPassword);
+	$("#repeatPasswordInput").val(generatedPassword);
 }
 
 function generatePassword() {
