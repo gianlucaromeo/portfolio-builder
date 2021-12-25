@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 
@@ -64,5 +67,11 @@ public class AdminPageRedirectController {
 		req.setAttribute("email", user.getEmail());
 		
 	}
+	
+	@GetMapping("/admin")
+	public String testAdminPage(HttpServletRequest req, String username) throws JsonSyntaxException, JsonIOException, IOException {
+		return "admin_page";
+	}
+
 	
 }

@@ -299,6 +299,19 @@
                                                                 placeholder="Last Name" name="last_name" value="${lastName}"></div>
                                                     </div>
                                                 </div>
+                                            
+                                                
+                                                <div class="row">
+                                                     <div class="col">
+                                                       <div class="mb-3">
+														<div id="datePickerContainer"
+															class="md-form md-outline input-with-post-icon datepicker">
+															 <label class="datePickerLabel" for="datePicker">Date of birth</label> <i class="fas fa-calendar input-prefix" tabindex=0></i>
+															<input placeholder="Select date" type="date" id="datePicker"
+																name="date_of_birth" class="form-control form-control-user" value="${dateOfBirth}">
+														</div>
+                                                    </div>
+                                                </div>
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm"
                                                         type="submit">Save Settings</button></div>
                                             </form>
@@ -311,21 +324,21 @@
                                         <div class="card-body">
                                             <form>
                                                 <div class="mb-3"><label class="form-label"
-                                                        for="address"><strong>Address</strong></label><input
-                                                        class="form-control" type="text" id="address"
-                                                        placeholder="Sunset Blvd, 38" name="address"></div>
+                                                        for="contact_email"><strong>Contact email</strong></label><input
+                                                        class="form-control" type="text" id="contactEmail"
+                                                        placeholder="" name="contact_email"></div>
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label"
-                                                                for="city"><strong>City</strong></label><input
-                                                                class="form-control" type="text" id="city"
-                                                                placeholder="Los Angeles" name="city"></div>
+                                                                for="city"><strong>Phone number</strong></label><input
+                                                                class="form-control" type="text" id="phoneNumber"
+                                                                placeholder="" name="phone_number"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label"
-                                                                for="country"><strong>Country</strong></label><input
-                                                                class="form-control" type="text" id="country"
-                                                                placeholder="USA" name="country"></div>
+                                                                for="sec_phone_number"><strong>Secondary phone number</strong></label><input
+                                                                class="form-control" type="text" id="secPhoneNumber"
+                                                                placeholder="" name="sec_phone_number"></div>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm"

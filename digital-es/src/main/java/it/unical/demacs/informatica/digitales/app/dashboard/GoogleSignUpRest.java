@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +42,6 @@ public class GoogleSignUpRest {
 		boolean usernameExists = UserDAOImpl.getInstance().checkUsernameExists(username);
 		return usernameExists ? Protocol.ERROR : Protocol.OK;
 	}
+
 
 }
