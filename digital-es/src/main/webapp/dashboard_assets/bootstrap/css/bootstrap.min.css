@@ -10417,7 +10417,7 @@ a:focus {
 }
 .sidebar #sidebarToggle::after {
   font-weight: 900;
-  content: "";
+    content: "\f060";
   font-family: "Font Awesome 5 Free";
   margin-right: 0.1rem;
 }
@@ -10432,7 +10432,7 @@ a:focus {
   overflow: hidden;
 }
 .sidebar.toggled #sidebarToggle::after {
-  content: "";
+  content: "\f061";
   font-family: "Font Awesome 5 Free";
   margin-left: 0.25rem;
 }
