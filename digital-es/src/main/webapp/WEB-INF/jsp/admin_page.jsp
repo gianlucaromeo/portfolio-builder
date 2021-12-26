@@ -412,9 +412,8 @@
 														<div class="mb-3">
 															<div id="datePickerContainer"
 																class="md-form md-outline input-with-post-icon datepicker">
-																<label class="datePickerLabel" for="datePicker">Date
-																	of birth</label> <i class="fas fa-calendar input-prefix"
-																	tabindex=0></i> <input placeholder="Select date"
+																<label class="datePickerLabel" for="datePicker"><strong>Date
+																	of birth</strong></label> </i> <input placeholder="Select date"
 																	type="date" id="datePicker" name="date_of_birth"
 																	class="form-control form-control-user"
 																	value="${dateOfBirth}">
