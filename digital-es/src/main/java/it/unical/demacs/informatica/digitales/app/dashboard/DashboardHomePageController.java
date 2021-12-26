@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/dashboard")
-public class DashboardHomePage {
+public class DashboardHomePageController {
 
 	@GetMapping(value = {"/login", "/", ""})
 	public String showLoginPage() {

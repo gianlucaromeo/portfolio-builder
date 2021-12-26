@@ -16,7 +16,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 @RestController
-public class GoogleSignUpRest {
+public class GoogleSignUpREST {
 	
 	@PostMapping("/sign_up_get_new_google_username")
 	public String getNextId(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {

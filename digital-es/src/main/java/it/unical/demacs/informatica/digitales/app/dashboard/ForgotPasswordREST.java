@@ -15,7 +15,7 @@ import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 
 @RestController
-public class ForgotPasswordController {
+public class ForgotPasswordREST {
 	
 	@PostMapping("/get_password_and_email_from_username")
 	public String signUpAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {

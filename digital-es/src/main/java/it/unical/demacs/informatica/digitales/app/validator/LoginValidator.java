@@ -1,8 +1,8 @@
 package it.unical.demacs.informatica.digitales.app.validator;
 
+import it.unical.demacs.informatica.digitales.app.beans.UserAuthentication;
 import it.unical.demacs.informatica.digitales.app.beans.validation.LoginValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dashboard.UserAuthentication;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class LoginValidator {
