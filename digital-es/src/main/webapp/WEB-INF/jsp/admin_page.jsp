@@ -244,12 +244,10 @@
 											Photo</button>
 									</div>
 								</div>
-								<div class="card-header py-3">
-										<p class="text-primary m-0 fw-bold">Biography</p>
-									</div>
 									<div class="card-body">
 										<div class="row">
 											<div class="col-md-12">
+											<label class="form-label" for="biography"><strong>Biography</strong></label>
 												<form>
 													<div class="mb-3">
 														<textarea class="form-control" id="signature" rows="4"
