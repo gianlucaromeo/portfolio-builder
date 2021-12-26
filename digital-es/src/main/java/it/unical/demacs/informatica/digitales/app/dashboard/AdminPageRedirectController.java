@@ -66,6 +66,8 @@ public class AdminPageRedirectController {
 		req.setAttribute("lastName", user.getLastName());
 		req.setAttribute("email", user.getEmail());
 		
+		req.setAttribute("dateOfBirth", user.getDateOfBirth());
+		
 	}
 	
 	@GetMapping("/admin")

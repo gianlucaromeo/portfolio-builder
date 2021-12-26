@@ -1,7 +1,12 @@
-//$('.datepicker').datepicker();
+/*
+ * At the beginning, we have multiple divs in our jsp
+ * that we want to hide when the user first goes to the sign up page.
+ * We hide them here and then "toggle" those we need to show.
+ **/
+hideErrorsDiv();
 
-signUpBtn = $("#signUpBtn");
-signUpForm = $("#signUpForm");
+signUpBtn = $("#signUpBtn"); // Check fields..
+signUpForm = $("#signUpForm"); // ..then submit the form
 
 var firstName = $("#firstName");
 var lastName = $("#lastName");
@@ -21,16 +26,6 @@ var fields = [
 	repeatPassword
 ];
 
-function checkPasswordMatch() {
-	$("#passwordsDontMatch").remove();
-	if (password.val() !== repeatPassword.val()) {
-		password.addClass("is-invalid");
-		repeatPassword.addClass("is-invalid");
-		addPasswordDontMatchDiv();
-		return false;
-	}
-	return true;
-}
 
 signUpBtn.on("click", function(e) {
 
@@ -38,6 +33,7 @@ signUpBtn.on("click", function(e) {
 
 	fields.forEach(field => field.removeClass("is-invalid"));
 
+	// Check all the fields are not null and/or empty.
 	var fieldsAreValid = true;
 	fields.forEach(field => {
 		if (field.val() == null || field.val() === "") {
@@ -48,6 +44,7 @@ signUpBtn.on("click", function(e) {
 
 	if (checkPasswordMatch()) {
 		if (fieldsAreValid) {
+			// Send data to Server and check if the User can be registered
 			sendData(fields);
 		}	
 	}
@@ -91,9 +88,11 @@ function sendData(fields) {
 
 		fields.forEach(field => field.removeClass("is-invalid"));
 
-		removeErrorLabels();
+		removeErrorsDivs();
+		hideErrorsDiv();
 
 		userDataValidated = true;
+		
 		checkPasswordValidation(data);
 		checkFirstNameValidation(data);
 		checkLastNameValidation(data);
@@ -102,31 +101,109 @@ function sendData(fields) {
 		checkEmailValidation(data);
 		
 		if (userDataValidated) {
-			// redirect
 			signUpForm.submit();
-			//window.location.href = "/dashboard/" + userData.username + "/admin-page";
 		}
 
 	});
 
 }
 
-/**
- * Rimuove tutte le Label
- * che erano state aggiunte per mostrare
- * eventuali errori all'Utente.
- * */
-function removeErrorLabels() {
-	$("#passwordInvalid").remove();
+
+/* ===================== HIDE ERROR DIVS ======================== */
+
+function hideErrorsDiv() {
+	hidePasswordDontMatchDiv();
+	hidePasswordNotValidDiv();
+	hideDateOfBirthNotValidDiv();
+	hideEmailNotValidDiv();
+}
+
+function hidePasswordDontMatchDiv() {
+	$("#passwordsDontMatch").hide();	
+}
+
+function hidePasswordNotValidDiv() {
+	$("#passwordInvalid").hide();
+}
+
+function hideDateOfBirthNotValidDiv() {
+	$("#dateInvalid").hide();	
+}
+
+function hideEmailNotValidDiv() {
+	$("#emailInvalid").hide();
+}
+
+/* ===================== SHOW ERROR DIVS ======================== */
+
+function showPasswordDontMatchDiv() {
+	$("#passwordsDontMatch").show();
+}
+
+function showPasswordNotValidDiv() {
+	$("#passwordInvalid").show();
+}
+
+function showDateOfBirthNotValidDiv() {
+	$("#dateInvalid").show();
+}
+
+function showEmailNotValidDiv() {
+	$("#emailInvalid").show();
+}
+
+/* ================= ADD ERRORS DIV ================= */
+
+function addNameNotValidDiv(fieldName) {
+	$("#nameContainer").append(
+		`<div id="nameInvalid" class="text-danger">
+			Please check the ${fieldName} field and try again.
+	     </div>`
+	 );
+}
+
+function addUsernameNotValidDiv(errorText) {
+	$("#usernameContainer").append(
+		`<div id="usernameInvalid" class="text-danger">
+			${errorText}
+		</div>`
+	);
+}
+
+
+/* =========== REMOVE ERROR DIVS =============== */
+
+function removeErrorsDivs() {
+	removeUsernameInvalidDiv();
+	removeNameInvalidDiv();
+	removeNameInvalidDiv(); // twice for both First and Last name
+}
+
+function removeUsernameInvalidDiv() {
 	$("#usernameInvalid").remove();
-	$("#nameInvalid").remove();
-	$("#nameInvalid").remove();
-	$("#emailInvalid").remove();
-	$("#dateInvalid").remove();
+	
+}
+
+function removeNameInvalidDiv() {
+	$("#nameInvalid").remove();	
+}
+
+
+/* ========================== CHECK DATA VALIDATION ============== */
+
+function checkPasswordMatch() {
+	if (password.val() !== repeatPassword.val()) {
+		password.addClass("is-invalid");
+		repeatPassword.addClass("is-invalid");
+		showPasswordDontMatchDiv();
+		return false;
+	} else {
+		hidePasswordDontMatchDiv();
+	}
+	return true;
 }
 
 function checkFirstNameValidation(data) {
-	
 	if (data.firstNameResp === "error") {
 		firstName.addClass("is-invalid");
 		addNameNotValidDiv("First Name");
@@ -138,7 +215,6 @@ function checkFirstNameValidation(data) {
 
 
 function checkLastNameValidation(data) {
-	
 	if (data.lastNameResp === "error") {
 		lastName.addClass("is-invalid");
 		addNameNotValidDiv("Last Name");
@@ -146,7 +222,6 @@ function checkLastNameValidation(data) {
 	} else if (data.lastNameResp === "ok") {
 		lastName.addClass("is-valid");
 	}
-	
 }
 
 function checkUsernameValidation(data) {
@@ -185,94 +260,36 @@ function checkUsernameValidation(data) {
 }
 
 function checkDateOfBirthValidation(data) {
-
 	if (data.dateOfBirthResp === "error") {
 		dateOfBirth.addClass("is-invalid");
-		addDateOfBirthNotValidDiv();
+		showDateOfBirthNotValidDiv();
 		userDataValidated = false;
 	} else if (data.dateOfBirthResp === "ok") {
 		dateOfBirth.addClass("is-valid");
+		hideDateOfBirthNotValidDiv();
 	}
 }
 
 function checkEmailValidation(data) {
 	if (data.emailResp === "email duplicated error") {
 		email.addClass("is-invalid");
-		addEmailNotValidDiv();
+		showEmailNotValidDiv();
 		userDataValidated = false;
 	} else if (data.emailResp === "ok") {
+		hideEmailNotValidDiv();
 		email.addClass("is-valid");
 	}
 }
 
 function checkPasswordValidation(data) {
 	if (data.passwordResp === "error") {
-			password.addClass("is-invalid");
-			repeatPassword.addClass("is-invalid");
-			userDataValidated = false;
-			addPasswordNotValidDiv();
-		} else if (data.passwordResp === "ok") {
-			password.addClass("is-valid");
-			repeatPassword.addClass("is-valid");
-		}
+		password.addClass("is-invalid");
+		repeatPassword.addClass("is-invalid");
+		userDataValidated = false;
+		showPasswordNotValidDiv();
+	} else if (data.passwordResp === "ok") {
+		password.addClass("is-valid");
+		repeatPassword.addClass("is-valid");
+		hidePasswordNotValidDiv();
+	}
 }
-
-// Nascondere tag
-
-function addPasswordDontMatchDiv() {
-	$("#passwordsContainer").append(
-		`<div id="passwordsDontMatch" class="text-danger">
-			Please check passwords match and try again.
-		</div>`
-	);
-}
-
-function addNameNotValidDiv(fieldName) {
-	$("#nameContainer").append(
-		`<div id="nameInvalid" class="text-danger">
-			Please check the ${fieldName} field and try again.
-	     </div>`
-	 );
-}
-
-function addUsernameNotValidDiv(errorText) {
-	$("#usernameContainer").append(
-		`<div id="usernameInvalid" class="text-danger">
-			${errorText}
-		</div>`
-	);
-}
-
-function addDateOfBirthNotValidDiv() {
-	$("#dateContainer").append(
-		`<div id="dateInvalid" class="text-danger">
-			You must be at least 18 years old.
-		</div>`
-	);
-}
-
-function addEmailNotValidDiv() {
-	$("#emailContainer").append(
-		`<div id="emailInvalid" class="text-danger">
-			Email already used. Please try again.
-		</div>`
-	);
-}
-
-function addPasswordNotValidDiv() {
-	$("#passwordsContainer").append(
-		`<div id="passwordInvalid" class="text-danger">
-			Password must contain:
-			<br>- At least 8 characters and at most 20 characters.
-			<br>- At least one digit [0-9].
-			<br>- Both lower and uppercase letters .
-			<br>- At least a special character [@$!%*?&].
-		</div>`
-	);
-}
-
-
-
-
-
-

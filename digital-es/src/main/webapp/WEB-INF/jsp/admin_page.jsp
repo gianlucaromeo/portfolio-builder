@@ -236,74 +236,68 @@
 					<div class="row mb-3">
 						<div class="col-lg-4">
 							<div class="card mb-3">
-								<div class="card-body text-center shadow">
-									<img class="rounded-circle mb-3 mt-4"
-										src="assets/img/dogs/image2.jpeg" width="160" height="160">
-									<div class="mb-3">
-										<button class="btn btn-primary btn-sm" type="button">Change
-											Photo</button>
-									</div>
-								</div>
-									<div class="card-body">
-										<div class="row">
-											<div class="col-md-12">
-											<label class="form-label" for="biography"><strong>Biography</strong></label>
-												<form>
-													<div class="mb-3">
-														<textarea class="form-control" id="signature" rows="4"
-															name="biography"></textarea>
-													</div>
-
-													<div class="mb-3">
-														<button class="btn btn-primary btn-sm" type="submit">Save
-															Settings</button>
-													</div>
-												</form>
-											</div>
+								<div class="card-body shadow">
+									<div class="text-center">
+										<img class="rounded-circle mb-3 mt-4"
+											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
+											width="160" height="160">
+										<div class="mb-3">
+											<button class="btn btn-primary btn-sm" type="button">Change
+												Photo</button>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<label class="form-label" for="biography"><strong>Biography</strong></label>
+											<form>
+												<div class="mb-3">
+													<textarea class="form-control" id="signature" rows="4"
+														name="biography"></textarea>
+												</div>
+
+												<div class="mb-3">
+													<button class="btn btn-primary btn-sm" type="submit">Save
+														Settings</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="text-primary fw-bold m-0">Projects</h6>
+									<h6 class="text-primary fw-bold m-0">Your 3 main Skills</h6>
 								</div>
 								<div class="card-body">
-									<h4 class="small fw-bold">
-										Server migration<span class="float-end">20%</span>
-									</h4>
+
+									<!--  A SKILL -->
+									<div class="row">
+										<div class="col-8 mb-3">
+											<div class="row">
+												<h4 class="small fw-bold">Skill</h4>
+											</div>
+											<input class="form-control" type="text" id="firstName"
+												placeholder="First Name" name="first_name" value="Java">
+										</div>
+										<div class="col-4 mb-3">
+											<div class="row">
+												<h4 class="small fw-bold">Level (0-100)</h4>
+											</div>
+											<input class="form-control" type="text" id="firstName"
+												placeholder="First Name" name="first_name" value="20">
+										</div>
+
+									</div>
 									<div class="progress progress-sm mb-3">
 										<div class="progress-bar bg-danger" aria-valuenow="20"
 											aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
 											<span class="visually-hidden">20%</span>
 										</div>
 									</div>
-									<h4 class="small fw-bold">
-										Sales tracking<span class="float-end">40%</span>
-									</h4>
-									<div class="progress progress-sm mb-3">
-										<div class="progress-bar bg-warning" aria-valuenow="40"
-											aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-											<span class="visually-hidden">40%</span>
-										</div>
-									</div>
-									<h4 class="small fw-bold">
-										Customer Database<span class="float-end">60%</span>
-									</h4>
-									<div class="progress progress-sm mb-3">
-										<div class="progress-bar bg-primary" aria-valuenow="60"
-											aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-											<span class="visually-hidden">60%</span>
-										</div>
-									</div>
-									<h4 class="small fw-bold">
-										Payout Details<span class="float-end">80%</span>
-									</h4>
-									<div class="progress progress-sm mb-3">
-										<div class="progress-bar bg-info" aria-valuenow="80"
-											aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-											<span class="visually-hidden">80%</span>
-										</div>
-									</div>
+									<hr />
+									<!--  END OF A SKILL -->
+
+
 									<h4 class="small fw-bold">
 										Account setup<span class="float-end">Complete!</span>
 									</h4>
@@ -313,6 +307,12 @@
 											<span class="visually-hidden">100%</span>
 										</div>
 									</div>
+
+									<div class="mb-3">
+										<button class="btn btn-primary btn-sm" type="submit">Save
+											Settings</button>
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -411,8 +411,8 @@
 															<div id="datePickerContainer"
 																class="md-form md-outline input-with-post-icon datepicker">
 																<label class="datePickerLabel" for="datePicker"><strong>Date
-																	of birth</strong></label> </i> <input placeholder="Select date"
-																	type="date" id="datePicker" name="date_of_birth"
+																		of birth</strong></label> </i> <input placeholder="Select date" type="date"
+																	id="datePicker" name="date_of_birth"
 																	class="form-control form-control-user"
 																	value="${dateOfBirth}">
 															</div>
@@ -447,10 +447,32 @@
 													</div>
 													<div class="col">
 														<div class="mb-3">
-															<label class="form-label" for="sec_phone_number"><strong>Secondary
-																	phone number</strong></label><input class="form-control" type="text"
+															<label class="form-label" for="sec_phone_number"><strong>Phone number (2)</strong></label><input class="form-control" type="text"
 																id="secPhoneNumber" placeholder=""
 																name="sec_phone_number">
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-4">
+															<div class="mb-3 text-center">
+																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-twitter"></i></strong></label><input class="form-control" type="text"
+																	id="secPhoneNumber" placeholder=""
+																	name="sec_phone_number">
+															</div>
+														</div>
+														<div class="col-4">
+															<div class="mb-3 text-center">
+																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-facebook"></i></strong></label><input class="form-control" type="text"
+																	id="secPhoneNumber" placeholder=""
+																	name="sec_phone_number">
+															</div>
+														</div>
+														<div class="col-4">
+															<div class="mb-3 text-center">
+																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-instagram"></i></strong></label><input class="form-control" type="text"
+																	id="secPhoneNumber" placeholder=""
+																	name="sec_phone_number">
+															</div>
 														</div>
 													</div>
 												</div>
