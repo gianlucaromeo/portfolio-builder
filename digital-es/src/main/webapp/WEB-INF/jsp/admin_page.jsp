@@ -34,18 +34,18 @@
 					</div>
 				</a>
 				<hr class="sidebar-divider my-0">
-				 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i
-                                class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="profile.html"><i
-                                class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="table.html"><i
-                                class="fas fa-project-diagram"></i><span>Projects</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html"><i
-                                class="far fa-comments"></i><span>Posts</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html"><i
-                                class="fas fa-address-card"></i><span>Curriculum</span></a></li>
-                </ul>
+				<ul class="navbar-nav text-light" id="accordionSidebar">
+					<li class="nav-item"><a class="nav-link" href="index.html"><i
+							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="table.html"><i
+							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="login.html"><i
+							class="far fa-comments"></i><span>Posts</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="register.html"><i
+							class="fas fa-address-card"></i><span>Curriculum</span></a></li>
+				</ul>
 				<div class="text-center d-none d-md-inline">
 					<button class="btn rounded-circle border-0" id="sidebarToggle"
 						type="button"></button>
@@ -244,29 +244,26 @@
 											Photo</button>
 									</div>
 								</div>
-								
-						<div class="card shadow mb-5">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Biography</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form>
-                                        <div class="mb-3">
-                                        	<textarea
-                                                class="form-control" id="signature" rows="4"
-                                                name="biography"></textarea>
-                                         </div>
-                                        
-                                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Save
-                                                Settings</button></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-								
+								<div class="card-header py-3">
+										<p class="text-primary m-0 fw-bold">Biography</p>
+									</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-md-12">
+												<form>
+													<div class="mb-3">
+														<textarea class="form-control" id="signature" rows="4"
+															name="biography"></textarea>
+													</div>
+
+													<div class="mb-3">
+														<button class="btn btn-primary btn-sm" type="submit">Save
+															Settings</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
 							</div>
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
