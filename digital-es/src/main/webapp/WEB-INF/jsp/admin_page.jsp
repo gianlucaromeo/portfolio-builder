@@ -244,6 +244,29 @@
 											Photo</button>
 									</div>
 								</div>
+								
+						<div class="card shadow mb-5">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Biography</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form>
+                                        <div class="mb-3">
+                                        	<textarea
+                                                class="form-control" id="signature" rows="4"
+                                                name="biography"></textarea>
+                                         </div>
+                                        
+                                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Save
+                                                Settings</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+								
 							</div>
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
