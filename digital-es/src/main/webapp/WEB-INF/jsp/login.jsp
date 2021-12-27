@@ -55,7 +55,6 @@
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
     <script src="../../dashboard_assets/js/login.js"></script>
-    <script src="../../dashboard_assets/js/sign_up.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script> 
 	<script src="https://apis.google.com/js/client.js"></script>
 	<script src="https://apis.google.com/js/api:client.js"></script>

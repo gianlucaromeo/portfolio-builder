@@ -6,27 +6,31 @@ signUpForm = $("#loginForm");
 var username = $("#username");
 var password = $("#passwordInput");
 
-var fields = [
+var login_fields = [
 	username,
-	password,
+	password
 ];
 
 loginBtn.on("click", function(e) {
 
 	e.preventDefault();
 
-	fields.forEach(field => field.removeClass("is-invalid"));
+	login_fields.forEach(field => field.removeClass("is-invalid"));
 
-	var fieldsAreValid = true;
-	fields.forEach(field => {
+	var login_fieldsAreValid = true;
+	login_fields.forEach(field => {
 		if (field.val() == null || field.val() === "") {
+			console.log("Field " + field.val());
 			field.addClass("is-invalid");
-			fieldsAreValid = false;
+			login_fieldsAreValid = false;
+		} else {
+			console.log("field ok : " + field.val());
 		}
 	});
 
-	if (fieldsAreValid) {
-		sendData(fields);
+	if (login_fieldsAreValid) {
+		console.log("inseide")
+		sendData(login_fields);
 	}
 
 });
@@ -34,11 +38,11 @@ loginBtn.on("click", function(e) {
 
 var userLoginDataValidated = true;
 
-function sendData(fields) {
+function sendData(login_fields) {
 
 	let userData = {
-		username: fields[0].val(),
-		password: fields[1].val()
+		username: login_fields[0].val(),
+		password: login_fields[1].val()
 	}
 
 	/*
@@ -63,14 +67,14 @@ function sendData(fields) {
 
 		console.log(data.username);
 		console.log(data.password);
-		fields.forEach(field => field.removeClass("is-invalid"));
+		login_fields.forEach(field => field.removeClass("is-invalid"));
 
 		removeErrorLabels();
 
 		userLoginDataValidated = true;
 		checkPasswordValidation(data);
 		checkUsernameValidation(data);
-		
+	
 		if (userLoginDataValidated) {
 			loginForm.submit();
 		}

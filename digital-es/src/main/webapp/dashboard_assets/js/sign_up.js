@@ -5,7 +5,7 @@
  **/
 hideErrorsDiv();
 
-signUpBtn = $("#signUpBtn"); // Check fields..
+signUpBtn = $("#signUpBtn"); // Check signup_fields..
 signUpForm = $("#signUpForm"); // ..then submit the form
 
 var firstName = $("#firstName");
@@ -16,7 +16,7 @@ var username = $("#username");
 var password = $("#passwordInput");
 var repeatPassword = $("#repeatPasswordInput");
 
-var fields = [
+let signup_fields = [
 	firstName,
 	lastName,
 	dateOfBirth,
@@ -31,21 +31,21 @@ signUpBtn.on("click", function(e) {
 
 	e.preventDefault();
 
-	fields.forEach(field => field.removeClass("is-invalid"));
+	signup_fields.forEach(field => field.removeClass("is-invalid"));
 
-	// Check all the fields are not null and/or empty.
-	var fieldsAreValid = true;
-	fields.forEach(field => {
+	// Check all the signup_fields are not null and/or empty.
+	var signup_fieldsAreValid = true;
+	signup_fields.forEach(field => {
 		if (field.val() == null || field.val() === "") {
 			field.addClass("is-invalid");
-			fieldsAreValid = false;
+			signup_fieldsAreValid = false;
 		}
 	});
 
 	if (checkPasswordMatch()) {
-		if (fieldsAreValid) {
+		if (signup_fieldsAreValid) {
 			// Send data to Server and check if the User can be registered
-			sendData(fields);
+			sendData(signup_fields);
 		}	
 	}
 
@@ -54,15 +54,15 @@ signUpBtn.on("click", function(e) {
 
 var userDataValidated = true;
 
-function sendData(fields) {
+function sendData(signup_fields) {
 
 	let userData = {
-		firstName: fields[0].val(),
-		lastName: fields[1].val(),
-		dateOfBirth: fields[2].val(),
-		email: fields[3].val(),
-		username: fields[4].val(),
-		password: fields[5].val()
+		firstName: signup_fields[0].val(),
+		lastName: signup_fields[1].val(),
+		dateOfBirth: signup_fields[2].val(),
+		email: signup_fields[3].val(),
+		username: signup_fields[4].val(),
+		password: signup_fields[5].val()
 	}
 
 	/*
@@ -86,7 +86,7 @@ function sendData(fields) {
 
 	}).done(function(data) {
 
-		fields.forEach(field => field.removeClass("is-invalid"));
+		signup_fields.forEach(field => field.removeClass("is-invalid"));
 
 		removeErrorsDivs();
 		hideErrorsDiv();

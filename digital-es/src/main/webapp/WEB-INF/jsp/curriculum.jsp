@@ -155,7 +155,7 @@
 					<div class="row mb-3" id="curriculumExperiencesContainer">
 
 						<!-- A CURRICULUM EXPERIENCE -->
-						<div class="col-12 col-lg-6">
+						<div class="col-12 col-lg-6" id="experienceId">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
 									<h6 class="text-primary fw-bold m-0">Experience</h6>
@@ -168,7 +168,7 @@
 											</div>
 											<input class="form-control" type="text" id="experienceTitle"
 												placeholder="Experience" name="experience_title"
-												value="Web Developer">
+												value="The title of the experience goes here...">
 										</div>
 										<div id="datePickerFromContainer"
 											class="col-12 col-sm-6 mb-3 md-form md-outline input-with-post-icon datepicker">
@@ -181,7 +181,7 @@
 											class="col-12 col-sm-6 mb-3 md-form md-outline input-with-post-icon datepicker">
 											<label class="datePickerLabel" for="datePicker"><strong>To</strong></label>
 											</i> <input placeholder="Select date" type="date"
-												id="datePickerFrom" name="experienceDateTo"
+												id="datePickerTo" name="experienceDateTo"
 												class="form-control form-control-user"> <input
 												class="form-check-input" type="checkbox" id="toPresent"><label
 												class="form-check-label" for="toPresent"><strong>Present</strong></label>
@@ -198,7 +198,7 @@
 											<div class="row">
 												<h4 class="small fw-bold">Type</h4>
 											</div>
-											<select class="form-select" aria-label="Work">
+											<select class="form-select" aria-label="Work" id="experienceType">
 												<option value="1">Work</option>
 												<option value="2">Education</option>
 											</select>
@@ -212,9 +212,10 @@
 										</div>
 										<div class="row">
 											<div class="col-12">
-												<button class="btn btn-primary btn-sm" type="submit">Edit</button>
-												<button class="btn btn-danger btn-sm" type="submit">Delete</button>
-												<button class="btn btn-primary btn-sm" type="submit">Save
+												<button class="btn btn-primary btn-sm" type="submit" id="editBtn">Edit</button>
+												<button class="btn btn-danger btn-sm" type="submit" id="deleteBtn">Delete</button>
+												<button class="btn btn-danger btn-sm" type="submit" id="discardChangesBtn">Discard changes</button>
+												<button class="btn btn-primary btn-sm" type="submit" id="saveBtn">Save
 													Settings</button>
 											</div>
 										</div>
@@ -252,7 +253,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/admin_page.js"></script>
+	<script src="../../dashboard_assets/js/profile.js"></script>
+	<script src="../../dashboard_assets/js/curriculum.js"></script>
 	
 </body>
 
