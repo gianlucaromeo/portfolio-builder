@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Profile - PB</title>
+<title>Posts - PB</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -16,9 +16,12 @@
 	href="../../dashboard_assets/fonts/font-awesome.min.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/fonts/fontawesome5-overrides.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/jquery-ui.min.css">
 </head>
 
 <body id="page-top">
+
 	<div id="wrapper">
 		<nav
 			class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
@@ -61,9 +64,9 @@
 							id="sidebarToggleTop" type="button">
 							<i class="fas fa-bars"></i>
 						</button>
-						
+
 						<ul class="navbar-nav flex-nowrap ms-auto">
-							
+
 							<li class="nav-item dropdown no-arrow mx-1">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
@@ -109,7 +112,7 @@
 									</div>
 								</div>
 							</li>
-							
+
 							<div class="d-none d-sm-block topbar-divider"></div>
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
@@ -137,9 +140,9 @@
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">Profile</h3>
+					<h3 class="text-dark mb-4">Posts</h3>
 					<div class="row mb-3">
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card mb-3">
 								<div class="card-body shadow">
 									<div class="text-center">
@@ -147,280 +150,57 @@
 											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
 											width="160" height="160">
 										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="button">Change
-												Photo</button>
+											<button class="btn btn-primary btn-sm" type="button">Add
+												a photo</button>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<label class="form-label" for="biography"><strong>Biography</strong></label>
+
 											<form>
+												<label class="form-label" for="title"><strong>Title</strong></label>
 												<div class="mb-3">
-													<textarea class="form-control" id="signature" rows="4"
-														name="biography"></textarea>
+													<input class="form-control" type="text" id="username"
+														placeholder="Title..." name="title">
+												</div>
+												<label class="form-label" for="description"><strong>Description</strong></label>
+												<div class="mb-3">
+													<textarea class="form-control" id="description" rows="4"
+														placeholder="Description..." name="description"></textarea>
 												</div>
 
+
 												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
-														Settings</button>
+													<button class="btn btn-primary btn-sm" type="submit">Publish
+														Post</button>
 												</div>
 											</form>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="text-primary fw-bold m-0">Your 3 main Skills</h6>
-								</div>
-								<div class="card-body">
-
-									<!--  A SKILL -->
-									<div class="row">
-										<div class="col-8 mb-3">
-											<div class="row">
-												<h4 class="small fw-bold">Skill</h4>
-											</div>
-											<input class="form-control" type="text" id="firstName"
-												placeholder="First Name" name="first_name" value="Java">
-										</div>
-										<div class="col-4 mb-3">
-											<div class="row">
-												<h4 class="small fw-bold">Level (0-100)</h4>
-											</div>
-											<input class="form-control" type="text" id="firstName"
-												placeholder="First Name" name="first_name" value="20">
-										</div>
-
-									</div>
-									<div class="progress progress-sm mb-3">
-										<div class="progress-bar bg-danger" aria-valuenow="20"
-											aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-											<span class="visually-hidden">20%</span>
-										</div>
-									</div>
-									<hr />
-									<!--  END OF A SKILL -->
 
 
-									<h4 class="small fw-bold">
-										Account setup<span class="float-end">Complete!</span>
-									</h4>
-									<div class="progress progress-sm mb-3">
-										<div class="progress-bar bg-success" aria-valuenow="100"
-											aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-											<span class="visually-hidden">100%</span>
-										</div>
-									</div>
-
-									<div class="mb-3">
-										<button class="btn btn-primary btn-sm" type="submit">Save
-											Settings</button>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-8">
-							<div class="row mb-3 d-none">
-								<div class="col">
-									<div class="card textwhite bg-primary text-white shadow">
-										<div class="card-body">
-											<div class="row mb-2">
-												<div class="col">
-													<p class="m-0">Peformance</p>
-													<p class="m-0">
-														<strong>65.2%</strong>
-													</p>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-rocket fa-2x"></i>
-												</div>
-											</div>
-											<p class="text-white-50 small m-0">
-												<i class="fas fa-arrow-up"></i>&nbsp;5% since last month
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card textwhite bg-success text-white shadow">
-										<div class="card-body">
-											<div class="row mb-2">
-												<div class="col">
-													<p class="m-0">Peformance</p>
-													<p class="m-0">
-														<strong>65.2%</strong>
-													</p>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-rocket fa-2x"></i>
-												</div>
-											</div>
-											<p class="text-white-50 small m-0">
-												<i class="fas fa-arrow-up"></i>&nbsp;5% since last month
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
 							<div class="row">
 								<div class="col">
 									<div class="card shadow mb-3">
 										<div class="card-header py-3">
-											<p class="text-primary m-0 fw-bold">User Settings</p>
+											<p class="text-primary m-0 fw-bold">Published Posts</p>
 										</div>
 										<div class="card-body">
 											<form>
-												<div class="row">
-													<div class="col">
-														<div class="mb-3">
-															<label class="form-label" for="username"><strong>Username</strong></label><input
-																class="form-control" type="text" id="username"
-																placeholder="username" name="username"
-																value="${username}">
-														</div>
-													</div>
-													<div class="col">
-														<div class="mb-3">
-															<label class="form-label" for="email"><strong>Email
-																	Address</strong></label><input class="form-control" type="email"
-																id="email" placeholder="your_email@example.com"
-																name="email" value="${email}">
-														</div>
-													</div>
+												<div class="col-md-12 col-lg-12 col-sm-12 text-center" id="postsSection">
 												</div>
-												<div class="row">
-													<div class="col">
-														<div class="mb-3">
-															<label class="form-label" for="first_name"><strong>First
-																	Name</strong></label><input class="form-control" type="text"
-																id="firstName" placeholder="First Name"
-																name="first_name" value="${firstName}">
-														</div>
-													</div>
-													<div class="col">
-														<div class="mb-3">
-															<label class="form-label" for="last_name"><strong>Last
-																	Name</strong></label><input class="form-control" type="text"
-																id="lastName" placeholder="Last Name" name="last_name"
-																value="${lastName}">
-														</div>
-													</div>
-												</div>
-
-
-												<div class="row">
-													<div class="col">
-														<div class="mb-3">
-															<div id="datePickerContainer"
-																class="md-form md-outline input-with-post-icon datepicker">
-																<label class="datePickerLabel" for="datePicker"><strong>Date
-																		of birth</strong></label> </i> <input placeholder="Select date" type="date"
-																	id="datePicker" name="date_of_birth"
-																	class="form-control form-control-user"
-																	value="${dateOfBirth}">
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
-														Settings</button>
-												</div>
+													
 											</form>
 										</div>
 									</div>
-									<div class="card shadow">
-										<div class="card-header py-3">
-											<p class="text-primary m-0 fw-bold">Contact Settings</p>
-										</div>
-										<div class="card-body">
-											<form>
-												<div class="mb-3">
-													<label class="form-label" for="contact_email"><strong>Contact
-															email</strong></label><input class="form-control" type="text"
-														id="contactEmail" placeholder="" name="contact_email">
-												</div>
-												<div class="row">
-													<div class="col">
-														<div class="mb-3">
-															<label class="form-label" for="city"><strong>Phone
-																	number</strong></label><input class="form-control" type="text"
-																id="phoneNumber" placeholder="" name="phone_number">
-														</div>
-													</div>
-													<div class="col">
-														<div class="mb-3">
-															<label class="form-label" for="sec_phone_number"><strong>Phone number (2)</strong></label><input class="form-control" type="text"
-																id="secPhoneNumber" placeholder=""
-																name="sec_phone_number">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-4">
-															<div class="mb-3 text-center">
-																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-twitter"></i></strong></label><input class="form-control" type="text"
-																	id="secPhoneNumber" placeholder=""
-																	name="sec_phone_number">
-															</div>
-														</div>
-														<div class="col-4">
-															<div class="mb-3 text-center">
-																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-facebook"></i></strong></label><input class="form-control" type="text"
-																	id="secPhoneNumber" placeholder=""
-																	name="sec_phone_number">
-															</div>
-														</div>
-														<div class="col-4">
-															<div class="mb-3 text-center">
-																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-instagram"></i></strong></label><input class="form-control" type="text"
-																	id="secPhoneNumber" placeholder=""
-																	name="sec_phone_number">
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button>
-												</div>
-											</form>
-										</div>
-									</div>
+
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="card shadow mb-5">
-						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">Forum Settings</p>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-6">
-									<form>
-										<div class="mb-3">
-											<label class="form-label" for="signature"><strong>Signature</strong><br></label>
-											<textarea class="form-control" id="signature" rows="4"
-												name="signature"></textarea>
-										</div>
-										<div class="mb-3">
-											<div class="form-check form-switch">
-												<input class="form-check-input" type="checkbox"
-													id="formCheck-1"><label class="form-check-label"
-													for="formCheck-1"><strong>Notify me about
-														new replies</strong></label>
-											</div>
-										</div>
-										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="submit">Save
-												Settings</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 			<footer class="bg-white sticky-footer">
@@ -440,7 +220,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/admin_page.js"></script>
+	<script src="../../dashboard_assets/js/posts.js"></script>
+	<script src="../../dashboard_assets/js/jquery-ui.min.js"></script>	
+	
 </body>
 
 </html>
