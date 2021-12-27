@@ -136,6 +136,36 @@ public class AdminPageController {
 
 	}
 
-	
+
+	@GetMapping("/posts")
+	public String showPostsPageGET(HttpServletResponse resp, HttpServletRequest req) {
+
+		String username = null;
+		Cookie[] cookies = req.getCookies();
+
+		for (Cookie c : cookies) {
+
+			if (c.getName().equals("logged_username")) {
+
+				username = c.getValue();
+				Cookie cookie = new Cookie("logged_username", username);
+				cookie.setMaxAge(60 * 60 * 24);
+
+				resp.addCookie(cookie);
+//				resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+//				resp.setHeader("Location", "/dashboard/curriculum"); 
+
+			}
+
+		}
+
+		if (username == null) {
+			return "error_page";
+		}
+
+		return "posts";
+
+	}
+
 
 }
