@@ -52,7 +52,7 @@ public class LoginREST {
 			    
 			    resp.addCookie(cookie);
 				resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-				resp.setHeader("Location", "/dashboard/admin-page"); 
+				resp.setHeader("Location", "/dashboard/profile"); 
 				
 			}
 		}

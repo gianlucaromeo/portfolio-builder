@@ -10,7 +10,7 @@ public class DashboardHomePageController {
 
 	@GetMapping(value = {"/login", "/", ""})
 	public String showLoginPage() {
-		return "dashboard_login";
+		return "login";
 	}
 	
 	@GetMapping("sign_up")

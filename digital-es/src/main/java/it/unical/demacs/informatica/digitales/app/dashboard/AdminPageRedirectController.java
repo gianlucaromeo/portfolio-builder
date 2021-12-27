@@ -20,7 +20,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 @RequestMapping("/dashboard")
 public class AdminPageRedirectController {
 
-	@PostMapping("/admin-page")
+	@PostMapping("/profile")
 	public String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
 		Cookie[] cookies = req.getCookies();
@@ -35,11 +35,11 @@ public class AdminPageRedirectController {
 		
 		fetchUserData(req, username);
 		
-		return "admin_page";
+		return "profile";
 		
 	}
 	
-	@GetMapping("/admin-page")
+	@GetMapping("/profile")
 	public String goToUserAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
 		Cookie[] cookies = req.getCookies();
@@ -48,7 +48,7 @@ public class AdminPageRedirectController {
 			if (c.getName().equals("logged_username")) {
 				String username = c.getValue();
 				fetchUserData(req, username);
-				return "admin_page";
+				return "profile";
 			}
 		}
 		
@@ -70,9 +70,9 @@ public class AdminPageRedirectController {
 		
 	}
 	
-	@GetMapping("/admin")
+	@GetMapping("/profile_test")
 	public String testAdminPage(HttpServletRequest req, String username) throws JsonSyntaxException, JsonIOException, IOException {
-		return "admin_page";
+		return "profile";
 	}
 
 	
