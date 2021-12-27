@@ -74,6 +74,12 @@ public class AdminPageRedirectController {
 	public String testAdminPage(HttpServletRequest req, String username) throws JsonSyntaxException, JsonIOException, IOException {
 		return "profile";
 	}
+	
+	@GetMapping("/posts_test")
+	public String testPostsPage(HttpServletRequest req, String username) throws JsonSyntaxException, JsonIOException, IOException {
+		return "posts";
+	}
+
 
 	
 }
