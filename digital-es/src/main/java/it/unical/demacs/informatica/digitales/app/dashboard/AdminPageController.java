@@ -79,6 +79,27 @@ public class AdminPageController {
 	public String testPostsPage(HttpServletRequest req, String username) throws JsonSyntaxException, JsonIOException, IOException {
 		return "posts";
 	}
+	
+	@GetMapping("/projects_test")
+	public String testProjectsPage(HttpServletRequest req, String username) throws JsonSyntaxException, JsonIOException, IOException {
+		return "projects";
+	}
+	
+	@GetMapping("/projects")
+	public String showProjectsPage(HttpServletRequest req, HttpServletResponse resp) {
+		
+		Cookie[] cookies = req.getCookies();
+		
+		for (Cookie c : cookies) {
+			if (c.getName().equals("logged_username")) {
+				String username = c.getValue();
+				fetchUserData(req, username);
+				return "projects";
+			}
+		}
+		
+		return "error_page";
+	}
 
 	@GetMapping("/curriculum")
 	public String showCurriculumPage() {
