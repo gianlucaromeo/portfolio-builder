@@ -67,6 +67,10 @@
 						<ul class="navbar-nav flex-nowrap ms-auto">
 							
 							<li class="nav-item dropdown no-arrow mx-1">
+							<button id="projectBtn" class="btn btn-primary btn-sm" type="submit">Add new Project</button>
+							</li>
+							
+							<li class="nav-item dropdown no-arrow mx-1">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
 										data-bs-toggle="dropdown" href="#"><span
@@ -116,7 +120,7 @@
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
-										data-bs-toggle="dropdown" href="#"><span
+										data-bs-toggle="dropdown" href="#"><span id="username_span"
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
 										src="assets/img/avatars/avatar1.jpeg"></a>
@@ -141,7 +145,7 @@
 			</div>
 			
 					<div class="container-fluid">
-					<div class="row mb-3">
+					<div id="firstProject" class="row mb-3">
 						<!-- INIZIO PROJECT TEMPLATE -->
 						<div class="col-lg-4">
 							<div class="card mb-3">
@@ -221,11 +225,6 @@
 						</div>
 						<!-- FINE PROJECT TEMPLATE -->
 						
-						<div class="col lg-4">
-							<button class="btn btn-primary btn-sm" type="submit">Add new Project</button>
-						</div>
-						
-						
 					</div>
 				</div>
 				
@@ -237,4 +236,5 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
+	<script src="../../dashboard_assets/js/projects.js"></script>
 </body>
