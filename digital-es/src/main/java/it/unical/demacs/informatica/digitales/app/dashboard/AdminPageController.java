@@ -18,7 +18,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 
 @Controller
 @RequestMapping("/dashboard")
-public class AdminPageRedirectController {
+public class AdminPageController {
 
 	@PostMapping("/profile")
 	public String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -80,6 +80,10 @@ public class AdminPageRedirectController {
 		return "posts";
 	}
 
+	@GetMapping("/curriculum")
+	public String showCurriculumPage() {
+		return "curriculum";
+	}
 
 	
 }
