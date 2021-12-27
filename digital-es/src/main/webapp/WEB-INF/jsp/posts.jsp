@@ -41,7 +41,7 @@
 					<li class="nav-item"><a class="nav-link" href="index.html"><i
 							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
+						href="profile"><i class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="posts"><i
