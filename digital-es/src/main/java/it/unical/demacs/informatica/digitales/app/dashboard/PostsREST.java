@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -23,7 +24,7 @@ import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-@Controller
+@RestController
 public class PostsREST {
 	@PostMapping("/delete_post")
 	public void deletePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
