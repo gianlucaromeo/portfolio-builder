@@ -1,8 +1,28 @@
-/**
- * 
- */
 
-function start(){
+var deleteButton= `<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="deleteId${id}">
+  Delete
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to delete this post?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="confirmDelete${id}">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+function start() {
 	$.ajax({
 
 		url: "/get_posts_data_action",
@@ -16,21 +36,19 @@ function start(){
 	});
 	//addPost(post);
 
-	
 }
-function addPost(post){
-	let id=post.id;
-	let title= post.title;
-	let description= post.description;
-	let imagePath=post.imagePath;
-	let publicationDate= post.publicationDate;
-	let lastEditDate= post.lastEditDate;
-	let refLink= post.refLink;
+function addPost(post) {
+	let id = post.id;
+	let title = post.title;
+	let description = post.description;
+	let imagePath = post.imagePath;
+	let publicationDate = post.publicationDate;
+	let lastEditDate = post.lastEditDate;
+	let refLink = post.refLink;
 
 	$("#postsSection").append(`<div class="card border-0" id="post${id}">
-		<div class="text-left mb-3"  style="text-align: right;" >
-		<button class="btn btn-primary btn-sm" type="submit" id="modifyId${id}">Modify</button>
-		<button class="btn btn-danger btn-sm" type="submit" id="deleteId${id}" >Delete</button>
+		<div class="text-left mb-3" style="text-align: right;" >
+		<button class="btn btn-primary btn-sm" type="submit" id="modifyId${id}">Modify</button>`+ deleteButton+ `
 		</div>
 		<div class= "col-12">
 		<img src="${imagePath}" height="150" class="img-responsive" />
@@ -45,9 +63,8 @@ function addPost(post){
 		</div >
 		</div >
 		<hr/>`);
-		
-	
-	$("#deleteId"+id).click(function(e) {
+
+	$("#deleteId" + id).click(function(e) {
 		e.preventDefault();
 		var answer = window.confirm("Are you sure to delete this post?");
 		if (answer) {
@@ -63,12 +80,10 @@ function addPost(post){
 			}).done(function() {
 
 			});
-			
 			$("#post" + id).remove();
 		}
 
 	});
-
 
 	$("#modifyId" + id).click(function(event) {
 		event.preventDefault();
