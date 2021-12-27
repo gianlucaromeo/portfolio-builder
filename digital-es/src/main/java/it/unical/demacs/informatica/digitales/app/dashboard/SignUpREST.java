@@ -54,7 +54,7 @@ public class SignUpREST {
 		    
 		    resp.addCookie(cookie);
 			resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-			resp.setHeader("Location", "/dashboard/profile");
+			resp.setHeader("Location", "/dashboard/login");
 			
 		} else {
 			System.out.println(res);

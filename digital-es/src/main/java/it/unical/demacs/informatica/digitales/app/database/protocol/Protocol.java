@@ -14,6 +14,9 @@ public class Protocol {
 	public final static String LOGIN_ERROR = "login error"; // Generic
 	public final static String USERNAME_NOT_VALID_ERROR = "username not valid error";
 	public final static String LOGIN_PASSWORD_ERROR = "login password error";
+
+	/* CURRICULUM EXPERIENCES */
+	public final static String NO_USER_EXPERIENCES = "no curriculum experiences";
 	
 	
 }

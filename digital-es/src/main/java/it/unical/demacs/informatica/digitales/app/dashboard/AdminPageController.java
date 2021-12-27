@@ -123,8 +123,6 @@ public class AdminPageController {
 				cookie.setMaxAge(60 * 60 * 24);
 
 				resp.addCookie(cookie);
-//				resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-//				resp.setHeader("Location", "/dashboard/curriculum"); 
 
 			}
 

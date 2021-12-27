@@ -20,6 +20,7 @@ import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumExperienceDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 @RestController
 public class CurriculumREST {
@@ -27,14 +28,13 @@ public class CurriculumREST {
 	@PostMapping("/get_curriculum_data_action")
 	public String getCurriculumDataAction(HttpServletRequest req, HttpServletResponse resp) {
 		
-		System.out.println("req.");
-		
 		Gson gson = new Gson();
 		
 		Cookie[] cookies = req.getCookies();
 		for (Cookie c : cookies) {
-			System.out.println("Cookie: " + c.getName());
+
 			if (c.getName().equals("logged_username")) {
+				
 				String username = c.getValue();
 				User user = UserDAOImpl.getInstance().findByUsername(username);	
 				
@@ -45,10 +45,11 @@ public class CurriculumREST {
 				System.out.println(curriculumExperiencesToJSON);
 				
 				return curriculumExperiencesToJSON;
+				
 			}
 		}
 		
-		return "Hello";
+		return Protocol.NO_USER_EXPERIENCES;
 		
 	}
 	

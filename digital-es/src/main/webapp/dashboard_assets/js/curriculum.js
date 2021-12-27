@@ -24,14 +24,18 @@ window.onload = function() {
 	$.ajax({
 
 		url: "/get_curriculum_data_action",
-		//contentType: "application/json",
-		// data: JSON.stringify(""),
 		type: "post",
 		dataType: "json",
 
 	}).done(function(data) {
 
 		console.log(data);
+
+		if (data.length == 0) {
+			console.log("no data");
+		} else {
+			
+		}
 
 	});
 	
@@ -54,8 +58,6 @@ $("#editBtn").on("click", function(e) {
 	showDiscardChangesBtn();
 	
 });
-
-
 
 
 /* ======================== SHOW/HIDE CONTENT ======================== */
