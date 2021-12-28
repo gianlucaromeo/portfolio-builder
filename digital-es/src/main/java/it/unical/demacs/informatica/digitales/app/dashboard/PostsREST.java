@@ -37,6 +37,19 @@ public class PostsREST {
 
 	}
 
+	@PostMapping("/update_post")
+	public void updatePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Post post = new Post();
+		post = gson.fromJson(req.getReader(), Post.class);
+		Post originalPost= PostDAOImpl.getInstance().findById(post.getId());
+		
+		post.setPubblicationDate(originalPost.getPubblicationDate());
+		post.setUserId(originalPost.getUserId());
+		System.out.println(post);
+		PostDAOImpl.getInstance().update(post);
+
+	}
 	@PostMapping("/get_posts_data_action")
 	public String getPostsDataAction(HttpServletRequest req, HttpServletResponse resp) {
 		Gson gson = new Gson();

@@ -1,3 +1,10 @@
 @charset "UTF-8";
 
-label {display:block; width:x; height:y; text-align:left;}
+#postsSection{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+hr{
+  border: 2px solid;
+}
