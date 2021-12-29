@@ -46,8 +46,8 @@
 				<ul class="navbar-nav text-light" id="accordionSidebar">
 					<li class="nav-item"><a class="nav-link" href="index.html"><i
 							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="profile"><i class="fas fa-user"></i><span>Profile</span></a></li>
+					<li class="nav-item"><a class="nav-link active" href="profile"><i
+							class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="posts"><i
@@ -152,32 +152,45 @@
 							<div class="card mb-3">
 								<div class="card-body shadow">
 									<div class="text-center">
-										<img class="rounded-circle mb-3 mt-4"
-											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
-											width="160" height="160">
-										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="button">Add
-												a photo</button>
+										<img 
+											src="undefined"
+											width="160" height="160" id="newPostImage">
+										<div class="row" style="margin-top: 20px;"
+											id="divNewImage">
+											<div class="text-center"> 
+											<input type="file" accept="image/jpg, image/png"
+												id="newImageInput" class="editPhotoChooser col-12" hidden /> <label
+												id="newImageLabel" for="newImageInput" class="labelImage">
+												<i class="material-icons"> add_photo_alternate </i> &nbsp
+												New image
+											</label>
+											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 
 											<form>
-												<label class="form-label" for="title"><strong>Title</strong></label>
+												<label class="form-label" for="newPostTitle"><strong>Title</strong></label>
 												<div class="mb-3">
-													<input class="form-control" type="text" id="username"
-														placeholder="Title..." name="title">
+													<input class="form-control" type="text" id="newPostTitle"
+														placeholder="Title..." name="new_title">
 												</div>
-												<label class="form-label" for="description"><strong>Description</strong></label>
+												<label class="form-label" for="newPostDescription"><strong>Description</strong></label>
 												<div class="mb-3">
-													<textarea class="form-control" id="description" rows="4"
-														placeholder="Description..." name="description"></textarea>
+													<textarea class="form-control" id="newPostDSescription"
+														rows="4" placeholder="Description..." name="new_description"></textarea>
+												</div>
+												
+												<label class="form-label" for="newPostRefLink"><strong>Title</strong></label>
+												<div class="mb-3">
+													<input class="form-control" type="text" id="newPostRefLink"
+														placeholder="Reference link..." name="new_reference_link">
 												</div>
 
 
 												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Publish
+													<button class="btn btn-primary btn-sm" id="addNewPostBtn" type="submit">Publish
 														Post</button>
 												</div>
 											</form>
@@ -187,7 +200,7 @@
 							</div>
 
 
-							<div class="row">
+							<div class="row" id="postsContainer">
 								<div class="col">
 									<div class="card shadow mb-3">
 										<div class="card-header py-3">
@@ -195,9 +208,9 @@
 										</div>
 										<div class="card-body">
 											<form>
-												<div class="col-md-12 col-lg-12 col-sm-12 text-center" id="postsSection">
-												</div>
-													
+												<div class="col-md-12 col-lg-12 col-sm-12 text-center"
+													id="postsSection"></div>
+
 											</form>
 										</div>
 									</div>
@@ -227,8 +240,8 @@
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
 	<script src="../../dashboard_assets/js/posts.js"></script>
-	<script src="../../dashboard_assets/js/jquery-ui.min.js"></script>	
-	
+	<script src="../../dashboard_assets/js/jquery-ui.min.js"></script>
+
 </body>
 
 </html>

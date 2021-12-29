@@ -1,4 +1,4 @@
-
+//é***************************************************** FUNZIONE START *******************************************//
 /**
 * Chiedo al rest controller tutti i post, lui me li invia correttamente poichè
 * abbiamo solo il cookie dell'utente loggato (solo lui può essere in questa dashboard
@@ -8,6 +8,8 @@ function start() {
 	//setto la grandezza del div che contiene i posts
 	var h = $(window).height();
 	$("#postsSection").height(h);
+	addEventOnNewPostImage();
+	addEventOnAddNewPost();
 
 	$.ajax({
 
@@ -24,7 +26,7 @@ function start() {
 			console.log("no data");
 		} else {
 			posts.forEach(post => addPost(post));
-			posts.forEach(post => console.log(post));
+			//posts.forEach(post => console.log(post));
 
 		}
 
@@ -36,6 +38,14 @@ function start() {
 }
 
 
+//é*****************************************************END  FUNZIONE START *******************************************//
+//é*****************************************************END  FUNZIONE START *******************************************//
+
+
+
+
+
+//************************************************************************CREAZIONE POST NELL'HTML**************************************************' */
 /**
 * aggiungo i post alla pagina in modo dinamico
 * per ogni post che inserisco vado a settare read only i suoi campi
@@ -43,7 +53,7 @@ function start() {
 * 	
  */
 function addPost(post) {
-	appendPost(post);
+	prependPost(post);
 	refactPostFields(post.id, true);
 	setEventOnDelete(post.id);
 	setEventOnEdit(post.id);
@@ -60,7 +70,12 @@ function addPost(post) {
 * 	
  */
 function appendPost(post) {
-
+	$("#postsSection").append(createPost(post));
+}
+function prependPost(post) {
+	$("#postsSection").prepend(createPost(post));
+}
+function createPost(post){
 	let id = post.id;
 	let title = post.title;
 	let description = post.description;
@@ -70,8 +85,7 @@ function appendPost(post) {
 	let refLink = post.refLink;
 
 	console.log(post.pubblicationDate);
-
-	$("#postsSection").append(`<div class="card border-0" id="post${id}">
+	return `<div class="card border-0" id="post${id}">
 								<div class="text-left mb-3" style="text-align: right;">
 									<button class="btn btn-primary btn-sm" id="editId${id}">Edit</button>
 									`+ getDeleteButton(id) + `
@@ -82,13 +96,14 @@ function appendPost(post) {
 											id="postImageId${id}" />
 									</div>
 								</div>
-								<div class "row" style="margin-top: 20px;">
-									
+								<div class="row" style="margin-top: 20px;">
+									<div class="text-center"> 
 									<input type="file" accept="image/jpg, image/png" id="editPhotoId${id}" class="editPhotoChooser" hidden/>
 									<label id="editPhotoLabelId${id}" for="editPhotoId${id}" class="labelImage">
 									<i class="material-icons"> add_photo_alternate </i> &nbsp
 									New image
 									</label>
+									</div>
 								</div>
 							
 								<div class="card-body">
@@ -119,13 +134,18 @@ function appendPost(post) {
 								<button class="btn btn-primary btn-sm" type="submit" id="saveBtn${id}">Save
 									Settings</button>
 								<hr />
-							</div>`);
-
-
+							</div>`;
 }
 
 
 
+//************************************************************************END CREAZIONE POST NELL'HTML**************************************************' */
+//************************************************************************************************+****************************************************' */
+
+
+
+
+//************************************************************************Gestione campi dei post e bottoni di edit ed eliminazione POST NELL'HTML**************************************************' */
 /**
 * se value è true allora gli input field devono essere nascosti, altrimenti devo mostrarli (se ho cliccato su edit è false)
 * 
@@ -137,6 +157,14 @@ function refactPostFields(id, value) {
 	$("#postTitleId" + id).attr('readonly', value);
 	$("#postDescriptionId" + id).attr('readonly', value);
 	$("#postLinkRefId" + id).attr('readonly', value);
+	if($("#postImageId" + id).attr('src')==='undefined'){
+		$("#postImageId" + id).hide();
+		
+	}
+	if($("#newPostImage").attr('src')==='undefined'){
+		$("#newPostImage").hide();
+		
+	}
 
 }
 
@@ -158,6 +186,93 @@ function refactButton(id, value) {
 
 }
 
+function resetFieldsNewPost(){
+	$("#newPostImage").attr("src", "undefined");
+	$("#newPostTitle").val("");
+	$("#newPostDSescription").val("");
+	$("#newPostRefLink").val("");
+}
+
+function addEventOnNewPostImage(){
+	const imageInput=document.querySelector("#newImageInput");
+	var newImage="";
+	imageInput.addEventListener("change", function(){
+		const reader= new FileReader();
+		reader.addEventListener("load", ()=> {
+			newImage=reader.result;
+		
+			document.querySelector("#newPostImage").src=newImage;	
+			
+		});
+		reader.readAsDataURL(this.files[0]);
+		
+		$("#newPostImage").show();
+	});
+	
+}
+
+function addEventOnAddNewPost(){
+	$("#newPostImage").hide()
+	
+	$("#addNewPostBtn").click(function(e) {
+		e.preventDefault();
+		
+		var canvas = document.createElement("canvas");
+		context = canvas.getContext('2d');
+
+
+		base_image = new Image();
+		base_image.src = $("#newPostImage").attr("src");
+		base_image.onload = function() {
+			context.drawImage(base_image, 100, 100);
+			
+		}
+		
+		console.log(base_image);
+
+		
+		
+		var image64 =canvas.toDataURL();
+		
+		var date= getCurrentDate();
+		const newPost = {
+			id: -1,
+			title: $("#newPostTitle").val(),
+			description: $("#newPostDSescription").val(),
+			picture: $("#newPostImage").attr("src"),
+			pubblicationDate: date,
+			lastEditDate: "0-0-0",
+			refLink: $("#newPostRefLink").val(),
+			userId: -1
+		};
+		
+		
+
+		$.ajax({
+
+			url: "/create_post",
+			contentType: "application/json",
+			data: JSON.stringify(newPost),
+			type: "post",
+			dataType: "json",
+
+		}).done(function(data) {
+			
+			console.log(data);
+			if(data==="error"){
+				
+			}else{
+				$("#postsSection").prepend(createPost(data));
+				resetFieldsNewPost();
+				refactPostFields(data.id, true);
+				refactButton(data.id, true);
+			}
+
+
+		});
+
+	});
+}
 
 /**
 *  prendo il bottone di eliminazione che ha ogni post 
@@ -253,6 +368,7 @@ function setEventOnSave(postId) {
 			userId: -1
 		};
 
+		var newPost="";
 		$.ajax({
 
 			url: "/update_post",
@@ -261,14 +377,24 @@ function setEventOnSave(postId) {
 			type: "post",
 			dataType: "json",
 
-		}).done(function() {
-
+		}).done(function(data) {
+			if(data==="error"){
+				
+			}else{
+				$("#postId" + data.id).remove()
+				let newEditDate = "Last edit date: " + date;
+				$("#lastEditDateLabelId" + data.id).text(newEditDate);
+				$("#postsSection").prepend(createPost(data));
+				refactPostFields(data.id, true);
+				refactButton(data.id, true);
+			}
 
 		});
 
+		
+
 		//modifico in runtime la data di ultima modifica
-		let newEditDate = "Publication date: " + date;
-		$("#lastEditDateLabelId" + postId).text(newEditDate);
+		
 
 		refactPostFields(postId, true);
 		refactButton(postId, true);
@@ -292,24 +418,12 @@ function setEventChangePhoto(id) {
 			
 		});
 		reader.readAsDataURL(this.files[0]);
-		
-		
+		$("#postImageId"+id).show();
 	});
 	
 
 }
 
-/**
-*  Prendo la data in cui la funzione viene richiamata e ritorno una stringra del patter yyyy-mm-dd
-* il mese viene sommato ad 1 perchè vanno da 0 a 11
-* 	
- */
-function getCurrentDate() {
-	var date = new Date();
-	var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-
-	return dateString;
-}
 
 
 /**
@@ -345,6 +459,35 @@ function getDeleteButton(id) {
 
 	return deleteButton;
 }
+
+
+
+
+//************************************************************************END Gestione campi dei post e bottoni di edit ed eliminazione POST NELL'HTML**************************************************' */
+//****************************************************************************************************************************************' */
+
+
+
+
+//*******************************************************************************************************FUnzione per prendere la data************************_ */
+
+/**
+*  Prendo la data in cui la funzione viene richiamata e ritorno una stringra del patter yyyy-mm-dd
+* il mese viene sommato ad 1 perchè vanno da 0 a 11
+* 	
+ */
+function getCurrentDate() {
+	var date = new Date();
+	var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+	return dateString;
+}
+
+//*******************************************************************************************************END FUnzione per prendere la data************************_ */
+//****************************************************************************************************************************************************************_ */
+
+
+
 
 
 //richiamo il metodo start in modo che venga eseguito tutto il codice che mi serve per settare i post

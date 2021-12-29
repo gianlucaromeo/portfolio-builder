@@ -2,7 +2,9 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
@@ -206,9 +208,9 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 	}
 	
-	public Set<Post> findAllByUserId(Long userId) {
+	public List<Post> findAllByUserId(Long userId) {
 		
-		Set<Post> posts = new HashSet<Post>();
+		List<Post> posts = new ArrayList<Post>();
 		
 		con = DBUtil.getInstance().getConnection();
 		

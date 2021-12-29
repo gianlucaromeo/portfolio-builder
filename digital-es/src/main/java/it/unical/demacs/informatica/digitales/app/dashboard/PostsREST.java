@@ -1,6 +1,8 @@
 package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.Cookie;
@@ -32,13 +34,12 @@ public class PostsREST {
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 		Post post = new Post();
 		post.setId(id);
-		System.out.println(id);
 		PostDAOImpl.getInstance().delete(post);
 
 	}
 
 	@PostMapping("/update_post")
-	public void updatePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public String updatePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Post post = new Post();
 		post = gson.fromJson(req.getReader(), Post.class);
@@ -48,6 +49,7 @@ public class PostsREST {
 		post.setUserId(originalPost.getUserId());
 		System.out.println(post);
 		PostDAOImpl.getInstance().update(post);
+		return gson.toJson(post);
 
 	}
 	@PostMapping("/get_posts_data_action")
@@ -56,15 +58,13 @@ public class PostsREST {
 
 		Cookie[] cookies = req.getCookies();
 		for (Cookie c : cookies) {
-			System.out.println("Cookie: " + c.getName());
 			if (c.getName().equals("logged_username")) {
 				String username = c.getValue();
 				User user = UserDAOImpl.getInstance().findByUsername(username);
-
-				Set<Post> posts = PostDAOImpl.getInstance().findAllByUserId(user.getId());
+				List<Post> posts = new ArrayList<Post>();
+				posts = PostDAOImpl.getInstance().findAllByUserId(user.getId());
 				String postsToJSON = gson.toJson(posts);
 
-				System.out.println(postsToJSON);
 
 				return postsToJSON;
 			}
@@ -73,4 +73,39 @@ public class PostsREST {
 		return Protocol.ERROR;
 
 	}
+
+	@PostMapping("/create_post")
+	public String createPost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Post post = new Post();
+		User user=null;
+		post = gson.fromJson(req.getReader(), Post.class);
+		Cookie[] cookies = req.getCookies();
+		for (Cookie c : cookies) {
+			System.out.println(c.getName());
+			if (c.getName().equals("logged_username")) {
+				String username = c.getValue();
+				user = UserDAOImpl.getInstance().findByUsername(username);
+			}
+
+		}
+		//System.out.println(post);
+		if(user!=null) {
+			post.setUserId(user.getId());
+			post.setLastEditDate("");
+			
+			System.out.println(user);
+			PostDAOImpl.getInstance().create(post);
+			return gson.toJson(post);
+			
+		}else {
+			return Protocol.ERROR;
+		}
+		
+
+	}
+
+	
+	
+	
 }

@@ -11,20 +11,28 @@ hr {
 
 .editPhotoChooser {
 	display: none;
-}
+}/*
+#divNewImage{
+	text-align: center;
+}*/
 
 .labelImage {
 	color: white;
 	background-color: #0074d9;
-	font-size: 20px;
+	vertical-align: middle;
 	width: 150px;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	padding: 0.25rem 0.5rem;
-	font-size: 0.8rem;
-	border-radius: 0.2rem;
-	font-family: "Montserrat", sans-serif;
-	text-align: center;
+	border-color: #3e5cb2;
 	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+	
 }
+/*
+.newImageLabel{
+	color: white;
+	background-color: #0074d9;
+	vertical-align: middle;
+	width: 150px;
+	
+}*/
