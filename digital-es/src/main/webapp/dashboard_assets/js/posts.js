@@ -223,6 +223,25 @@ function setEventOnSave(postId) {
 		event.preventDefault();
 
 		var date = getCurrentDate();
+		
+		
+		
+		var canvas = document.createElement("canvas");
+		context = canvas.getContext('2d');
+
+
+		base_image = new Image();
+		base_image.src = $("#postImageId"+postId).src;
+		base_image.onload = function() {
+			context.drawImage(base_image, 100, 100);
+		}
+		
+		console.log(base_image);
+
+
+		
+		var image64 =canvas.toDataURL();
+		console.log(image64);
 		const updatedPost = {
 			id: postId,
 			title: $("#postTitleId" + postId).val(),
