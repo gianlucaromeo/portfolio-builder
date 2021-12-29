@@ -368,7 +368,7 @@ function setEventOnSave(postId) {
 			userId: -1
 		};
 
-		var newPost="";
+		
 		$.ajax({
 
 			url: "/update_post",
@@ -381,12 +381,9 @@ function setEventOnSave(postId) {
 			if(data==="error"){
 				
 			}else{
-				$("#postId" + data.id).remove()
-				let newEditDate = "Last edit date: " + date;
-				$("#lastEditDateLabelId" + data.id).text(newEditDate);
-				$("#postsSection").prepend(createPost(data));
-				refactPostFields(data.id, true);
-				refactButton(data.id, true);
+				//console.log()
+				$("#post" + data.id).remove()
+				addPost(data);
 			}
 
 		});
