@@ -1,12 +1,9 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
-import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -187,6 +184,43 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project>{
 			
 		} catch (SQLException e) {
 			System.err.println("[ProjectDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return projects;
+		
+	}
+	
+public Set<Project> findAllByUserId(Long userId) {
+		
+		Set<Project> projects = new HashSet<Project>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM projects WHERE user_id=?;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, userId);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Project project = new Project();
+				project.setId(rs.getLong("id"));
+				project.setUserId(rs.getLong("user_id"));
+				project.setTitle(rs.getString("title"));
+				project.setDescription(rs.getString("description"));
+				project.setPicture(rs.getString("picture"));
+				project.setLinkRef(rs.getString("link_ref"));
+				projects.add(project);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[ProjectDAOImpl] [findAllByUserId]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();
