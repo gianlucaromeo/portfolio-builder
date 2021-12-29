@@ -1,10 +1,30 @@
 @charset "UTF-8";
 
-#postsSection{
-  overflow-y: auto;
-  overflow-x: hidden;
+#postsSection {
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
-hr{
-  border: 2px solid;
+hr {
+	border: 2px solid;
+}
+
+.editPhotoChooser {
+	display: none;
+}
+
+.labelImage {
+	color: white;
+	background-color: #0074d9;
+	font-size: 20px;
+	width: 150px;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	padding: 0.25rem 0.5rem;
+	font-size: 0.8rem;
+	border-radius: 0.2rem;
+	font-family: "Montserrat", sans-serif;
+	text-align: center;
+	cursor: pointer;
 }

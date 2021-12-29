@@ -48,6 +48,7 @@ function addPost(post) {
 	setEventOnDelete(post.id);
 	setEventOnEdit(post.id);
 	setEventOnSave(post.id);
+	setEventChangePhoto(post.id);
 	refactButton(post.id, true);
 
 }
@@ -82,8 +83,12 @@ function appendPost(post) {
 									</div>
 								</div>
 								<div class "row" style="margin-top: 20px;">
-									<button class="btn btn-primary btn-sm" id="editPhotoId${id}">Change
-										photo</button>
+									
+									<input type="file" accept="image/jpg, image/png" id="editPhotoId${id}" class="editPhotoChooser" hidden/>
+									<label id="editPhotoLabelId${id}" for="editPhotoId${id}" class="labelImage">
+									<i class="material-icons"> add_photo_alternate </i> &nbsp
+									New image
+									</label>
 								</div>
 							
 								<div class="card-body">
@@ -141,11 +146,13 @@ function refactButton(id, value) {
 		$("#editId" + id).hide();
 		$("#saveBtn" + id).show();
 		$("#editPhotoId" + id).show();
+		$("#editPhotoLabelId"+id).show();
 	} else {
 		$("#deleteId" + id).show();
 		$("#editId" + id).show();
 		$("#saveBtn" + id).hide();
 		$("#editPhotoId" + id).hide();
+		$("#editPhotoLabelId"+id).hide();
 	}
 
 
@@ -254,6 +261,24 @@ function setEventOnSave(postId) {
 	});
 }
 
+function setEventChangePhoto(id) {
+	const imageInput=document.querySelector("#editPhotoId"+id);
+	var newImage="";
+	imageInput.addEventListener("change", function(){
+		const reader= new FileReader();
+		reader.addEventListener("load", ()=> {
+			newImage=reader.result;
+		
+			document.querySelector("#postImageId"+id).src=newImage;	
+			
+		});
+		reader.readAsDataURL(this.files[0]);
+		
+		
+	});
+	
+
+}
 
 /**
 *  Prendo la data in cui la funzione viene richiamata e ritorno una stringra del patter yyyy-mm-dd
