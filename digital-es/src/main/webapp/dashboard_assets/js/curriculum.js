@@ -1,10 +1,6 @@
-let all_experiences = [];
+const all_experiences = new Map();
 
 window.onload = function() {
-
-	hideSaveBtn();
-	hideDiscardChangesBtn();
-	disableFields();
 
 	$.ajax({
 
@@ -20,24 +16,177 @@ window.onload = function() {
 			console.log("no data");
 		} else {
 			experiences.forEach(exp => {
-				buildExperience(exp)
+				all_experiences.set(exp.id, exp);
 			});
+			init();
 		}
 
 	});
 
 }
 
+function init() {
+	$("#curriculumExperiencesContainer").empty();
+	all_experiences.forEach((exp, exp_id) => {
+		initExperience(exp, exp_id, false);
+	});
+}
 
-function buildExperience(exp) {
+function initExperience(exp, exp_id, is_updating) {
+	buildExperience(exp, is_updating);
+	hideSaveBtn(exp_id);
+	hideDiscardChangesBtn(exp_id);
+	disableFields(exp_id);
+	setEditBtnActions(exp_id);
+	setSaveBtnAction(exp);	
+}
+
+
+/* ================== BUTTONS ACTIONS ================= */
+
+function setEditBtnActions(exp_id) {
+	$("#editBtn_" + exp_id).on("click", function(e) {
+		e.preventDefault();
+		enableFields(exp_id);
+		hideDeleteBtn(exp_id);
+		hideEditBtn(exp_id);
+		showSaveBtn(exp_id);
+		showDiscardChangesBtn(exp_id);
+	});
+}
+
+function setSaveBtnAction(exp) {
+	$("#saveBtn_" + exp.id).on("click", function(e) {
+		e.preventDefault();
+		// TODO: Ask if User wants to edit the experience with a friendly pop-up!
+		new_data = fetchNewData(exp);
+		//console.log(new_data);
+		
+		updateExperience(new_data);
+
+	})
+}
+
+
+function fetchNewData(exp) {
+	
+	new_title = $("#title_" + exp.id).val();
+	new_dateStart = $("#dpFrom_" + exp.id).val();
+	new_dateEnd = $("#dpTo_" + exp.id).val();
+	//$("#toPresent_" + id).val();
+	new_place = $("#place_" + exp.id).val();
+	new_type = $("#typeSelect_" + exp.id).val(); // WORK = 1, EDUCATION = 2
+	new_description = $("#description_" + exp.id).val();
+	
+	new_data = {
+		id:	exp.id,
+		userId: exp.userId,
+		title: new_title,
+		startDate: new_dateStart,
+		endDate: new_dateEnd,
+		place: new_place,
+		type: new_type,
+		description: new_description
+	};
+	
+	return new_data;
+
+}
+
+function updateExperience(new_experience_data) {
+	
+	$.ajax({
+
+		url: "/update_experience_action",
+		contentType: "application/json",
+		data: JSON.stringify(new_experience_data),
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+		
+		all_experiences.set(new_experience_data.id, new_experience_data);
+		updateExperienceDiv(new_experience_data);
+		
+
+	});
+	
+}
+
+/* ================== END BUTTONS ACTIONS ================= */
+
+
+/* ======================== SHOW/HIDE CONTENT ======================== */
+
+function setFieldsDisabled(id, enable) {
+	$("#title_" + id).attr('readonly', enable);
+	$("#dpFrom_" + id).attr('readonly', enable);
+	$("#dpTo_" + id).attr('readonly', enable);
+	$("#toPresent_" + id).prop('disabled', enable);
+	$("#place_" + id).attr('readonly', enable);
+	$("#typeSelect_" + id).prop('disabled', enable);
+	$("#description_" + id).attr('readonly', enable);
+}
+
+function disableFields(id) {
+	setFieldsDisabled(id, true);
+}
+
+function enableFields(id) {
+	setFieldsDisabled(id, false);
+}
+
+function hideDiscardChangesBtn(id) {
+	$("#discardChangesBtn_" + id).hide();
+}
+
+function showDiscardChangesBtn(id) {
+	$("#discardChangesBtn_" + id).show();
+}
+
+function hideDeleteBtn(id) {
+	$("#deleteBtn_" + id).hide();
+}
+
+function showDeleteBtn(id) {
+	$("#deleteBtn_" + id).show();
+}
+
+function hideSaveBtn(id) {
+	$("#saveBtn_" + id).hide();
+}
+
+function showSaveBtn(id) {
+	$("#saveBtn_" + id).show();
+}
+
+function hideEditBtn(id) {
+	$("#editBtn_" + id).hide();
+}
+
+function showEditBtn(id) {
+	$("#editBtn_" + id).show();
+}
+
+/* ======================== END SHOW/HIDE CONTENT ======================== */
+
+
+/* ========================= BUILD GUI ============================ */
+
+function updateExperienceDiv(exp) {
+	$("#experience_" + exp.id).empty();
+	initExperience(exp, exp.id, true);
+}
+
+function buildExperience(exp, is_updating) {
 
 	experiences_container = $("#curriculumExperiencesContainer");
-	
+
 	exp_card_container = buildCardContainer(exp);
 	
 	exp_card = buildCard(exp);
-	
-	exp_card_header = buildCardHeader();
+
+	exp_card_header = buildCardHeader(exp.type);
 	exp_card_body = buildCardBody(exp);
 
 	title_div = buildTitleDiv(exp);
@@ -47,13 +196,16 @@ function buildExperience(exp) {
 	type_div = buildTypeDiv(exp);
 	description_div = buildDescriptionDiv(exp);
 	buttons_div = buildButtonsDiv(exp);
+
+	if (!is_updating) {
+		experiences_container.append(exp_card_container);
+	}
 	
-	experiences_container.append(exp_card_container);
 	$("#experience_" + exp.id).append(exp_card);
-	
+
 	$("#expCard_" + exp.id).append(exp_card_header);
 	$("#expCard_" + exp.id).append(exp_card_body);
-	
+
 	$("#cardBody_" + exp.id).append(title_div);
 	$("#cardBody_" + exp.id).append(dp_from_div);
 	$("#cardBody_" + exp.id).append(dp_to_div);
@@ -61,9 +213,7 @@ function buildExperience(exp) {
 	$("#cardBody_" + exp.id).append(type_div);
 	$("#cardBody_" + exp.id).append(description_div);
 	$("#cardBody_" + exp.id).append(buttons_div);
-	
-	
-	
+
 }
 
 function buildCardBody(exp) {
@@ -74,9 +224,12 @@ function buildCardBody(exp) {
 			</div>`;
 }
 
-function buildCardHeader() {
-	return `<div class="card-header py-3">
-				<h6 class="text-primary fw-bold m-0">Experience</h6>
+function buildCardHeader(type) {
+	div_class = "card-header py-3 ";
+	div_class += type === "WORK" ? "work-experience" : "education-experience";
+	console.log(type);
+	return `<div class="${div_class}">
+				<h6 class="text-light fw-bold m-0">Experience</h6>
 			</div>`;
 }
 
@@ -139,8 +292,8 @@ function buildTypeDiv(exp) {
 				</div>
 				<select class="form-select" aria-label="Work"
 					id="${select_id}">
-					<option value="1">${exp.type}</option>
-					<option value="2">${secondary_exp}</option>
+					<option value="${exp.type}">${exp.type}</option>
+					<option value="${secondary_exp}">${secondary_exp}</option>
 				</select>
 			</div>
 			<!-- END TYPE -->`;
@@ -161,7 +314,7 @@ function buildPlaceDiv(exp) {
 }
 
 function buildDatePickerFromDiv(exp) {
-	div_id = "dpFormContainer_" + exp.id;
+	div_id = "dpFromContainer_" + exp.id;
 	dp_id = "dpFrom_" + exp.id;
 	return `<!-- DATE PICKER FROM -->
 			<div id="${div_id}"
@@ -178,6 +331,7 @@ function buildDatePickerFromDiv(exp) {
 function buildDatePickerToDiv(exp) {
 	div_id = "dpToContainer_" + exp.id;
 	dp_id = "dpTo_" + exp.id;
+	to_present_div = "toPresent_" + exp.id;
 	end_date = exp.endDate === undefined ? '' : exp.endDate;
 	return `<!-- DATE PICKER TO -->
 			<div id="${div_id}"
@@ -186,7 +340,7 @@ function buildDatePickerToDiv(exp) {
 				<input placeholder="Select date" type="date"
 					id="${dp_id}" name="experienceDateTo"
 					class="form-control form-control-user" value="${end_date}"> <input
-					class="form-check-input" type="checkbox" id="toPresent"><label
+					class="form-check-input" type="checkbox" id="${to_present_div}"><label
 					class="form-check-label" for="toPresent"><strong>Present</strong></label>
 			</div>
 			<!-- END DATE PICKER TO -->`;
@@ -206,76 +360,4 @@ function buildTitleDiv(exp) {
 			<!-- END TITLE -->`;
 }
 
-
-/* ================== GUI ACTIONS ================= */
-
-$("#editBtn").on("click", function(e) {
-
-	e.preventDefault();
-
-	enableFields();
-
-	hideDeleteBtn();
-	hideEditBtn();
-
-	showSaveBtn();
-	showDiscardChangesBtn();
-
-});
-
-/* ================== END GUI ACTIONS ================= */
-
-
-/* ======================== SHOW/HIDE CONTENT ======================== */
-
-function setFieldsDisabled(enable) {
-	$("#experienceTitle").attr('readonly', enable);
-	$("#datePickerFrom").attr('readonly', enable);
-	$("#datePickerTo").attr('readonly', enable);
-	$("#toPresent").prop('disabled', enable);
-	$("#experiencePlace").attr('readonly', enable);
-	$("#experienceType").prop('disabled', enable);
-	$("#experienceDescription").attr('readonly', enable);
-}
-
-function disableFields() {
-	setFieldsDisabled(true);
-}
-
-function enableFields() {
-	setFieldsDisabled(false);
-}
-
-function hideDiscardChangesBtn() {
-	$("#discardChangesBtn").hide();
-}
-
-function showDiscardChangesBtn() {
-	$("#discardChangesBtn").show();
-}
-
-function hideDeleteBtn() {
-	$("#deleteBtn").hide();
-}
-
-function showDeleteBtn() {
-	$("#deleteBtn").show();
-}
-
-function hideSaveBtn() {
-	$("#saveBtn").hide();
-}
-
-function showSaveBtn() {
-	$("#saveBtn").show();
-}
-
-function hideEditBtn() {
-	$("#editBtn").hide();
-}
-
-function showEditBtn() {
-	$("#editBtn").show();
-}
-
-/* ======================== END SHOW/HIDE CONTENT ======================== */
+/* ========================= END BUILD GUI ============================ */
