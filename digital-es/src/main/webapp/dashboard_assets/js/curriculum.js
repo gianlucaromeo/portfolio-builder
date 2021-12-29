@@ -1,22 +1,4 @@
-/*
- * "experience" refers to the current experience 
- * this file is working on.
- *
- * To dynamically add an experience, I'll use the following ids inside the jsp file:
- *  - experienceId: id (stored in database) of the experience.
- *  - experienceTitle: title of the experience.
- *  - datePickerFrom: date start of the experience.
- *  - datePickerTo: date end of the experience.
- *  - toPresent: check box to check if the experience ended.
- *  - experiencePlace: the place the user had the experience at.
- *  - experienceType: the type of the experience. Must be "Work" or "Education".
- *  - experienceDescription: the description of the experience.
- *  - editBtn: ...
- *  - deleteBtn: ...
- *  - saveBtn: ...
- *  - discardChangesBtn: ...
- *  - addExperienceBtn: ...
- **/
+let all_experiences = [];
 
 window.onload = function() {
 
@@ -37,7 +19,9 @@ window.onload = function() {
 		if (experiences.length == 0) {
 			console.log("no data");
 		} else {
-			experiences.forEach(exp => buildExperience(exp));
+			experiences.forEach(exp => {
+				buildExperience(exp)
+			});
 		}
 
 	});
