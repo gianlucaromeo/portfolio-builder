@@ -29,13 +29,13 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 @RestController
 public class PostsREST {
 	@PostMapping("/delete_post")
-	public void deletePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public String deletePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 		Post post = new Post();
 		post.setId(id);
 		PostDAOImpl.getInstance().delete(post);
-
+		return id.toString();
 	}
 
 	@PostMapping("/update_post")

@@ -295,11 +295,11 @@ function setEventOnDelete(id) {
 			type: "post",
 			dataType: "json",
 
-		}).done(function() {
-
+		}).done(function(id) {
+			$("#post" + id).remove();
 		});
 
-		$("#post" + id).remove();
+		
 		//$("#modalId"+id).modal('toggle');
 
 	});
