@@ -17,48 +17,42 @@ import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 @RestController
 public class ProjectsREST {
 	
-	@PostMapping("/load_user_id")
-	public String loadUserId(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
-
-//		Cookie[] cookies = req.getCookies();
-//		String username="";
-//		for (Cookie c : cookies) {
-//			if (c.getName().equals("logged_username")) {
-//				username = c.getValue();
-//				break;
-//			}
-//		}
-		String username=(String) req.getAttribute("username");
-		User user=UserDAOImpl.getInstance().findByUsername(username);
+	@PostMapping("/load_projects")
+	public String loadProjects(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
-		user = gson.fromJson(req.getReader(), User.class);
-		
-		user=UserDAOImpl.getInstance().findByUsername(user.getUsername());
-		
-		String userDataResponseToJSON = gson.toJson(user);
-		
-		return userDataResponseToJSON;
-	}
-	
-	@PostMapping("/load_projects_id")
-	public String loadProjectsId(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
-		//long id=(long) req.getAttribute("id");
-		
-		Set<Project> projects=ProjectDAOImpl.getInstance().findAll();
-		String res="";
-		for(Project project:projects) {
-			if(project.getUserId()==44) {
-				res+=project.getId();
-				res+=" ";
+		Cookie[] cookies = req.getCookies();
+		for (Cookie c : cookies) {
+			System.out.println("Cookie: " + c.getName());
+			if (c.getName().equals("logged_username")) {
+				String username = c.getValue();
+				User user = UserDAOImpl.getInstance().findByUsername(username);
+
+				Set<Project> posts = ProjectDAOImpl.getInstance().findAllByUserId(user.getId());
+				String postsToJSON = gson.toJson(posts);
+
+				System.out.println(postsToJSON);
+
+				return postsToJSON;
 			}
 		}
-		
-		return res;
+
+		return Protocol.ERROR;
+	}
+	
+	@PostMapping("delete_project")
+	public void deleteProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Integer id = gson.fromJson(req.getReader(), Integer.class);
+		Project project = new Project();
+		project.setId(id);
+		System.out.println(id);
+		ProjectDAOImpl.getInstance().delete(project);
 	}
 	
 }

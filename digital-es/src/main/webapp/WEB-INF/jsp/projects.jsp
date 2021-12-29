@@ -120,7 +120,7 @@
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
-										data-bs-toggle="dropdown" href="#"><span id="username_span"
+										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
 										src="assets/img/avatars/avatar1.jpeg"></a>
