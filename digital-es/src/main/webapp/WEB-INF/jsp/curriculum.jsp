@@ -153,29 +153,27 @@
 					<!-- END BODY HEADER -->
 
 
-					<!-- EXPERIENCES CONTAINER -->
-					<div class="row mb-3" id="curriculumExperiencesContainer">
-
-						<!-- A CURRICULUM EXPERIENCE -->
+					<div class="row mb-3 justify-content-center" id="newExperienceContainer">
+							<!-- A CURRICULUM EXPERIENCE -->
 						<div class="col-12 col-lg-6" id="experienceId">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="text-primary fw-bold m-0">Experience</h6>
+									<h6 class="text-primary fw-bold m-0">Add a new experience!</h6>
 								</div>
 								<div class="card-body">
 									<div class="row">
-									
+
 										<!-- TITLE -->
 										<div class="col-12 mb-3">
 											<div class="row">
 												<h4 class="small fw-bold">Experience Title</h4>
 											</div>
 											<input class="form-control" type="text" id="experienceTitle"
-												placeholder="Experience" name="experience_title"
-												value="The title of the experience goes here...">
+												placeholder="Title of the experience..." name="experience_title" 
+												value="">
 										</div>
 										<!-- END TITLE -->
-										
+
 										<!-- DATE PICKER FROM -->
 										<div id="datePickerFromContainer"
 											class="col-12 col-sm-6 mb-3 md-form md-outline input-with-post-icon datepicker">
@@ -185,7 +183,7 @@
 												class="form-control form-control-user">
 										</div>
 										<!-- END DATE PICKER FROM -->
-										
+
 										<!-- DATE PICKER TO -->
 										<div id="datePickerToContainer"
 											class="col-12 col-sm-6 mb-3 md-form md-outline input-with-post-icon datepicker">
@@ -197,18 +195,18 @@
 												class="form-check-label" for="toPresent"><strong>Present</strong></label>
 										</div>
 										<!-- END DATE PICKER TO -->
-										
+
 										<!-- PLACE -->
 										<div class="col-12 col-sm-6 mb-3">
 											<div class="row">
 												<h4 class="small fw-bold">Place</h4>
 											</div>
 											<input class="form-control" type="text" id="experiencePlace"
-												placeholder="experience_place" name="experience_place"
-												value="New York ASM&Co.">
+												placeholder="Place..." name="experience_place"
+												value="">
 										</div>
 										<!-- END PLACE -->
-										
+
 										<!-- TYPE -->
 										<div class="col-12 col-sm-6 mb-3">
 											<div class="row">
@@ -216,12 +214,12 @@
 											</div>
 											<select class="form-select" aria-label="Work"
 												id="experienceType">
-												<option value="1">WORK</option>
-												<option value="2">EDUCATION</option>
+												<option value="WORK">WORK</option>
+												<option value="EDUCATION">EDUCATION</option>
 											</select>
 										</div>
 										<!-- END TYPE -->
-										
+
 										<!-- DESCRIPTION -->
 										<div class="col-12 mb-3">
 											<div class="row">
@@ -231,30 +229,29 @@
 												rows="4" name="experience_description"></textarea>
 										</div>
 										<!-- END DESCRIPTION -->
-										
+
 										<!-- BUTTONS -->
 										<div class="row">
 											<div class="col-12">
-												<button class="btn btn-primary btn-sm" type="submit"
-													id="editBtn">Edit</button>
-												<button class="btn btn-danger btn-sm" type="submit"
-													id="deleteBtn">Delete</button>
 												<button class="btn btn-danger btn-sm" type="submit"
 													id="discardChangesBtn">Discard changes</button>
-												<button class="btn btn-primary btn-sm" type="submit"
-													id="saveBtn">Save Settings</button>
+												<button class="btn btn-primary text-light btn-sm" type="submit"
+													id="doneBtn">Add</button>
 											</div>
 										</div>
 										<!-- END BUTTONS -->
-										
-										
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- END OF A CURRICULUM EXPERIENCE -->
+					</div>
+					<hr/>
 
-						
+					<!-- EXPERIENCES CONTAINER -->
+					<div class="row mb-3" id="curriculumExperiencesContainer">
+
+						<!-- Experiences go here... -->
 
 					</div>
 					<!-- END OF EXPERIENCES CONTAINER -->

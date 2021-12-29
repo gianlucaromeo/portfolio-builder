@@ -61,10 +61,37 @@ public class CurriculumREST {
 		CurriculumExperience curriculumExperience = null;
 		
 		curriculumExperience = gson.fromJson(req.getReader(), CurriculumExperience.class);
-		
+	
 		CurriculumExperienceDAOImpl.getInstance().update(curriculumExperience);
 		
 		return gson.toJson(curriculumExperience);
+		
+	}
+	
+	@PostMapping("/create_experience_action")
+	public String createExperienceAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+		
+		Gson gson = new Gson();
+		CurriculumExperience curriculumExperience = null;
+		
+		curriculumExperience = gson.fromJson(req.getReader(), CurriculumExperience.class);
+	
+		CurriculumExperienceDAOImpl.getInstance().create(curriculumExperience);
+		
+		return gson.toJson(curriculumExperience);
+		
+	}
+	
+	@PostMapping("/delete_experience_action")
+	public String deleteExperienceAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+		
+		Gson gson = new Gson();
+		Long id = gson.fromJson(req.getReader(), Long.class);
+		
+		CurriculumExperience experience = CurriculumExperienceDAOImpl.getInstance().findById(id);
+		String res = CurriculumExperienceDAOImpl.getInstance().delete(experience);
+		
+		return gson.toJson(res);
 		
 	}
 	

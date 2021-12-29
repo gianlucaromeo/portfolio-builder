@@ -2,6 +2,9 @@ const all_experiences = new Map();
 
 window.onload = function() {
 
+	hideNewExperienceDiv();
+	initBtns();
+
 	$.ajax({
 
 		url: "/get_curriculum_data_action",
@@ -19,11 +22,63 @@ window.onload = function() {
 				all_experiences.set(exp.id, exp);
 			});
 			init();
+			initDoneButton(data[0].userId);
 		}
 
 	});
 
 }
+
+function initBtns() {
+	initAddExperienceBtn();
+	initDiscardNewExperienceChangesBtn();
+}
+
+function initAddExperienceBtn() {
+	$("#addExperienceBtn").on("click", function(e) {
+		e.preventDefault();
+		showNewExperienceDiv();
+	});
+}
+
+function initDiscardNewExperienceChangesBtn() {
+	$("#discardChangesBtn").on("click", function(e) {
+		e.preventDefault();
+		hideNewExperienceDiv();
+	});
+}
+
+function initDoneButton(user_id) {
+	
+	$("#doneBtn").on("click", function(e) {
+		
+		e.preventDefault();
+		
+		new_title = $("#experienceTitle").val();
+		new_dateStart = $("#datePickerFrom").val();
+		new_dateEnd = $("#datePickerTo").val();
+		new_place = $("#experiencePlace").val();
+		new_type = $("#experienceType").val();
+		new_description = $("#experienceDescription").val();
+
+		new_data = {
+			id: "-1",
+			userId: user_id,
+			title: new_title,
+			startDate: new_dateStart,
+			endDate: new_dateEnd,
+			place: new_place,
+			type: new_type,
+			description: new_description
+		};
+		
+		//console.log(new_data);
+		addExperience(new_data);
+		
+	});
+	
+}
+
 
 function init() {
 	$("#curriculumExperiencesContainer").empty();
@@ -38,11 +93,19 @@ function initExperience(exp, exp_id, is_updating) {
 	hideDiscardChangesBtn(exp_id);
 	disableFields(exp_id);
 	setEditBtnActions(exp_id);
-	setSaveBtnAction(exp);	
+	setSaveBtnAction(exp);
+	setDeleteBtnAction(exp_id);
 }
 
 
 /* ================== BUTTONS ACTIONS ================= */
+
+function setDeleteBtnAction(exp_id) {
+	$("#deleteBtn_" + exp_id).on("click", function(e) {
+		e.preventDefault();
+		deleteExperience(exp_id);
+	});
+}
 
 function setEditBtnActions(exp_id) {
 	$("#editBtn_" + exp_id).on("click", function(e) {
@@ -61,7 +124,7 @@ function setSaveBtnAction(exp) {
 		// TODO: Ask if User wants to edit the experience with a friendly pop-up!
 		new_data = fetchNewData(exp);
 		//console.log(new_data);
-		
+
 		updateExperience(new_data);
 
 	})
@@ -69,7 +132,7 @@ function setSaveBtnAction(exp) {
 
 
 function fetchNewData(exp) {
-	
+
 	new_title = $("#title_" + exp.id).val();
 	new_dateStart = $("#dpFrom_" + exp.id).val();
 	new_dateEnd = $("#dpTo_" + exp.id).val();
@@ -77,9 +140,9 @@ function fetchNewData(exp) {
 	new_place = $("#place_" + exp.id).val();
 	new_type = $("#typeSelect_" + exp.id).val(); // WORK = 1, EDUCATION = 2
 	new_description = $("#description_" + exp.id).val();
-	
+
 	new_data = {
-		id:	exp.id,
+		id: exp.id,
 		userId: exp.userId,
 		title: new_title,
 		startDate: new_dateStart,
@@ -88,13 +151,13 @@ function fetchNewData(exp) {
 		type: new_type,
 		description: new_description
 	};
-	
+
 	return new_data;
 
 }
 
 function updateExperience(new_experience_data) {
-	
+
 	$.ajax({
 
 		url: "/update_experience_action",
@@ -104,19 +167,68 @@ function updateExperience(new_experience_data) {
 		dataType: "json",
 
 	}).done(function(data) {
-		
+
 		all_experiences.set(new_experience_data.id, new_experience_data);
 		updateExperienceDiv(new_experience_data);
-		
+
 
 	});
-	
+
+}
+
+function addExperience(new_experience) {
+
+	$.ajax({
+
+		url: "/create_experience_action",
+		contentType: "application/json",
+		data: JSON.stringify(new_experience),
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+
+		all_experiences.set(data.id, data);
+		initExperience(data, data.id, false);
+		cleanAddNewExperienceFields();
+		hideNewExperienceDiv();
+
+	});
+
+}
+
+function deleteExperience(exp_id) {
+
+	$.ajax({
+
+		url: "/delete_experience_action",
+		contentType: "application/json",
+		data: JSON.stringify(exp_id),
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+
+		$("#experience_" + exp_id).remove();
+		//init();
+
+	});
+
 }
 
 /* ================== END BUTTONS ACTIONS ================= */
 
 
 /* ======================== SHOW/HIDE CONTENT ======================== */
+
+function cleanAddNewExperienceFields() {
+	$("#experienceTitle").val("");
+	$("#datePickerFrom").val("");
+	$("#datePickerTo").val("");
+	$("#experiencePlace").val("");
+	$("#experienceType").val("");
+	$("#experienceDescription").val("");
+}
 
 function setFieldsDisabled(id, enable) {
 	$("#title_" + id).attr('readonly', enable);
@@ -168,6 +280,14 @@ function showEditBtn(id) {
 	$("#editBtn_" + id).show();
 }
 
+function hideNewExperienceDiv() {
+	$("#newExperienceContainer").hide();
+}
+
+function showNewExperienceDiv() {
+	$("#newExperienceContainer").show();
+}
+
 /* ======================== END SHOW/HIDE CONTENT ======================== */
 
 
@@ -183,7 +303,7 @@ function buildExperience(exp, is_updating) {
 	experiences_container = $("#curriculumExperiencesContainer");
 
 	exp_card_container = buildCardContainer(exp);
-	
+
 	exp_card = buildCard(exp);
 
 	exp_card_header = buildCardHeader(exp.type);
@@ -200,7 +320,7 @@ function buildExperience(exp, is_updating) {
 	if (!is_updating) {
 		experiences_container.append(exp_card_container);
 	}
-	
+
 	$("#experience_" + exp.id).append(exp_card);
 
 	$("#expCard_" + exp.id).append(exp_card_header);
@@ -323,7 +443,7 @@ function buildDatePickerFromDiv(exp) {
 				<input placeholder="Select date" type="date"
 					id="${dp_id}" name="experienceDateFrom"
 					class="form-control form-control-user"
-					value="${exp.startDate}">
+					value="${exp.startDate}" pattern="yyyy-MM-dd">
 			</div>
 			<!-- END DATE PICKER FROM -->`;
 }
