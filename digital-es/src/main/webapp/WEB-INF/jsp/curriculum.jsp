@@ -16,6 +16,8 @@
 	href="../../dashboard_assets/fonts/font-awesome.min.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/fonts/fontawesome5-overrides.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/curriculum.css">
 </head>
 
 <body id="page-top">

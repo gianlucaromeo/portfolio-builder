@@ -42,7 +42,7 @@ public class CurriculumREST {
 				String curriculumExperiencesToJSON = gson.toJson(curriculumExperiences);
 				
 				// DEBUG
-				System.out.println(curriculumExperiencesToJSON);
+				//System.out.println(curriculumExperiencesToJSON);
 				
 				return curriculumExperiencesToJSON;
 				
@@ -50,6 +50,21 @@ public class CurriculumREST {
 		}
 		
 		return Protocol.NO_USER_EXPERIENCES;
+		
+	}
+	
+	
+	@PostMapping("/update_experience_action")
+	public String updateExperienceAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+		
+		Gson gson = new Gson();
+		CurriculumExperience curriculumExperience = null;
+		
+		curriculumExperience = gson.fromJson(req.getReader(), CurriculumExperience.class);
+		
+		CurriculumExperienceDAOImpl.getInstance().update(curriculumExperience);
+		
+		return gson.toJson(curriculumExperience);
 		
 	}
 	
