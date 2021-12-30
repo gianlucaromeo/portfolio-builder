@@ -22,6 +22,8 @@ function setGoogleSignUpAPI() {
 		});
 
 		attachGoogleLogin(document.getElementById('googleLoginBtn'));
+		
+		
 
 	});
 
@@ -36,20 +38,28 @@ function attachGoogleLogin(element) {
 	auth2.attachClickHandler(element, {},
 		function(googleUser) {
 
-			let email= googleUser.getBasicProfile().getEmail();
-			
-			$.ajax({
-				url: "/google_login",
-				contentType: "application/json",
-				data: JSON.stringify(email),
-				type: "post",
-				dataType: "json",
-			}).done(function(data) {
-				
-			});
+			var email= googleUser.getBasicProfile().getEmail();
+			doLogin(email);
 
 		}, function(error) {
-			alert(JSON.stringify(error, undefined, 2));
+		
 		});
 
 }
+
+
+function doLogin(email){
+	$.ajax({
+		url: "/google_login",
+		contentType: "application/json",
+		data: JSON.stringify(email),
+		type: "post",
+		dataType: "json",
+	}).done(function(data) {
+		console.log("ciao");
+	});
+}
+
+setGoogleSignUpAPI();
+
+

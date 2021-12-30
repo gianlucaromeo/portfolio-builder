@@ -46,11 +46,11 @@
 				<ul class="navbar-nav text-light" id="accordionSidebar">
 					<li class="nav-item"><a class="nav-link" href="index.html"><i
 							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="profile"><i
+					<li class="nav-item"><a class="nav-link" href="profile"><i
 							class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="posts"><i
+					<li class="nav-item"><a class="nav-link active" href="posts"><i
 							class="far fa-comments"></i><span>Posts</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="curriculum"><i
 							class="fas fa-address-card"></i><span>Curriculum</span></a></li>
@@ -192,6 +192,29 @@
 												<div class="mb-3">
 													<button class="btn btn-primary btn-sm" id="addNewPostBtn" type="submit">Publish
 														Post</button>
+												</div>
+												<button type="button" class="btn btn-primary btn-sm"
+													data-bs-toggle="modal"
+													data-bs-target="#modalIdNewPopup"
+													id="popupNewBtn" hidden></button>
+												<!-- Modal -->
+												<div class="modal fade" id="modalIdNewPopup"
+													tabindex="-1" aria-labelledby="modalLabel"
+													aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="modalLabel">New Post</h5>
+																<button type="button" class="btn-close"
+																	data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<div class="modal-body">Post successfully published</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-primary"
+																	data-bs-dismiss="modal" id="closeNewPopupBtn">Ok</button>
+															</div>
+														</div>
+													</div>
 												</div>
 											</form>
 										</div>

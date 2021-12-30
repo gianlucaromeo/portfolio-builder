@@ -133,6 +133,7 @@ function createPost(post){
 							
 								<button class="btn btn-primary btn-sm" type="submit" id="saveBtn${id}">Save
 									Settings</button>
+								`+ getPopUpOnSave(id)+`
 								<hr />
 							</div>`;
 }
@@ -258,22 +259,48 @@ function addEventOnAddNewPost(){
 
 		}).done(function(data) {
 			
-			console.log(data);
-			if(data==="error"){
-				
-			}else{
-				$("#postsSection").prepend(createPost(data));
-				resetFieldsNewPost();
-				refactPostFields(data.id, true);
-				refactButton(data.id, true);
-			}
-
+			doCreateOnDOM(data);
 
 		});
 
 	});
 }
 
+function doCreateOnDOM(data){
+	console.log(data);
+
+
+	
+	$("#newPostTitle").removeClass("is-invalid");
+	$("#newPostDSescription").removeClass("is-invalid");
+	$("#newPostRefLink").removeClass("is-invalid");
+	var isValidPost = true;
+	if (data.title === "post_field_empty" || data.title === "post_title_not_correct") {
+		$("#newPostTitle").addClass("is-invalid");
+		isValidPost = false;
+	} if (data.description === "post_field_empty") {
+		$("#newPostDSescription").addClass("is-invalid");
+		isValidPost = false;
+	} if (data.refLink === "post_field_empty") {
+		$("#newPostRefLink").addClass("is-invalid");
+		isValidPost = false;
+	}
+
+	if (isValidPost) {
+		
+		$("#popupNewBtn").trigger('click');
+		
+		$("#closeNewPopupBtn").click(function() {
+			$("#postsSection").prepend(createPost(data));
+			resetFieldsNewPost();
+			refactPostFields(data.id, true);
+			refactButton(data.id, true);
+		});
+		
+		
+
+	}
+}
 /**
 *  prendo il bottone di eliminazione che ha ogni post 
 *  gli associo un evento sul click evitando che effettui la submit con preventDefault()
@@ -378,13 +405,8 @@ function setEventOnSave(postId) {
 			dataType: "json",
 
 		}).done(function(data) {
-			if(data==="error"){
-				
-			}else{
-				//console.log()
-				$("#post" + data.id).remove()
-				addPost(data);
-			}
+			
+			doUpdateOnDOM(data);
 
 		});
 
@@ -393,15 +415,44 @@ function setEventOnSave(postId) {
 		//modifico in runtime la data di ultima modifica
 		
 
-		refactPostFields(postId, true);
-		refactButton(postId, true);
-
 
 
 
 
 	});
 }
+function doUpdateOnDOM(data){
+	console.log(data);
+	$("#postTitleId" + data.id).removeClass("is-invalid");
+	$("#postDescriptionId" + data.id).removeClass("is-invalid");
+	$("#postLinkRefId" + data.id).removeClass("is-invalid");
+	var isValidPost = true;
+	if (data.title === "post_field_empty" || data.title === "post_title_not_correct") {
+		$("#postTitleId" + data.id).addClass("is-invalid");
+		isValidPost = false;
+	} if (data.description === "post_field_empty") {
+		$("#postDescriptionId" + data.id).addClass("is-invalid");
+		isValidPost = false;
+	} if (data.refLink === "post_field_empty") {
+		$("#postLinkRefId" + data.id).addClass("is-invalid");
+		isValidPost = false;
+	}
+
+	if (isValidPost) {
+		$("#popupSaveBtn"+data.id).trigger('click');
+		
+		$("#closeSavePopupBtn" + data.id).click(function() {
+			$("#post" + data.id).remove()
+			addPost(data);
+			refactPostFields(postId, true);
+			refactButton(postId, true);
+		});
+		
+		
+
+	}
+}
+
 
 function setEventChangePhoto(id) {
 	const imageInput=document.querySelector("#editPhotoId"+id);
@@ -455,6 +506,34 @@ function getDeleteButton(id) {
 						</div>`;
 
 	return deleteButton;
+}
+function getPopUpOnSave(id){
+		var saveButton=`<button type="button" class="btn btn-primary btn-sm"
+							data-bs-toggle="modal" data-bs-target="#modalIdSavePopup${id}"
+							id="popupSaveBtn${id}" hidden></button>
+						<!-- Modal -->
+						<div class="modal fade" id="modalIdSavePopup${id}" tabindex="-1"
+							aria-labelledby="modalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="modalLabel">Update</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">Post successfully updated</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary"
+											data-bs-dismiss="modal" id="closeSavePopupBtn${id}">Ok</button>
+									</div>
+								</div>
+							</div>
+						</div>`;
+						
+						
+				
+							
+		return saveButton;				
 }
 
 

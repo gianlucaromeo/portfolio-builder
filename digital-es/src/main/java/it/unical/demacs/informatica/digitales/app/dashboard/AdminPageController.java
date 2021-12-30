@@ -39,7 +39,7 @@ public class AdminPageController {
 		}
 
 		fetchUserData(req, username);
-
+		System.out.println("devo essere reindirizzato ma non succede nulla");
 		return "profile";
 
 	}
@@ -52,11 +52,11 @@ public class AdminPageController {
 		for (Cookie c : cookies) {
 			if (c.getName().equals("logged_username")) {
 				String username = c.getValue();
+				System.out.println(c.getValue());
 				fetchUserData(req, username);
 				return "profile";
 			}
 		}
-
 		return "error_page";
 
 	}
@@ -150,10 +150,9 @@ public class AdminPageController {
 				username = c.getValue();
 				Cookie cookie = new Cookie("logged_username", username);
 				cookie.setMaxAge(60 * 60 * 24);
-
+					
 				resp.addCookie(cookie);
-//				resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-//				resp.setHeader("Location", "/dashboard/curriculum"); 
+				fetchUserData(req, username);
 
 			}
 

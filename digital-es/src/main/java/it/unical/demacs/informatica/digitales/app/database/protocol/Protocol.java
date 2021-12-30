@@ -17,6 +17,10 @@ public class Protocol {
 
 	/* CURRICULUM EXPERIENCES */
 	public final static String NO_USER_EXPERIENCES = "no curriculum experiences";
-	
+
+	/* POSTS */
+	public final static String POST_EMPTY_FIELD = "post_field_empty";
+	public final static String POST_TITLE_NOT_CORRECT = "post_title_not_correct";
+	public final static String POST_LINK_NO_VALID = "post_link_not_valid";
 	
 }

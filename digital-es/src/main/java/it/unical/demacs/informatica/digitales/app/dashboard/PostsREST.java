@@ -3,13 +3,12 @@ package it.unical.demacs.informatica.digitales.app.dashboard;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,14 +16,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.User;
-import it.unical.demacs.informatica.digitales.app.beans.UserAuthentication;
-import it.unical.demacs.informatica.digitales.app.dao.CurriculumExperienceDAOImpl;
+import it.unical.demacs.informatica.digitales.app.beans.validation.PostValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
+import it.unical.demacs.informatica.digitales.app.validator.PostValidator;
 
 @RestController
 public class PostsREST {
@@ -47,9 +45,12 @@ public class PostsREST {
 		
 		post.setPubblicationDate(originalPost.getPubblicationDate());
 		post.setUserId(originalPost.getUserId());
-		System.out.println(post);
-		PostDAOImpl.getInstance().update(post);
-		return gson.toJson(post);
+		
+		PostValidatorResponse newPost= PostValidator.validatePost(post);
+		if(PostValidator.isValidPost(newPost)) {
+			PostDAOImpl.getInstance().update(post);
+		}
+		return gson.toJson(newPost);
 
 	}
 	@PostMapping("/get_posts_data_action")
@@ -90,21 +91,23 @@ public class PostsREST {
 
 		}
 		//System.out.println(post);
+		PostValidatorResponse newPost= PostValidator.validatePost(post);
 		if(user!=null) {
 			post.setUserId(user.getId());
 			post.setLastEditDate("");
-			
+			newPost.setUserId(user.getId());
+			newPost.setLastEditDate("");
 			System.out.println(user);
-			PostDAOImpl.getInstance().create(post);
-			return gson.toJson(post);
-			
-		}else {
-			return Protocol.ERROR;
+			if(PostValidator.isValidPost(newPost)) {
+				
+				PostDAOImpl.getInstance().create(post);
+			}
+		
 		}
+		return gson.toJson(newPost);
 		
 
 	}
-
 	
 	
 	
