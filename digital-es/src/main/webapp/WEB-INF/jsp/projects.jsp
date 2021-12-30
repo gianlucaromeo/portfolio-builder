@@ -16,6 +16,8 @@
 	href="../../dashboard_assets/fonts/font-awesome.min.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/fonts/fontawesome5-overrides.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/projects.css">
 </head>
 
 </html>
@@ -39,9 +41,9 @@
 				<ul class="navbar-nav text-light" id="accordionSidebar">
 					<li class="nav-item"><a class="nav-link" href="index.html"><i
 							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="projects"><i
+					<li class="nav-item"><a class="nav-link"
+						href="profile"><i class="fas fa-user"></i><span>Profile</span></a></li>
+					<li class="nav-item"><a class="nav-link active" href="projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="posts"><i
 							class="far fa-comments"></i><span>Posts</span></a></li>
@@ -64,12 +66,7 @@
 							<i class="fas fa-bars"></i>
 						</button>
 						
-						<ul class="navbar-nav flex-nowrap ms-auto">
-							
-							<li class="nav-item dropdown no-arrow mx-1">
-							<button id="projectBtn" class="btn btn-primary btn-sm" type="submit">Add new Project</button>
-							</li>
-							
+						<ul class="navbar-nav flex-nowrap ms-auto">							
 							<li class="nav-item dropdown no-arrow mx-1">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
@@ -152,17 +149,16 @@
 								<div class="card-body shadow">
 								
 									<div class="text-center">
-										
-										<div class="mb-3">
-													<button class="btn btn-danger btn-sm" type="submit">DELETE</button>
-												</div>
-										
-										<img class="img-thumbnail mb-3 mt-4"
-											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
-											width="160" height="160">
-										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="button">Change
-												Photo</button>
+										<img 
+											src="undefined"
+											width="160" height="160" id="project_image">
+										<div class="row" style="margin-top: 20px;"id="divNewImage">
+											<div class="text-center"> 
+											<input type="file" accept="image/jpg, image/png" id="image_chooser" class="editPhotoChooser col-12"/> 
+											<label id="image_label" for="image_chooser" class="labelImage">
+												Change Photo
+											</label>
+											</div>
 										</div>
 									</div>
 									
@@ -175,11 +171,6 @@
 																id="project_title" placeholder="The title of your project"
 																name="project_title">
 												</div>
-
-												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
-														Settings</button>
-												</div>
 											</form>
 										</div>
 									</div>
@@ -189,13 +180,8 @@
 											<label class="form-label" for="project_description"><strong>Project description</strong></label>
 											<form>
 												<div class="mb-3">
-													<textarea class="form-control" id="project_description" rows="1"
+													<textarea class="form-control" id="project_description" rows="4" maxlength="250"
 														name="project_description"></textarea>
-												</div>
-
-												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
-														Settings</button>
 												</div>
 											</form>
 										</div>
@@ -210,13 +196,23 @@
 																id="projectLink" placeholder="Link to your project"
 																name="project_link">
 												</div>
-
-												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
-														Settings</button>
-												</div>
+												
 											</form>
 										</div>
+										<div class="row text-center">
+											<div class="col mb-3">
+												<button id="projectBtn" class="btn btn-primary btn-sm" type="submit">ADD PROJECT</button>
+											</div>
+											<!--  
+											<div class="col mb-3">
+												<button class="btn btn-primary btn-sm" type="submit">EDIT</button>
+											</div>
+											<div class="col mb-3">
+												<button class="btn btn-danger btn-sm" type="submit">DELETE</button>
+											</div>
+											-->
+										</div>
+
 									</div>
 									
 								</div>
