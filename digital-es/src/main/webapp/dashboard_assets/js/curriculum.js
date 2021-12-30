@@ -1,10 +1,31 @@
+let user_id = -1;
 const all_experiences = new Map();
 
-window.onload = function() {
-
+window.onload = (event) => {
+	initDoneBtn();
 	hideNewExperienceDiv();
 	initBtns();
+	retrieveCurriculumData();
+};
 
+function fetchUserId() {
+
+	$.ajax({
+
+		url: "/get_user_id_action",
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+
+		user_id = JSON.stringify(data);
+		console.log("User id retrieved. Value: " + user_id);
+
+	});
+
+}
+
+function retrieveCurriculumData() {
 	$.ajax({
 
 		url: "/get_curriculum_data_action",
@@ -13,30 +34,30 @@ window.onload = function() {
 
 	}).done(function(data) {
 
-		experiences = data;
-
-		if (experiences.length == 0) {
-			console.log("no data");
+		if (data.length == 0) {
+			//console.log("no data");
 		} else {
+			experiences = data;
 			experiences.forEach(exp => {
 				all_experiences.set(exp.id, exp);
 			});
 			init();
-			initDoneButton(data[0].userId);
+			//initDoneButton(userId);
 		}
 
-	});
 
+	});
 }
 
 function initBtns() {
-	initAddExperienceBtn();
+	initAddNewExperienceBtn();
 	initDiscardNewExperienceChangesBtn();
 }
 
-function initAddExperienceBtn() {
+function initAddNewExperienceBtn() {
 	$("#addExperienceBtn").on("click", function(e) {
 		e.preventDefault();
+		cleanAddNewExperienceFields();
 		showNewExperienceDiv();
 	});
 }
@@ -48,12 +69,16 @@ function initDiscardNewExperienceChangesBtn() {
 	});
 }
 
-function initDoneButton(user_id) {
+function initDoneBtn() {
+	
+	if (user_id == -1) {
+		fetchUserId();
+	}
 	
 	$("#doneBtn").on("click", function(e) {
-		
+
 		e.preventDefault();
-		
+
 		new_title = $("#experienceTitle").val();
 		new_dateStart = $("#datePickerFrom").val();
 		new_dateEnd = $("#datePickerTo").val();
@@ -71,12 +96,12 @@ function initDoneButton(user_id) {
 			type: new_type,
 			description: new_description
 		};
-		
+
 		//console.log(new_data);
 		addExperience(new_data);
-		
+
 	});
-	
+
 }
 
 
@@ -95,10 +120,18 @@ function initExperience(exp, exp_id, is_updating) {
 	setEditBtnActions(exp_id);
 	setSaveBtnAction(exp);
 	setDeleteBtnAction(exp_id);
+	setDiscardChangesBtn(exp_id);
 }
 
 
 /* ================== BUTTONS ACTIONS ================= */
+
+function setDiscardChangesBtn(exp_id) {
+	$("#discardChangesBtn_" + exp_id).on("click", function(e) {
+		e.preventDefault();
+		updateExperience(all_experiences.get(exp_id));
+	});
+}
 
 function setDeleteBtnAction(exp_id) {
 	$("#deleteBtn_" + exp_id).on("click", function(e) {
@@ -170,7 +203,6 @@ function updateExperience(new_experience_data) {
 
 		all_experiences.set(new_experience_data.id, new_experience_data);
 		updateExperienceDiv(new_experience_data);
-
 
 	});
 

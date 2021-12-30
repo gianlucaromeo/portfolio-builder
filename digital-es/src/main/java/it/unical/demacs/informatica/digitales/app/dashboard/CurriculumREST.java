@@ -26,7 +26,7 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 public class CurriculumREST {
 
 	@PostMapping("/get_curriculum_data_action")
-	public String getCurriculumDataAction(HttpServletRequest req, HttpServletResponse resp) {
+	public synchronized String getCurriculumDataAction(HttpServletRequest req, HttpServletResponse resp) {
 		
 		Gson gson = new Gson();
 		
@@ -36,6 +36,7 @@ public class CurriculumREST {
 			if (c.getName().equals("logged_username")) {
 				
 				String username = c.getValue();
+				System.out.println(username);
 				User user = UserDAOImpl.getInstance().findByUsername(username);	
 				
 				Set<CurriculumExperience> curriculumExperiences =  CurriculumExperienceDAOImpl.getInstance().findAllByUserId(user.getId());
@@ -49,7 +50,30 @@ public class CurriculumREST {
 			}
 		}
 		
-		return Protocol.NO_USER_EXPERIENCES;
+		return gson.toJson(Protocol.NO_USER_EXPERIENCES);
+		
+	}
+	
+	@PostMapping("/get_user_id_action")
+	public synchronized String getUserIdAction(HttpServletRequest req, HttpServletResponse resp) {
+		
+		Gson gson = new Gson();
+		
+		Cookie[] cookies = req.getCookies();
+		for (Cookie c : cookies) {
+
+			if (c.getName().equals("logged_username")) {
+				
+				String username = c.getValue();
+				User user = UserDAOImpl.getInstance().findByUsername(username);	
+				
+				return gson.toJson(user.getId());
+				
+			}
+		}
+		
+		long id = -1;
+		return gson.toJson(id);
 		
 	}
 	
