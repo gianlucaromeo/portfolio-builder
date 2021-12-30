@@ -114,6 +114,9 @@ function init() {
 
 function initExperience(exp, exp_id, is_updating) {
 	buildExperience(exp, is_updating);
+	if (exp.endDate == "PRESENT") {
+		checkToPresent(exp.id);
+	}
 	hideSaveBtn(exp_id);
 	hideDiscardChangesBtn(exp_id);
 	disableFields(exp_id);
@@ -168,8 +171,8 @@ function fetchNewData(exp) {
 
 	new_title = $("#title_" + exp.id).val();
 	new_dateStart = $("#dpFrom_" + exp.id).val();
-	new_dateEnd = $("#dpTo_" + exp.id).val();
-	//$("#toPresent_" + id).val();
+	to_present = $("#toPresent_" + exp.id).prop("checked");
+	new_dateEnd = to_present ? "PRESENT" : $("#dpTo_" + exp.id).val();
 	new_place = $("#place_" + exp.id).val();
 	new_type = $("#typeSelect_" + exp.id).val(); // WORK = 1, EDUCATION = 2
 	new_description = $("#description_" + exp.id).val();
@@ -318,6 +321,14 @@ function hideNewExperienceDiv() {
 
 function showNewExperienceDiv() {
 	$("#newExperienceContainer").show();
+}
+
+function checkToPresent(id) {
+	$('#toPresent_' + id).prop("checked", true);
+}
+
+function uncheckToPresent(id) {
+	$('#toPresent_' + id).prop("checked", false);
 }
 
 /* ======================== END SHOW/HIDE CONTENT ======================== */
@@ -484,16 +495,15 @@ function buildDatePickerToDiv(exp) {
 	div_id = "dpToContainer_" + exp.id;
 	dp_id = "dpTo_" + exp.id;
 	to_present_div = "toPresent_" + exp.id;
-	end_date = exp.endDate === undefined ? '' : exp.endDate;
 	return `<!-- DATE PICKER TO -->
 			<div id="${div_id}"
 				class="col-12 col-sm-6 mb-3 md-form md-outline input-with-post-icon datepicker">
 				<label class="datePickerLabel" for="${div_id}"><strong>To</strong></label>
 				<input placeholder="Select date" type="date"
 					id="${dp_id}" name="experienceDateTo"
-					class="form-control form-control-user" value="${end_date}"> <input
+					class="form-control form-control-user" value="${exp.endDate}"> <input
 					class="form-check-input" type="checkbox" id="${to_present_div}"><label
-					class="form-check-label" for="toPresent"><strong>Present</strong></label>
+					class="form-check-label" for="${to_present_div}"><strong>Present</strong></label>
 			</div>
 			<!-- END DATE PICKER TO -->`;
 }
