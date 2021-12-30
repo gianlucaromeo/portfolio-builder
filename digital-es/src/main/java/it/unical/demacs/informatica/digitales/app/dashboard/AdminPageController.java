@@ -117,11 +117,12 @@ public class AdminPageController {
 		for (Cookie c : cookies) {
 
 			if (c.getName().equals("logged_username")) {
-
+				
 				username = c.getValue();
 				Cookie cookie = new Cookie("logged_username", username);
 				cookie.setMaxAge(60 * 60 * 24);
 
+				req.setAttribute("username", username);
 				resp.addCookie(cookie);
 
 			}
