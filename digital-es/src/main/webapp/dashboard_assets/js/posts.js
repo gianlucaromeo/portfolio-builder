@@ -85,7 +85,8 @@ function createPost(post){
 	let refLink = post.refLink;
 
 	console.log(post.pubblicationDate);
-	return `<div class="card border-0" id="post${id}">
+	return `<div class="card border-0 postClass" id="post${id}">
+								<br/>
 								<div class="text-left mb-3" style="text-align: right;">
 									<button class="btn btn-primary btn-sm" id="editId${id}">Edit</button>
 									`+ getDeleteButton(id) + `
@@ -134,8 +135,8 @@ function createPost(post){
 								<button class="btn btn-primary btn-sm" type="submit" id="saveBtn${id}">Save
 									Settings</button>
 								`+ getPopUpOnSave(id)+`
-								<hr />
-							</div>`;
+								
+							</div> <hr />`;
 }
 
 

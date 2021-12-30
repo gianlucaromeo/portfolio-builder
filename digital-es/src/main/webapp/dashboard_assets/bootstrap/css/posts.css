@@ -15,7 +15,9 @@ hr {
 #divNewImage{
 	text-align: center;
 }*/
-
+.postClass{
+	background-color: #F5F5F5;
+}
 .labelImage {
 	color: white;
 	background-color: #0074d9;

@@ -147,10 +147,10 @@
 				</nav>
 				<div class="container-fluid">
 					<h3 class="text-dark mb-4">Posts</h3>
-					<div class="row mb-3">
+					<div class="row mb-3 ">
 						<div class="col-lg-12">
 							<div class="card mb-3">
-								<div class="card-body shadow">
+								<div class="card-body shadow postClass">
 									<div class="text-center">
 										<img 
 											src="undefined"
