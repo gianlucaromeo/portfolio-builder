@@ -16,3 +16,34 @@
 .editPhotoChooser {
 	display: none;
 }
+
+#drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  font-family: sans-serif;
+  padding: 20px;
+  margin-bottom: 5px;
+}
+#drop-area.highlight {
+  border-color: purple;
+}
+#gallery img {
+  width: 30px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+#image_label {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+#image_label:hover {
+  background: #ddd;
+}
+#fileElem {
+  display: none;
+}

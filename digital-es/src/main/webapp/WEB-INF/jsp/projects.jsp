@@ -148,20 +148,32 @@
 							<div class="card mb-3">
 								<div class="card-body shadow">
 								
+									<div id="drop-area">
+										<form class="image_form">
+									    	<p>Drop your Image here</p>
+									    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+									    	<input type="file" accept="image/jpg, image/png" id="image_chooser" class="editPhotoChooser col-12"/> 
+											<label id="image_label" for="image_chooser" class="labelImage">
+												Or click here to select your photo
+											</label>
+											<img 
+											src="undefined"
+											width="160" height="160" id="project_image">
+									  	</form>
+									</div>
+									
+									<!-- 
 									<div class="text-center">
 										<img 
 											src="undefined"
 											width="160" height="160" id="project_image">
 										<div class="row" style="margin-top: 20px;"id="divNewImage">
 											<div class="text-center"> 
-											<input type="file" accept="image/jpg, image/png" id="image_chooser" class="editPhotoChooser col-12"/> 
-											<label id="image_label" for="image_chooser" class="labelImage">
-												Change Photo
-											</label>
+											
 											</div>
 										</div>
 									</div>
-									
+									 -->
 									<div class="row">
 										<div class="col-md-12">
 											<label class="form-label" for="project_title"><strong>Project Title</strong></label>
@@ -193,7 +205,7 @@
 											<form>
 												<div class="mb-3">
 													<input class="form-control" type="text"
-																id="projectLink" placeholder="Link to your project"
+																id="project_link" placeholder="Link to your project"
 																name="project_link">
 												</div>
 												
@@ -203,14 +215,6 @@
 											<div class="col mb-3">
 												<button id="projectBtn" class="btn btn-primary btn-sm" type="submit">ADD PROJECT</button>
 											</div>
-											<!--  
-											<div class="col mb-3">
-												<button class="btn btn-primary btn-sm" type="submit">EDIT</button>
-											</div>
-											<div class="col mb-3">
-												<button class="btn btn-danger btn-sm" type="submit">DELETE</button>
-											</div>
-											-->
 										</div>
 
 									</div>
