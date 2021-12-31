@@ -1,4 +1,9 @@
 
+setCreateProject();
+setChangeImage();
+loadProjects();
+handleDragEvent();
+
 function loadProjects() {
 	
 	$.ajax({
@@ -20,19 +25,84 @@ function loadProjects() {
 });
 }
 
-setCreateProject();
-loadProjects();
+function handleDragEvent() {
+	let dropArea = document.getElementById('drop-area');
+	
+	['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+		dropArea.addEventListener(eventName, preventDefaults, false)});
+
+	function preventDefaults (e) {
+  		e.preventDefault()
+  		e.stopPropagation()
+		}
+	
+	['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, highlight, false)});
+
+	['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, unhighlight, false)});
+
+	function highlight(e) {
+  		dropArea.classList.add('highlight');
+	}
+
+	function unhighlight(e) {
+  		dropArea.classList.remove('highlight');
+	}
+
+
+	dropArea.addEventListener('drop', handleDrop, false)
+
+	function handleDrop(e) {
+	let dt = e.dataTransfer;
+  	let files = dt.files;
+	console.log(files);
+	handleFiles(files);
+	}
+	
+	//files is a FileList
+	function handleFiles(files) {
+  		files = [...files];
+ 		files.forEach(uploadFile);
+ 		files.forEach(previewFile);
+	}
+	
+	function uploadFile(file) {
+ 		let url = 'YOUR URL HERE'
+  		let formData = new FormData()
+		
+		formData.append('file', file)
+
+	 	fetch(url, {
+    	method: 'POST',
+    	body: formData
+  		})
+  		.then(() => { /* Done. Inform the user */ })
+  		.catch(() => { /* Error. Inform the user */ })
+	}
+	
+	function previewFile(file) {
+		
+	    let reader = new FileReader()
+    	reader.readAsDataURL(file)
+    	reader.onloadend = function() {
+      		document.querySelector("#project_image").src=reader.result;
+		}
+	}
+}
 
 function addProject(project) {
 	appendProject(project);
 	setEditable(project.id,true);
 	setEvents(project.id);
+	resetButtons(project.id,false);
 }
 
 function setEvents(projectId) {
 	setOnDelete(projectId);
 	setOnEdit(projectId);
 	setOnConfirmEdit(projectId);
+	setOnChangeImage(projectId);
 }
 
 function setOnDelete(id) {
@@ -67,16 +137,16 @@ function setOnConfirmEdit(id) {
 		
 	var image64 =canvas.toDataURL();
 	console.log(image64);
-	selectedProject={
-		id:id,
-		userId:-1,
-		title:$("#project_title"+id).val(),
-		description:$("#project_description"+id).val(),
-		picture:$("#project_image"+id).attr("src"),
-		linkRef:$("#project_link"+id).val()
-	};
 	
 	$("#confirm"+id).click(function(e) {
+		selectedProject={
+			id:id,
+			userId:-1,
+			title:$("#project_title"+id).val(),
+			description:$("#project_description"+id).val(),
+			picture:$("#project_image"+id).attr("src"),
+			linkRef:$("#project_link"+id).val()
+		};
 		e.preventDefault();
 		$.ajax({
 			url: "/edit_project",
@@ -99,6 +169,7 @@ function setOnConfirmEdit(id) {
 function setOnEdit(id) {
 	$("#edit"+id).click(function(e){
 			setEditable(id,false);
+			resetButtons(id,true);
 	});
 
 }
@@ -228,7 +299,56 @@ function setCreateProject() {
 				appendProject(project);
 				setEditable(project.id,true);
 				setEvents(project.id);
+				resetTemplate();
 			}
 		});
 	});
+}
+
+function setChangeImage() {
+	const image_chooser=document.querySelector("#image_chooser");
+	var newImage="";
+	image_chooser.addEventListener("change", function(){
+		const reader= new FileReader();
+		reader.addEventListener("load", ()=> {
+			newImage=reader.result;
+			document.querySelector("#project_image").src=newImage;	
+			
+		});
+		reader.readAsDataURL(this.files[0]);
+	});
+}
+
+function setOnChangeImage(id) {
+	const image_chooser=document.querySelector("#image_chooser"+id);
+	var newImage="";
+	image_chooser.addEventListener("change", function(){
+		const reader= new FileReader();
+		reader.addEventListener("load", ()=> {
+			newImage=reader.result;
+			document.querySelector("#project_image"+id).src=newImage;	
+		});
+		reader.readAsDataURL(this.files[0]);
+	});
+}
+
+function resetTemplate() {
+	$("#project_title").val("");
+	$("#project_description").val("");
+	$("#project_image").attr("src","undefined");
+	$("#project_link").val("");
+}
+
+function resetButtons(id,value) {
+	$("#edit"+id).hide();
+	$("#delete"+id).hide();
+	$("#confirm"+id).hide();
+	if(value===true) {
+		$("#delete"+id).show();
+		$("#confirm"+id).show();
+	}
+	else {
+		$("#edit"+id).show();
+		$("#delete"+id).show();
+	}
 }
