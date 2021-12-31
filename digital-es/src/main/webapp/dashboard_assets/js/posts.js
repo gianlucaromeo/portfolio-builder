@@ -1,3 +1,6 @@
+
+const postsMap = new Map();
+
 //é***************************************************** FUNZIONE START *******************************************//
 /**
 * Chiedo al rest controller tutti i post, lui me li invia correttamente poichè
@@ -25,7 +28,11 @@ function start() {
 		if (posts.length === 0) {
 			console.log("no data");
 		} else {
-			posts.forEach(post => addPost(post));
+			posts.forEach(post => {
+				addPost(post);
+				
+				postsMap.set(post.id, post);
+			});
 			//posts.forEach(post => console.log(post));
 
 		}
@@ -53,13 +60,16 @@ function start() {
 * 	
  */
 function addPost(post) {
+	postsMap.set(post.id, post);
 	prependPost(post);
 	refactPostFields(post.id, true);
 	setEventOnDelete(post.id);
 	setEventOnEdit(post.id);
 	setEventOnSave(post.id);
 	setEventChangePhoto(post.id);
+	setOnDiscardChanges(post.id);
 	refactButton(post.id, true);
+
 
 }
 
@@ -83,13 +93,17 @@ function createPost(post){
 	let publicationDate = post.pubblicationDate;
 	let lastEditDate = post.lastEditDate;
 	let refLink = post.refLink;
+	
 
 	console.log(post.pubblicationDate);
-	return `<div class="card border-0 postClass" id="post${id}">
+	return `<div  id="post${id}">
+				<div class="postClass card border-0">
 								<br/>
+								<div class="postButtonDiv">
 								<div class="text-left mb-3" style="text-align: right;">
 									<button class="btn btn-primary btn-sm" id="editId${id}">Edit</button>
 									`+ getDeleteButton(id) + `
+								</div>
 								</div>
 								<div class="row">
 									<div col-12>
@@ -131,12 +145,17 @@ function createPost(post){
 											${lastEditDate}</h6>
 									</div>
 								</div>
-							
+								
+								<button class="btn btn-danger btn-sm" type="submit" id="discardChangesId${id}">Discard
+									Changes</button>
 								<button class="btn btn-primary btn-sm" type="submit" id="saveBtn${id}">Save
 									Settings</button>
 								`+ getPopUpOnSave(id)+`
+								</div>
 								
-							</div> <hr />`;
+								<hr /> 
+								
+							</div> `;
 }
 
 
@@ -177,10 +196,13 @@ function refactButton(id, value) {
 		$("#saveBtn" + id).show();
 		$("#editPhotoId" + id).show();
 		$("#editPhotoLabelId"+id).show();
+		$("#discardChangesId"+id).show();
+		
 	} else {
 		$("#deleteId" + id).show();
 		$("#editId" + id).show();
 		$("#saveBtn" + id).hide();
+		$("#discardChangesId"+id).hide();
 		$("#editPhotoId" + id).hide();
 		$("#editPhotoLabelId"+id).hide();
 	}
@@ -195,6 +217,9 @@ function resetFieldsNewPost(){
 	$("#newPostRefLink").val("");
 }
 
+
+
+//************************************************************ EVENTS ON BUTTONS ****************************************************** */
 function addEventOnNewPostImage(){
 	const imageInput=document.querySelector("#newImageInput");
 	var newImage="";
@@ -213,6 +238,8 @@ function addEventOnNewPostImage(){
 	
 }
 
+
+//funzione per la creazione di un nuovo post, notifica alla servlet che risponde in base a come sono creati i campi
 function addEventOnAddNewPost(){
 	$("#newPostImage").hide()
 	
@@ -267,41 +294,7 @@ function addEventOnAddNewPost(){
 	});
 }
 
-function doCreateOnDOM(data){
-	console.log(data);
 
-
-	
-	$("#newPostTitle").removeClass("is-invalid");
-	$("#newPostDSescription").removeClass("is-invalid");
-	$("#newPostRefLink").removeClass("is-invalid");
-	var isValidPost = true;
-	if (data.title === "post_field_empty" || data.title === "post_title_not_correct") {
-		$("#newPostTitle").addClass("is-invalid");
-		isValidPost = false;
-	} if (data.description === "post_field_empty") {
-		$("#newPostDSescription").addClass("is-invalid");
-		isValidPost = false;
-	} if (data.refLink === "post_field_empty") {
-		$("#newPostRefLink").addClass("is-invalid");
-		isValidPost = false;
-	}
-
-	if (isValidPost) {
-		
-		$("#popupNewBtn").trigger('click');
-		
-		$("#closeNewPopupBtn").click(function() {
-			$("#postsSection").prepend(createPost(data));
-			resetFieldsNewPost();
-			refactPostFields(data.id, true);
-			refactButton(data.id, true);
-		});
-		
-		
-
-	}
-}
 /**
 *  prendo il bottone di eliminazione che ha ogni post 
 *  gli associo un evento sul click evitando che effettui la submit con preventDefault()
@@ -361,6 +354,20 @@ function setEventOnEdit(id) {
 *  i bottoni modifica ed elimina ricompaiono e quello di salvataggio scompare
 * 	
  */
+function setOnDiscardChanges(postId){
+	$("#discardChangesId"+postId).click(function(event){
+		event.preventDefault();
+		
+		oldPost=postsMap.get(postId);
+		
+		console.log(oldPost);
+		$("#postTitleId" + postId).val(oldPost.title);
+		$("#postDescriptionId" + postId).val(oldPost.description);
+		$("#postLinkRefId" + postId).val(oldPost.refLink);
+		refactPostFields(postId, true);
+		refactButton(postId, true);
+	});
+}
 function setEventOnSave(postId) {
 	$("#saveBtn" + postId).click(function(event) {
 		event.preventDefault();
@@ -422,6 +429,67 @@ function setEventOnSave(postId) {
 
 	});
 }
+
+
+
+function setEventChangePhoto(id) {
+	const imageInput=document.querySelector("#editPhotoId"+id);
+	var newImage="";
+	imageInput.addEventListener("change", function(){
+		const reader= new FileReader();
+		reader.addEventListener("load", ()=> {
+			newImage=reader.result;
+		
+			document.querySelector("#postImageId"+id).src=newImage;	
+			
+		});
+		reader.readAsDataURL(this.files[0]);
+		$("#postImageId"+id).show();
+	});
+	
+
+}
+
+
+
+//***************************************************************************************DOM MANIPULATION************************************************* */
+function doCreateOnDOM(data){
+	console.log(data);
+
+
+	
+	$("#newPostTitle").removeClass("is-invalid");
+	$("#newPostDSescription").removeClass("is-invalid");
+	$("#newPostRefLink").removeClass("is-invalid");
+	var isValidPost = true;
+	if (data.title === "post_field_empty" || data.title === "post_title_not_correct") {
+		$("#newPostTitle").addClass("is-invalid");
+		isValidPost = false;
+	} if (data.description === "post_field_empty") {
+		$("#newPostDSescription").addClass("is-invalid");
+		isValidPost = false;
+	} if (data.refLink === "post_field_empty") {
+		$("#newPostRefLink").addClass("is-invalid");
+		isValidPost = false;
+	}
+
+	if (isValidPost) {
+		
+		$("#popupNewBtn").trigger('click');
+		
+		$("#closeNewPopupBtn").click(function() {
+			$("#postsSection").prepend(createPost(data));
+			resetFieldsNewPost();
+			refactPostFields(data.id, true);
+			refactButton(data.id, true);
+			postsMap.set(data.id, data);
+		});
+		
+		
+
+	}
+}
+
 function doUpdateOnDOM(data){
 	console.log(data);
 	$("#postTitleId" + data.id).removeClass("is-invalid");
@@ -455,26 +523,35 @@ function doUpdateOnDOM(data){
 }
 
 
-function setEventChangePhoto(id) {
-	const imageInput=document.querySelector("#editPhotoId"+id);
-	var newImage="";
-	imageInput.addEventListener("change", function(){
-		const reader= new FileReader();
-		reader.addEventListener("load", ()=> {
-			newImage=reader.result;
-		
-			document.querySelector("#postImageId"+id).src=newImage;	
-			
-		});
-		reader.readAsDataURL(this.files[0]);
-		$("#postImageId"+id).show();
-	});
-	
 
+
+
+//************************************************************************END Gestione campi dei post e bottoni di edit ed eliminazione POST NELL'HTML**************************************************' */
+//****************************************************************************************************************************************' */
+
+
+
+
+//*******************************************************************************************************FUnzione per prendere la data************************_ */
+
+/**
+*  Prendo la data in cui la funzione viene richiamata e ritorno una stringra del patter yyyy-mm-dd
+* il mese viene sommato ad 1 perchè vanno da 0 a 11
+* 	
+ */
+function getCurrentDate() {
+	var date = new Date();
+	var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+	return dateString;
 }
 
+//*******************************************************************************************************END FUnzione per prendere la data************************_ */
+//****************************************************************************************************************************************************************_ */
 
 
+
+//***************************** BUTTON CREATION ************************************************************************************************* */
 /**
 *  Creo il bottone dell'eliminazione dei post passandogli il loro id, inorltre gli associo la funzionalità del model box di bootstrap ovvero
 * una finestra di dialogo in cui l'utente deve confermare l'eliminazione'
@@ -540,32 +617,10 @@ function getPopUpOnSave(id){
 
 
 
-//************************************************************************END Gestione campi dei post e bottoni di edit ed eliminazione POST NELL'HTML**************************************************' */
-//****************************************************************************************************************************************' */
-
-
-
-
-//*******************************************************************************************************FUnzione per prendere la data************************_ */
-
-/**
-*  Prendo la data in cui la funzione viene richiamata e ritorno una stringra del patter yyyy-mm-dd
-* il mese viene sommato ad 1 perchè vanno da 0 a 11
-* 	
- */
-function getCurrentDate() {
-	var date = new Date();
-	var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-
-	return dateString;
-}
-
-//*******************************************************************************************************END FUnzione per prendere la data************************_ */
-//****************************************************************************************************************************************************************_ */
-
-
-
-
-
 //richiamo il metodo start in modo che venga eseguito tutto il codice che mi serve per settare i post
 start();
+
+
+
+
+

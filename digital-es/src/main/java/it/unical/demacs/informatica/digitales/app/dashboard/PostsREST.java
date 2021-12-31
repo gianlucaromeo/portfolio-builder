@@ -26,6 +26,42 @@ import it.unical.demacs.informatica.digitales.app.validator.PostValidator;
 
 @RestController
 public class PostsREST {
+	
+	@PostMapping("/create_post")
+	public String createPost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Post post = new Post();
+		User user=null;
+		post = gson.fromJson(req.getReader(), Post.class);
+		Cookie[] cookies = req.getCookies();
+		for (Cookie c : cookies) {
+			System.out.println(c.getName());
+			if (c.getName().equals("logged_username")) {
+				String username = c.getValue();
+				user = UserDAOImpl.getInstance().findByUsername(username);
+			}
+
+		}
+		//System.out.println(post);
+		PostValidatorResponse newPost= PostValidator.validatePost(post);
+		if(user!=null) {
+			post.setUserId(user.getId());
+			post.setLastEditDate("");
+			newPost.setUserId(user.getId());
+			newPost.setLastEditDate("");
+			System.out.println(user);
+			if(PostValidator.isValidPost(newPost)) {
+				
+				PostDAOImpl.getInstance().create(post);
+			}
+		
+		}
+		return gson.toJson(newPost);
+		
+
+	}
+	
+	
 	@PostMapping("/delete_post")
 	public String deletePost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
@@ -75,40 +111,7 @@ public class PostsREST {
 
 	}
 
-	@PostMapping("/create_post")
-	public String createPost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
-		Gson gson = new Gson();
-		Post post = new Post();
-		User user=null;
-		post = gson.fromJson(req.getReader(), Post.class);
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-			System.out.println(c.getName());
-			if (c.getName().equals("logged_username")) {
-				String username = c.getValue();
-				user = UserDAOImpl.getInstance().findByUsername(username);
-			}
 
-		}
-		//System.out.println(post);
-		PostValidatorResponse newPost= PostValidator.validatePost(post);
-		if(user!=null) {
-			post.setUserId(user.getId());
-			post.setLastEditDate("");
-			newPost.setUserId(user.getId());
-			newPost.setLastEditDate("");
-			System.out.println(user);
-			if(PostValidator.isValidPost(newPost)) {
-				
-				PostDAOImpl.getInstance().create(post);
-			}
-		
-		}
-		return gson.toJson(newPost);
-		
-
-	}
-	
 	
 	
 }

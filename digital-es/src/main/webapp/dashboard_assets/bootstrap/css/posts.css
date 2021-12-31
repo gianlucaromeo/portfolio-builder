@@ -30,6 +30,9 @@ hr {
     border-radius: 0.2rem;
 	
 }
+.postButtonDiv{
+	padding-right: 20px;
+}
 /*
 .newImageLabel{
 	color: white;
