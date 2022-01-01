@@ -68,7 +68,7 @@ function handleDragEvent() {
 	}
 	
 	function uploadFile(file) {
- 		let url = 'YOUR URL HERE'
+ 		let url = ''
   		let formData = new FormData()
 		
 		formData.append('file', file)
@@ -81,8 +81,7 @@ function handleDragEvent() {
   		.catch(() => { /* Error. Inform the user */ })
 	}
 	
-	function previewFile(file) {
-		
+	function previewFile(file) {		
 	    let reader = new FileReader()
     	reader.readAsDataURL(file)
     	reader.onloadend = function() {
@@ -103,6 +102,7 @@ function setEvents(projectId) {
 	setOnEdit(projectId);
 	setOnConfirmEdit(projectId);
 	setOnChangeImage(projectId);
+	setOnDiscard(projectId);
 }
 
 function setOnDelete(id) {
@@ -158,11 +158,30 @@ function setOnConfirmEdit(id) {
 			if(data==="error"){
 				
 			}else{
-				$("#project" + data.id).remove()
-				addProject(data);
+				restore(id,data);
+				setEditable(id,true);
+				resetButtons(id,false);
 			}
 		});
 		
+	});
+}
+
+function setOnDiscard(id) {
+	$("#discard"+id).click(function(e) {
+		e.preventDefault();
+		console.log(id);
+		$.ajax({
+			url: "/restore_project",
+			contentType: "application/json",
+			data: JSON.stringify(id),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			restore(id,data);
+			setEditable(id,true);
+			resetButtons(id,false);
+		});
 	});
 }
 
@@ -191,10 +210,10 @@ function appendProject(project) {
 	first=$("#firstProject");
 	first.append(`<div class="col-lg-4" id="project${id}">
 							<div class="card mb-3">
-								<div class="card-body shadow">
+								<div class="card-body shadow" id="project_container">
 									<div class="text-center">
 										<img 
-											src="undefined"
+											src="${imagePath}"
 											width="160" height="160" id="project_image${id}">
 										<div class="row" style="margin-top: 20px;"id="divNewImage${id}">
 											<div class="text-center"> 
@@ -224,7 +243,7 @@ function appendProject(project) {
 											<label class="form-label" for="project_description"><strong>Project description</strong></label>
 											<form>
 												<div class="mb-3">
-													<textarea class="form-control" id="project_description${id}" rows="1"
+													<textarea class="form-control" id="project_description${id}" rows="4" maxlength="250"  style="resize: none;"
 														name="project_description">${description}</textarea>
 												</div>
 											</form>
@@ -248,6 +267,9 @@ function appendProject(project) {
 											</div>
 											<div class="col mb-3">
 												<button id="confirm${id}" class="btn btn-primary btn-sm" type="submit">CONFIRM</button>
+											</div>
+											<div class="col mb-3">
+												<button id="discard${id}" class="btn btn-danger btn-sm" type="submit">UNDO</button>
 											</div>
 											<div class="col mb-3">
 												<button id="delete${id}" class="btn btn-danger btn-sm" type="submit">DELETE</button>
@@ -296,13 +318,45 @@ function setCreateProject() {
 			if(project==="error"){
 				
 			}else{
-				appendProject(project);
-				setEditable(project.id,true);
-				setEvents(project.id);
-				resetTemplate();
+			//	addProject(project);
+				//resetTemplate();
+				createValidation(project);
 			}
 		});
 	});
+}
+
+function createValidation(data) {
+	console.log(data);
+	
+	$("#project_title").removeClass("is-invalid");
+	$("#project_description").removeClass("is-invalid");
+	$("#project_link").removeClass("is-invalid");
+	var isValidProject = true;
+	if (data.title === "project_field_empty" || data.title === "project_title_not_valid") {
+		$("#project_title").addClass("is-invalid");
+		isValidProject = false;
+	} if (data.description === "project_field_empty") {
+		$("#project_description").addClass("is-invalid");
+		isValidProject = false;
+	} if (data.linkRef === "project_field_empty") {
+		$("#project_link").addClass("is-invalid");
+		isValidProject = false;
+	}
+
+	if (isValidProject) {
+		
+		//$("#popupNewBtn").trigger('click');
+		
+		//$("#closeNewPopupBtn").click(function() {
+			
+				addProject(data);
+				resetTemplate();
+		//});
+		
+		
+
+	}
 }
 
 function setChangeImage() {
@@ -343,12 +397,23 @@ function resetButtons(id,value) {
 	$("#edit"+id).hide();
 	$("#delete"+id).hide();
 	$("#confirm"+id).hide();
+	$("#discard"+id).hide();
+	$("#image_label"+id).hide();
 	if(value===true) {
 		$("#delete"+id).show();
 		$("#confirm"+id).show();
+		$("#discard"+id).show();
+		$("#image_label"+id).show();
 	}
 	else {
 		$("#edit"+id).show();
 		$("#delete"+id).show();
 	}
+}
+
+function restore(id,project) {
+			$("#project_title"+id).val(project.title);
+			$("#project_description"+id).val(project.description);
+			$("#project_image"+id).attr("src",project.picture);
+			$("#project_link"+id).val(project.linkRef);
 }

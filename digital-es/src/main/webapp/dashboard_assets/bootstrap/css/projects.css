@@ -17,10 +17,13 @@
 	display: none;
 }
 
+#project_container {
+  max-height: 1000px;
+}
+
 #drop-area {
   border: 2px dashed #ccc;
   border-radius: 20px;
-  font-family: sans-serif;
   padding: 20px;
   margin-bottom: 5px;
 }

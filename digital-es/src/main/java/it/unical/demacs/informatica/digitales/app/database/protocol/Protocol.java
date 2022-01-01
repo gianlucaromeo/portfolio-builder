@@ -23,4 +23,9 @@ public class Protocol {
 	public final static String POST_TITLE_NOT_CORRECT = "post_title_not_correct";
 	public final static String POST_LINK_NO_VALID = "post_link_not_valid";
 	
+	/*PROJECTS*/
+	public final static String PROJECT_EMPTY_FIELD = "project_field_empty";
+	public final static String PROJECT_TITLE_NOT_VALID = "project_title_not_valid";
+	public final static String PROJECT_LINK_NO_VALID = "project_link_not_valid";
+	
 }

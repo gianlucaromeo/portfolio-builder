@@ -15,9 +15,14 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.beans.validation.PostValidatorResponse;
+import it.unical.demacs.informatica.digitales.app.beans.validation.ProjectValidatorResponse;
+import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
+import it.unical.demacs.informatica.digitales.app.validator.PostValidator;
+import it.unical.demacs.informatica.digitales.app.validator.ProjectValidator;
 
 @RestController
 public class ProjectsREST {
@@ -28,15 +33,12 @@ public class ProjectsREST {
 
 		Cookie[] cookies = req.getCookies();
 		for (Cookie c : cookies) {
-			System.out.println("Cookie: " + c.getName());
 			if (c.getName().equals("logged_username")) {
 				String username = c.getValue();
 				User user = UserDAOImpl.getInstance().findByUsername(username);
 
 				Set<Project> projects = ProjectDAOImpl.getInstance().findAllByUserId(user.getId());
 				String projectsToJSON = gson.toJson(projects);
-
-				System.out.println(projectsToJSON);
 
 				return projectsToJSON;
 			}
@@ -51,7 +53,6 @@ public class ProjectsREST {
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 		Project project = new Project();
 		project.setId(id);
-		System.out.println(id);
 		ProjectDAOImpl.getInstance().delete(project);
 	}
 	
@@ -65,6 +66,15 @@ public class ProjectsREST {
 		project.setUserId(originalProject.getUserId());
 		ProjectDAOImpl.getInstance().update(project);
 		return gson.toJson(project);
+	}
+	
+	@PostMapping("restore_project")
+	public String restoreProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Integer id = gson.fromJson(req.getReader(), Integer.class);
+		Project originalProject= ProjectDAOImpl.getInstance().findById(id);
+		
+		return gson.toJson(originalProject);
 	}
 	
 	@PostMapping("add_project")
@@ -81,14 +91,27 @@ public class ProjectsREST {
 			}
 
 		}
+		ProjectValidatorResponse newProject= ProjectValidator.validateProject(project);
 		if(user!=null) {
 			project.setUserId(user.getId());
-			ProjectDAOImpl.getInstance().create(project);
+			newProject.setUserId(user.getId());
+			System.out.println(user);
+			if(ProjectValidator.isValidProject(newProject)) {
+				
+				ProjectDAOImpl.getInstance().create(project);
+				project.setId(ProjectDAOImpl.getInstance().findId(project));
+			}
+		
+		}
+//		if(user!=null) {
+//			project.setUserId(user.getId());
+//			ProjectDAOImpl.getInstance().create(project);
+//			project.setId(ProjectDAOImpl.getInstance().findId(project));
 			return gson.toJson(project);
 			
-		}else {
-			return Protocol.ERROR;
-		}
+//		}else {
+//			return Protocol.ERROR;
+//		}
 	}
 	
 }

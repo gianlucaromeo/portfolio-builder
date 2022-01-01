@@ -143,22 +143,28 @@
 			
 					<div class="container-fluid">
 					<div id="firstProject" class="row mb-3">
-						<!-- INIZIO PROJECT TEMPLATE -->
-						<div class="col-lg-4">
+						<!-- INIZIO PROJECT TEMPLATE --><!-- METTERE 4 INVECE DI 12 PER NON AVERE SOLO TEMPLATE SOPRA -->
+						<div class="col-lg-12">
 							<div class="card mb-3">
-								<div class="card-body shadow">
+								<div class="card-body shadow" id="project_container">
 								
 									<div id="drop-area">
 										<form class="image_form">
-									    	<p>Drop your Image here</p>
-									    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-									    	<input type="file" accept="image/jpg, image/png" id="image_chooser" class="editPhotoChooser col-12"/> 
-											<label id="image_label" for="image_chooser" class="labelImage">
-												Or click here to select your photo
-											</label>
-											<img 
-											src="undefined"
-											width="160" height="160" id="project_image">
+											<div class="row">
+												<div class="col-sm-6">
+											    	<p>Drop your Image here</p>
+											    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+											    	<input type="file" accept="image/jpg, image/png" id="image_chooser" class="editPhotoChooser col-12"/> 
+													<label id="image_label" for="image_chooser" class="labelImage">
+														Or click here to select your photo
+													</label>
+												</div>
+												<div class="col-sm-6">
+													<img 
+													src="undefined"
+													width="160" height="160" id="project_image">
+												</div>
+											</div>
 									  	</form>
 									</div>
 									
@@ -192,7 +198,7 @@
 											<label class="form-label" for="project_description"><strong>Project description</strong></label>
 											<form>
 												<div class="mb-3">
-													<textarea class="form-control" id="project_description" rows="4" maxlength="250"
+													<textarea class="form-control" id="project_description" rows="4" maxlength="250"  style="resize: none;"
 														name="project_description"></textarea>
 												</div>
 											</form>
