@@ -62,10 +62,15 @@ public class ProjectsREST {
 		Project project = new Project();
 		project = gson.fromJson(req.getReader(), Project.class);
 		Project originalProject= ProjectDAOImpl.getInstance().findById(project.getId());
-		
 		project.setUserId(originalProject.getUserId());
-		ProjectDAOImpl.getInstance().update(project);
-		return gson.toJson(project);
+		
+		ProjectValidatorResponse newProject= ProjectValidator.validateProject(project);
+			if(ProjectValidator.isValidProject(newProject)) {
+				ProjectDAOImpl.getInstance().update(project);
+				project.setId(ProjectDAOImpl.getInstance().findId(project));
+			}
+		
+		return gson.toJson(newProject);
 	}
 	
 	@PostMapping("restore_project")
@@ -95,23 +100,14 @@ public class ProjectsREST {
 		if(user!=null) {
 			project.setUserId(user.getId());
 			newProject.setUserId(user.getId());
-			System.out.println(user);
 			if(ProjectValidator.isValidProject(newProject)) {
-				
 				ProjectDAOImpl.getInstance().create(project);
 				project.setId(ProjectDAOImpl.getInstance().findId(project));
+				newProject.setId(project.getId());
 			}
 		
 		}
-//		if(user!=null) {
-//			project.setUserId(user.getId());
-//			ProjectDAOImpl.getInstance().create(project);
-//			project.setId(ProjectDAOImpl.getInstance().findId(project));
-			return gson.toJson(project);
-			
-//		}else {
-//			return Protocol.ERROR;
-//		}
+			return gson.toJson(newProject);
 	}
 	
 }

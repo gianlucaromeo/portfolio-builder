@@ -158,13 +158,36 @@ function setOnConfirmEdit(id) {
 			if(data==="error"){
 				
 			}else{
-				restore(id,data);
-				setEditable(id,true);
-				resetButtons(id,false);
+				editValidation(data);
 			}
 		});
 		
 	});
+}
+
+function editValidation(data) {
+	console.log("START EDIT VALIDATION; VALIDATING THIS DATA:");
+	console.log(data);
+	
+	$("#project_title"+data.id).removeClass("is-invalid");
+	$("#project_description"+data.id).removeClass("is-invalid");
+	$("#project_link"+data.id).removeClass("is-invalid");
+	var isValidProject = true;
+	if (data.title === "project_field_empty" || data.title === "project_title_not_valid") {
+		$("#project_title"+data.id).addClass("is-invalid");
+		isValidProject = false;
+	} if (data.description === "project_field_empty") {
+		$("#project_description"+data.id).addClass("is-invalid");
+		isValidProject = false;
+	} if (data.linkRef === "project_field_empty"||data.linkRef === "...") {
+		$("#project_link"+data.id).addClass("is-invalid");
+		isValidProject = false;
+	}
+	if (isValidProject) {
+				restore(data.id,data);
+				setEditable(data.id,true);
+				resetButtons(data.id,false);
+	}
 }
 
 function setOnDiscard(id) {
@@ -181,6 +204,9 @@ function setOnDiscard(id) {
 			restore(id,data);
 			setEditable(id,true);
 			resetButtons(id,false);
+			$("#project_title"+id).removeClass("is-invalid");
+			$("#project_description"+id).removeClass("is-invalid");
+			$("#project_link"+id).removeClass("is-invalid");
 		});
 	});
 }
@@ -318,8 +344,6 @@ function setCreateProject() {
 			if(project==="error"){
 				
 			}else{
-			//	addProject(project);
-				//resetTemplate();
 				createValidation(project);
 			}
 		});
@@ -327,11 +351,13 @@ function setCreateProject() {
 }
 
 function createValidation(data) {
+	console.log("START VALIDATION; VALIDATING THIS DATA:");
 	console.log(data);
 	
 	$("#project_title").removeClass("is-invalid");
 	$("#project_description").removeClass("is-invalid");
 	$("#project_link").removeClass("is-invalid");
+	$("#drop-area").removeClass("is-invalid");
 	var isValidProject = true;
 	if (data.title === "project_field_empty" || data.title === "project_title_not_valid") {
 		$("#project_title").addClass("is-invalid");
@@ -339,23 +365,16 @@ function createValidation(data) {
 	} if (data.description === "project_field_empty") {
 		$("#project_description").addClass("is-invalid");
 		isValidProject = false;
-	} if (data.linkRef === "project_field_empty") {
+	} if (data.linkRef === "project_field_empty"||data.linkRef === "...") {
 		$("#project_link").addClass("is-invalid");
 		isValidProject = false;
+	} if (data.picture === "undefined") {
+		$("#drop-area").addClass("is-invalid");
+		isValidProject = false;
 	}
-
 	if (isValidProject) {
-		
-		//$("#popupNewBtn").trigger('click');
-		
-		//$("#closeNewPopupBtn").click(function() {
-			
 				addProject(data);
 				resetTemplate();
-		//});
-		
-		
-
 	}
 }
 
