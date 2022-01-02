@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -436,6 +437,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		return username;
 
 	}
+
 	
 	
 	

@@ -236,5 +236,31 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		
 	}
 
+	public synchronized String findProfileImageById(long id) {
+		con = DBUtil.getInstance().getConnection();
+		System.out.println(id);
+
+		String query = "SELECT profile_picture FROM users_main_informations WHERE user_id=?;";
+
+		try {
+
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("profile_picture");
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[UserMainInformationsDAOImpl] [findProfileImageById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return Protocol.ERROR;
+	}
 
 }

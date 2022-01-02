@@ -208,8 +208,8 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 	}
 	
-	public List<Post> findAllByUserId(Long userId) {
-		
+	public List<Post> findAllByUserId(long userId) {
+		System.out.println(userId);
 		List<Post> posts = new ArrayList<Post>();
 		
 		con = DBUtil.getInstance().getConnection();

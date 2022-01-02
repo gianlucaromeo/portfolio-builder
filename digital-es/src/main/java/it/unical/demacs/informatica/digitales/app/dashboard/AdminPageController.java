@@ -60,6 +60,24 @@ public class AdminPageController {
 		return "error_page";
 
 	}
+	
+	@GetMapping("/moderator_posts")
+	public String goToPostsAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+		Cookie[] cookies = req.getCookies();
+
+		for (Cookie c : cookies) {
+			if (c.getName().equals("logged_username")) {
+				String username = c.getValue();
+				System.out.println(c.getValue());
+				fetchUserData(req, username);
+				System.out.println("moderator");
+				return "moderator_posts";
+			}
+		}
+		return "error_page";
+
+	}
 
 	private void fetchUserData(HttpServletRequest req, String username) {
 
