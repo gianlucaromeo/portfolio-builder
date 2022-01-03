@@ -10,7 +10,7 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class PostValidator {
 	
-	private static final String TITLE_RGX = "^[0-9a-zA-Z]+$";
+	private static final String TITLE_RGX = "^[0-9a-zA-Z\\s]+$";
 	private static final Pattern TITLE_PATTERN = Pattern.compile(TITLE_RGX);
 	
 	private static final String LINK_RGX = "^(?:[a-z]*?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
