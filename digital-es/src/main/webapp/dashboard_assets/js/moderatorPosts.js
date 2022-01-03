@@ -125,7 +125,7 @@ function createPost(post){
 	return `<div  id="post${id}" class="row">
 			<div class="postButtonDiv">
 								<div class="text-left mb-3" style="text-align: right;">
-									`+ getBanButton(id) + `
+									`+ getDeleteButton(id) + `
 			</div>
 			<div class="col-md-12 col-lg-12">
 				<div class="card border-0">
@@ -137,7 +137,7 @@ function createPost(post){
 							Title: ${title}
 							</strong>
 						</h5>
-						<p class="text-muted card-text">Description:  ${description} </p>
+						<p class="text-muted card-text">Description: ${description} </p>
 						
 						Reference Link: <a href="${refLink}">${refLink}</a>
 					</div>
@@ -156,11 +156,11 @@ function createPost(post){
 			</div> <hr/>`;
 }
 
-function getBanButton(id) {
+function getDeleteButton(id) {
 	var deleteButton = `<!-- Button trigger modal -->
 						<button type="button" class="btn btn-danger btn-sm"
 							data-bs-toggle="modal" data-bs-target="#modalId${id}"
-							id="banId${id}">Ban</button>
+							id="deleteId${id}">Delete</button>
 						<!-- Modal -->
 						<div class="modal fade" id="modalId${id}" tabindex="-1"
 							aria-labelledby="modalLabel" aria-hidden="true">
@@ -171,12 +171,12 @@ function getBanButton(id) {
 										<button type="button" class="btn-close" data-bs-dismiss="modal"
 											aria-label="Close"></button>
 									</div>
-									<div class="modal-body">Are you sure to ban this post?</div>
+									<div class="modal-body">Are you sure to delete this post?</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal"">Close</button>
-										<button type="button" class="btn btn-danger" id="confirmBan${id}"
-											data-bs-dismiss="modal">Ban</button>
+										<button type="button" class="btn btn-danger" id="confirmDelete${id}"
+											data-bs-dismiss="modal">Delete</button>
 									</div>
 								</div>
 							</div>
