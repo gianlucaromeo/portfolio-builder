@@ -26,7 +26,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 public class AdminPageController {
 
 	@PostMapping("/profile")
-	public String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public synchronized String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		Cookie[] cookies = req.getCookies();
 		String username = null;
@@ -45,7 +45,7 @@ public class AdminPageController {
 	}
 
 	@GetMapping("/profile")
-	public String goToUserAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public synchronized String goToUserAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		Cookie[] cookies = req.getCookies();
 
@@ -79,7 +79,7 @@ public class AdminPageController {
 
 	}
 
-	private void fetchUserData(HttpServletRequest req, String username) {
+	private synchronized void fetchUserData(HttpServletRequest req, String username) {
 
 		User user = (User) UserDAOImpl.getInstance().findByUsername(username);
 

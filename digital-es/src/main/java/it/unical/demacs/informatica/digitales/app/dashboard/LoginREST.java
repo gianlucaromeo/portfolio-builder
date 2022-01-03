@@ -23,7 +23,7 @@ public class LoginREST {
 
 
 	@PostMapping("/login_data_validation")
-	public String loginAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String loginAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 	
 		Gson gson = new Gson();
 		UserAuthentication userAuth = new UserAuthentication();
@@ -35,7 +35,7 @@ public class LoginREST {
 	}
 	
 	@PostMapping("/dashboard/login")
-	public void login(HttpServletRequest req, HttpServletResponse resp) {
+	public synchronized void login(HttpServletRequest req, HttpServletResponse resp) {
 		
 		System.out.println("DO LOGIN");
 		UserAuthentication userAuth = new UserAuthentication();

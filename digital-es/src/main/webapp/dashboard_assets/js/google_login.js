@@ -54,9 +54,13 @@ function doLogin(email){
 		contentType: "application/json",
 		data: JSON.stringify(email),
 		type: "post",
-		dataType: "json",
+		dataType: "json"
 	}).done(function(data) {
-		console.log("ciao");
+		if (data === "ok") {			
+			window.location.href = "/dashboard/profile";
+		} else  {
+			window.location.href = "/dashboard/sign_up";
+		}
 	});
 }
 
