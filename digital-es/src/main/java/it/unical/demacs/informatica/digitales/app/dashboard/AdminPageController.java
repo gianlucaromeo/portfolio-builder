@@ -27,163 +27,35 @@ public class AdminPageController {
 
 	@PostMapping("/profile")
 	public synchronized String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-		Cookie[] cookies = req.getCookies();
-		String username = null;
-
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
-				username = c.getValue();
-				break;
-			}
-		}
-
-		fetchUserData(req, username);
-		System.out.println("devo essere reindirizzato ma non succede nulla");
-		return "profile";
+		return Servlets.redirect(req, "profile");
 
 	}
 
 	@GetMapping("/profile")
-	public synchronized String goToUserAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-		Cookie[] cookies = req.getCookies();
-
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
-				String username = c.getValue();
-				System.out.println(c.getValue());
-				fetchUserData(req, username);
-				return "profile";
-			}
-		}
-		return "error_page";
+	public synchronized String goToUserAdminPageGET(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		return Servlets.redirect(req, "profile");
 
 	}
-	
+
 	@GetMapping("/moderator_posts")
 	public String goToPostsAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-		Cookie[] cookies = req.getCookies();
-
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
-				String username = c.getValue();
-				System.out.println(c.getValue());
-				fetchUserData(req, username);
-				System.out.println("moderator");
-				return "moderator_posts";
-			}
-		}
-		return "error_page";
-
-	}
-
-	private synchronized void fetchUserData(HttpServletRequest req, String username) {
-
-		User user = (User) UserDAOImpl.getInstance().findByUsername(username);
-
-		req.setAttribute("username", username);
-		req.setAttribute("firstName", user.getFirstName());
-		req.setAttribute("lastName", user.getLastName());
-		req.setAttribute("email", user.getEmail());
-
-		req.setAttribute("dateOfBirth", user.getDateOfBirth());
-
-	}
-
-	@GetMapping("/profile_test")
-	public String testAdminPage(HttpServletRequest req, String username)
-			throws JsonSyntaxException, JsonIOException, IOException {
-		return "profile";
-	}
-
-	@GetMapping("/posts_test")
-	public String testPostsPage(HttpServletRequest req, String username)
-			throws JsonSyntaxException, JsonIOException, IOException {
-		return "posts";
-	}
-
-	@GetMapping("/projects_test")
-	public String testProjectsPage(HttpServletRequest req, String username)
-			throws JsonSyntaxException, JsonIOException, IOException {
-		return "projects";
+		return Servlets.redirect(req, "moderator_posts");
 	}
 
 	@GetMapping("/projects")
 	public String showProjectsPage(HttpServletRequest req, HttpServletResponse resp) {
-
-		Cookie[] cookies = req.getCookies();
-
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
-				String username = c.getValue();
-				fetchUserData(req, username);
-				return "projects";
-			}
-		}
-
-		return "error_page";
+		return Servlets.redirect(req, "projects");
 	}
 
 	@GetMapping("/curriculum")
 	public String showCurriculumPageGET(HttpServletResponse resp, HttpServletRequest req) {
-
-		String username = null;
-		Cookie[] cookies = req.getCookies();
-
-		for (Cookie c : cookies) {
-
-			if (c.getName().equals("logged_username")) {
-				
-				username = c.getValue();
-				Cookie cookie = new Cookie("logged_username", username);
-				cookie.setMaxAge(60 * 60 * 24);
-
-				req.setAttribute("username", username);
-				resp.addCookie(cookie);
-
-			}
-
-		}
-
-		if (username == null) {
-			return "error_page";
-		}
-
-		return "curriculum";
-
+		return Servlets.redirect(req, "curriculum");
 	}
-
 
 	@GetMapping("/posts")
 	public String showPostsPageGET(HttpServletResponse resp, HttpServletRequest req) {
-
-		String username = null;
-		Cookie[] cookies = req.getCookies();
-
-		for (Cookie c : cookies) {
-
-			if (c.getName().equals("logged_username")) {
-
-				username = c.getValue();
-				Cookie cookie = new Cookie("logged_username", username);
-				cookie.setMaxAge(60 * 60 * 24);
-					
-				resp.addCookie(cookie);
-				fetchUserData(req, username);
-
-			}
-
-		}
-
-		if (username == null) {
-			return "error_page";
-		}
-
-		return "posts";
-
+		return Servlets.redirect(req, "posts");
 	}
-
 
 }

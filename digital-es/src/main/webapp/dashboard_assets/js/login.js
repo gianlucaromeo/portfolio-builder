@@ -1,7 +1,7 @@
 //$('.datepicker').datepicker();
 
 loginBtn = $("#loginBtn");
-signUpForm = $("#loginForm");
+loginForm = $("#loginForm");
 
 var username = $("#username");
 var password = $("#passwordInput");

@@ -56,7 +56,7 @@ function doLogin(email){
 		type: "post",
 		dataType: "json"
 	}).done(function(data) {
-		if (data === "ok") {			
+		if (data === "ok") {	
 			window.location.href = "/dashboard/profile";
 		} else  {
 			window.location.href = "/dashboard/sign_up";

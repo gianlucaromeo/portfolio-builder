@@ -49,12 +49,8 @@ public class SignUpREST {
 			
 			user.setId(UserDAOImpl.getInstance().findId(user));
 			
-			Cookie cookie = new Cookie("logged_username", user.getUsername());
-		    cookie.setMaxAge(60 * 60 * 24);
-		    cookie.setPath("/");
-		    resp.addCookie(cookie);
-			resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-			resp.setHeader("Location", "/dashboard/login");
+			Cookie cookie = Servlets.initLoggedUsernameCookie(req, user.getUsername());
+			Servlets.redirectLogin(resp, cookie);
 			
 		} else {
 			System.out.println(res);

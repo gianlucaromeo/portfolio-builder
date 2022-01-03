@@ -22,7 +22,6 @@ public class GoogleSignUpREST {
 	public String getNextId(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		
 		Integer usersCounter =  UserDAOImpl.getInstance().getUsersCounter();
-		System.out.println("Actual total number of users: " + usersCounter);
 		
 	    String username = "googleUser" + usersCounter;
 		while (UserDAOImpl.getInstance().checkUsernameExists(username)) {
@@ -30,8 +29,6 @@ public class GoogleSignUpREST {
 			usersCounter++;
 			username = "googleUser" + usersCounter;
 		}
-		
-		System.out.println("New username found: " + username);
 		
 		return new Gson().toJson(username);	
 	

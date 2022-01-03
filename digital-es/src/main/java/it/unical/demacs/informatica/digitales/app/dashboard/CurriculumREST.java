@@ -30,51 +30,27 @@ public class CurriculumREST {
 		
 		Gson gson = new Gson();
 		
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-
-			if (c.getName().equals("logged_username")) {
-				
-				String username = c.getValue();
-				System.out.println(username);
-				User user = UserDAOImpl.getInstance().findByUsername(username);	
-				
-				Set<CurriculumExperience> curriculumExperiences =  CurriculumExperienceDAOImpl.getInstance().findAllByUserId(user.getId());
-				String curriculumExperiencesToJSON = gson.toJson(curriculumExperiences);
-				
-				// DEBUG
-				//System.out.println(curriculumExperiencesToJSON);
-				
-				return curriculumExperiencesToJSON;
-				
-			}
+		User user = Servlets.getLoggedUser(req);
+		
+		if (user == null) {
+			return Protocol.ERROR;
 		}
 		
-		return gson.toJson(Protocol.NO_USER_EXPERIENCES);
+		Set<CurriculumExperience> curriculumExperiences =  CurriculumExperienceDAOImpl.getInstance().findAllByUserId(user.getId());
+		String curriculumExperiencesToJSON = gson.toJson(curriculumExperiences);
+		return curriculumExperiencesToJSON;
 		
 	}
 	
 	@PostMapping("/get_user_id_action")
 	public synchronized String getUserIdAction(HttpServletRequest req, HttpServletResponse resp) {
-		
 		Gson gson = new Gson();
-		
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-
-			if (c.getName().equals("logged_username")) {
-				
-				String username = c.getValue();
-				User user = UserDAOImpl.getInstance().findByUsername(username);	
-				
-				return gson.toJson(user.getId());
-				
-			}
+		User user = Servlets.getLoggedUser(req);
+		long userId = -1;
+		if (user != null) {
+			userId = user.getId();
 		}
-		
-		long id = -1;
-		return gson.toJson(id);
-		
+		return gson.toJson(userId);
 	}
 	
 	

@@ -26,20 +26,13 @@ public class GoogleLoginREST {
 		Gson gson = new Gson();
 		String email = new String();
 		email = gson.fromJson(req.getReader(), String.class);
-		//System.out.println(email);
+
 		if (UserDAOImpl.getInstance().checkEmailExists(email)) {
 			
-			System.out.println("email exists");
-			
 			String username = UserDAOImpl.getInstance().getUsernameByEmail(email);
-			
-			Cookie cookie = new Cookie("logged_username", username);
-			cookie.setMaxAge(60 * 60 * 24);
-			cookie.setPath("/");
-
+			Cookie cookie = Servlets.initLoggedUsernameCookie(req, username);
 			resp.addCookie(cookie);
-//			resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-//			resp.setHeader("Location", "/dashboard/profile"); 
+			//Servlets.redirectLogin(resp, cookie);
 
 			return gson.toJson(Protocol.OK);
 		}
