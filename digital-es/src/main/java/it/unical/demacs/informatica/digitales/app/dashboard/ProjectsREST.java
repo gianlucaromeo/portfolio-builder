@@ -26,27 +26,24 @@ import it.unical.demacs.informatica.digitales.app.validator.ProjectValidator;
 
 @RestController
 public class ProjectsREST {
-	
+
 	@PostMapping("/load_projects")
 	public String loadProjects(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
 		Gson gson = new Gson();
 
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
-				String username = c.getValue();
-				User user = UserDAOImpl.getInstance().findByUsername(username);
+		User user = Servlets.getLoggedUser(req);
 
-				Set<Project> projects = ProjectDAOImpl.getInstance().findAllByUserId(user.getId());
-				String projectsToJSON = gson.toJson(projects);
-
-				return projectsToJSON;
-			}
+		if (user == null) {
+			return Protocol.ERROR;
 		}
 
-		return Protocol.ERROR;
+		Set<Project> projects = ProjectDAOImpl.getInstance().findAllByUserId(user.getId());
+		String projectsToJSON = gson.toJson(projects);
+		return projectsToJSON;
+
 	}
-	
+
 	@PostMapping("delete_project")
 	public void deleteProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
@@ -55,59 +52,51 @@ public class ProjectsREST {
 		project.setId(id);
 		ProjectDAOImpl.getInstance().delete(project);
 	}
-	
+
 	@PostMapping("edit_project")
 	public String editProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Project project = new Project();
 		project = gson.fromJson(req.getReader(), Project.class);
-		Project originalProject= ProjectDAOImpl.getInstance().findById(project.getId());
+		Project originalProject = ProjectDAOImpl.getInstance().findById(project.getId());
 		project.setUserId(originalProject.getUserId());
-		
-		ProjectValidatorResponse newProject= ProjectValidator.validateProject(project);
-			if(ProjectValidator.isValidProject(newProject)) {
-				ProjectDAOImpl.getInstance().update(project);
-				project.setId(ProjectDAOImpl.getInstance().findId(project));
-			}
-		
+
+		ProjectValidatorResponse newProject = ProjectValidator.validateProject(project);
+		if (ProjectValidator.isValidProject(newProject)) {
+			ProjectDAOImpl.getInstance().update(project);
+			project.setId(ProjectDAOImpl.getInstance().findId(project));
+		}
+
 		return gson.toJson(newProject);
 	}
-	
+
 	@PostMapping("restore_project")
 	public String restoreProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
-		Project originalProject= ProjectDAOImpl.getInstance().findById(id);
-		
+		Project originalProject = ProjectDAOImpl.getInstance().findById(id);
+
 		return gson.toJson(originalProject);
 	}
-	
+
 	@PostMapping("add_project")
 	public String addProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Project project = new Project();
-		User user=null;
 		project = gson.fromJson(req.getReader(), Project.class);
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
-				String username = c.getValue();
-				user = UserDAOImpl.getInstance().findByUsername(username);
-			}
-
-		}
-		ProjectValidatorResponse newProject= ProjectValidator.validateProject(project);
-		if(user!=null) {
+		User user = Servlets.getLoggedUser(req);
+		ProjectValidatorResponse newProject = ProjectValidator.validateProject(project);
+		if (user != null) {
 			project.setUserId(user.getId());
 			newProject.setUserId(user.getId());
-			if(ProjectValidator.isValidProject(newProject)) {
+			if (ProjectValidator.isValidProject(newProject)) {
 				ProjectDAOImpl.getInstance().create(project);
 				project.setId(ProjectDAOImpl.getInstance().findId(project));
 				newProject.setId(project.getId());
 			}
-		
+
 		}
-			return gson.toJson(newProject);
+		return gson.toJson(newProject);
 	}
-	
+
 }
