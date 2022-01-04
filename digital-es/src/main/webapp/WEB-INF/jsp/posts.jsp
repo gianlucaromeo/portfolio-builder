@@ -44,8 +44,6 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link" href="index.html"><i
-							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="profile"><i
 							class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
@@ -126,7 +124,7 @@
 										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
-										src="assets/img/avatars/avatar1.jpeg"></a>
+										src="${profilePicture}"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i

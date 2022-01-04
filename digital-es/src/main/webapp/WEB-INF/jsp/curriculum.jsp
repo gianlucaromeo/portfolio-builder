@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Profile - PB</title>
+<title>Curriculum - PB</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -37,15 +37,13 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link" href="index.html"><i
-							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="profile"><i
+					<li class="nav-item"><a class="nav-link" href="profile"><i
 							class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="posts"><i
 							class="far fa-comments"></i><span>Posts</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="curriculum"><i
+					<li class="nav-item"><a class="nav-link active" href="curriculum"><i
 							class="fas fa-address-card"></i><span>Curriculum</span></a></li>
 				</ul>
 				<div class="text-center d-none d-md-inline">
@@ -119,7 +117,7 @@
 										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
-										src="${profilePicture}" id="profilePicture"></a>
+										src="${profilePicture}"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i
