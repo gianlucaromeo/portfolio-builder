@@ -21,7 +21,7 @@ import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 public class ProfileREST {
 	
 	@PostMapping("/get_profile_picture")
-	public String getProfilePicture(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String getProfilePicture(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		User user = Servlets.getLoggedUser(req);
 		

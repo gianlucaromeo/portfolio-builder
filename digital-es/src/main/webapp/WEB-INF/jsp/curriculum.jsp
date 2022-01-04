@@ -119,7 +119,7 @@
 										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
-										src="" id="profilePicture"></a>
+										src="${profilePicture}" id="profilePicture"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i
@@ -279,7 +279,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/profile.js"></script>
 	<script src="../../dashboard_assets/js/curriculum.js"></script>
 
 </body>

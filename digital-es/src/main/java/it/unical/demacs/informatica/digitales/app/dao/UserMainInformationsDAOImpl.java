@@ -10,6 +10,7 @@ import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
+import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 
 public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMainInformations> {
 	private static UserMainInformationsDAOImpl instance= null;
@@ -260,7 +261,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			closeAll();
 		}
 
-		return Protocol.ERROR;
+		return ProfileSettings.getDefaultAvatarIMage64();
 	}
 
 }
