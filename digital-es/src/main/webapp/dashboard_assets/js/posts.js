@@ -30,7 +30,7 @@ function start() {
 		} else {
 			posts.forEach(post => {
 				addPost(post);
-				
+
 				postsMap.set(post.id, post);
 			});
 			//posts.forEach(post => console.log(post));
@@ -85,7 +85,7 @@ function appendPost(post) {
 function prependPost(post) {
 	$("#postsSection").prepend(createPost(post));
 }
-function createPost(post){
+function createPost(post) {
 	let id = post.id;
 	let title = post.title;
 	let description = post.description;
@@ -93,7 +93,7 @@ function createPost(post){
 	let publicationDate = post.pubblicationDate;
 	let lastEditDate = post.lastEditDate;
 	let refLink = post.refLink;
-	
+
 
 	console.log(post.pubblicationDate);
 	return `<div  id="post${id}">
@@ -150,7 +150,7 @@ function createPost(post){
 									Changes</button>
 								<button class="btn btn-primary btn-sm" type="submit" id="saveBtn${id}">Save
 									Settings</button>
-								`+ getPopUpOnSave(id)+`
+								`+ getPopUpOnSave(id) + `
 								</div>
 								
 								<hr /> 
@@ -178,13 +178,13 @@ function refactPostFields(id, value) {
 	$("#postTitleId" + id).attr('readonly', value);
 	$("#postDescriptionId" + id).attr('readonly', value);
 	$("#postLinkRefId" + id).attr('readonly', value);
-	if($("#postImageId" + id).attr('src')==='undefined'){
+	if ($("#postImageId" + id).attr('src') === 'undefined') {
 		$("#postImageId" + id).hide();
-		
+
 	}
-	if($("#newPostImage").attr('src')==='undefined'){
+	if ($("#newPostImage").attr('src') === 'undefined') {
 		$("#newPostImage").hide();
-		
+
 	}
 
 }
@@ -195,22 +195,22 @@ function refactButton(id, value) {
 		$("#editId" + id).hide();
 		$("#saveBtn" + id).show();
 		$("#editPhotoId" + id).show();
-		$("#editPhotoLabelId"+id).show();
-		$("#discardChangesId"+id).show();
-		
+		$("#editPhotoLabelId" + id).show();
+		$("#discardChangesId" + id).show();
+
 	} else {
 		$("#deleteId" + id).show();
 		$("#editId" + id).show();
 		$("#saveBtn" + id).hide();
-		$("#discardChangesId"+id).hide();
+		$("#discardChangesId" + id).hide();
 		$("#editPhotoId" + id).hide();
-		$("#editPhotoLabelId"+id).hide();
+		$("#editPhotoLabelId" + id).hide();
 	}
 
 
 }
 
-function resetFieldsNewPost(){
+function resetFieldsNewPost() {
 	$("#newPostImage").attr("src", "undefined");
 	$("#newPostTitle").val("");
 	$("#newPostDSescription").val("");
@@ -220,50 +220,33 @@ function resetFieldsNewPost(){
 
 
 //************************************************************ EVENTS ON BUTTONS ****************************************************** */
-function addEventOnNewPostImage(){
-	const imageInput=document.querySelector("#newImageInput");
-	var newImage="";
-	imageInput.addEventListener("change", function(){
-		const reader= new FileReader();
-		reader.addEventListener("load", ()=> {
-			newImage=reader.result;
-		
-			document.querySelector("#newPostImage").src=newImage;	
-			
+function addEventOnNewPostImage() {
+	const imageInput = document.querySelector("#newImageInput");
+	var newImage = "";
+	imageInput.addEventListener("change", function() {
+		const reader = new FileReader();
+		reader.addEventListener("load", () => {
+			newImage = reader.result;
+
+			document.querySelector("#newPostImage").src = newImage;
+
 		});
 		reader.readAsDataURL(this.files[0]);
-		
+
 		$("#newPostImage").show();
 	});
-	
 }
 
 
 //funzione per la creazione di un nuovo post, notifica alla servlet che risponde in base a come sono creati i campi
-function addEventOnAddNewPost(){
+function addEventOnAddNewPost() {
 	$("#newPostImage").hide()
-	
+
 	$("#addNewPostBtn").click(function(e) {
 		e.preventDefault();
-		
-		var canvas = document.createElement("canvas");
-		context = canvas.getContext('2d');
 
 
-		base_image = new Image();
-		base_image.src = $("#newPostImage").attr("src");
-		base_image.onload = function() {
-			context.drawImage(base_image, 100, 100);
-			
-		}
-		
-		console.log(base_image);
-
-		
-		
-		var image64 =canvas.toDataURL();
-		
-		var date= getCurrentDate();
+		var date = getCurrentDate();
 		const newPost = {
 			id: -1,
 			title: $("#newPostTitle").val(),
@@ -274,8 +257,8 @@ function addEventOnAddNewPost(){
 			refLink: $("#newPostRefLink").val(),
 			userId: -1
 		};
-		
-		
+
+
 
 		$.ajax({
 
@@ -286,7 +269,7 @@ function addEventOnAddNewPost(){
 			dataType: "json",
 
 		}).done(function(data) {
-			
+
 			doCreateOnDOM(data);
 
 		});
@@ -320,7 +303,7 @@ function setEventOnDelete(id) {
 			$("#post" + id).remove();
 		});
 
-		
+
 		//$("#modalId"+id).modal('toggle');
 
 	});
@@ -354,12 +337,12 @@ function setEventOnEdit(id) {
 *  i bottoni modifica ed elimina ricompaiono e quello di salvataggio scompare
 * 	
  */
-function setOnDiscardChanges(postId){
-	$("#discardChangesId"+postId).click(function(event){
+function setOnDiscardChanges(postId) {
+	$("#discardChangesId" + postId).click(function(event) {
 		event.preventDefault();
-		
-		oldPost=postsMap.get(postId);
-		
+
+		oldPost = postsMap.get(postId);
+
 		console.log(oldPost);
 		$("#postTitleId" + postId).val(oldPost.title);
 		$("#postDescriptionId" + postId).val(oldPost.description);
@@ -373,25 +356,8 @@ function setEventOnSave(postId) {
 		event.preventDefault();
 
 		var date = getCurrentDate();
-		
-		
-		
-		var canvas = document.createElement("canvas");
-		context = canvas.getContext('2d');
 
 
-		base_image = new Image();
-		base_image.src = $("#postImageId"+postId).src;
-		base_image.onload = function() {
-			context.drawImage(base_image, 100, 100);
-		}
-		
-		console.log(base_image);
-
-
-		
-		var image64 =canvas.toDataURL();
-		console.log(image64);
 		const updatedPost = {
 			id: postId,
 			title: $("#postTitleId" + postId).val(),
@@ -403,7 +369,7 @@ function setEventOnSave(postId) {
 			userId: -1
 		};
 
-		
+
 		$.ajax({
 
 			url: "/update_post",
@@ -413,15 +379,15 @@ function setEventOnSave(postId) {
 			dataType: "json",
 
 		}).done(function(data) {
-			
+
 			doUpdateOnDOM(data);
 
 		});
 
-		
+
 
 		//modifico in runtime la data di ultima modifica
-		
+
 
 
 
@@ -433,31 +399,31 @@ function setEventOnSave(postId) {
 
 
 function setEventChangePhoto(id) {
-	const imageInput=document.querySelector("#editPhotoId"+id);
-	var newImage="";
-	imageInput.addEventListener("change", function(){
-		const reader= new FileReader();
-		reader.addEventListener("load", ()=> {
-			newImage=reader.result;
-		
-			document.querySelector("#postImageId"+id).src=newImage;	
-			
+	const imageInput = document.querySelector("#editPhotoId" + id);
+	var newImage = "";
+	imageInput.addEventListener("change", function() {
+		const reader = new FileReader();
+		reader.addEventListener("load", () => {
+			newImage = reader.result;
+
+			document.querySelector("#postImageId" + id).src = newImage;
+
 		});
 		reader.readAsDataURL(this.files[0]);
-		$("#postImageId"+id).show();
+		$("#postImageId" + id).show();
 	});
-	
+
 
 }
 
 
 
 //***************************************************************************************DOM MANIPULATION************************************************* */
-function doCreateOnDOM(data){
+function doCreateOnDOM(data) {
 	console.log(data);
 
 
-	
+
 	$("#newPostTitle").removeClass("is-invalid");
 	$("#newPostDSescription").removeClass("is-invalid");
 	$("#newPostRefLink").removeClass("is-invalid");
@@ -474,9 +440,9 @@ function doCreateOnDOM(data){
 	}
 
 	if (isValidPost) {
-		
+
 		$("#popupNewBtn").trigger('click');
-		
+
 		$("#closeNewPopupBtn").click(function() {
 			$("#postsSection").prepend(createPost(data));
 			resetFieldsNewPost();
@@ -484,13 +450,13 @@ function doCreateOnDOM(data){
 			refactButton(data.id, true);
 			postsMap.set(data.id, data);
 		});
-		
-		
+
+
 
 	}
 }
 
-function doUpdateOnDOM(data){
+function doUpdateOnDOM(data) {
 	console.log(data);
 	$("#postTitleId" + data.id).removeClass("is-invalid");
 	$("#postDescriptionId" + data.id).removeClass("is-invalid");
@@ -508,16 +474,16 @@ function doUpdateOnDOM(data){
 	}
 
 	if (isValidPost) {
-		$("#popupSaveBtn"+data.id).trigger('click');
-		
+		$("#popupSaveBtn" + data.id).trigger('click');
+
 		$("#closeSavePopupBtn" + data.id).click(function() {
 			$("#post" + data.id).remove()
 			addPost(data);
 			refactPostFields(postId, true);
 			refactButton(postId, true);
 		});
-		
-		
+
+
 
 	}
 }
@@ -585,8 +551,8 @@ function getDeleteButton(id) {
 
 	return deleteButton;
 }
-function getPopUpOnSave(id){
-		var saveButton=`<button type="button" class="btn btn-primary btn-sm"
+function getPopUpOnSave(id) {
+	var saveButton = `<button type="button" class="btn btn-primary btn-sm"
 							data-bs-toggle="modal" data-bs-target="#modalIdSavePopup${id}"
 							id="popupSaveBtn${id}" hidden></button>
 						<!-- Modal -->
@@ -607,11 +573,11 @@ function getPopUpOnSave(id){
 								</div>
 							</div>
 						</div>`;
-						
-						
-				
-							
-		return saveButton;				
+
+
+
+
+	return saveButton;
 }
 
 
