@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.labelImage {
+	 display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+	
+}
+
+.labelImage:hover {
+  background: #ddd;
+}
+
+.editPhotoChooser {
+	display: none;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 5px;
+}
+.drop-area.highlight {
+  border-color: purple;
+}
+.drop-area.is-invalid {
+  border-color: red;
+}
+#fileElem {
+  display: none;
+}

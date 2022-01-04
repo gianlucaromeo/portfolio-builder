@@ -18,6 +18,8 @@
 	href="../../dashboard_assets/fonts/font-awesome.min.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/fonts/fontawesome5-overrides.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/profile.css">
 </head>
 
 <body id="page-top">
@@ -149,7 +151,7 @@
 											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
 											width="160" height="160">
 										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="button">Change
+											<button class="btn btn-primary btn-sm" type="button" id="profile_photo_btn">Change
 												Photo</button>
 										</div>
 									</div>
@@ -163,7 +165,7 @@
 												</div>
 
 												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
+													<button class="btn btn-primary btn-sm" type="submit" id="biography_btn">Save
 														Settings</button>
 												</div>
 											</form>
@@ -216,8 +218,7 @@
 									</div>
 
 									<div class="mb-3">
-										<button class="btn btn-primary btn-sm" type="submit">Save
-											Settings</button>
+										<button class="btn btn-primary btn-sm" type="submit" id="skill_btn">Add skill</button>
 									</div>
 
 								</div>
@@ -327,7 +328,7 @@
 													</div>
 												</div>
 												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save
+													<button class="btn btn-primary btn-sm" type="submit" id="main_info_btn">Save
 														Settings</button>
 												</div>
 											</form>
@@ -384,7 +385,7 @@
 													</div>
 												</div>
 												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button>
+													<button class="btn btn-primary btn-sm" type="submit" id="contact_btn">Save&nbsp;Settings</button>
 												</div>
 											</form>
 										</div>
@@ -395,31 +396,79 @@
 					</div>
 					<div class="card shadow mb-5">
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">Forum Settings</p>
+							<p class="text-primary m-0 fw-bold">Presentation Images</p>
 						</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-6">
-									<form>
-										<div class="mb-3">
-											<label class="form-label" for="signature"><strong>Signature</strong><br></label>
-											<textarea class="form-control" id="signature" rows="4"
-												name="signature"></textarea>
-										</div>
-										<div class="mb-3">
-											<div class="form-check form-switch">
-												<input class="form-check-input" type="checkbox"
-													id="formCheck-1"><label class="form-check-label"
-													for="formCheck-1"><strong>Notify me about
-														new replies</strong></label>
+								<div class="col-lg-4 col-md-12">
+									<div id="drop-area-1" class="drop-area">
+										<form class="image_form">
+											<div class="row">
+												<div class="col-sm-6">
+											    	<p>Drop your Image here</p>
+											    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+											    	<input type="file" accept="image/jpg, image/png" id="image_chooser_1" class="editPhotoChooser col-12"/> 
+													<label id="image_label_1" for="image_chooser_1" class="labelImage">
+														Or click here to select your photo
+													</label>
+												</div>
+												<div class="col-sm-6">
+													<img 
+													class="img-fluid"
+													src="undefined"
+													width="160" height="160" id="presentation_image_1">
+												</div>
 											</div>
-										</div>
-										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="submit">Save
-												Settings</button>
-										</div>
-									</form>
+									  	</form>
+									</div>
 								</div>
+								
+								<div class="col-lg-4 col-md-12">
+									<div id="drop-area-2" class="drop-area">
+										<form class="image_form">
+											<div class="row">
+												<div class="col-sm-6">
+											    	<p>Drop your Image here</p>
+											    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+											    	<input type="file" accept="image/jpg, image/png" id="image_chooser_2" class="editPhotoChooser col-12"/> 
+													<label id="image_label_2" for="image_chooser_2" class="labelImage">
+														Or click here to select your photo
+													</label>
+												</div>
+												<div class="col-sm-6">
+													<img 
+													class="img-fluid"
+													src="undefined"
+													width="160" height="160" id="presentation_image_2">
+												</div>
+											</div>
+									  	</form>
+									</div>
+								</div>
+								
+								<div class="col-lg-4 col-md-12">
+									<div id="drop-area-3" class="drop-area">
+										<form class="image_form">
+											<div class="row">
+												<div class="col-sm-6">
+											    	<p>Drop your Image here</p>
+											    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+											    	<input type="file" accept="image/jpg, image/png" id="image_chooser_3" class="editPhotoChooser col-12"/> 
+													<label id="image_label_3" for="image_chooser_3" class="labelImage">
+														Or click here to select your photo
+													</label>
+												</div>
+												<div class="col-sm-6">
+													<img 
+													class="img-fluid"
+													src="undefined"
+													width="160" height="160" id="presentation_image_3">
+												</div>
+											</div>
+									  	</form>
+									</div>
+								</div>
+								
 							</div>
 						</div>
 					</div>

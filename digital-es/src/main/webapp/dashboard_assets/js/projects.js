@@ -68,17 +68,17 @@ function handleDragEvent() {
 	}
 	
 	function uploadFile(file) {
- 		let url = ''
+ 	//	let url = ''
   		let formData = new FormData()
 		
 		formData.append('file', file)
 
-	 	fetch(url, {
-    	method: 'POST',
-    	body: formData
-  		})
-  		.then(() => { /* Done. Inform the user */ })
-  		.catch(() => { /* Error. Inform the user */ })
+	// 	fetch(url, {
+    //	method: 'POST',
+    //	body: formData
+  	//	})
+  	//	.then(() => { /* Done. Inform the user */ })
+  	//	.catch(() => { /* Error. Inform the user */ })
 	}
 	
 	function previewFile(file) {		

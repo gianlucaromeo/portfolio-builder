@@ -16,7 +16,9 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.validator.SignUpFormValidator;
 
@@ -48,6 +50,11 @@ public class SignUpREST {
 		if (res.equals(Protocol.OK)) {
 			
 			user.setId(UserDAOImpl.getInstance().findId(user));
+			
+			UserMainInformations info=new UserMainInformations();
+			info.setUserId(user.getId());
+			info.setBio("Not Null");
+			UserMainInformationsDAOImpl.getInstance().create(info);
 			
 			Cookie cookie = Servlets.initLoggedUsernameCookie(req, user.getUsername());
 			Servlets.redirectLogin(resp, cookie);
