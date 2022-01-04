@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class Servlets {
@@ -107,7 +108,6 @@ public class Servlets {
 	}
 
 	public static User getLoggedUser(HttpServletRequest req) {
-
 		Cookie loggedUsernameCookie = Servlets.getCookie(req, "logged_username");
 
 		if (loggedUsernameCookie == null) {
@@ -130,6 +130,9 @@ public class Servlets {
 		req.setAttribute("email", user.getEmail());
 
 		req.setAttribute("dateOfBirth", user.getDateOfBirth());
+		
+		String profilePicture = UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId());
+		req.setAttribute("profilePicture", profilePicture);
 
 	}
 	

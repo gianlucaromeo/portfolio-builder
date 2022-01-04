@@ -308,7 +308,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 		
 	}
 	
-	public User findByUsername(String username) {
+	public synchronized User findByUsername(String username) {
 		
 		User user = null;
 		

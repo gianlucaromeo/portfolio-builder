@@ -28,7 +28,7 @@ public class DBUtil {
 	private Connection con = null;
 	
 	public synchronized Connection getConnection() {
-		
+	
 		con = null;
 		
 		try {
