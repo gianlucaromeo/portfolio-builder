@@ -25,9 +25,12 @@ public class Servlets {
 		return null;
 	}
 
-	public static Cookie initLoggedUsernameCookie(HttpServletRequest req, String username) {
+	public static Cookie initLoggedUsernameCookie(HttpServletRequest req, HttpServletResponse resp, String username) {
 
 		Cookie cookie = Servlets.getCookie(req, "logged_username");
+		
+		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+		deleteCookie(resp, moderatorCookie);
 
 		if (cookie == null) {
 			System.out.println("created new cookie: " + username);
@@ -43,6 +46,27 @@ public class Servlets {
 		return cookie;
 
 	}
+	
+
+	public static Cookie initLoggedModeratorUsernameCookie(HttpServletRequest req, HttpServletResponse resp, String username) {
+		Cookie cookie = Servlets.getCookie(req, "logged_moderator");
+		
+		Cookie userCookie= Servlets.getCookie(req, "logged_username");
+		deleteCookie(resp, userCookie);
+		
+		if (cookie == null) {
+			System.out.println("created new cookie for moderator: " + username);
+			cookie = new Cookie("logged_moderator", username);
+		} else {
+			System.out.println("set new value moderator cookie: " + username);
+			cookie.setValue(username);
+		}
+
+		cookie.setMaxAge(60 * 60 * 24);
+		cookie.setPath("/");
+
+		return cookie;
+	}
 
 	public static void redirectLogin(HttpServletResponse resp, Cookie cookie) {
 		System.out.println("in redirectLogin: Username = " + cookie.getValue());
@@ -54,11 +78,11 @@ public class Servlets {
 	public static String redirect(HttpServletRequest req, String location) {
 
 		Cookie loggedUsernameCookie = Servlets.getCookie(req, "logged_username");
-		//System.out.println("in redirect: usernaem = " + loggedUsernameCookie.getValue());
 
 		if (loggedUsernameCookie == null) {
 			return "error_page";
 		}
+		System.out.println("in redirect: username = " + loggedUsernameCookie.getValue());
 
 		String username = loggedUsernameCookie.getValue();
 		fetchUserData(req, username);
@@ -92,6 +116,16 @@ public class Servlets {
 
 		req.setAttribute("dateOfBirth", user.getDateOfBirth());
 
+	}
+	
+	private static void deleteCookie(HttpServletResponse resp, Cookie cookie) {
+		if(cookie!=null) {
+			cookie.setMaxAge(0);
+			cookie.setValue(null);
+			cookie.setPath("/");
+			resp.addCookie(cookie);
+		}		
+		
 	}
 
 }

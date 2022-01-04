@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.validator;
 
 import it.unical.demacs.informatica.digitales.app.beans.UserAuthentication;
 import it.unical.demacs.informatica.digitales.app.beans.validation.LoginValidatorResponse;
+import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
@@ -28,12 +29,16 @@ public class LoginValidator {
 		if (username == null) {
 			return Protocol.LOGIN_ERROR;
 		}
-		return UserDAOImpl.getInstance().checkUsernameExists(username) ? Protocol.OK : Protocol.USERNAME_NOT_VALID_ERROR;
+		if(UserDAOImpl.getInstance().checkUsernameExists(username)) return Protocol.OK;
+		
+		return ModeratorDAOImpl.getInstance().checkUsernameExists(username) ? Protocol.OK : Protocol.USERNAME_NOT_VALID_ERROR;
 	}
 
 	private static String checkPassword(String username, String password) {
 		boolean userExists =  UserDAOImpl.getInstance().checkUsernameAndPassword(username, password);
-		return userExists ? Protocol.OK : Protocol.LOGIN_PASSWORD_ERROR;
+		boolean moderatorExists =  ModeratorDAOImpl.getInstance().checkUsernameAndPassword(username, password);
+		if(userExists) return Protocol.OK; 
+		return moderatorExists ? Protocol.OK : Protocol.LOGIN_PASSWORD_ERROR;
 	}
 	
 }

@@ -1,7 +1,6 @@
 package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserAuthentication;
+import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.validator.LoginValidator;
 
@@ -44,13 +45,17 @@ public class LoginREST {
 		userAuth.setUsername(req.getParameter("username"));
 
 		User user = new User();
+		Moderator moderator= new Moderator();
+		
+		moderator= ModeratorDAOImpl.getInstance().findByUsername(userAuth.getUsername());
 		user = UserDAOImpl.getInstance().findByUsername(userAuth.getUsername());
-		if (user.getFirstName() != null) {
-			user.setId(UserDAOImpl.getInstance().findId(user));
-			if (user.getId() != 0) {
-				Cookie cookie = Servlets.initLoggedUsernameCookie(req, user.getUsername());
-				Servlets.redirectLogin(resp, cookie);
-			}
+		if (user != null) {
+			Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, user.getUsername());
+			Servlets.redirectLogin(resp, cookie);
+			return;
+		}else if(moderator!=null) {
+			Cookie cookie = Servlets.initLoggedModeratorUsernameCookie(req, resp, moderator.getUsername());
+			Servlets.redirectLogin(resp, cookie);
 		}
 
 	}

@@ -49,7 +49,7 @@ public class SignUpREST {
 			
 			user.setId(UserDAOImpl.getInstance().findId(user));
 			
-			Cookie cookie = Servlets.initLoggedUsernameCookie(req, user.getUsername());
+			Cookie cookie = Servlets.initLoggedUsernameCookie(req,resp, user.getUsername());
 			Servlets.redirectLogin(resp, cookie);
 			
 		} else {

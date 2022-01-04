@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
+import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
@@ -212,5 +213,98 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 		
 		return Protocol.OK;
 	}
+	
+	public boolean checkUsernameExists(String username) {
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * from moderators WHERE username=?";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [checkUsernameExists]: ");
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeAll();
+		}
+		
+		return false;
+		
+	}
 
+	public boolean checkUsernameAndPassword(String username, String password) {
+
+		boolean moderatorExists = false;
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM moderators WHERE username=?;";
+		
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+			
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				String hashPassword = rs.getString("password");
+				moderatorExists = BCrypt.checkpw(password, hashPassword);
+			}
+	
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [checkUsernameAndPassword]: ");
+			e.printStackTrace();
+			moderatorExists = false;
+		} finally {
+			closeAll();
+		}
+		
+		return moderatorExists;
+		
+	}
+	
+	public Moderator findByUsername(String username) {
+
+		Moderator moderator = null;
+
+		con = DBUtil.getInstance().getConnection();
+
+		String query = "SELECT * FROM moderators WHERE username=?;";
+
+		try {
+
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				moderator = new Moderator();
+				moderator.setId(rs.getLong("id"));
+				moderator.setUsername(rs.getString("username"));
+				moderator.setEmail(rs.getString("email"));
+				moderator.setPassword(rs.getString("password"));
+
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[ModeratorDAOImpl] [findByUsername]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return moderator;
+	}
 }
