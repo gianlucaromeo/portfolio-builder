@@ -33,4 +33,9 @@ public class ModeratorPageController {
 		return Servlets.redirect(req, "moderator_users");
 	}
 	
+	@GetMapping("/testing_text")
+	public synchronized String testingText(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		return Servlets.redirect(req, "text_moderator_testing");
+	}
+	
 }
