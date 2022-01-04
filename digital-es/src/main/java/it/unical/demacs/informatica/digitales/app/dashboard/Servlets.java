@@ -78,6 +78,7 @@ public class Servlets {
 	public static String redirect(HttpServletRequest req, String location) {
 
 		Cookie loggedUsernameCookie = Servlets.getCookie(req, "logged_username");
+
 		if (loggedUsernameCookie == null) {
 			return "error_page";
 		}

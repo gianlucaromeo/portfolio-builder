@@ -24,7 +24,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 @Controller
 @RequestMapping("/dashboard")
 public class AdminPageController {
-
+	
 	@PostMapping("/profile")
 	public synchronized String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		return Servlets.redirect(req, "profile");
@@ -38,24 +38,19 @@ public class AdminPageController {
 
 	}
 
-	@GetMapping("/moderator_posts")
-	public String goToPostsAdminPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		return Servlets.redirect(req, "moderator_posts");
-	}
-
 	@GetMapping("/projects")
-	public String showProjectsPage(HttpServletRequest req, HttpServletResponse resp) {
+	public synchronized String showProjectsPageGET(HttpServletRequest req, HttpServletResponse resp) {
 		return Servlets.redirect(req, "projects");
 	}
 
 	@GetMapping("/curriculum")
-	public String showCurriculumPageGET(HttpServletResponse resp, HttpServletRequest req) {
+	public synchronized String showCurriculumPageGET(HttpServletResponse resp, HttpServletRequest req) {
 		return Servlets.redirect(req, "curriculum");
 	}
 
 	@GetMapping("/posts")
-	public String showPostsPageGET(HttpServletResponse resp, HttpServletRequest req) {
+	public synchronized String showPostsPageGET(HttpServletResponse resp, HttpServletRequest req) {
 		return Servlets.redirect(req, "posts");
 	}
-
+	
 }
