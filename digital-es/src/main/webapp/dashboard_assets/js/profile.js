@@ -1,16 +1,31 @@
 
 start();
-for(i=1;i<=3;i++) {
-	handleDragEvent(i);
-	setOnChangeImage(i);
-}
 
 function start() {
 	$("#main_info_btn").hide();
 	$("#contact_btn").hide();
 	$("#biography_btn").hide();
-	$("#profile_photo_btn").hide();
+	//$("#profile_photo_btn").hide();
 	$("#skill_btn").hide();
+	loadMainInformations();
+	loadEvents();
+	for(i=1;i<=3;i++) {
+		handleDragEvent(i);
+		setOnChangeImage(i);
+	}
+}
+function loadEvents() {
+	const image_chooser=document.querySelector("#image_chooser_profile");
+	var newImage="";
+	image_chooser.addEventListener("change", function(){
+		const reader= new FileReader();
+		reader.addEventListener("load", ()=> {
+			newImage=reader.result;
+			document.querySelector("#profile_picture").src=newImage;	
+			saveImages();
+		});
+		reader.readAsDataURL(this.files[0]);
+	});
 }
 
 function handleDragEvent(id) {
@@ -74,7 +89,7 @@ function handleDragEvent(id) {
     	reader.readAsDataURL(file)
     	reader.onloadend = function() {
       		document.querySelector("#presentation_image_"+id).src=reader.result;
-			saveImage(reader.result,id);
+			saveImages();
 		}
 	}
 }
@@ -87,34 +102,65 @@ function setOnChangeImage(id) {
 		reader.addEventListener("load", ()=> {
 			newImage=reader.result;
 			document.querySelector("#presentation_image_"+id).src=newImage;	
-			saveImage(newImage,id);
+			saveImages();
 		});
 		reader.readAsDataURL(this.files[0]);
 	});
 }
 
-function saveImage(newImage,id) {
-	console.log("SAVING IMAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-	
-	
-	var selectedImage={
-			presentationPicture1:"...",
-			presentationPicture2:"...",
-			presentationPicture3:"..."
+function saveImages() {
+	var newImages={
+			profilePicture:document.querySelector("#profile_picture").src,
+			presentationPicture1:document.querySelector("#presentation_image_1").src,
+			presentationPicture2:document.querySelector("#presentation_image_2").src,
+			presentationPicture3:document.querySelector("#presentation_image_3").src,
 		};
-	if(id==1)
-		selectedImage.presentationPicture1=newImage;
-	if(id==2)
-		selectedImage.presentationPicture2=newImage;
-	if(id==3)
-		selectedImage.presentationPicture3=newImage;
 		$.ajax({
 			url: "/save_presentation_image",
 			contentType: "application/json",
-			data: JSON.stringify(selectedImage),
+			data: JSON.stringify(newImages),
 			type: "post",
 			dataType: "json",
 		});
+}
+
+function loadMainInformations() {
+	var mainInformations ={
+		 userId:-1,
+		 profilePicture:"",
+	     logoPicture:"",
+	     logoName:"",
+	     bio:"",
+	     presentationPicture1:"",
+	     presentationPicture2:"",
+	     presentationPicture3:"",
+	     specialSkillName1:"",
+	     specialSkillName2:"",
+	     specialSkillName3:"",
+	     specialSkillDescr1:"",
+	     specialSkillDescr2:"",
+	     specialSkillDescr3:"",
+	     facebookLinkRef:"",
+	     instagramLinkRef:"",
+         twitterLinkRef:"",
+	}
+	$.ajax({
+			url: "/get_main_info",
+			contentType: "application/json",
+			data: JSON.stringify(mainInformations),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			console.log(data);
+			document.querySelector("#profile_picture").src=data.profilePicture;
+			$("#biography").val(data.bio);
+			
+			
+			document.querySelector("#presentation_image_1").src=data.presentationPicture1;
+			document.querySelector("#presentation_image_2").src=data.presentationPicture2;
+			document.querySelector("#presentation_image_3").src=data.presentationPicture3;
+		});
+	
 }
 
 

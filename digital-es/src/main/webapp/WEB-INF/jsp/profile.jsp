@@ -149,10 +149,12 @@
 									<div class="text-center">
 										<img class="rounded-circle mb-3 mt-4"
 											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
-											width="160" height="160">
+											width="160" height="160" id="profile_picture">
 										<div class="mb-3">
-											<button class="btn btn-primary btn-sm" type="button" id="profile_photo_btn">Change
-												Photo</button>
+											<input type="file" accept="image/jpg, image/png" id="image_chooser_profile" class="editPhotoChooser col-12"/> 
+													<label id="image_label_profile" for="image_chooser_profile" class="labelImage">
+														Change Image
+													</label>
 										</div>
 									</div>
 									<div class="row">
@@ -160,7 +162,7 @@
 											<label class="form-label" for="biography"><strong>Biography</strong></label>
 											<form>
 												<div class="mb-3">
-													<textarea class="form-control" id="signature" rows="4"
+													<textarea class="form-control" id="biography" rows="4"
 														name="biography"></textarea>
 												</div>
 

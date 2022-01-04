@@ -35,7 +35,7 @@ public class ProfileREST {
 	}
 	
 	@PostMapping("/save_presentation_image")
-	public String loadProjects(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public String savePresentation(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
@@ -44,16 +44,28 @@ public class ProfileREST {
 		User user = Servlets.getLoggedUser(req);
 		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 		
-		if(newMainInfo.getPresentationPicture1()!="...")
-			info.setPresentationPicture1(newMainInfo.getPresentationPicture1());
-		if(newMainInfo.getPresentationPicture2()!="...")
-			info.setPresentationPicture2(newMainInfo.getPresentationPicture2());
-		if(newMainInfo.getPresentationPicture3()!="...")
-			info.setPresentationPicture3(newMainInfo.getPresentationPicture3());
+		info.setProfilePicture(newMainInfo.getProfilePicture());
+		info.setPresentationPicture1(newMainInfo.getPresentationPicture1());
+		info.setPresentationPicture2(newMainInfo.getPresentationPicture2());
+		info.setPresentationPicture3(newMainInfo.getPresentationPicture3());
 		
 		UserMainInformationsDAOImpl.getInstance().update(info);
 
 		return "";
+
+	}
+	
+	@PostMapping("/get_main_info")
+	public String getMainInfo(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		
+		User user = Servlets.getLoggedUser(req);
+		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
+		
+		System.out.println(info);
+		
+		return gson.toJson(info);
 
 	}
 }
