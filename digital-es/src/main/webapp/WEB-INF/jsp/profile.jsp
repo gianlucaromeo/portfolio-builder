@@ -39,8 +39,6 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link" href="index.html"><i
-							class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
@@ -121,7 +119,7 @@
 										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
-										src="assets/img/avatars/avatar1.jpeg"></a>
+										src="${profilePicture}"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i
@@ -148,7 +146,7 @@
 								<div class="card-body shadow">
 									<div class="text-center">
 										<img class="rounded-circle mb-3 mt-4"
-											src="../../dashboard_assets/img/avatars/default_avatar_image.png"
+											src="${profilePicture}"
 											width="160" height="160" id="profile_picture">
 										<div class="mb-3">
 											<input type="file" accept="image/jpg, image/png" id="image_chooser_profile" class="editPhotoChooser col-12"/> 
