@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Posts - PB</title>
+<title>Projects Moderation</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -44,10 +44,10 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link" href="all_users"><i
-							class="fas fa-user"></i><span>Users</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="all_projects"><i
-							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="all_users"><i class="fas fa-user"></i><span>Users</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="all_projects"><i class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="all_posts"><i class="far fa-comments"></i><span>Posts</span></a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -144,10 +144,10 @@
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">Posts</h3>
-					<div class="card shadow mb-3">
+					<h3 class="text-dark mb-4">Team</h3>
+					<div class="card shadow">
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">Users</p>
+							<p class="text-primary m-0 fw-bold">Employee Info</p>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -225,7 +225,7 @@
 						<div class="col">
 							<div class="card shadow mb-3">
 								<div class="card-header py-3">
-									<p class="text-primary m-0 fw-bold">Published Posts</p>
+									<p class="text-primary m-0 fw-bold">Published Projects</p>
 								</div>
 								<div class="card-body">
 									<form>
@@ -241,6 +241,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../../dashboard_assets/js/bs-init.js"></script>
 	<script src="../../dashboard_assets/js/theme.js"></script>

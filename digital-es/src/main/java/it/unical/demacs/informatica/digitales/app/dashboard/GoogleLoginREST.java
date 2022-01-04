@@ -30,7 +30,7 @@ public class GoogleLoginREST {
 		if (UserDAOImpl.getInstance().checkEmailExists(email)) {
 			
 			String username = UserDAOImpl.getInstance().getUsernameByEmail(email);
-			Cookie cookie = Servlets.initLoggedUsernameCookie(req, username);
+			Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, username);
 			resp.addCookie(cookie);
 			//Servlets.redirectLogin(resp, cookie);
 
