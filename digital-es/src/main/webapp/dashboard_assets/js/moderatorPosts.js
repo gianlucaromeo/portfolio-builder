@@ -1,7 +1,10 @@
 /**
  * 
  */
+var banReasons;
 function start(){
+	getBanReasons();
+	
 	
 	$("#postsContainer").hide();
 	$.ajax({
@@ -171,7 +174,10 @@ function getDeleteButton(id) {
 										<button type="button" class="btn-close" data-bs-dismiss="modal"
 											aria-label="Close"></button>
 									</div>
-									<div class="modal-body">Are you sure to delete this post?</div>
+									<div class="modal-body">Please give a reson why you want to delete this post...</div>
+									<div id="selectDiv">
+									<select name="reasons" id="reasonsSelectId${id}">
+									</select>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal"">Close</button>
@@ -182,7 +188,33 @@ function getDeleteButton(id) {
 							</div>
 						</div>`;
 
+	let i = 0;
+	banReasons.forEach(function(reason) {
+		$("#reasonsSelectId" + id).append(`<option value="${i}">${reason}</option>`);
+		i++;
+		//console.log(reason);
+	});
+	
 	return deleteButton;
 }
+
+function getBanReasons(){
+	$.ajax({
+
+		url: "/get_ban_reasons",
+		contentType: "application/json",
+		type: "post",
+		
+
+	}).done(function(data) {
+		reasons=JSON.parse(data);
+		//console.log(reasons);
+		if (reasons.length !== 0) {
+			banReasons=reasons;
+		} 
+
+	});
+}
+
 
 start();

@@ -23,6 +23,7 @@ import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
+import it.unical.demacs.informatica.digitales.app.settings.BanReasons;
 
 @RestController
 public class ModeratorPostsREST {
@@ -31,15 +32,14 @@ public class ModeratorPostsREST {
 	public String getUsersDataAction(HttpServletRequest req, HttpServletResponse resp) {
 		Gson gson = new Gson();
 
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
+		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+		if(moderatorCookie!=null) {
 				Set<User> users = new HashSet<User>();
 				users = UserDAOImpl.getInstance().findAll();
 				String usersToJSON = gson.toJson(users);
 
 				return usersToJSON;
-			}
+			
 		}
 
 		return Protocol.ERROR;
@@ -51,15 +51,14 @@ public class ModeratorPostsREST {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
+		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+		if(moderatorCookie!=null) {
 				String profileImage64 = "";
 				profileImage64 = UserMainInformationsDAOImpl.getInstance().findProfileImageById(id);
 				String imageToJSON = gson.toJson(profileImage64);
 
 				return imageToJSON;
-			}
+			
 		}
 
 		return Protocol.ERROR;
@@ -70,16 +69,34 @@ public class ModeratorPostsREST {
 	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
-		Cookie[] cookies = req.getCookies();
-		for (Cookie c : cookies) {
-			if (c.getName().equals("logged_username")) {
+		
+		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+		if(moderatorCookie!=null) {
 				List<Post> posts = new ArrayList<Post>();
 				posts = PostDAOImpl.getInstance().findAllByUserId(id);
 				String postsToJSON = gson.toJson(posts);
 
 				return postsToJSON;
-			}
 		}
+		
+
+		return Protocol.ERROR;
+
+	}
+	
+	@PostMapping("/get_ban_reasons")
+	public String getBanReasons(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+		if(moderatorCookie!=null) {
+			List<String> reasons = new ArrayList<String>();
+			reasons.add(BanReasons.TEXT_NOT_COMPLY);
+			reasons.add(BanReasons.TEXT_NOT_COMPLY);
+			String reasonsToJSON = gson.toJson(reasons);
+			return reasonsToJSON;
+		}
+		
+
 
 		return Protocol.ERROR;
 

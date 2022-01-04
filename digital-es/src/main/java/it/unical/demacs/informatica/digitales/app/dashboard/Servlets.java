@@ -90,6 +90,21 @@ public class Servlets {
 		return location;
 
 	}
+	public static String redirectModerator(HttpServletRequest req, String location) {
+
+		Cookie loggedModeratorCookie = Servlets.getCookie(req, "logged_moderator");
+
+		if (loggedModeratorCookie == null) {
+			return "error_page";
+		}
+		System.out.println("in redirect: username = " + loggedModeratorCookie.getValue());
+
+		//String username = loggedModeratorCookie.getValue();
+		//fetchUserData(req, username);
+
+		return location;
+
+	}
 
 	public static User getLoggedUser(HttpServletRequest req) {
 
