@@ -15,9 +15,24 @@ import com.google.gson.JsonSyntaxException;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
+import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 
 @RestController
 public class ProfileREST {
+	
+	@PostMapping("/get_profile_picture")
+	public String getProfilePicture(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		User user = Servlets.getLoggedUser(req);
+		
+		if (user == null) {
+			return ProfileSettings.getDefaultAvatarIMage64();
+		}
+
+		long userId = user.getId();
+		return UserMainInformationsDAOImpl.getInstance().findProfileImageById(userId);
+
+	}
 	
 	@PostMapping("/save_presentation_image")
 	public String loadProjects(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {

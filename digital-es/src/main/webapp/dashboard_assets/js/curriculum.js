@@ -2,11 +2,30 @@ let user_id = -1;
 const all_experiences = new Map();
 
 window.onload = (event) => {
+	setProfilePicture();
 	initDoneBtn();
 	hideNewExperienceDiv();
 	initBtns();
 	retrieveCurriculumData();
 };
+
+function setProfilePicture() {
+	
+	profilePicture = $("#profilePicture");
+	
+	$.ajax({
+
+		url: "/get_profile_picture",
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+
+		profilePicture.src(data);
+
+	});
+	
+}
 
 function fetchUserId() {
 
