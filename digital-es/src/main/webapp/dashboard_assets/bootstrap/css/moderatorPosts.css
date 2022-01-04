@@ -1,0 +1,18 @@
+#selectDiv select {
+  background-color: #858796;
+  color: white;
+  border-radius: 0.6 rem;
+  border-radius: 5px 5px 5px 5px;
+  font-size: 15px;
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+
+#selectDiv select option {
+  padding: 30px;
+}
+#selectDiv {
+  margin-right: 10px;
+
+}

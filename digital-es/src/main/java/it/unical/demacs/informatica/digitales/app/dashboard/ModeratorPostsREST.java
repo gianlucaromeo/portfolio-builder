@@ -17,9 +17,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
+import it.unical.demacs.informatica.digitales.app.beans.PostBanRequest;
+import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -91,7 +96,6 @@ public class ModeratorPostsREST {
 		if(moderatorCookie!=null) {
 			List<String> reasons = new ArrayList<String>();
 			reasons.add(BanReasons.TEXT_NOT_COMPLY);
-			reasons.add(BanReasons.TEXT_NOT_COMPLY);
 			String reasonsToJSON = gson.toJson(reasons);
 			return reasonsToJSON;
 		}
@@ -102,6 +106,31 @@ public class ModeratorPostsREST {
 
 	}
 	
+	@PostMapping("/ban_post")
+	public String banPost(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+		
+		Gson gson = new Gson();
+		PostBanRequest banReq = gson.fromJson(req.getReader(), PostBanRequest.class);
+		Post post = new Post();
+		
+		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+		if (moderatorCookie != null) {
+			post = PostDAOImpl.getInstance().findById(banReq.getPostId());
+			if (post != null) {
+				RemovedPost rem = new RemovedPost();
+				Moderator m = ModeratorDAOImpl.getInstance().findByUsername(moderatorCookie.getValue());
+				rem.setModeratorId(m.getId());
+				rem.setPostId(banReq.getPostId());
+				rem.setReason(banReq.getReason());
+				RemovedPostDAOImpl.getInstance().create(rem);
+			}
+		}
+		
+
+
+		return Protocol.ERROR;
+
+	}
 	
 
 }

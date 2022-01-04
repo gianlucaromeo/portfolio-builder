@@ -8,6 +8,8 @@
 <title>Posts - PB</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/moderatorPosts.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/posts.css">
 <link rel="stylesheet"
