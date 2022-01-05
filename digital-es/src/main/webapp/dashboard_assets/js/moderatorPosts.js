@@ -238,7 +238,6 @@ function getDeleteButton(id) {
 function appendReason(reason, id){
 	$("#reasonsSelectId" + id).append(`<option value="${reason}">${reason}</option>`);
 	//console.log($("#reasonsSelectId" + id).val();
-
 }
 function getBanReasons(){
 	$.ajax({

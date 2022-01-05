@@ -1,10 +1,13 @@
 /**
  * 
  */
-var banReasons=[];
+var banReasons = [];
 
 
-function start(){
+function start() {
+	getBanReasons();
+
+	console.log(banReasons)
 	$.ajax({
 
 		url: "/get_users_data_action",
@@ -18,7 +21,7 @@ function start(){
 
 		if (users.length !== 0) {
 			//console.log("no data");
-		
+
 			users.forEach(user => {
 				addUserOnTable(user);
 				//console.log(user);
@@ -28,26 +31,28 @@ function start(){
 	});
 }
 
-function addUserOnTable(user){
+function addUserOnTable(user) {
 	$("#usersTableBody").append(createUserRow(user));
 	setUserTableUserImage(user.id);
 	setEventOnConfirmBan(user.id);
-	
+	setBanReasonsOnPopUp(user.id)
+
 }
 
-function createUserRow(userData){
+function createUserRow(userData) {
 	//console.log(userData);
-		return `<tr id="rowUserId${userData.id}">
+	;
+	return `<tr id="rowUserId${userData.id}">
 				<td><img class="rounded-circle me-2" width="30" height="30"
 					src="undefined" id="profileImageUserId${userData.id}">${userData.firstName} ${userData.lastName} </td>
 				<td>${userData.email}</td>
 				<td>${userData.dateOfBirth}</td>
 				<td>${userData.signUpDate}</td>
-				<td>`+ getBanButton(userData.id) +`</td>
+				<td>`+ getBanButton(userData.id) + `</td>
 			</tr>`;
 }
 
-function setUserTableUserImage(id){
+function setUserTableUserImage(id) {
 	$.ajax({
 
 		url: "/get_user_profile_image",
@@ -59,29 +64,43 @@ function setUserTableUserImage(id){
 	}).done(function(profileImage) {
 		//console.log(data);
 		//console.log($("#profileImageUserId"+id));
-			
-		if(profileImage!=="error"){
-			$("#profileImageUserId"+id).attr("src", profileImage);
+
+		if (profileImage !== "error") {
+			$("#profileImageUserId" + id).attr("src", profileImage);
 		}
-			
+
 
 	});
-	
-	
+
+
 }
 
 
 
-function setEventOnConfirmBan(id){
-	
+function setEventOnConfirmBan(id) {
+
+
 	$("#confirmBan" + id).click(function(e) {
 		e.preventDefault();
+
+		let selectedReason = $('#reasonsSelectId' + id + ' option:selected').val();
+		console.log(selectedReason);
+
+		let end = $("#datePickerExpiration").val();
+
+		var banRequest = {
+			userId: id,
+			reason: selectedReason,
+			dateStart: getCurrentDate(),
+			dateEnd: end
+
+		}
 		console.log(id);
 		$.ajax({
 
 			url: "/ban_user",
 			contentType: "application/json",
-			data: JSON.stringify(id),
+			data: JSON.stringify(banRequest),
 			type: "post",
 			dataType: "json",
 
@@ -90,12 +109,18 @@ function setEventOnConfirmBan(id){
 		});
 
 
-		
+
 
 	});
-	
+
 }
 
+function getCurrentDate() {
+	var date = new Date();
+	var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+	return dateString;
+}
 
 
 
@@ -115,9 +140,14 @@ function getBanButton(id) {
 											aria-label="Close"></button>
 									</div>
 									<div class="modal-body">Ban expiration date, if you don't give a date, ban will be forever...</div>
+									<div id="selectDivDate">
+										<label class="datePickerLabel" for="datePicker"><strong>Expiration date</strong></label>
+										<input placeholder="Select date" type="date" id="datePickerExpiration" name="expirationDateFrom" class="form-control form-control-user">
+									</div>
+									<div class="modal-body">Please give a reson why you want to delete this post...</div>
 									<div id="selectDiv">
-									<label class="datePickerLabel" for="datePicker"><strong>Expiration date</strong></label>
-									<input placeholder="Select date" type="date" id="datePickerExpiration" name="expirationDateFrom" class="form-control form-control-user">
+									<select name="reasons" id="reasonsSelectId${id}">
+									</select>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal"">Close</button>
@@ -129,11 +159,48 @@ function getBanButton(id) {
 						</div>`;
 
 	//console.log(banReasons);
-	
-	
+
+
 	return banButton;
 }
+function getBanReasons() {
 
+
+	$.ajax({
+
+		url: "/get_users_ban_reasons",
+		contentType: "application/json",
+		type: "post",
+
+
+	}).done(function(data) {
+		reasons = JSON.parse(data);
+		console.log(reasons);
+		if (reasons.length !== 0) {
+			console.log("ciao")
+			setBanReasons(reasons);
+		}
+
+	});
+}
+
+function setBanReasons(reasons) {
+	banReasons = reasons;
+	//	console.log(banReasons);
+}
+
+function appendReason(reason, id) {
+	$("#reasonsSelectId" + id).append(`<option value="${reason}">${reason}</option>`);
+	//console.log($("#reasonsSelectId" + id).val();
+}
+function setBanReasonsOnPopUp(id) {
+	banReasons.forEach(function(reason) {
+		//console.log(reason);
+		appendReason(reason, id);
+
+		//console.log(reason);
+	});
+}
 
 
 start();

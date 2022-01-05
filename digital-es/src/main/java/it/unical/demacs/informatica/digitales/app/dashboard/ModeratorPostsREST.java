@@ -42,7 +42,7 @@ public class ModeratorPostsREST {
 		if (moderatorCookie != null) {
 
 			Set<User> users = new HashSet<User>();
-			users = UserDAOImpl.getInstance().findAll();
+			users = UserDAOImpl.getInstance().findAllNotBanned();
 			String usersToJSON = gson.toJson(users);
 
 			return usersToJSON;
