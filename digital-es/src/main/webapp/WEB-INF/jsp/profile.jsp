@@ -139,7 +139,16 @@
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">Profile</h3>
+					<div class="row">
+						<div class="col-md-2">
+							<h3 class="text-dark mb-4">Profile</h3>
+						</div>
+						<div class="col-md-2">
+							<div class="mb-3">
+								<button class="btn btn-primary btn-sm" type="submit" id="edit_all_btn">Edit your profile</button>
+							</div>
+						</div>
+					</div>
 					<div class="row mb-3">
 						<div class="col-lg-4">
 							<div class="card mb-3">
@@ -165,8 +174,7 @@
 												</div>
 
 												<div class="mb-3">
-													<button class="btn btn-primary btn-sm" type="submit" id="biography_btn">Save
-														Settings</button>
+													<button class="btn btn-primary btn-sm" type="submit" id="biography_btn">Save Biography</button>
 												</div>
 											</form>
 										</div>
@@ -185,15 +193,15 @@
 											<div class="row">
 												<h4 class="small fw-bold">Skill</h4>
 											</div>
-											<input class="form-control" type="text" id="firstName"
-												placeholder="First Name" name="first_name" value="Java">
+											<input class="form-control" type="text" id="firstSkill"
+												placeholder="First Skill" name="first_skill" value="Java">
 										</div>
 										<div class="col-4 mb-3">
 											<div class="row">
 												<h4 class="small fw-bold">Level (0-100)</h4>
 											</div>
-											<input class="form-control" type="text" id="firstName"
-												placeholder="First Name" name="first_name" value="20">
+											<input class="form-control" type="text" id="firstLevel"
+												placeholder="First Level" name="first_level" value="20">
 										</div>
 
 									</div>
@@ -363,23 +371,23 @@
 													<div class="row">
 														<div class="col-4">
 															<div class="mb-3 text-center">
-																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-twitter"></i></strong></label><input class="form-control" type="text"
-																	id="secPhoneNumber" placeholder=""
-																	name="sec_phone_number">
+																<label class="form-label" for="twitter"><strong><i class="fab fa-twitter"></i></strong></label><input class="form-control" type="text"
+																	id="twitter" placeholder=""
+																	name="twitter">
 															</div>
 														</div>
 														<div class="col-4">
 															<div class="mb-3 text-center">
-																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-facebook"></i></strong></label><input class="form-control" type="text"
-																	id="secPhoneNumber" placeholder=""
-																	name="sec_phone_number">
+																<label class="form-label" for="facebook"><strong><i class="fab fa-facebook"></i></strong></label><input class="form-control" type="text"
+																	id="facebook" placeholder=""
+																	name="facebook">
 															</div>
 														</div>
 														<div class="col-4">
 															<div class="mb-3 text-center">
-																<label class="form-label" for="sec_phone_number"><strong><i class="fab fa-instagram"></i></strong></label><input class="form-control" type="text"
-																	id="secPhoneNumber" placeholder=""
-																	name="sec_phone_number">
+																<label class="form-label" for="instagram"><strong><i class="fab fa-instagram"></i></strong></label><input class="form-control" type="text"
+																	id="instagram" placeholder=""
+																	name="instagram">
 															</div>
 														</div>
 													</div>

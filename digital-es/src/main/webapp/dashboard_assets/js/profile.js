@@ -2,19 +2,46 @@
 start();
 
 function start() {
-	$("#main_info_btn").hide();
-	$("#contact_btn").hide();
-	$("#biography_btn").hide();
-	//$("#profile_photo_btn").hide();
-	$("#skill_btn").hide();
 	loadMainInformations();
 	loadEvents();
+	editAll(true);
+}
+function loadEvents() {
+	loadProfileImageEvent()
 	for(i=1;i<=3;i++) {
 		handleDragEvent(i);
 		setOnChangeImage(i);
 	}
+	setEditAll();
+	saveBiography();
 }
-function loadEvents() {
+
+function setEditAll() {
+	$("#edit_all_btn").click(function(e){
+			editAll(false);
+	});
+}
+
+function saveBiography() {
+		$("#biography_btn").click(function(e){
+		biography ={
+			bio:$("#biography").val(),
+		};
+		console.log(biography.bio);
+			$.ajax({
+			url: "/save_bio",
+			contentType: "application/json",
+			data: JSON.stringify(biography),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			console.log(data);
+			document.querySelector("#biography").src=data.bio;
+		});
+	});
+}
+
+function loadProfileImageEvent() {
 	const image_chooser=document.querySelector("#image_chooser_profile");
 	var newImage="";
 	image_chooser.addEventListener("change", function(){
@@ -163,6 +190,31 @@ function loadMainInformations() {
 	
 }
 
-
+function editAll(value) {
+	$("#biography").attr('readonly',value);	
+	$("#username").attr('readonly',value);	
+	$("#email").attr('readonly',value);	
+	$("#firstName").attr('readonly',value);	
+	$("#lastName").attr('readonly',value);	
+	$("#datePicker").attr('readonly',value);	
+	$("#contactEmail").attr('readonly',value);	
+	$("#phoneNumber").attr('readonly',value);	
+	$("#secPhoneNumber").attr('readonly',value);
+	$("#twitter").attr('readonly',value);	
+	$("#facebook").attr('readonly',value);	
+	$("#instagram").attr('readonly',value);	
+	if(value) {
+		$("#main_info_btn").hide();
+		$("#contact_btn").hide();
+		$("#biography_btn").hide();
+		$("#skill_btn").hide();	
+	}
+	else {
+		$("#main_info_btn").show();
+		$("#contact_btn").show();
+		$("#biography_btn").show();
+		$("#skill_btn").show();	
+	}
+}
 
 

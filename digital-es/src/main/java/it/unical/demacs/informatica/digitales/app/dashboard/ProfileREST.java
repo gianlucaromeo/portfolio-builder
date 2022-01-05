@@ -68,4 +68,22 @@ public class ProfileREST {
 		return gson.toJson(info);
 
 	}
+	
+	@PostMapping("/save_bio")
+	public String saveBio(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
+		System.out.println(newMainInfo);
+		
+		User user = Servlets.getLoggedUser(req);
+		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
+		
+		info.setBio(newMainInfo.getBio());
+		
+		UserMainInformationsDAOImpl.getInstance().update(info);
+
+		return gson.toJson(info);
+
+	}
 }
