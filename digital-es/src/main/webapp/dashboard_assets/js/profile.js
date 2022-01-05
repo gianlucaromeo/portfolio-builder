@@ -5,6 +5,7 @@ function start() {
 	loadMainInformations();
 	loadEvents();
 	editAll(true);
+	refactUndefinedImage();
 }
 function loadEvents() {
 	loadProfileImageEvent()
@@ -132,16 +133,20 @@ function setOnChangeImage(id) {
 			saveImages();
 		});
 		reader.readAsDataURL(this.files[0]);
+		
 	});
 }
 
 function saveImages() {
+	console.log(newImages);
 	var newImages={
-			profilePicture:document.querySelector("#profile_picture").src,
-			presentationPicture1:document.querySelector("#presentation_image_1").src,
-			presentationPicture2:document.querySelector("#presentation_image_2").src,
-			presentationPicture3:document.querySelector("#presentation_image_3").src,
+			profilePicture:$("#profile_picture").attr("src"),
+			presentationPicture1:$("#presentation_image_1").attr("src"),
+			presentationPicture2:$("#presentation_image_2").attr("src"),
+			presentationPicture3:$("#presentation_image_3").attr("src"),
 		};
+		
+		console.log(newImages);
 		$.ajax({
 			url: "/save_presentation_image",
 			contentType: "application/json",
@@ -149,6 +154,7 @@ function saveImages() {
 			type: "post",
 			dataType: "json",
 		});
+	refactUndefinedImage();
 }
 
 function loadMainInformations() {
@@ -179,14 +185,16 @@ function loadMainInformations() {
 			dataType: "json",
 		}).done(function(data) {
 			console.log(data);
-			document.querySelector("#profile_picture").src=data.profilePicture;
 			$("#biography").val(data.bio);
 			
 			
 			document.querySelector("#presentation_image_1").src=data.presentationPicture1;
 			document.querySelector("#presentation_image_2").src=data.presentationPicture2;
 			document.querySelector("#presentation_image_3").src=data.presentationPicture3;
+			refactUndefinedImage();
 		});
+		
+	
 	
 }
 
@@ -217,4 +225,23 @@ function editAll(value) {
 	}
 }
 
+function refactUndefinedImage(){
+	if($("#presentation_image_1").attr("src")==="undefined"){
+		$("#presentation_image_1").hide();
+	}else{
+		$("#presentation_image_1").show();
+	}
+	if($("#presentation_image_2").attr("src")==="undefined"){
+		$("#presentation_image_2").hide();
+	}else{
+		$("#presentation_image_2").show();
+	}
+	if($("#presentation_image_3").attr("src")==="undefined"){
+		$("#presentation_image_3").hide();
+	}else{
+		$("#presentation_image_3").show();
+	}
+	
+			
+}
 
