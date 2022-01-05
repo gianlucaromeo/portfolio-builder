@@ -82,7 +82,7 @@ public class Servlets {
 		Cookie loggedUsernameCookie = Servlets.getCookie(req, "logged_username");
 
 		if (loggedUsernameCookie == null) {
-			return "error_page";
+			return "404_page";
 		}
 
 		String username = loggedUsernameCookie.getValue();
@@ -97,7 +97,7 @@ public class Servlets {
 		Cookie loggedModeratorCookie = Servlets.getCookie(req, "logged_moderator");
 
 		if (loggedModeratorCookie == null) {
-			return "error_page";
+			return "404_page";
 		}
 		// String username = loggedModeratorCookie.getValue();
 		// fetchUserData(req, username);
