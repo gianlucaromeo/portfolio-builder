@@ -14,6 +14,7 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
+import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 
@@ -26,12 +27,14 @@ public class ProfileREST {
 		User user = Servlets.getLoggedUser(req);
 		
 		if (user == null) {
-			return ProfileSettings.getDefaultAvatarIMage64();
+			return Servlets.redirect(req, "error_page");
 		}
 
 		long userId = user.getId();
-		return UserMainInformationsDAOImpl.getInstance().findProfileImageById(userId);
-
+		String profileImage =  UserMainInformationsDAOImpl.getInstance().findProfileImageById(userId);
+		
+		return profileImage;
+		
 	}
 	
 	@PostMapping("/save_presentation_image")

@@ -1,5 +1,8 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.HashSet;
@@ -13,26 +16,27 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 
 public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMainInformations> {
-	private static UserMainInformationsDAOImpl instance= null;
-	
-	private UserMainInformationsDAOImpl() {}
-	
-	public static UserMainInformationsDAOImpl getInstance(){
-		if(instance==null)
-			instance= new UserMainInformationsDAOImpl();
+	private static UserMainInformationsDAOImpl instance = null;
+
+	private UserMainInformationsDAOImpl() {
+	}
+
+	public static UserMainInformationsDAOImpl getInstance() {
+		if (instance == null)
+			instance = new UserMainInformationsDAOImpl();
 		return instance;
 	}
 
 	@Override
 	public String create(UserMainInformations userMainInfo) {
 		con = DBUtil.getInstance().getConnection();
-		
+
 		String query = "INSERT INTO users_main_informations VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		
+
 		try {
-			
+
 			p = con.prepareStatement(query);
-		
+
 			p.setLong(1, userMainInfo.getUserId());
 			p.setString(2, userMainInfo.getProfilePicture());
 			p.setString(3, userMainInfo.getLogoPicture());
@@ -50,9 +54,9 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			p.setString(15, userMainInfo.getFacebookLinkRef());
 			p.setString(16, userMainInfo.getInstagramLinkRef());
 			p.setString(17, userMainInfo.getTwitterLinkRef());
-			
+
 			p.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			System.err.println("[UserMainInformationsDAOImpl] [create]: ");
 			e.printStackTrace();
@@ -60,25 +64,25 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		} finally {
 			closeAll();
 		}
-		
+
 		return Protocol.OK;
 	}
 
 	@Override
 	public String update(UserMainInformations userMainInfo) {
-		
+
 		con = DBUtil.getInstance().getConnection();
-		
+
 		String query = "UPDATE users_main_informations SET profile_picture=?,logo_picture=?,logo_name=?,"
 				+ "bio=?, presentation_picture_1=?,presentation_picture_2=?,presentation_picture_3=?,"
 				+ "special_skill_name_1=?,special_skill_name_2=?,special_skill_name_3=?,  "
 				+ "special_skill_descr_1=?,special_skill_descr_2=?,special_skill_descr_3=?,"
 				+ "facebook_link_ref=?,instagram_link_ref=?,twitter_link_ref=? WHERE user_id=?";
-		   
+
 		try {
-			
+
 			p = con.prepareStatement(query);
-		
+
 			p.setString(1, userMainInfo.getProfilePicture());
 			p.setString(2, userMainInfo.getLogoPicture());
 			p.setString(3, userMainInfo.getLogoName());
@@ -96,9 +100,9 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			p.setString(15, userMainInfo.getInstagramLinkRef());
 			p.setString(16, userMainInfo.getTwitterLinkRef());
 			p.setLong(17, userMainInfo.getUserId());
-			
+
 			p.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			System.err.println("[UserMainInformationsDAOImpl] [update]: ");
 			e.printStackTrace();
@@ -106,32 +110,32 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		} finally {
 			closeAll();
 		}
-		
+
 		return Protocol.OK;
 	}
-	
+
 	@Override
 	public long findId(UserMainInformations userMainInfo) {
 		return userMainInfo.getUserId();
-	
+
 	}
-	
+
 	@Override
 	public UserMainInformations findById(long id) {
 
 		UserMainInformations userMainInfo = null;
-		
+
 		con = DBUtil.getInstance().getConnection();
-		
+
 		String query = "SELECT * FROM users_main_informations WHERE user_id=?;";
-		
+
 		try {
-			
+
 			p = con.prepareStatement(query);
 			p.setLong(1, id);
-			
+
 			rs = p.executeQuery();
-			
+
 			if (rs.next()) {
 				userMainInfo = new UserMainInformations();
 				userMainInfo.setUserId(id);
@@ -152,33 +156,33 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 				userMainInfo.setInstagramLinkRef(rs.getString("instagram_link_ref"));
 				userMainInfo.setTwitterLinkRef(rs.getString("twitter_link_ref"));
 			}
-	
+
 		} catch (SQLException e) {
 			System.err.println("[UserMainInformationsDAOImpl] [findById]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();
 		}
-		
+
 		return userMainInfo;
-		
+
 	}
-	
+
 	@Override
 	public Set<UserMainInformations> findAll() {
 
 		Set<UserMainInformations> usersMainInfo = new HashSet<UserMainInformations>();
-		
+
 		con = DBUtil.getInstance().getConnection();
-		
+
 		String query = "SELECT * FROM users_main_informations;";
 
 		try {
-			
+
 			p = con.prepareStatement(query);
-			
+
 			rs = p.executeQuery();
-			
+
 			while (rs.next()) {
 				UserMainInformations userMainInfo = new UserMainInformations();
 				userMainInfo.setUserId(rs.getLong("user_id"));
@@ -200,31 +204,31 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 				userMainInfo.setTwitterLinkRef(rs.getString("twitter_link_ref"));
 				usersMainInfo.add(userMainInfo);
 			}
-			
+
 		} catch (SQLException e) {
 			System.err.println("[UserMainInformationsDAOImpl] [findAll]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();
 		}
-		
+
 		return usersMainInfo;
-		
+
 	}
-	
+
 	@Override
 	public String delete(UserMainInformations userMainInfo) {
 
 		con = DBUtil.getInstance().getConnection();
-		
+
 		String query = "DELETE from users_main_informations WHERE user_id=?";
-		
+
 		try {
-			
+
 			p = con.prepareStatement(query);
 			p.setLong(1, userMainInfo.getUserId());
 			p.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			System.err.println("[UserMainInformationsDAOImpl] [delete]: ");
 			e.printStackTrace();
@@ -232,9 +236,9 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		} finally {
 			closeAll();
 		}
-		
+
 		return Protocol.OK;
-		
+
 	}
 
 	public synchronized String findProfileImageById(long id) {
@@ -261,7 +265,35 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			closeAll();
 		}
 
-		return ProfileSettings.getDefaultAvatarIMage64();
+		return getDefaultAvatarIMage64();
+	}
+
+	private synchronized String getDefaultAvatarIMage64() {
+
+		closeAll();
+		String query = "SELECT image FROM default_image;";
+
+		try {
+
+			con = DBUtil.getInstance().getConnection();
+			p = con.prepareStatement(query);
+
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				System.out.println("Hello: " + rs.getString("image"));
+				return rs.getString("image");
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[UserMainInformationsDAOImpl] [findProfileImageById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return "error";
+
 	}
 
 }

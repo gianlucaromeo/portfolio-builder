@@ -29,8 +29,8 @@ public class Servlets {
 	public static Cookie initLoggedUsernameCookie(HttpServletRequest req, HttpServletResponse resp, String username) {
 
 		Cookie cookie = Servlets.getCookie(req, "logged_username");
-		
-		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
+
+		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
 		deleteCookie(resp, moderatorCookie);
 
 		if (cookie == null) {
@@ -47,14 +47,14 @@ public class Servlets {
 		return cookie;
 
 	}
-	
 
-	public static Cookie initLoggedModeratorUsernameCookie(HttpServletRequest req, HttpServletResponse resp, String username) {
+	public static Cookie initLoggedModeratorUsernameCookie(HttpServletRequest req, HttpServletResponse resp,
+			String username) {
 		Cookie cookie = Servlets.getCookie(req, "logged_moderator");
-		
-		Cookie userCookie= Servlets.getCookie(req, "logged_username");
+
+		Cookie userCookie = Servlets.getCookie(req, "logged_username");
 		deleteCookie(resp, userCookie);
-		
+
 		if (cookie == null) {
 			System.out.println("created new cookie for moderator: " + username);
 			cookie = new Cookie("logged_moderator", username);
@@ -91,6 +91,7 @@ public class Servlets {
 		return location;
 
 	}
+
 	public static String redirectModerator(HttpServletRequest req, String location) {
 
 		Cookie loggedModeratorCookie = Servlets.getCookie(req, "logged_moderator");
@@ -100,8 +101,8 @@ public class Servlets {
 		}
 		System.out.println("in redirect: username = " + loggedModeratorCookie.getValue());
 
-		//String username = loggedModeratorCookie.getValue();
-		//fetchUserData(req, username);
+		// String username = loggedModeratorCookie.getValue();
+		// fetchUserData(req, username);
 
 		return location;
 
@@ -130,20 +131,21 @@ public class Servlets {
 		req.setAttribute("email", user.getEmail());
 
 		req.setAttribute("dateOfBirth", user.getDateOfBirth());
-		
+
 		String profilePicture = UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId());
+		System.out.println("profile pict: " + profilePicture);
 		req.setAttribute("profilePicture", profilePicture);
 
 	}
-	
+
 	private static void deleteCookie(HttpServletResponse resp, Cookie cookie) {
-		if(cookie!=null) {
+		if (cookie != null) {
 			cookie.setMaxAge(0);
 			cookie.setValue(null);
 			cookie.setPath("/");
 			resp.addCookie(cookie);
-		}		
-		
+		}
+
 	}
 
 }
