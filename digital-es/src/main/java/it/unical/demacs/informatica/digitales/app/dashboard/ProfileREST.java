@@ -3,7 +3,9 @@ package it.unical.demacs.informatica.digitales.app.dashboard;
 import java.io.IOException;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +16,11 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
+import it.unical.demacs.informatica.digitales.app.beans.validation.ProfileValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
+import it.unical.demacs.informatica.digitales.app.validator.ProfileValidator;
 
 @RestController
 public class ProfileREST {
@@ -85,5 +89,72 @@ public class ProfileREST {
 
 		return gson.toJson(info);
 
+	}
+	
+	@PostMapping("/save_main_info")
+	public String saveMainInfo(HttpServletRequest req,HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		User newMainInfo = gson.fromJson(req.getReader(), User.class);
+		System.out.println(newMainInfo);
+		
+		User user = Servlets.getLoggedUser(req);
+		
+		ProfileValidatorResponse validation=ProfileValidator.validateMainInfo(newMainInfo);
+		if(ProfileValidator.isValidMainInfo(validation)) {
+			
+		user.setUsername(newMainInfo.getUsername());
+		user.setFirstName(newMainInfo.getFirstName());
+		user.setLastName(newMainInfo.getLastName());
+		user.setEmail(newMainInfo.getEmail());
+		user.setDateOfBirth(newMainInfo.getDateOfBirth());
+		UserDAOImpl.getInstance().update(user);
+//		TODO CHANGE COOKIE
+//		Cookie cookie =Servlets.initLoggedUsernameCookie(req, resp, user.getUsername());
+		}
+
+		return gson.toJson(validation);
+	}
+	
+	@PostMapping("/save_contacts1")
+	public String saveContacts1(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		User newUser = gson.fromJson(req.getReader(), User.class);
+		System.out.println("NEW DATA");
+		System.out.println(newUser);
+		
+		
+		User user = Servlets.getLoggedUser(req);
+		System.out.println("CURRENT");
+		System.out.println(user);
+		
+		user.setContactEmail(newUser.getContactEmail());
+		user.setMainPhoneNumber(newUser.getMainPhoneNumber());
+		user.setSecondaryPhoneNumber(newUser.getSecondaryPhoneNumber());
+		
+		UserDAOImpl.getInstance().update(user);
+		
+		return gson.toJson(user);
+	}
+	
+	@PostMapping("/save_contacts2")
+	public String saveContacts2(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		
+		User user = Servlets.getLoggedUser(req);
+		
+		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
+//		System.out.println(newMainInfo);
+		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
+		
+		info.setFacebookLinkRef(newMainInfo.getFacebookLinkRef());
+		info.setTwitterLinkRef(newMainInfo.getTwitterLinkRef());
+		info.setInstagramLinkRef(newMainInfo.getInstagramLinkRef());
+		
+		UserMainInformationsDAOImpl.getInstance().update(info);
+
+		return gson.toJson(info);
 	}
 }

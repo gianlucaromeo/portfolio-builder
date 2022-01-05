@@ -20,86 +20,55 @@ import com.google.gson.JsonSyntaxException;
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.PostBanRequest;
+import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.settings.BanReasons;
+import it.unical.demacs.informatica.digitales.app.settings.RemoveProjectReasons;
 
 @RestController
-public class ModeratorPostsREST {
+public class ModeratorProjectsREST {
 
-	@PostMapping("/get_users_data_action")
-	public String getUsersDataAction(HttpServletRequest req, HttpServletResponse resp) {
-
-		Gson gson = new Gson();
-
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
-		if (moderatorCookie != null) {
-
-			Set<User> users = new HashSet<User>();
-			users = UserDAOImpl.getInstance().findAll();
-			String usersToJSON = gson.toJson(users);
-
-			return usersToJSON;
-
-		}
-
-		return Protocol.ERROR;
-
-	}
-
-	@PostMapping("/get_user_profile_image")
-	public String getUsersProfileImageAction(HttpServletRequest req, HttpServletResponse resp)
+	@PostMapping("/get_projects_by_user_id")
+	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
+
 		Gson gson = new Gson();
-		Integer id = gson.fromJson(req.getReader(), Integer.class);
+
+		Long id = gson.fromJson(req.getReader(), Long.class);
 
 		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+
 		if (moderatorCookie != null) {
-			String profileImage64 = "";
-			profileImage64 = UserMainInformationsDAOImpl.getInstance().findProfileImageById(id);
-			String imageToJSON = gson.toJson(profileImage64);
 
-			return imageToJSON;
+			Set<Project> projects = new HashSet<Project>();
+			projects = ProjectDAOImpl.getInstance().findAllByUserId(id);
+			String projectsToJSON = gson.toJson(projects);
 
+			return projectsToJSON;
+			
 		}
 
 		return Protocol.ERROR;
 
 	}
-
-
-	@PostMapping("/get_users_posts_by_id_not_banned")
-	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
-		Gson gson = new Gson();
-		Integer id = gson.fromJson(req.getReader(), Integer.class);
-
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
-		if (moderatorCookie != null) {
-			List<Post> posts = new ArrayList<Post>();
-			posts = PostDAOImpl.getInstance().findAllByUserId(id);
-			String postsToJSON = gson.toJson(posts);
-
-			return postsToJSON;
-		}
-
-		return Protocol.ERROR;
-
-	}
-
-	@PostMapping("/get_ban_reasons")
+	
+	@PostMapping("/get_remove_projects_reasons")
 	public String getBanReasons(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
+		
 		Gson gson = new Gson();
 		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
-			reasons.add(BanReasons.TEXT_NOT_COMPLY);
+			reasons.add(RemoveProjectReasons.INAPPROPRIATE_CONTENT);
 			String reasonsToJSON = gson.toJson(reasons);
 			return reasonsToJSON;
 		}
@@ -107,8 +76,8 @@ public class ModeratorPostsREST {
 		return Protocol.ERROR;
 
 	}
-
-	@PostMapping("/remove_project_action")
+/*
+	@PostMapping("/ban_post")
 	public String banPost(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
 
@@ -132,4 +101,6 @@ public class ModeratorPostsREST {
 		return Protocol.ERROR;
 
 	}
+	*/
+
 }

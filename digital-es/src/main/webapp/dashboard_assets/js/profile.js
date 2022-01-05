@@ -15,6 +15,8 @@ function loadEvents() {
 	}
 	setEditAll();
 	saveBiography();
+	saveMainInfo();
+	saveContacts();
 }
 
 function setEditAll() {
@@ -25,6 +27,7 @@ function setEditAll() {
 
 function saveBiography() {
 		$("#biography_btn").click(function(e){
+		e.preventDefault();
 		biography ={
 			bio:$("#biography").val(),
 		};
@@ -37,8 +40,96 @@ function saveBiography() {
 			dataType: "json",
 		}).done(function(data) {
 			console.log(data);
-			document.querySelector("#biography").src=data.bio;
 		});
+		bioEdit(true);
+	});
+}
+
+function saveMainInfo() {
+		$("#main_info_btn").click(function(e){
+		e.preventDefault();
+		mainInfo ={
+			username:$("#username").val(),
+			email:$("#email").val(),
+			firstName:$("#firstName").val(),
+			lastName:$("#lastName").val(),
+			dateOfBirth:$("#datePicker").val(),
+		};
+			$.ajax({
+			url: "/save_main_info",
+			contentType: "application/json",
+			data: JSON.stringify(mainInfo),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			mainInfoValidation(data);
+		});
+	});
+}
+
+function mainInfoValidation(data) {
+	console.log("START VALIDATION; VALIDATING THIS DATA:");
+	console.log(data);
+	
+	$("#username").removeClass("is-invalid");
+	$("#email").removeClass("is-invalid");
+	$("#firstName").removeClass("is-invalid");
+	$("#lastName").removeClass("is-invalid");
+	$("#datePicker").removeClass("is-invalid");
+	var isValid = true;
+	if (data.username === "error") {
+		$("#username").addClass("is-invalid");
+		isValid = false;
+	} if (data.email === "error") {
+		$("#email").addClass("is-invalid");
+		isValid = false;
+	} if (data.firstName === "error") {
+		$("#firstName").addClass("is-invalid");
+		isValid = false;
+	}  if (data.lastName === "error") {
+		$("#lastName").addClass("is-invalid");
+		isValid = false;
+	}  if (data.dateOfBirth === "error") {
+		$("#datePicker").addClass("is-invalid");
+		isValid = false;
+	}
+	if (isValid) {
+				mainInfoEdit(true);
+	}
+}
+
+function saveContacts() {
+		$("#contact_btn").click(function(e){
+		e.preventDefault();
+		contacts1 ={
+			contactEmail:$("#contactEmail").val(),
+			mainPhoneNumber:$("#phoneNumber").val(),
+			secondaryPhoneNumber:$("#secPhoneNumber").val(),
+		};
+		contacts2 ={
+			facebookLinkRef:$("#facebook").val(),
+			twitterLinkRef:$("#twitter").val(),
+			instagramLinkRef:$("#instagram").val(),
+		};
+			$.ajax({
+			url: "/save_contacts1",
+			contentType: "application/json",
+			data: JSON.stringify(contacts1),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			console.log(data);
+		});
+			$.ajax({
+			url: "/save_contacts2",
+			contentType: "application/json",
+			data: JSON.stringify(contacts2),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			console.log(data);
+		});
+		contactEdit(true);
 	});
 }
 
@@ -244,4 +335,44 @@ function refactUndefinedImage(){
 	
 			
 }
+
+function contactEdit(value) {
+	$("#contactEmail").attr('readonly',value);	
+	$("#phoneNumber").attr('readonly',value);	
+	$("#secPhoneNumber").attr('readonly',value);
+	$("#twitter").attr('readonly',value);	
+	$("#facebook").attr('readonly',value);	
+	$("#instagram").attr('readonly',value);	
+	if(value) {
+		$("#contact_btn").hide();
+	}
+	else {
+		$("#contact_btn").show();
+	}
+}
+
+function mainInfoEdit(value) {
+	$("#username").attr('readonly',value);	
+	$("#email").attr('readonly',value);	
+	$("#firstName").attr('readonly',value);	
+	$("#lastName").attr('readonly',value);	
+	$("#datePicker").attr('readonly',value);	
+	if(value) {
+		$("#main_info_btn").hide();
+	}
+	else {
+		$("#main_info_btn").show();
+	}
+}
+
+function bioEdit(value) {
+	$("#biography").attr('readonly',value);	
+	if(value) {
+		$("#biography_btn").hide();
+	}
+	else {
+		$("#biography_btn").show();
+	}
+}
+
 

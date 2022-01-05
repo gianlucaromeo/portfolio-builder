@@ -20,6 +20,8 @@
 	href="../../dashboard_assets/fonts/fontawesome5-overrides.min.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/profile.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/moderatorProjects.css">
 </head>
 
 <body id="page-top">
@@ -41,10 +43,10 @@
 				<ul class="navbar-nav text-light" id="accordionSidebar">
 					<li class="nav-item"><a class="nav-link" href="all_users"><i
 							class="fas fa-user"></i><span>Users</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="all_projects"><i
-							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="all_posts"><i class="far fa-comments"></i><span>Posts</span></a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="all_projects"><i class="fas fa-project-diagram"></i><span>Projects</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="all_posts"><i
+							class="far fa-comments"></i><span>Posts</span></a></li>
 				</ul>
 				<div class="text-center d-none d-md-inline">
 					<button class="btn rounded-circle border-0" id="sidebarToggle"
@@ -155,18 +157,18 @@
 						<div class="row">
 
 							<!-- USERS CARD -->
-							<div class="col-12 col-lg-3">
+							<div class="col-12 col-lg-4">
 								<div class="card shadow mb-3">
-									
+
 									<!-- USERS CARD HEADER -->
 									<div class="card-header py-3">
 										<p class="text-primary m-0 fw-bold">Users</p>
 									</div>
 									<!-- END USERS CARD HEADER -->
-		
+
 									<!-- USERS CARD BODY -->
 									<div class="card-body shadow">
-									
+
 										<div class="table-responsive table mt-2" id="dataTable"
 											role="grid" aria-describedby="dataTable_info">
 											<table class="table my-0" id="dataTable">
@@ -175,7 +177,7 @@
 														<th>Username</th>
 													</tr>
 												</thead>
-												<tbody id="usersTableBody">
+												<tbody id="allUsersTableBody">
 
 												</tbody>
 												<tfoot>
@@ -185,28 +187,28 @@
 												</tfoot>
 											</table>
 										</div>
-										
+
 									</div>
 									<!-- END USERS CARD BODY -->
 
 								</div>
 							</div>
 							<!-- END USERS CARD -->
-							
-							
+
+
 							<!-- CURRICULUMS CARD -->
-							<div class="col-12 col-lg-9">
+							<div class="col-12 col-lg-8">
 								<div class="card shadow mb-3">
-									
+
 									<!-- CURRICULUMS CARD HEADER -->
 									<div class="card-header py-3">
 										<p class="text-primary m-0 fw-bold">User's Projects</p>
 									</div>
 									<!-- END CURRICULUMS CARD HEADER -->
-		
+
 									<!-- USERS CURRICULUMS CARD BODY -->
 									<div class="card-body shadow">
-									
+
 										<div class="table-responsive table mt-2" id="dataTable"
 											role="grid" aria-describedby="dataTable_info">
 											<table class="table my-0" id="dataTable">
@@ -218,9 +220,7 @@
 														<th>Status</th>
 													</tr>
 												</thead>
-												<tbody id="usersTableBody">
-														
-												</tbody>
+												<tbody id="projectsTableBody"></tbody>
 												<tfoot>
 													<tr>
 														<th>Picture</th>
@@ -231,7 +231,7 @@
 												</tfoot>
 											</table>
 										</div>
-										
+
 									</div>
 									<!-- END CURRICULUMS CARD BODY -->
 
@@ -268,7 +268,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/profile.js"></script>
+	<script src="../../dashboard_assets/js/moderatorProjects.js"></script>
 </body>
 
 </html>
