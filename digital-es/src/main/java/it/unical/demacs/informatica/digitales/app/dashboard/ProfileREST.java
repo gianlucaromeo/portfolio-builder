@@ -42,7 +42,6 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
-		System.out.println(newMainInfo);
 		
 		User user = Servlets.getLoggedUser(req);
 		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
@@ -66,8 +65,6 @@ public class ProfileREST {
 		User user = Servlets.getLoggedUser(req);
 		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 		
-		System.out.println(info);
-		
 		return gson.toJson(info);
 
 	}
@@ -77,7 +74,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
-		System.out.println(newMainInfo);
+
 		
 		User user = Servlets.getLoggedUser(req);
 		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());

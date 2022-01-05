@@ -243,7 +243,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 
 	public synchronized String findProfileImageById(long id) {
 		con = DBUtil.getInstance().getConnection();
-		System.out.println(id);
+	
 
 		String query = "SELECT profile_picture FROM users_main_informations WHERE user_id=?;";
 
@@ -255,7 +255,8 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			rs = p.executeQuery();
 
 			if (rs.next()) {
-				return rs.getString("profile_picture");
+				if(rs.getString("profile_picture")!=null)
+					return rs.getString("profile_picture");
 			}
 
 		} catch (SQLException e) {
@@ -274,6 +275,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		String query = "SELECT image FROM default_image;";
 
 		try {
+			
 
 			con = DBUtil.getInstance().getConnection();
 			p = con.prepareStatement(query);
@@ -281,7 +283,6 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 			rs = p.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("Hello: " + rs.getString("image"));
 				return rs.getString("image");
 			}
 

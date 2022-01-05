@@ -34,10 +34,8 @@ public class Servlets {
 		deleteCookie(resp, moderatorCookie);
 
 		if (cookie == null) {
-			System.out.println("created new cookie: " + username);
 			cookie = new Cookie("logged_username", username);
 		} else {
-			System.out.println("set new value: " + username);
 			cookie.setValue(username);
 		}
 
@@ -56,10 +54,8 @@ public class Servlets {
 		deleteCookie(resp, userCookie);
 
 		if (cookie == null) {
-			System.out.println("created new cookie for moderator: " + username);
 			cookie = new Cookie("logged_moderator", username);
 		} else {
-			System.out.println("set new value moderator cookie: " + username);
 			cookie.setValue(username);
 		}
 
@@ -70,7 +66,6 @@ public class Servlets {
 	}
 
 	public static void redirectLogin(HttpServletResponse resp, Cookie cookie) {
-		System.out.println("in redirectLogin: Username = " + cookie.getValue());
 		resp.addCookie(cookie);
 		resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
 		resp.setHeader("Location", "/dashboard/profile");
@@ -83,7 +78,6 @@ public class Servlets {
 		if (loggedUsernameCookie == null) {
 			return "error_page";
 		}
-		System.out.println("in redirect: username = " + loggedUsernameCookie.getValue());
 
 		String username = loggedUsernameCookie.getValue();
 		fetchUserData(req, username);
@@ -99,8 +93,6 @@ public class Servlets {
 		if (loggedModeratorCookie == null) {
 			return "error_page";
 		}
-		System.out.println("in redirect: username = " + loggedModeratorCookie.getValue());
-
 		// String username = loggedModeratorCookie.getValue();
 		// fetchUserData(req, username);
 
@@ -133,7 +125,6 @@ public class Servlets {
 		req.setAttribute("dateOfBirth", user.getDateOfBirth());
 
 		String profilePicture = UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId());
-		System.out.println("profile pict: " + profilePicture);
 		req.setAttribute("profilePicture", profilePicture);
 
 	}
