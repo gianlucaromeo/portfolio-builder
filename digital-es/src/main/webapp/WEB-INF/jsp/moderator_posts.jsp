@@ -52,8 +52,6 @@
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="all_posts"><i class="far fa-comments"></i><span>Posts</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="all_curriculums"><i class="fas fa-address-card"></i><span>Curriculum</span></a></li>
 				</ul>
 				<div class="text-center d-none d-md-inline">
 					<button class="btn rounded-circle border-0" id="sidebarToggle"

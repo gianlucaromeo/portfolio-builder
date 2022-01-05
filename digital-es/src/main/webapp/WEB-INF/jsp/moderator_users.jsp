@@ -44,14 +44,12 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link" href="all_users"><i
+					<li class="nav-item"><a class="nav-link active" href="all_users"><i
 							class="fas fa-user"></i><span>Users</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="all_projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="all_posts"><i class="far fa-comments"></i><span>Posts</span></a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="all_curriculums"><i class="fas fa-address-card"></i><span>Curriculum</span></a></li>
+						href="all_posts"><i class="far fa-comments"></i><span>Posts</span></a></li>
 				</ul>
 				<div class="text-center d-none d-md-inline">
 					<button class="btn rounded-circle border-0" id="sidebarToggle"
