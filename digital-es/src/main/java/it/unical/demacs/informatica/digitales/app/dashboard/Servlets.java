@@ -70,6 +70,12 @@ public class Servlets {
 		resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
 		resp.setHeader("Location", "/dashboard/profile");
 	}
+	
+	public static void redirectModeratorLogin(HttpServletResponse resp, Cookie cookie) {
+		resp.addCookie(cookie);
+		resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+		resp.setHeader("Location", "/dashboard/moderator/all_users");
+	}
 
 	public static String redirect(HttpServletRequest req, String location) {
 

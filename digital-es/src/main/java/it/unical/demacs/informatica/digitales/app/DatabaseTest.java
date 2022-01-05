@@ -7,13 +7,13 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 
 public class DatabaseTest {
 	public static void main(String[] args) {
-	/*	Moderator m= new Moderator();
+		Moderator m= new Moderator();
 		m.setPassword("ciao");
 		m.setUsername("mario");
 		m.setEmail("peppino@live.com");
 		ModeratorDAOImpl.getInstance().create(m);
-		*/
-		User u= new User();
+		
+		/*User u= new User();
 		u.setFirstName("peppe");
 		u.setConfirmed(false);
 		u.setContactEmail("mamajajajakak");
@@ -26,7 +26,7 @@ public class DatabaseTest {
 		u.setSignUpDate("2000-21-12");
 		
 		UserDAOImpl.getInstance().create(u);
-		
+		*/
 	}
 
 }

@@ -307,4 +307,5 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 
 		return moderator;
 	}
+	
 }

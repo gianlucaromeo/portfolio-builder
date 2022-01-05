@@ -55,7 +55,7 @@ public class LoginREST {
 			return;
 		}else if(moderator!=null) {
 			Cookie cookie = Servlets.initLoggedModeratorUsernameCookie(req, resp, moderator.getUsername());
-			Servlets.redirectLogin(resp, cookie);
+			Servlets.redirectModeratorLogin(resp, cookie);
 		}
 
 	}

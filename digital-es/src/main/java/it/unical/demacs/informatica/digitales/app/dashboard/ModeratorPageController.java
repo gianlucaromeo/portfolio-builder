@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -30,6 +31,11 @@ public class ModeratorPageController {
 
 	@GetMapping("/all_users")
 	public synchronized String goToAllUsersPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		return Servlets.redirectModerator(req, "moderator_users");
+	}
+	
+	@PostMapping("/all_users")
+	public synchronized String goToAllUsersPagePOST(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		return Servlets.redirectModerator(req, "moderator_users");
 	}
 	
