@@ -69,6 +69,7 @@ function initDiscardNewExperienceChangesBtn() {
 	});
 }
 
+// 1 QUA
 function initDoneBtn() {
 
 	if (user_id == -1) {
