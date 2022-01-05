@@ -73,6 +73,7 @@ function setUserTableUserImage(id){
 
 
 function setEventOnConfirmBan(id){
+	
 	$("#confirmBan" + id).click(function(e) {
 		e.preventDefault();
 		console.log(id);
@@ -89,7 +90,7 @@ function setEventOnConfirmBan(id){
 		});
 
 
-		//$("#modalId"+id).modal('toggle');
+		
 
 	});
 	
