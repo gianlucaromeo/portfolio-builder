@@ -92,7 +92,7 @@ public class PostsREST {
 		}
 
 		List<Post> posts = new ArrayList<Post>();
-		posts = PostDAOImpl.getInstance().findAllByUserId(user.getId());
+		posts = PostDAOImpl.getInstance().findAllByUserIdNotBanned(user.getId());
 		String postsToJSON = gson.toJson(posts);
 
 		return postsToJSON;

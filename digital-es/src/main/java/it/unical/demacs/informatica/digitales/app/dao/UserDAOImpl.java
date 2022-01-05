@@ -72,7 +72,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 	}
 
 	@Override
-	public String update(User user) {
+	public synchronized String update(User user) {
 		
 		con = DBUtil.getInstance().getConnection(); 
 		
@@ -92,8 +92,9 @@ public class UserDAOImpl extends DAOImpl implements DAO<User>  {
 			p.setString(8, user.getSecondaryPhoneNumber());
 			p.setString(9, user.getContactEmail());
 			p.setBoolean(10, user.isConfirmed());
-			p.setLong(11, user.getId());
-			p.setString(12, user.getSignUpDate());
+			p.setString(11, user.getSignUpDate());
+			p.setLong(12, user.getId());
+
 			
 			p.executeUpdate();
 			

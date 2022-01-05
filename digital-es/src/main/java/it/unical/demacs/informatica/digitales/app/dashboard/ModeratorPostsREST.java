@@ -32,15 +32,15 @@ import it.unical.demacs.informatica.digitales.app.settings.BanReasons;
 
 @RestController
 public class ModeratorPostsREST {
-	
+
 	@PostMapping("/get_users_data_action")
 	public String getUsersDataAction(HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		Gson gson = new Gson();
 
 		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
-			
+
 			Set<User> users = new HashSet<User>();
 			users = UserDAOImpl.getInstance().findAll();
 			String usersToJSON = gson.toJson(users);
@@ -73,9 +73,9 @@ public class ModeratorPostsREST {
 
 	}
 
-	@PostMapping("/get_users_posts_by_id")
-	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp)
-			throws JsonSyntaxException, JsonIOException, IOException {
+
+	@PostMapping("/get_users_posts_by_id_not_banned")
+	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 

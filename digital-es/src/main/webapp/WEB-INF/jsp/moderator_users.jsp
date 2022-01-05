@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Posts - PB</title>
+<title>Users (Moderator)</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="../../dashboard_assets/bootstrap/css/posts.css">
+	href="../../dashboard_assets/bootstrap/css/moderatorUsers.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 <link rel="stylesheet"
@@ -190,6 +190,7 @@
 											<td><strong>Email</strong></td>
 											<td><strong>Date of birth</strong></td>
 											<td><strong>SignUp Date</strong></td>
+											<td><strong>Ban</strong></td>
 										</tr>
 									</tfoot>
 								</table>
@@ -245,7 +246,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/moderatorPosts.js"></script>
+	<script src="../../dashboard_assets/js/moderatorUsers.js"></script>
 	<script src="../../dashboard_assets/js/jquery-ui.min.js"></script>
 
 </body>

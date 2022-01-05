@@ -1,13 +1,8 @@
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-  background: linear-gradient(
-    90deg,
-    rgba(47, 54, 64, 1) 23%,
-    rgba(24, 27, 32, 1) 100%
-  );
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
 }
 
 .moon {
@@ -62,7 +57,7 @@ body {
 }
 
 .star {
-  background: grey;
+  background: #ffffff;
   position: absolute;
   width: 5px;
   height: 5px;
@@ -125,10 +120,12 @@ body {
 
 .error__title {
   font-size: 10em;
+  color: #ffffff;
 }
 
 .error__subtitle {
   font-size: 2em;
+  color: #ffffff;
 }
 
 .error__description {
@@ -141,7 +138,7 @@ body {
   margin-right: 0.5em;
   padding: 0.5em 2em;
   outline: none;
-  border: 2px solid #2f3640;
+  border: 2px solid #ffffff;
   background-color: transparent;
   border-radius: 8em;
   color: #576375;
