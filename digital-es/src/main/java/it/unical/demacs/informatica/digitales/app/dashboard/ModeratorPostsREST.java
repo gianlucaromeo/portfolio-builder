@@ -70,7 +70,7 @@ public class ModeratorPostsREST {
 
 	}
 	
-	@PostMapping("/get_users_posts_by_id")
+	@PostMapping("/get_users_posts_by_id_not_banned")
 	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
@@ -78,7 +78,7 @@ public class ModeratorPostsREST {
 		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
 		if(moderatorCookie!=null) {
 				List<Post> posts = new ArrayList<Post>();
-				posts = PostDAOImpl.getInstance().findAllByUserId(id);
+				posts = PostDAOImpl.getInstance().findAllByUserIdNotBanned(id);
 				String postsToJSON = gson.toJson(posts);
 
 				return postsToJSON;

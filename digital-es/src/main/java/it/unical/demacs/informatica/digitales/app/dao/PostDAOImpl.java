@@ -272,5 +272,42 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		return Protocol.OK;
 		
 	}
+
+	public List<Post> findAllByUserIdNotBanned(long userId) {
+		List<Post> posts = new ArrayList<Post>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT * FROM posts WHERE user_id=? AND id NOT IN (SELECT post_id FROM removed_posts);";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			p.setLong(1, userId);
+			
+			rs = p.executeQuery();
+			
+			while (rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getLong("id"));
+				post.setTitle(rs.getString("title"));
+				post.setDescription(rs.getString("description"));
+				post.setPicture(rs.getString("picture"));
+				post.setPubblicationDate(rs.getString("publication_date"));
+				post.setLastEditDate(rs.getString("last_edit_date"));
+				post.setRefLink(rs.getString("ref_link"));
+				post.setUserId(rs.getLong("user_id"));
+				posts.add(post);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[PostDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return posts;
+	}
 	
 }

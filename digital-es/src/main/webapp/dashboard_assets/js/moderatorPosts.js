@@ -77,7 +77,7 @@ function setEventOnUserRow(id){
 		$("#postsSection").empty();
 		$.ajax({
 
-			url: "/get_users_posts_by_id",
+			url: "/get_users_posts_by_id_not_banned",
 			contentType: "application/json",
 			type: "post",
 			data: JSON.stringify(id),
@@ -177,7 +177,7 @@ function createPost(post){
 					<img class="card-img-top scale-on-hover"
 						src="${imagePath}"
 						alt="Card Image" height="350" id="imageId${id}">
-					<div style="text-align: center; ">
+					<div style="text-align: center; margin-top: 10px ">
 						<h5><strong>
 							Title: ${title}
 							</strong>
@@ -187,7 +187,7 @@ function createPost(post){
 						Reference Link: <a href="${refLink}">${refLink}</a>
 					</div>
 				
-					<div style="text-align: left; ">
+					<div style="text-align: left; margin-top: 10px ">
 						<h6 id="publicationDateLabelId${id}">Publication date:
 							${publicationDate}</h6>
 						<h6 id="lastEditDateLabelId${id}">Last Edit date:
@@ -205,7 +205,7 @@ function getDeleteButton(id) {
 	var deleteButton = `<!-- Button trigger modal -->
 						<button type="button" class="btn btn-danger btn-sm"
 							data-bs-toggle="modal" data-bs-target="#modalId${id}"
-							id="deleteId${id}">Delete</button>
+							id="deleteId${id}" style="margin-bottom: 10px">Delete</button>
 						<!-- Modal -->
 						<div class="modal fade" id="modalId${id}" tabindex="-1"
 							aria-labelledby="modalLabel" aria-hidden="true">
