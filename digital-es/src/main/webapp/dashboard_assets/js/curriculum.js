@@ -20,26 +20,26 @@ function fetchUserId() {
 }
 
 function retrieveCurriculumData() {
-	
+
 	$.ajax({
-		
+
 		url: "/get_curriculum_data_action",
 		type: "post",
 		dataType: "json",
-	
+
 	}).done(function(data) {
-		
+
 		if (data.length == 0) {
-			
+
 		} else {
-			
+
 			experiences = data;
 			experiences.forEach(exp => {
 				all_experiences.set(exp.id, exp);
 			});
-			
+
 			init();
-			
+
 		}
 	});
 }
