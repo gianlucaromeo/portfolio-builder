@@ -155,6 +155,7 @@
 							<div class="card mb-3">
 								<div class="card-body shadow">
 									<div class="text-center">
+
 										<img class="rounded-circle mb-3 mt-4" src="${profilePicture}"
 											width="160" height="160" id="profile_picture">
 										<div class="mb-3">
@@ -290,8 +291,17 @@
 								<div class="col">
 									<div class="card shadow mb-3">
 										<div class="card-header py-3">
-											<p class="text-primary m-0 fw-bold">User Settings</p>
+											<div class="row">
+												<div class="col-md-3">
+													<p class="text-primary m-0 fw-bold">User Settings</p>
+												</div>
+												<div class="col-md-3">
+													<button class="btn btn-primary btn-sm" type="submit"
+													id="editUserSettings">Edit User Settings</button>
+												</div>
+											</div>
 										</div>
+											
 										<div class="card-body">
 											<form>
 												<div class="row">
@@ -355,7 +365,15 @@
 									</div>
 									<div class="card shadow">
 										<div class="card-header py-3">
-											<p class="text-primary m-0 fw-bold">Contact Settings</p>
+											<div class="row">
+												<div class="col-md-3">
+													<p class="text-primary m-0 fw-bold">Contact Settings</p>
+												</div>
+												<div class="col-md-3">
+													<button class="btn btn-primary btn-sm" type="submit"
+													id="editContactSettings">Edit Contact Settings</button>
+												</div>
+											</div>
 										</div>
 										<div class="card-body">
 											<form>
@@ -501,9 +519,17 @@
 					<div class="card shadow mb-5">
 
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">Your Main Skills</p>
-							<h6>Add your 3 Main Skill, with a description. People will
-								see them in your Home Page.</h6>
+							<div class="row">
+								<div class="col-md-10">
+									<p class="text-primary m-0 fw-bold">Your Main Skills</p>
+									<h6>Add your 3 Main Skill, with a description. People will
+										see them in your Home Page.</h6>
+								</div>
+								<div class="col-md-2">
+									<button class="btn btn-primary btn-sm" type="submit"
+					 						id="editMainSkill">Edit Skills</button>
+								</div>
+							</div>
 						</div>
 
 						<div class="card-body">
@@ -559,6 +585,11 @@
 										placeholder="e.g.: Expert in Angular and React. Advanced in Spring Boot."
 										name="main_description">
 								</div>
+							</div>
+							
+							<div class="mb-3">
+								<button class="btn btn-primary btn-sm" type="submit"
+										id="main_skill_btn">Save Settings</button>
 							</div>
 
 

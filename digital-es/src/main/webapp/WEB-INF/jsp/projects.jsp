@@ -140,6 +140,13 @@
 			</div>
 			
 					<div class="container-fluid">
+					
+					<div class="row">
+						<div class="col-md-2">
+							<h3 class="text-dark mb-4">Projects</h3>
+						</div>
+					</div>
+					
 					<div id="firstProject" class="row mb-3">
 						<!-- INIZIO PROJECT TEMPLATE --><!-- METTERE 4 INVECE DI 12 PER NON AVERE SOLO TEMPLATE SOPRA -->
 						<div class="col-lg-12">

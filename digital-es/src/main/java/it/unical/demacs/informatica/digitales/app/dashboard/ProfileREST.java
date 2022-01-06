@@ -92,7 +92,7 @@ public class ProfileREST {
 	}
 	
 	@PostMapping("/save_main_info")
-	public String saveMainInfo(HttpServletRequest req,HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String saveMainInfo(HttpServletRequest req,HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		User newMainInfo = gson.fromJson(req.getReader(), User.class);
@@ -117,7 +117,7 @@ public class ProfileREST {
 	}
 	
 	@PostMapping("/save_contacts1")
-	public String saveContacts1(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String saveContacts1(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		User newUser = gson.fromJson(req.getReader(), User.class);
@@ -129,17 +129,19 @@ public class ProfileREST {
 		System.out.println("CURRENT");
 		System.out.println(user);
 		
+		ProfileValidatorResponse validation=ProfileValidator.validateContacts1(newUser);
+		if(ProfileValidator.isValidContacts1(validation)) {
 		user.setContactEmail(newUser.getContactEmail());
 		user.setMainPhoneNumber(newUser.getMainPhoneNumber());
 		user.setSecondaryPhoneNumber(newUser.getSecondaryPhoneNumber());
 		
 		UserDAOImpl.getInstance().update(user);
-		
-		return gson.toJson(user);
+		}
+		return gson.toJson(validation);
 	}
 	
 	@PostMapping("/save_contacts2")
-	public String saveContacts2(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String saveContacts2(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		
@@ -149,9 +151,34 @@ public class ProfileREST {
 //		System.out.println(newMainInfo);
 		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 		
+		ProfileValidatorResponse validation=ProfileValidator.validateContacts2(newMainInfo);
+		if(ProfileValidator.isValidContacts2(validation)) {
 		info.setFacebookLinkRef(newMainInfo.getFacebookLinkRef());
 		info.setTwitterLinkRef(newMainInfo.getTwitterLinkRef());
 		info.setInstagramLinkRef(newMainInfo.getInstagramLinkRef());
+		
+		UserMainInformationsDAOImpl.getInstance().update(info);
+		}
+		return gson.toJson(validation);
+	}
+	
+	@PostMapping("/save_main_skills")
+	public synchronized String saveMainSkill(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		
+		User user = Servlets.getLoggedUser(req);
+		
+		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
+		System.out.println(newMainInfo);
+		UserMainInformations info=UserMainInformationsDAOImpl.getInstance().findById(user.getId());
+		
+		info.setSpecialSkillName1(newMainInfo.getSpecialSkillName1());
+		info.setSpecialSkillDescr1(newMainInfo.getSpecialSkillDescr1());
+		info.setSpecialSkillName2(newMainInfo.getSpecialSkillName2());
+		info.setSpecialSkillDescr2(newMainInfo.getSpecialSkillDescr2());
+		info.setSpecialSkillName3(newMainInfo.getSpecialSkillName3());
+		info.setSpecialSkillDescr3(newMainInfo.getSpecialSkillDescr3());
 		
 		UserMainInformationsDAOImpl.getInstance().update(info);
 

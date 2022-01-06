@@ -14,17 +14,40 @@ function loadEvents() {
 		setOnChangeImage(i);
 	}
 	setEditAll();
+	setUserSettingsEdit();
+	setConctactSettingsEdit();
+	setMainSkillEdit();
 	saveBiography();
 	saveMainInfo();
 	saveContacts();
+	saveMainSkills();
 }
 
 function setEditAll() {
 	$("#edit_all_btn").click(function(e){
-			editAll(false);
+		e.preventDefault();
+		editAll(false);
 	});
 }
 
+function setUserSettingsEdit() {
+	$("#editUserSettings").click(function(e){
+		e.preventDefault();
+		mainInfoEdit(false);
+	});
+}
+function setConctactSettingsEdit() {
+	$("#editContactSettings").click(function(e){
+		e.preventDefault();
+		contactEdit(false);
+	});
+}
+function setMainSkillEdit() {
+	$("#editMainSkill").click(function(e){
+		e.preventDefault();
+		mainSkillEdit(false);
+	});
+}
 function saveBiography() {
 		$("#biography_btn").click(function(e){
 		e.preventDefault();
@@ -106,11 +129,6 @@ function saveContacts() {
 			mainPhoneNumber:$("#phoneNumber").val(),
 			secondaryPhoneNumber:$("#secPhoneNumber").val(),
 		};
-		contacts2 ={
-			facebookLinkRef:$("#facebook").val(),
-			twitterLinkRef:$("#twitter").val(),
-			instagramLinkRef:$("#instagram").val(),
-		};
 			$.ajax({
 			url: "/save_contacts1",
 			contentType: "application/json",
@@ -118,8 +136,17 @@ function saveContacts() {
 			type: "post",
 			dataType: "json",
 		}).done(function(data) {
-			console.log(data);
+			saveContacts2(contactValidation1(data));
 		});
+	});
+}
+
+function saveContacts2(validated1) {
+		contacts2 ={
+			facebookLinkRef:$("#facebook").val(),
+			twitterLinkRef:$("#twitter").val(),
+			instagramLinkRef:$("#instagram").val(),
+		};
 			$.ajax({
 			url: "/save_contacts2",
 			contentType: "application/json",
@@ -127,9 +154,84 @@ function saveContacts() {
 			type: "post",
 			dataType: "json",
 		}).done(function(data) {
-			console.log(data);
+			validated2=contactValidation2(data);
+			if(validated1&&validated2) {
+			contactEdit(true);
+			console.log("VALID DATATATATATTATATATATATT");
+			}
 		});
-		contactEdit(true);
+}
+
+function contactValidation1(data) {
+	console.log("START VALIDATION; VALIDATING THIS DATA:");
+	console.log(data);
+	
+	$("#contactEmail").removeClass("is-invalid");
+	$("#phoneNumber").removeClass("is-invalid");
+	$("#secPhoneNumber").removeClass("is-invalid");
+	var isValid = true;
+	if (data.contactEmail === "error") {
+		$("#contactEmail").addClass("is-invalid");
+		isValid = false;
+	} if (data.mainPhoneNumber === "error") {
+		$("#phoneNumber").addClass("is-invalid");
+		isValid = false;
+	} if (data.secondaryPhoneNumber === "error") {
+		$("#secPhoneNumber").addClass("is-invalid");
+		isValid = false;
+	} 
+	if (isValid) {
+				return true;
+	}
+	return false;
+}
+
+function contactValidation2(data) {
+	console.log("START VALIDATION; VALIDATING THIS DATA:");
+	console.log(data);
+	
+	$("#facebook").removeClass("is-invalid");
+	$("#twitter").removeClass("is-invalid");
+	$("#instagram").removeClass("is-invalid");
+	var isValid = true;
+	if (data.facebookLinkRef === "error") {
+		$("#facebook").addClass("is-invalid");
+		isValid = false;
+	} if (data.twitterLinkRef === "error") {
+		$("#twitter").addClass("is-invalid");
+		isValid = false;
+	} if (data.instagramLinkRef === "error") {
+		$("#instagram").addClass("is-invalid");
+		isValid = false;
+	} 
+	if (isValid) {
+				return true;
+	}
+	return false;
+}
+
+function saveMainSkills() {
+		$("#main_skill_btn").click(function(e){
+		e.preventDefault();
+		mainSkills ={
+			specialSkillName1:$("#mainSkill1").val(),
+			specialSkillDescr1:$("#mainSkillDescr1").val(),
+			specialSkillName2:$("#mainSkill2").val(),
+			specialSkillDescr2:$("#mainSkillDescr2").val(),
+			specialSkillName3:$("#mainSkill3").val(),
+			specialSkillDescr3:$("#mainSkillDescr3").val(),
+		};
+		console.log(mainSkills);
+			$.ajax({
+			url: "/save_main_skills",
+			contentType: "application/json",
+			data: JSON.stringify(mainSkills),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			console.log(data);
+			mainSkillEdit(true);
+		});
 	});
 }
 
@@ -302,17 +404,25 @@ function editAll(value) {
 	$("#twitter").attr('readonly',value);	
 	$("#facebook").attr('readonly',value);	
 	$("#instagram").attr('readonly',value);	
+	$("#mainSkill1").attr('readonly',value);
+	$("#mainSkillDescr1").attr('readonly',value);	
+	$("#mainSkill2").attr('readonly',value);
+	$("#mainSkillDescr2").attr('readonly',value);	
+	$("#mainSkill3").attr('readonly',value);
+	$("#mainSkillDescr3").attr('readonly',value);	
 	if(value) {
 		$("#main_info_btn").hide();
 		$("#contact_btn").hide();
 		$("#biography_btn").hide();
 		$("#skill_btn").hide();	
+		$("#main_skill_btn").hide();	
 	}
 	else {
 		$("#main_info_btn").show();
 		$("#contact_btn").show();
 		$("#biography_btn").show();
 		$("#skill_btn").show();	
+		$("#main_skill_btn").show();	
 	}
 }
 
@@ -372,6 +482,21 @@ function bioEdit(value) {
 	}
 	else {
 		$("#biography_btn").show();
+	}
+}
+
+function mainSkillEdit(value) {
+	$("#mainSkill1").attr('readonly',value);
+	$("#mainSkillDescr1").attr('readonly',value);	
+	$("#mainSkill2").attr('readonly',value);
+	$("#mainSkillDescr2").attr('readonly',value);	
+	$("#mainSkill3").attr('readonly',value);
+	$("#mainSkillDescr3").attr('readonly',value);	
+	if(value) {
+		$("#main_skill_btn").hide();
+	}
+	else {
+		$("#main_skill_btn").show();
 	}
 }
 
