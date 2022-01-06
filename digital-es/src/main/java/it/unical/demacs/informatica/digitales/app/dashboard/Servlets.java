@@ -4,7 +4,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -100,10 +102,17 @@ public class Servlets {
 			return "404_page";
 		}
 		// String username = loggedModeratorCookie.getValue();
-		// fetchUserData(req, username);
+		fetchModeratorData(req, loggedModeratorCookie.getValue());
 
 		return location;
 
+	}
+
+	private static void fetchModeratorData(HttpServletRequest req, String username) {
+		req.setAttribute("username", username);
+		String profilePicture = ModeratorDAOImpl.getInstance().findDeafultModeratorImage();
+		req.setAttribute("profilePicture", profilePicture);
+		
 	}
 
 	public static User getLoggedUser(HttpServletRequest req) {
