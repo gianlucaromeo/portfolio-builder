@@ -7,6 +7,7 @@ import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ProfileValidatorResponse;
@@ -19,11 +20,13 @@ public class ProfileValidator {
 	private static final String USERNAME_RGX = "[a-zA-Z][a-zA-Z0-9]*";
 	private static final String PHONE_RGX = "\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}"; // 1234567890  123-456-7890 (123)456-7890
 	private static final String LINK_RGX = "^(?:[a-z]*?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
-
+	private static final String TITLE_RGX = "^[0-9a-zA-Z\\s]+$";
+	
 	private static final Pattern NAME_PATTERN = Pattern.compile(NAME_RGX);
 	private static final Pattern USERNAME_PATTERN = Pattern.compile(USERNAME_RGX);
 	private static final Pattern PHONE_PATTERN = Pattern.compile(PHONE_RGX);
 	private static final Pattern LINK_PATTERN = Pattern.compile(LINK_RGX);
+	private static final Pattern TITLE_PATTERN = Pattern.compile(TITLE_RGX);
 	
 public static boolean isValidMainInfo(ProfileValidatorResponse resp) {
 	if(resp.getUsername().equals("error"))
@@ -59,6 +62,14 @@ public static boolean isValidContacts2(ProfileValidatorResponse resp) {
 	return true;
 }
 
+public static boolean isValidSkill(ProfileValidatorResponse resp) {
+	if(resp.getTitle().equals("error"))
+		return false;
+	if(resp.getLevel()==-1)
+		return false;
+	return true;
+}
+
 public static ProfileValidatorResponse validateMainInfo(User user) {
 		ProfileValidatorResponse resp = new ProfileValidatorResponse();
 		resp.setFirstName(checkName(user.getFirstName()));
@@ -85,8 +96,31 @@ public static ProfileValidatorResponse validateContacts2(UserMainInformations us
 	return resp;
 }
 
+public static ProfileValidatorResponse validateSkill(CurriculumSkill skill) {
+	ProfileValidatorResponse resp = new ProfileValidatorResponse();
+	resp.setTitle(checkTitle(skill.getTitle()));
+	resp.setLevel(checkLevel(skill.getLevel()));
+	return resp;
+}
+
 public static String checkName(String name) {
 	return NAME_PATTERN.matcher(name).matches() ? name : Protocol.ERROR;
+}
+
+public static String checkTitle(String title) {
+	String titleResp="";
+	title=title.trim();
+	if(title.equals("") || title==null) {
+		titleResp=Protocol.ERROR;
+		return titleResp;
+	}
+	return TITLE_PATTERN.matcher(title).matches() ? title : Protocol.ERROR;
+}
+
+public static int checkLevel(int level) {
+	if(level>=0&&level<=100)
+		return level;
+	return -1;
 }
 
 public static String checkLink(String link) {

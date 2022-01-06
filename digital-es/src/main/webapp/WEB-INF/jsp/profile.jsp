@@ -185,9 +185,17 @@
 							</div>
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="text-primary fw-bold m-0">Your Skills</h6>
+									<div class="row">
+										<div class="col-md-6">
+											<h6 class="text-primary fw-bold m-0">Your Skills</h6>
+										</div>
+										<div class="col-md-6">
+											<button class="btn btn-primary btn-sm" type="submit"
+													id="editSkills">Edit Skills</button>
+										</div>
+									</div>
 								</div>
-								<div class="card-body">
+								<div class="card-body" id="skillStart">
 
 									<!--  A SKILL -->
 									<div class="row">
@@ -207,12 +215,14 @@
 										</div>
 									</div>
 
+									<!-- 
 									<div class="progress progress-sm mb-3">
 										<div class="progress-bar bg-danger" aria-valuenow="20"
 											aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
 											<span class="visually-hidden">20%</span>
 										</div>
 									</div>
+									 -->
 
 									<div class="row text-center">
 										<div class="mb-3">
@@ -235,11 +245,6 @@
 										</div>
 									</div>
 									 -->
-
-									<div class="mb-3">
-										<button class="btn btn-primary btn-sm" type="submit"
-											id="skill_btn">Add skill</button>
-									</div>
 
 								</div>
 							</div>

@@ -5,6 +5,7 @@ function start() {
 	loadMainInformations();
 	loadEvents();
 	editAll(true);
+	loadCurriculumSkills();
 	refactUndefinedImage();
 }
 function loadEvents() {
@@ -17,10 +18,13 @@ function loadEvents() {
 	setUserSettingsEdit();
 	setConctactSettingsEdit();
 	setMainSkillEdit();
+	setSkillsEdit();
 	saveBiography();
 	saveMainInfo();
 	saveContacts();
 	saveMainSkills();
+	
+	setCreateSkill();
 }
 
 function setEditAll() {
@@ -46,6 +50,12 @@ function setMainSkillEdit() {
 	$("#editMainSkill").click(function(e){
 		e.preventDefault();
 		mainSkillEdit(false);
+	});
+}
+function setSkillsEdit() {
+	$("#editSkills").click(function(e){
+		e.preventDefault();
+		skillsEdit(false);
 	});
 }
 function saveBiography() {
@@ -235,6 +245,199 @@ function saveMainSkills() {
 	});
 }
 
+function addSkill(skill) {
+		appendSkill(skill);
+		setSkillEditable(skill.id,true);
+		setSkillEvents(skill.id);
+		resetSkillButtons(skill.id,false);		
+}
+
+function appendSkill(skill) {
+	let id = skill.id;
+	let title = skill.title;
+	let level = skill.level;
+	
+	start=$("#skillStart");
+	start.append(`<div class="row" id="skillContainer${id}">
+										<div class="col-8 mb-3">
+											<div class="row">
+												<h4 class="small fw-bold">Skill</h4>
+											</div>
+											<input class="form-control" type="text" id="skill${id}"
+												placeholder="e.g.: Excel" name="skill${id}" value="${title}">
+										</div>
+										<div class="col-4 mb-3">
+											<div class="row">
+												<h4 class="small fw-bold">Level (0-100)</h4>
+											</div>
+											<input class="form-control" type="text" id="level${id}"
+												placeholder="e.g.: 85" name="level${id}" value="${level}">
+										</div>
+									</div>
+
+									<div class="progress progress-sm mb-3" id="progress${id}">
+										<div class="progress-bar bg-danger" aria-valuenow="${level}"
+											aria-valuemin="0" aria-valuemax="100" style="width: ${level}%;">
+											<span class="visually-hidden">${level}%</span>
+										</div>
+									</div>
+
+									<div class="row" id="skillButtons${id}">
+										<div class="col-md-3">
+											<div class="mb-3">
+												<button class="btn btn-primary btn-sm" type="submit"
+													id="editSkill${id}">Edit Skill</button>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="mb-3">
+												<button class="btn btn-primary btn-sm" type="submit"
+													id="confirmEditSkill${id}">Confirm</button>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="mb-3">
+												<button class="btn btn-danger btn-sm" type="submit"
+													id="removeSkill${id}">Remove Skill</button>
+											</div>
+										</div>
+									</div>`);
+}
+
+function setSkillEditable(id,value) {
+	$("#skill"+id).attr('readonly',value);
+	$("#level"+id).attr('readonly',value);
+}
+
+function setSkillEvents(id) {
+	$("#editSkill"+id).click(function(e){
+		e.preventDefault();
+		setSkillEditable(id,false);
+		resetSkillButtons(id,true);
+	});
+	
+	$("#confirmEditSkill"+id).click(function(e){
+		e.preventDefault();
+		selectedSkill={
+			id:id,
+			userId:-1,
+			title:$("#skill"+id).val(),
+			level:$("#level"+id).val()
+		};
+		$.ajax({
+			url: "/edit_skill",
+			contentType: "application/json",
+			data: JSON.stringify(selectedSkill),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			if(data==="error"){
+				
+			}else{
+				editSkillValidation(data);
+			}
+		});
+	});
+	
+	$("#removeSkill"+id).click(function(e){
+		e.preventDefault();
+		console.log(id);
+		$.ajax({
+			url: "/remove_skill",
+			contentType: "application/json",
+			data: JSON.stringify(id),
+			type: "post",
+			dataType: "json",
+		}).done(function() {
+
+		});
+
+		$("#skillContainer"+id).remove();
+		$("#skillButtons"+id).remove();
+		$("#progress"+id).remove();
+	});
+}
+
+function setCreateSkill() {
+	skillBtn = $("#addSkillBtn");
+	
+	skillBtn.click(function(e){
+		e.preventDefault();
+		
+		newSkill={
+		id:-1,
+		userId:-1,
+		title:$("#firstSkill").val(),
+		level:$("#firstLevel").val()
+		};
+		
+		$.ajax({
+		url: "/add_skill",
+		contentType: "application/json",
+		data: JSON.stringify(newSkill),
+		type: "post",
+		dataType: "json",
+		}).done(function(data) {
+			if(data==="error"){
+				
+			}else{
+				skillValidation(data);
+			}
+		});
+	});
+}
+
+function skillValidation(data) {
+	console.log("START VALIDATION; VALIDATING THIS DATA:");
+	console.log(data);
+	
+	$("#firstSkill").removeClass("is-invalid");
+	$("#firstLevel").removeClass("is-invalid");
+	var isValidSkill = true;
+	if (data.title === "error") {
+		$("#firstSkill").addClass("is-invalid");
+		isValidSkill = false;
+	} if (data.level === -1) {
+		$("#firstLevel").addClass("is-invalid");
+		isValidSkill = false;
+	}
+	if (isValidSkill) {
+				addSkill(data);
+				resetSkillTemplate();
+	}
+}
+
+function editSkillValidation(data) {
+	console.log("START VALIDATION; VALIDATING THIS DATA:");
+	console.log(data);
+	
+	$("#skill"+data.id).removeClass("is-invalid");
+	$("#level"+data.id).removeClass("is-invalid");
+	var isValidSkill = true;
+	if (data.title === "error") {
+		$("#skill"+data.id).addClass("is-invalid");
+		isValidSkill = false;
+	} if (data.level === -1) {
+		$("#level"+data.id).addClass("is-invalid");
+		isValidSkill = false;
+	}
+	if (isValidSkill) {
+		refactSkill(data.id,data);
+		setSkillEditable(data.id,true);
+		resetSkillButtons(data.id,false);
+	}
+}
+
+function refactSkill(id,data) {
+	$("#skill"+id).val(data.title);
+	$("#level"+id).val(data.level);
+}
+
+function resetSkillTemplate() {
+	$("#firstSkill").val("");
+	$("#firstLevel").val("");
+}
+
 function loadProfileImageEvent() {
 	const image_chooser=document.querySelector("#image_chooser_profile");
 	var newImage="";
@@ -385,10 +588,25 @@ function loadMainInformations() {
 			document.querySelector("#presentation_image_2").src=data.presentationPicture2;
 			document.querySelector("#presentation_image_3").src=data.presentationPicture3;
 			refactUndefinedImage();
-		});
-		
-	
-	
+		});	
+
+}
+
+function loadCurriculumSkills() {
+	$.ajax({
+		url: "/load_skills",
+		contentType: "application/json",
+		type: "post",
+		dataType: "json",
+	}).done(function(skills) {
+		console.log(skills);
+
+		if (skills.length===0) {
+			console.log("user has no skills");
+		} else {
+			skills.forEach(skill => addSkill(skill));
+		}
+	});
 }
 
 function editAll(value) {
@@ -410,19 +628,21 @@ function editAll(value) {
 	$("#mainSkillDescr2").attr('readonly',value);	
 	$("#mainSkill3").attr('readonly',value);
 	$("#mainSkillDescr3").attr('readonly',value);	
+	$("#firstSkill").attr('readonly',value);
+	$("#firstLevel").attr('readonly',value);	
 	if(value) {
 		$("#main_info_btn").hide();
 		$("#contact_btn").hide();
 		$("#biography_btn").hide();
-		$("#skill_btn").hide();	
 		$("#main_skill_btn").hide();	
+		$("#addSkillBtn").hide();
 	}
 	else {
 		$("#main_info_btn").show();
 		$("#contact_btn").show();
 		$("#biography_btn").show();
-		$("#skill_btn").show();	
 		$("#main_skill_btn").show();	
+		$("#addSkillBtn").show();
 	}
 }
 
@@ -499,5 +719,32 @@ function mainSkillEdit(value) {
 		$("#main_skill_btn").show();
 	}
 }
+
+function skillsEdit(value) {
+	$("#firstSkill").attr('readonly',value);
+	$("#firstLevel").attr('readonly',value);	
+	if(value) {
+		$("#addSkillBtn").hide();
+	}
+	else {
+		$("#addSkillBtn").show();
+	}
+}
+
+function resetSkillButtons(id,value) {
+	$("#editSkill"+id).hide();
+	$("#removeSkill"+id).hide();
+	$("#confirmEditSkill"+id).hide();
+	if(value===true) {
+		$("#confirmEditSkill"+id).show();
+		$("#removeSkill"+id).show();
+	}
+	else {
+		$("#editSkill"+id).show();
+		$("#removeSkill"+id).show();
+	}
+}
+
+
 
 

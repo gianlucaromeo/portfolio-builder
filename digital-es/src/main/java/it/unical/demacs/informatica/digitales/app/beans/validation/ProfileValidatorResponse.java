@@ -1,6 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.beans.validation;
 
 public class ProfileValidatorResponse {
+	//USER 
 	private long id;
 	private long userId;
 	private String firstName;
@@ -14,6 +15,7 @@ public class ProfileValidatorResponse {
 	private String contactEmail;
 	private boolean validation=true;
 	
+	//USER MAIN INFORMATION
 	private String profilePicture;
 	private String logoPicture;
 	private String logoName;
@@ -30,6 +32,12 @@ public class ProfileValidatorResponse {
 	private String facebookLinkRef;
 	private String instagramLinkRef;
 	private String twitterLinkRef;
+	
+	//CURRICULUM SKILL
+	private String title;
+	private int level;
+	
+	
 	public long getId() {
 		return id;
 	}
@@ -197,6 +205,18 @@ public class ProfileValidatorResponse {
 	}
 	public void setTwitterLinkRef(String twitterLinkRef) {
 		this.twitterLinkRef = twitterLinkRef;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 }

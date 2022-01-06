@@ -14,11 +14,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
+import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ProfileValidatorResponse;
+import it.unical.demacs.informatica.digitales.app.dao.CurriculumSkillDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
+import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 import it.unical.demacs.informatica.digitales.app.validator.ProfileValidator;
 
@@ -183,5 +188,67 @@ public class ProfileREST {
 		UserMainInformationsDAOImpl.getInstance().update(info);
 
 		return gson.toJson(info);
+	}
+	
+	@PostMapping("/load_skills")
+	public synchronized String loadSkills(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+
+		User user = Servlets.getLoggedUser(req);
+		System.out.println("USER WHEN LOADING SKILL");
+		System.out.println(user);
+		Set<CurriculumSkill> skills = CurriculumSkillDAOImpl.getInstance().findAllByUserId(user.getId());
+		String skillsToJSON = gson.toJson(skills);
+		return skillsToJSON;
+	}
+	
+	@PostMapping("/add_skill")
+	public synchronized String addSkill(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		
+		User user = Servlets.getLoggedUser(req);
+		
+		CurriculumSkill newSkill = gson.fromJson(req.getReader(), CurriculumSkill.class);
+		System.out.println(newSkill);
+		ProfileValidatorResponse resp=ProfileValidator.validateSkill(newSkill);
+		
+		if(ProfileValidator.isValidSkill(resp)) {
+			newSkill.setUserId(user.getId());
+			CurriculumSkillDAOImpl.getInstance().create(newSkill);
+			resp.setId(CurriculumSkillDAOImpl.getInstance().findId(newSkill));
+		}
+
+		return gson.toJson(resp);
+	}
+	
+	@PostMapping("/edit_skill")
+	public synchronized String editSkill(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		
+		User user = Servlets.getLoggedUser(req);
+		
+		CurriculumSkill newSkill = gson.fromJson(req.getReader(), CurriculumSkill.class);
+		System.out.println(newSkill);
+		ProfileValidatorResponse resp=ProfileValidator.validateSkill(newSkill);
+		resp.setId(newSkill.getId());
+		
+		if(ProfileValidator.isValidSkill(resp)) {
+			newSkill.setUserId(user.getId());
+			CurriculumSkillDAOImpl.getInstance().update(newSkill);
+		}
+		return gson.toJson(resp);
+	}
+	
+	@PostMapping("/remove_skill")
+	public synchronized void removeSkill(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		Integer id = gson.fromJson(req.getReader(), Integer.class);
+		CurriculumSkill skill = new CurriculumSkill();
+		skill.setId(id);
+		CurriculumSkillDAOImpl.getInstance().delete(skill);
 	}
 }
