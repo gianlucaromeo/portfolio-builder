@@ -307,5 +307,31 @@ public class ModeratorDAOImpl extends DAOImpl implements DAO<Moderator>{
 
 		return moderator;
 	}
-	
+
+	public synchronized String findDeafultModeratorImage() {
+		String query = "SELECT image FROM default_image WHERE type=?;";
+
+		try {
+
+			con = DBUtil.getInstance().getConnection();
+			p = con.prepareStatement(query);
+			p.setString(1, "moderator");
+
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("image");
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[UserMainInformationsDAOImpl] [findProfileImageById]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return "error";
+
+	}
+
 }

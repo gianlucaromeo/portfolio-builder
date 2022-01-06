@@ -18,6 +18,7 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.beans.validation.CurriculumExperienceValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumExperienceDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -75,7 +76,7 @@ public class CurriculumREST {
 		CurriculumExperience curriculumExperience = null;
 		
 		curriculumExperience = gson.fromJson(req.getReader(), CurriculumExperience.class);
-	
+		
 		CurriculumExperienceDAOImpl.getInstance().create(curriculumExperience);
 		
 		return gson.toJson(curriculumExperience);

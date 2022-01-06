@@ -18,19 +18,13 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
-import it.unical.demacs.informatica.digitales.app.beans.Post;
-import it.unical.demacs.informatica.digitales.app.beans.PostBanRequest;
 import it.unical.demacs.informatica.digitales.app.beans.Project;
-import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
-import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.beans.RemoveProjectRequest;
+import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.RemovedProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
-import it.unical.demacs.informatica.digitales.app.settings.BanReasons;
 import it.unical.demacs.informatica.digitales.app.settings.RemoveProjectReasons;
 
 @RestController
@@ -48,8 +42,9 @@ public class ModeratorProjectsREST {
 
 		if (moderatorCookie != null) {
 
-			Set<Project> projects = new HashSet<Project>();
-			projects = ProjectDAOImpl.getInstance().findAllByUserId(id);
+			List<Project> projects = new ArrayList<Project>();
+//			projects = ProjectDAOImpl.getInstance().findAllByUserId(id);
+			projects = ProjectDAOImpl.getInstance().findAllByUserIdNotRemoved(id);
 			String projectsToJSON = gson.toJson(projects);
 
 			return projectsToJSON;
@@ -76,31 +71,34 @@ public class ModeratorProjectsREST {
 		return Protocol.ERROR;
 
 	}
-/*
-	@PostMapping("/ban_post")
+
+	@PostMapping("/remove_user_project")
 	public String banPost(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
 
+		System.out.println("REMOVE PROJECT REQUEST");
 		Gson gson = new Gson();
-		PostBanRequest banReq = gson.fromJson(req.getReader(), PostBanRequest.class);
-		Post post = new Post();
+		RemoveProjectRequest removeProjectReq =  gson.fromJson(req.getReader(), RemoveProjectRequest.class);
+		Project projectToRemove = new Project();
 
 		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
-			post = PostDAOImpl.getInstance().findById(banReq.getPostId());
-			if (post != null) {
-				RemovedPost rem = new RemovedPost();
+			projectToRemove = ProjectDAOImpl.getInstance().findById(removeProjectReq.getId());
+			if (projectToRemove != null) {
+				RemovedProject removedProject = new RemovedProject();
 				Moderator m = ModeratorDAOImpl.getInstance().findByUsername(moderatorCookie.getValue());
-				rem.setModeratorId(m.getId());
-				rem.setPostId(banReq.getPostId());
-				rem.setReason(banReq.getReason());
-				RemovedPostDAOImpl.getInstance().create(rem);
+				removedProject.setModeratorId(m.getId());
+				removedProject.setProjectId(removeProjectReq.getId());
+				removedProject.setReason(removeProjectReq.getReason());
+				removedProject.setSeenByUser(false);
+				System.out.println("REMOVE PROJECT REQUEST OK");
+				return RemovedProjectDAOImpl.getInstance().create(removedProject);
 			}
 		}
 
+		System.out.println("REMOVE PROJECT REQUEST ERROR");
 		return Protocol.ERROR;
 
 	}
-	*/
 
 }

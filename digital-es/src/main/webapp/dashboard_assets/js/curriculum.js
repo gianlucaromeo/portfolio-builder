@@ -9,23 +9,18 @@ window.onload = (event) => {
 };
 
 function fetchUserId() {
-
 	$.ajax({
-
 		url: "/get_user_id_action",
 		type: "post",
-		dataType: "json",
-
+		dataType: "json"
 	}).done(function(data) {
-
 		user_id = JSON.stringify(data);
 		console.log("User id retrieved. Value: " + user_id);
-
 	});
-
 }
 
 function retrieveCurriculumData() {
+
 	$.ajax({
 
 		url: "/get_curriculum_data_action",
@@ -35,17 +30,17 @@ function retrieveCurriculumData() {
 	}).done(function(data) {
 
 		if (data.length == 0) {
-			//console.log("no data");
+
 		} else {
+
 			experiences = data;
 			experiences.forEach(exp => {
 				all_experiences.set(exp.id, exp);
 			});
+
 			init();
-			//initDoneButton(userId);
+
 		}
-
-
 	});
 }
 
@@ -69,7 +64,6 @@ function initDiscardNewExperienceChangesBtn() {
 	});
 }
 
-// 1 QUA
 function initDoneBtn() {
 
 	if (user_id == -1) {
@@ -163,7 +157,6 @@ function setSaveBtnAction(exp) {
 		//console.log(new_data);
 
 		updateExperience(new_data);
-
 	})
 }
 

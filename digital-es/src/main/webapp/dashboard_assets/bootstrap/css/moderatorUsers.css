@@ -38,8 +38,26 @@
 #selectDiv select option {
   padding: 30px;
 }
-#selectDiv {
-  margin-right: 10px;
 
+#dataTable{
+	overflow-y:scroll;
+	overflow-y:none;
+	height:600px;
 }
+#dataTablePost {
+    table-layout: fixed;
+}
+#dataTable td{
+    word-wrap:break-word;
+}
+
+#dataTable #usersStatus{
+    width: 100px;
+}
+
+
+.userRow{
+	cursor: pointer;
+}
+
 

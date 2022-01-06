@@ -27,7 +27,7 @@ import it.unical.demacs.informatica.digitales.app.settings.BanReasonsUser;
 @RestController
 public class ModeratorUsersREST {
 	@PostMapping("/ban_user")
-	public String banUser(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+	public long banUser(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
 		
 		Gson gson = new Gson();
 		UserBanRequest banReq = gson.fromJson(req.getReader(), UserBanRequest.class);
@@ -47,13 +47,13 @@ public class ModeratorUsersREST {
 				banUser.setReason(banReq.getReason());
 				
 				BannedUserDAOImpl.getInstance().create(banUser);
-				return Protocol.OK;
+				return banUser.getUserId();
 			}
 		}
 		
 
 
-		return Protocol.ERROR;
+		return -1;
 
 	}
 	

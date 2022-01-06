@@ -2,7 +2,8 @@
  * 
  */
 var banReasons=[];
-
+var currentUserSelected="";
+var userMap=new Map();
 
 function start(){
 	getBanReasons();
@@ -25,6 +26,7 @@ function start(){
 		
 			users.forEach(user => {
 				addUserOnTable(user);
+				userMap.set(user.id, user);
 				//console.log(user);
 			});
 		}
@@ -40,12 +42,12 @@ function addUserOnTable(user){
 
 function createUserRow(userData){
 	//console.log(userData);
-		return `<tr id="rowUserId${userData.id}">
+	
+		return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
 				<td><img class="rounded-circle me-2" width="30" height="30"
-					src="undefined" id="profileImageUserId${userData.id}">${userData.firstName} ${userData.lastName} </td>
+					src="undefined" id="profileImageUserId${userData.id}">${userData.username}</td>
 				<td>${userData.email}</td>
 				<td>${userData.dateOfBirth}</td>
-				<td>${userData.signUpDate}</td>
 			</tr>`;
 }
 
@@ -74,7 +76,9 @@ function setUserTableUserImage(id){
 
 function setEventOnUserRow(id){
 	$("#rowUserId"+id).click(function() {
-		$("#postsSection").empty();
+		currentUserSelected=userMap.get(id).username;
+		$("#userPostText").text(currentUserSelected+ "'s Posts");
+		$("#postsTableBody").empty();
 		$.ajax({
 
 			url: "/get_users_posts_by_id_not_banned",
@@ -88,7 +92,7 @@ function setEventOnUserRow(id){
 			posts = data;
 			//console.log(posts);
 			if (posts.length === 0) {
-				
+				addUserPost(null);
 			} else {
 				posts.forEach(post => {
 					addUserPost(post);
@@ -106,14 +110,20 @@ function setEventOnUserRow(id){
 
 function addUserPost(post) {
 	prependPost(post);
-	if(post.picture==="undefined"){
-		$("#imageId"+post.id).hide();
-		
+	if (post !== null) {
+		console.log(post.picture);
+		if (post.picture === "undefined" || post.picture === undefined) {
+			$("#imageId" + post.id).hide();
+
+		}
+
+		setBanReasonsOnDelete(post.id);
+		setEventOnConfirmBan(post.id);
+		//setEventOnDelete(post.id);
+	}else{
+		$("#noImage").hide();
 	}
 	
-	setBanReasonsOnDelete(post.id);
-	setEventOnConfirmBan(post.id);
-	//setEventOnDelete(post.id);
 }
 
 function setEventOnConfirmBan(id){
@@ -127,14 +137,17 @@ function setEventOnConfirmBan(id){
 		console.log(id);
 		$.ajax({
 
-			url: "/ban_post",
+			url: "/remove_post_action",
 			contentType: "application/json",
 			data: JSON.stringify(banRequest),
 			type: "post",
 			dataType: "json",
 
 		}).done(function(id) {
-			$("#post" + id).remove();
+			if(id!==-1){
+				$("#post" + id).remove();
+			}
+			
 		});
 
 
@@ -153,52 +166,35 @@ function setBanReasonsOnDelete(id){
 }
 
 function prependPost(post) {
-	$("#postsSection").prepend(createPost(post));
+	$("#postsTableBody").prepend(createPost(post));
 }
 
 function createPost(post){
-	let id = post.id;
-	let title = post.title;
-	let description = post.description;
-	let imagePath = post.picture;
-	let publicationDate = post.pubblicationDate;
-	let lastEditDate = post.lastEditDate;
-	let refLink = post.refLink;
+	if(post!==null){
+		let refLink = (post.refLink!="")? "None" : post.refLink;
+		
+		return `<tr class="shadow-sm p-3 mb-5" id="post${post.id}">
+				<td class="align-middle"><img class=" me-2" width="100" height="50"
+					src="${post.picture}" id="imageId${post.id}"></td>
+				<td class="align-middle"><h5>${post.title}<h5></td>
+				<td class="align-middle">${post.description}</td>
+				<td class="align-middle"><a href="${refLink}">${refLink}</a></td>
+				<td class="align-middle">${post.pubblicationDate}</td>
+				<td class="align-middle">${getDeleteButton(post.id)}</td>
+			</tr>`;
 	
-
-	//console.log(post.pubblicationDate);
-	return `<div  id="post${id}" class="row">
-			<div class="postButtonDiv">
-								<div class="text-left mb-3" style="text-align: right;">
-									`+ getDeleteButton(id) + `
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<div class="card border-0">
-					<img class="card-img-top scale-on-hover"
-						src="${imagePath}"
-						alt="Card Image" height="350" id="imageId${id}">
-					<div style="text-align: center; margin-top: 10px ">
-						<h5><strong>
-							Title: ${title}
-							</strong>
-						</h5>
-						<p class="text-muted card-text">Description: ${description} </p>
-						
-						Reference Link: <a href="${refLink}">${refLink}</a>
-					</div>
-				
-					<div style="text-align: left; margin-top: 10px ">
-						<h6 id="publicationDateLabelId${id}">Publication date:
-							${publicationDate}</h6>
-						<h6 id="lastEditDateLabelId${id}">Last Edit date:
-							${lastEditDate}</h6>
-					</div>
-				</div>
-			</div>
-
-				
-								
-			</div> <hr/>`;
+	}
+	else{
+		return `<tr class="shadow-sm p-3 mb-5" id="noPost">
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+			</tr>`;
+	}
+	
 }
 
 function getDeleteButton(id) {
