@@ -272,13 +272,14 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 	private synchronized String getDefaultAvatarIMage64() {
 
 		closeAll();
-		String query = "SELECT image FROM default_image;";
+		String query = "SELECT image FROM default_image WHERE type=?;";
 
 		try {
 			
 
 			con = DBUtil.getInstance().getConnection();
 			p = con.prepareStatement(query);
+			p.setString(1, "user");
 
 			rs = p.executeQuery();
 
