@@ -44,10 +44,9 @@ function createUserRow(userData) {
 	;
 	return `<tr id="rowUserId${userData.id}">
 				<td><img class="rounded-circle me-2" width="30" height="30"
-					src="undefined" id="profileImageUserId${userData.id}">${userData.firstName} ${userData.lastName} </td>
+					src="undefined" id="profileImageUserId${userData.id}">${userData.username} </td>
 				<td>${userData.email}</td>
 				<td>${userData.dateOfBirth}</td>
-				<td>${userData.signUpDate}</td>
 				<td>`+ getBanButton(userData.id) + `</td>
 			</tr>`;
 }
@@ -105,7 +104,7 @@ function setEventOnConfirmBan(id) {
 			dataType: "json",
 
 		}).done(function(id) {
-			$("#userId" + id).remove();
+			$("#rowUserId" + id).remove();
 		});
 
 

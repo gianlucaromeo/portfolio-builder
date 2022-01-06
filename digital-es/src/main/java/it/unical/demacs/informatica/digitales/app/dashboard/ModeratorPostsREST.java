@@ -82,7 +82,7 @@ public class ModeratorPostsREST {
 		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<Post> posts = new ArrayList<Post>();
-			posts = PostDAOImpl.getInstance().findAllByUserId(id);
+			posts = PostDAOImpl.getInstance().findAllByUserIdNotBanned(id);
 			String postsToJSON = gson.toJson(posts);
 
 			return postsToJSON;
@@ -108,8 +108,8 @@ public class ModeratorPostsREST {
 
 	}
 
-	@PostMapping("/remove_project_action")
-	public String banPost(HttpServletRequest req, HttpServletResponse resp)
+	@PostMapping("/remove_post_action")
+	public long banPost(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
@@ -126,10 +126,11 @@ public class ModeratorPostsREST {
 				rem.setPostId(banReq.getPostId());
 				rem.setReason(banReq.getReason());
 				RemovedPostDAOImpl.getInstance().create(rem);
+				return rem.getPostId();
 			}
 		}
 
-		return Protocol.ERROR;
+		return -1;
 
 	}
 }
