@@ -29,7 +29,12 @@
 #dataTablePost #postDescriptionCol{
     width: 230px;
 }
-
+#dataTablePost #postDateCol{
+    width: 150px;
+}
+#dataTablePost #postStatusCol{
+    width: 80px;
+}
 .userRow{
 	cursor: pointer;
 }

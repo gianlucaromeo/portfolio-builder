@@ -42,7 +42,7 @@ function addUserOnTable(user) {
 function createUserRow(userData) {
 	//console.log(userData);
 	;
-	return `<tr id="rowUserId${userData.id}">
+	return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
 				<td><img class="rounded-circle me-2" width="30" height="30"
 					src="undefined" id="profileImageUserId${userData.id}">${userData.username} </td>
 				<td>${userData.email}</td>

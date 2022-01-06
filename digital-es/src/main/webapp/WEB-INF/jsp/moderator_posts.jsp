@@ -212,7 +212,7 @@
 
 							<!-- CURRICULUMS CARD HEADER -->
 							<div class="card-header py-3">
-								<p class="text-primary m-0 fw-bold">User's Posts</p>
+								<p class="text-primary m-0 fw-bold" id="userPostText">User's Posts ${currentUserSelected}</p>
 							</div>
 							<!-- END CURRICULUMS CARD HEADER -->
 
@@ -228,8 +228,8 @@
 												<th>Title</th>
 												<th id="postDescriptionCol">Description</th>
 												<th>Reference Link</th>
-												<th>Publication Date</th>
-												<th>Status</th>
+												<th id="postDateCol">Publication Date</th>
+												<th id="postStatusCol">Status</th>
 											</tr>
 										</thead>
 										<tbody id="postsTableBody"></tbody>

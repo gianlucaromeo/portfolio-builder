@@ -41,17 +41,20 @@
 
 #dataTable{
 	overflow-y:scroll;
+	overflow-y:none;
 	height:600px;
 }
 #dataTablePost {
     table-layout: fixed;
 }
-#dataTablePost td{
+#dataTable td{
     word-wrap:break-word;
 }
-#dataTablePost #postDescriptionCol{
-    width: 230px;
+
+#dataTable #usersStatus{
+    width: 100px;
 }
+
 
 .userRow{
 	cursor: pointer;

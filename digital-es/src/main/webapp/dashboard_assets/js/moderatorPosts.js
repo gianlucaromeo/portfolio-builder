@@ -2,7 +2,8 @@
  * 
  */
 var banReasons=[];
-
+var currentUserSelected="";
+var userMap=new Map();
 
 function start(){
 	getBanReasons();
@@ -25,6 +26,7 @@ function start(){
 		
 			users.forEach(user => {
 				addUserOnTable(user);
+				userMap.set(user.id, user);
 				//console.log(user);
 			});
 		}
@@ -40,7 +42,8 @@ function addUserOnTable(user){
 
 function createUserRow(userData){
 	//console.log(userData);
-		return `<tr id="rowUserId${userData.id}">
+	
+		return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
 				<td><img class="rounded-circle me-2" width="30" height="30"
 					src="undefined" id="profileImageUserId${userData.id}">${userData.username}</td>
 				<td>${userData.email}</td>
@@ -73,6 +76,8 @@ function setUserTableUserImage(id){
 
 function setEventOnUserRow(id){
 	$("#rowUserId"+id).click(function() {
+		currentUserSelected=userMap.get(id).username;
+		$("#userPostText").text(currentUserSelected+ "'s Posts");
 		$("#postsTableBody").empty();
 		$.ajax({
 
@@ -181,12 +186,12 @@ function createPost(post){
 	}
 	else{
 		return `<tr class="shadow-sm p-3 mb-5" id="noPost">
-				<td class="align-middle"><img class=" me-2" width="100" height="50"
-					src="" id="noImage"></td>
-				<td class="align-middle">NONE</td>
-				<td class="align-middle">NONE</td>
-				<td class="align-middle">NONE</td>
-				<td class="align-middle">NONE</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
+				<td class="align-middle">NO POSTS YET</td>
 			</tr>`;
 	}
 	

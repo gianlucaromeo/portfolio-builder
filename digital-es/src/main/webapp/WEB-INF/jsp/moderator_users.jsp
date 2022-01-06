@@ -143,10 +143,10 @@
 				</nav>
 
 				<!--  MAIN CONTAINER -->
-				<div class="container-fluid">
+				<div class="container-fluid ">
 
 					<!-- DISPLAY ELEMENTS IN ROW  -->
-					<div class="row">
+					<div class="row" >
 
 						<!-- HEADER PAGE TITLE -->
 						<div class="row">
@@ -157,7 +157,7 @@
 						<!-- END HEADER PAGE TITLE -->
 
 						<!-- MAIN CARDS CONTAINER -->
-						<div class="row">
+						<div class="row ">
 
 							<!-- USERS CARD -->
 							<div class="col-12 col-lg-12">
@@ -180,6 +180,7 @@
 														<td><strong>Username</strong></td>
 														<td><strong>Email</strong></td>
 														<td><strong>Date of birth</strong></td>
+														<td><strong>Status</strong></td>
 													</tr>
 												</thead>
 												<tbody id="usersTableBody">
@@ -190,6 +191,7 @@
 														<td><strong>Username</strong></td>
 														<td><strong>Email</strong></td>
 														<td><strong>Date of birth</strong></td>
+														<td id="usersStatus"><strong>Status</strong></td>
 													</tr>
 												</tfoot>
 											</table>
