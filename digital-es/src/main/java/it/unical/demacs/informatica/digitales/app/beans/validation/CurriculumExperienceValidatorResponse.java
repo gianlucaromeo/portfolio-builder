@@ -1,8 +1,6 @@
-package it.unical.demacs.informatica.digitales.app.beans;
+package it.unical.demacs.informatica.digitales.app.beans.validation;
 
-import java.util.Objects;
-
-public class CurriculumExperience {
+public class CurriculumExperienceValidatorResponse {
 
 	private long id;
 	private long userId;
@@ -12,9 +10,17 @@ public class CurriculumExperience {
 	private String endDate;
 	private String description;
 	private String type;
+	private boolean valid;
 
-	public CurriculumExperience() {
-		// TODO Auto-generated constructor stub
+	public CurriculumExperienceValidatorResponse() {
+	}
+
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 
 	public long getId() {
@@ -79,32 +85,6 @@ public class CurriculumExperience {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(description, endDate, id, place, startDate, title, type, userId);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CurriculumExperience other = (CurriculumExperience) obj;
-		return Objects.equals(description, other.description) && Objects.equals(endDate, other.endDate)
-				&& id == other.id && Objects.equals(place, other.place) && Objects.equals(startDate, other.startDate)
-				&& Objects.equals(title, other.title) && Objects.equals(type, other.type) && userId == other.userId;
-	}
-
-	@Override
-	public String toString() {
-		return "CurriculumExperience [id=" + id + ", userId=" + userId + ", title=" + title + ", place=" + place
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", description=" + description + ", type="
-				+ type + "]";
 	}
 
 }
