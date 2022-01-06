@@ -8,7 +8,7 @@
 <title>Posts - PB</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/moderatorPosts.css">
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/posts.css">
@@ -143,103 +143,133 @@
 						</ul>
 					</div>
 				</nav>
-				<div class="container-fluid">
-					<h3 class="text-dark mb-4">Posts</h3>
-					<div class="card shadow mb-3">
-						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">Users</p>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-6 text-nowrap">
-									<div id="dataTable_length" class="dataTables_length"
-										aria-controls="dataTable">
-										<label class="form-label">Show&nbsp;<select
-											class="d-inline-block form-select form-select-sm"><option
-													value="10" selected="">10</option>
-												<option value="25">25</option>
-												<option value="50">50</option>
-												<option value="100">100</option></select>&nbsp;
-										</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="text-md-end dataTables_filter"
-										id="dataTable_filter">
-										<label class="form-label"><input type="search"
-											class="form-control form-control-sm"
-											aria-controls="dataTable" placeholder="Search"></label>
-									</div>
-								</div>
-							</div>
-							<div class="table-responsive table mt-2" id="dataTable"
-								role="grid" aria-describedby="dataTable_info">
-								<table class="table my-0" id="dataTable">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Date of birth</th>
-											<th>SignUp Date</th>
-										</tr>
-									</thead>
-									<tbody id="usersTableBody">
 
-									</tbody>
-									<tfoot>
-										<tr>
-											<td><strong>Name</strong></td>
-											<td><strong>Email</strong></td>
-											<td><strong>Date of birth</strong></td>
-											<td><strong>SignUp Date</strong></td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-							<div class="row">
-								<div class="col-md-6 align-self-center">
-									<p id="dataTable_info" class="dataTables_info" role="status"
-										aria-live="polite">Showing 1 to 10 of 27</p>
-								</div>
-								<div class="col-md-6">
-									<nav
-										class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-										<ul class="pagination">
-											<li class="page-item disabled"><a class="page-link"
-												href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-											<li class="page-item active"><a class="page-link"
-												href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Next"><span aria-hidden="true">»</span></a></li>
-										</ul>
-									</nav>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<div class="row" id="postsContainer">
+		<!--  MAIN CONTAINER -->
+		<div class="container-fluid">
 
-						<div class="col">
-							<div class="card shadow mb-3">
-								<div class="card-header py-3">
-									<p class="text-primary m-0 fw-bold">Published Posts</p>
-								</div>
-								<div class="card-body">
-									<form>
-										<div class="container" id="postsSection"></div>
+			<!-- DISPLAY ELEMENTS IN ROW  -->
+			<div class="row">
 
-									</form>
-								</div>
-							</div>
-
-						</div>
+				<!-- HEADER PAGE TITLE -->
+				<div class="row">
+					<div class="col-md-2">
+						<h2 class="text-dark mb-4">Posts</h2>
 					</div>
 				</div>
+				<!-- END HEADER PAGE TITLE -->
+
+				<!-- MAIN CARDS CONTAINER -->
+				<div class="row">
+
+					<!-- USERS CARD -->
+					<div class="col-12 col-lg-5">
+						<div class="card shadow mb-3">
+
+							<!-- USERS CARD HEADER -->
+							<div class="card-header py-3">
+								<p class="text-primary m-0 fw-bold">Users</p>
+							</div>
+							<!-- END USERS CARD HEADER -->
+
+							<!-- USERS CARD BODY -->
+							<div class="card-body shadow">
+
+								<div class="table-responsive table mt-2" id="dataTable"
+									role="grid" aria-describedby="dataTable_info">
+									<table class="table my-0" id="dataTable">
+										<thead>
+											<tr>
+												<td><strong>Username</strong></td>
+												<td><strong>Email</strong></td>
+												<td><strong>Date of birth</strong></td>
+											</tr>
+										</thead>
+										<tbody id="usersTableBody">
+
+										</tbody>
+										<tfoot>
+											<tr>
+												<td><strong>Username</strong></td>
+												<td><strong>Email</strong></td>
+												<td><strong>Date of birth</strong></td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+
+							</div>
+							<!-- END USERS CARD BODY -->
+
+						</div>
+					</div>
+					<!-- END USERS CARD -->
+
+
+					<!-- CURRICULUMS CARD -->
+					<div class="col-12 col-lg-7 " id="postsContainer">
+						<div class="card shadow mb-3">
+
+							<!-- CURRICULUMS CARD HEADER -->
+							<div class="card-header py-3">
+								<p class="text-primary m-0 fw-bold">User's Posts</p>
+							</div>
+							<!-- END CURRICULUMS CARD HEADER -->
+
+							<!-- USERS CURRICULUMS CARD BODY -->
+							<div class="card-body shadow">
+
+								<div class="table-responsive table mt-2" id="dataTableDivPosts"
+									role="grid" aria-describedby="dataTable_info">
+									<table class="table my-0" id="dataTablePost">
+										<thead>
+											<tr>
+												<th>Picture</th>
+												<th>Title</th>
+												<th id="postDescriptionCol">Description</th>
+												<th>Reference Link</th>
+												<th>Publication Date</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody id="postsTableBody"></tbody>
+										<tfoot>
+											<tr>
+												<th>Picture</th>
+												<th>Title</th>
+												<th>Description</th>
+												<th>Reference Link</th>
+												<th>Publication Date</th>
+												<th>Status</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+
+							</div>
+							<!-- END CURRICULUMS CARD BODY -->
+
+						</div>
+					</div>
+					<!-- END CURRICULUMS CARD -->
+
+
+
+				</div>
+				<!-- END MAIN CARDS CONTAINER -->
+
 			</div>
+			<!-- END DISPLAY ELEMENTS IN ROW  -->
+
 		</div>
+		<!-- END MAIN CONTAINER -->
+
+
+
+
+
+
+
 	</div>
 	<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../../dashboard_assets/js/bs-init.js"></script>
