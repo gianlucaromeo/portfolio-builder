@@ -54,7 +54,6 @@ public class SignUpREST {
 
 			UserMainInformations info=new UserMainInformations();
 			info.setUserId(user.getId());
-			info.setBio("Not Null");
 			UserMainInformationsDAOImpl.getInstance().create(info);
 
 			Cookie cookie = Servlets.initLoggedUsernameCookie(req,resp, user.getUsername());
