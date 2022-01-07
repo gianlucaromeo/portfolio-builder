@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Projects - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../portfolio_assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="../../portfolio_assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
 </head>
 
@@ -18,10 +18,10 @@
                     navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="projects-grid-cards.html">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
-                    <li class="nav-item"><a class="nav-link" href="hire-me.html">Hire me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="homepage">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="posts">Posts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="curriculum">CV</a></li>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover"
-                                    src="assets/img/nature/image1.jpg" alt="Card Image"></a>
+                                    src="../../portfolio_assets/img/nature/image1.jpg" alt="Card Image"></a>
                             <div class="card-body">
                                 <h6><a href="#">Lorem Ipsum</a></h6>
                                 <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover"
-                                    src="assets/img/nature/image2.jpg" alt="Card Image"></a>
+                                    src="../../portfolio_assets/img/nature/image2.jpg" alt="Card Image"></a>
                             <div class="card-body">
                                 <h6><a href="#">Lorem Ipsum</a></h6>
                                 <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover"
-                                    src="assets/img/nature/image3.jpg" alt="Card Image"></a>
+                                    src="../../portfolio_assets/img/nature/image3.jpg" alt="Card Image"></a>
                             <div class="card-body">
                                 <h6><a href="#">Lorem Ipsum</a></h6>
                                 <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover"
-                                    src="assets/img/nature/image4.jpg" alt="Card Image"></a>
+                                    src="../../portfolio_assets/img/nature/image4.jpg" alt="Card Image"></a>
                             <div class="card-body">
                                 <h6><a href="#">Lorem Ipsum</a></h6>
                                 <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover"
-                                    src="assets/img/nature/image5.jpg" alt="Card Image"></a>
+                                    src="../../portfolio_assets/img/nature/image5.jpg" alt="Card Image"></a>
                             <div class="card-body">
                                 <h6><a href="#">Lorem Ipsum</a></h6>
                                 <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover"
-                                    src="assets/img/nature/image6.jpg" alt="Card Image"></a>
+                                    src="../../portfolio_assets/img/nature/image6.jpg" alt="Card Image"></a>
                             <div class="card-body">
                                 <h6><a href="#">Lorem Ipsum</a></h6>
                                 <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -106,9 +106,9 @@
                         class="icon ion-social-twitter"></i></a></div>
         </div>
     </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../portfolio_assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
-    <script src="assets/js/theme.js"></script>
+    <script src="../../portfolio_assets/js/theme.js"></script>
 </body>
 
 </html>
