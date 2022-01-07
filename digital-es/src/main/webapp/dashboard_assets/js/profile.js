@@ -518,6 +518,7 @@ function handleDragEvent(id) {
 	}
 }
 
+
 function setOnChangeImage(id) {
 	const image_chooser=document.querySelector("#image_chooser_"+id);
 	var newImage="";
@@ -554,6 +555,10 @@ function saveImages() {
 }
 
 function loadMainInformations() {
+	
+	$("#firstSkill").val("");
+	$("#firstLevel").val("");
+	
 	var mainInformations ={
 		 userId:-1,
 		 profilePicture:"",
@@ -583,6 +588,17 @@ function loadMainInformations() {
 			console.log(data);
 			$("#biography").val(data.bio);
 			
+			
+			$("#mainSkill1").val(data.specialSkillName1);
+			$("#mainSkillDescr1").val(data.specialSkillDescr1);
+			$("#mainSkill2").val(data.specialSkillName2);
+			$("#mainSkillDescr2").val(data.specialSkillDescr2);
+			$("#mainSkill3").val(data.specialSkillName3);
+			$("#mainSkillDescr3").val(data.specialSkillDescr3);
+			
+			$("#facebook").val(data.facebookLinkRef);
+			$("#instagram").val(data.instagramLinkRef);
+			$("#twitter").val(data.twitterLinkRef);
 			
 			document.querySelector("#presentation_image_1").src=data.presentationPicture1;
 			document.querySelector("#presentation_image_2").src=data.presentationPicture2;

@@ -47,7 +47,7 @@ public class ProfileREST {
 	}
 	
 	@PostMapping("/save_presentation_image")
-	public String savePresentation(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String savePresentation(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
@@ -67,7 +67,7 @@ public class ProfileREST {
 	}
 	
 	@PostMapping("/get_main_info")
-	public String getMainInfo(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String getMainInfo(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		
@@ -79,7 +79,7 @@ public class ProfileREST {
 	}
 	
 	@PostMapping("/save_bio")
-	public String saveBio(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+	public synchronized String saveBio(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);

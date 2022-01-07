@@ -154,6 +154,7 @@
 						<div class="col-lg-4">
 							<div class="card mb-3">
 								<div class="card-body shadow">
+								 
 									<div class="text-center">
 
 										<img class="rounded-circle mb-3 mt-4" src="${profilePicture}"
@@ -165,6 +166,30 @@
 												class="labelImage"> Change Image </label>
 										</div>
 									</div>
+								
+								
+								<!-- DROP AREA 
+								<div id="drop-area-1" class="drop-area">
+										<form class="image_form">
+											<div class="row">
+												<div class="col-sm-6">
+													<p>Drop your Image here</p>
+													<input type="file" id="fileElem" multiple accept="image/*"
+														onchange="handleFiles(this.files)"> <input
+														type="file" accept="image/jpg, image/png"
+														id="image_chooser" class="editPhotoChooser col-12" /> <label
+														id="image_label" for="image_chooser"
+														class="labelImage"> Or click here to select your
+														photo </label>
+												</div>
+												<div class="col-sm-6">
+													<img class="img-fluid" src="undefined" width="160"
+														height="160" id="profile_picture">
+												</div>
+											</div>
+										</form>
+									</div>
+								-->
 									<div class="row">
 										<div class="col-md-12">
 											<label class="form-label" for="biography"><strong>Biography</strong></label>
