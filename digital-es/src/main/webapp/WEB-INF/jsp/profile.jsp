@@ -148,8 +148,8 @@
 						<div class="col-lg-4">
 							<div class="card mb-3">
 								<div class="card-body shadow">
-										<button class="btn btn-primary btn-sm" type="submit"
-										id="edit_all_btn">Edit your profile</button>
+									<button class="btn btn-primary btn-sm float-end" type="submit"
+										id="edit_all_btn">Edit</button>
 									<div class="text-center">
 										<img class="rounded-circle mb-3 mt-4" src="${profilePicture}"
 											width="160" height="160" id="profile_picture">
@@ -160,9 +160,9 @@
 												class="labelImage"> Change Image </label>
 										</div>
 									</div>
-								
-								
-								<!-- DROP AREA 
+
+
+									<!-- DROP AREA 
 								<div id="drop-area-1" class="drop-area">
 										<form class="image_form">
 											<div class="row">
@@ -201,12 +201,12 @@
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-10">
 											<h6 class="text-primary fw-bold m-0">Your Skills</h6>
 										</div>
-										<div class="col-md-6">
-											<button class="btn btn-primary btn-sm" type="submit"
-													id="editSkills">Edit Skills</button>
+										<div class="col-2">
+											<button class="btn btn-primary btn-sm float-end" type="submit"
+												id="editSkills">Edit</button>
 										</div>
 									</div>
 								</div>
@@ -214,7 +214,7 @@
 
 									<!--  A SKILL -->
 									<div class="row">
-										<div class="col-8 mb-3">
+										<div class="col-8">
 											<div class="row">
 												<h4 class="small fw-bold">Skill</h4>
 											</div>
@@ -223,11 +223,11 @@
 										</div>
 										<div class="col-4 mb-3">
 											<div class="row">
-												<h4 class="small fw-bold">Level (0-100)</h4>
+												<h4 class="small fw-bold">(0-100)</h4>
 											</div>
 											<input class="form-control" type="number" id="firstLevel"
-												placeholder="e.g.: 85" name="first_level"
-												min="0" step="5" max="100">
+												placeholder="e.g.: 85" name="first_level" min="0" step="5"
+												max="100">
 										</div>
 									</div>
 
@@ -318,11 +318,11 @@
 												</div>
 												<div class="col-md-3">
 													<button class="btn btn-primary btn-sm" type="submit"
-													id="editUserSettings">Edit User Settings</button>
+														id="editUserSettings">Edit User Settings</button>
 												</div>
 											</div>
 										</div>
-											
+
 										<div class="card-body">
 											<form>
 												<div class="row">
@@ -387,12 +387,12 @@
 									<div class="card shadow">
 										<div class="card-header py-3">
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-8">
 													<p class="text-primary m-0 fw-bold">Contact Settings</p>
 												</div>
-												<div class="col-md-3">
-													<button class="btn btn-primary btn-sm" type="submit"
-													id="editContactSettings">Edit Contact Settings</button>
+												<div class="col-4">
+													<button class="btn btn-primary btn-sm float-end"
+														type="submit" id="editContactSettings">Edit</button>
 												</div>
 											</div>
 										</div>
@@ -541,14 +541,14 @@
 
 						<div class="card-header py-3">
 							<div class="row">
-								<div class="col-md-10">
+								<div class="col-10">
 									<p class="text-primary m-0 fw-bold">Your Main Skills</p>
 									<h6>Add your 3 Main Skill, with a description. People will
 										see them in your Home Page.</h6>
 								</div>
-								<div class="col-md-2">
-									<button class="btn btn-primary btn-sm" type="submit"
-					 						id="editMainSkill">Edit Skills</button>
+								<div class="col-2">
+									<button class="btn btn-primary btn-sm float-end" type="submit"
+										id="editMainSkill">Edit</button>
 								</div>
 							</div>
 						</div>
@@ -607,10 +607,10 @@
 										name="main_description">
 								</div>
 							</div>
-							
+
 							<div class="mb-3">
 								<button class="btn btn-primary btn-sm" type="submit"
-										id="main_skill_btn">Save Settings</button>
+									id="main_skill_btn">Save Settings</button>
 							</div>
 
 

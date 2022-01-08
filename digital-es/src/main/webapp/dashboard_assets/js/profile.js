@@ -324,7 +324,7 @@ function appendSkill(skill) {
 										</div>
 										<div class="col-4 mb-3">
 											<div class="row">
-												<h4 class="small fw-bold">Level (0-100)</h4>
+												<h4 class="small fw-bold">(0-100)</h4>
 											</div>
 											<input class="form-control" type="number" id="level${id}"
 												placeholder="e.g.: 85" name="level${id}" value="${level}"
@@ -333,32 +333,21 @@ function appendSkill(skill) {
 									</div>
 
 									<div class="progress progress-sm mb-3" id="progress${id}">
-										<div class="progress-bar bg-danger" aria-valuenow="${level}"
+										<div class="progress-bar bg-success" aria-valuenow="${level}"
 											aria-valuemin="0" aria-valuemax="100" style="width: ${level}%;">
 											<span class="visually-hidden">${level}%</span>
 										</div>
 									</div>
 
-									<div class="row" id="skillButtons${id}">
-										<div class="col-md-3">
-											<div class="mb-3">
-												<button class="btn btn-primary btn-sm" type="submit"
+									<div class="col mb-3" id="skillButtons${id}">
+										<button class="btn btn-primary btn-sm" type="submit"
 													id="editSkill${id}">Edit</button>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="mb-3">
-												<button class="btn btn-primary btn-sm" type="submit"
-													id="confirmEditSkill${id}">Confirm</button>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="mb-3">
-												<button class="btn btn-danger btn-sm" type="submit"
-													id="removeSkill${id}">Remove</button>
-											</div>
-										</div>
-									</div>`);
+										<button class="btn btn-primary btn-sm" type="submit"
+											id="confirmEditSkill${id}">Confirm</button>
+										<button class="btn btn-danger btn-sm" type="submit"
+											id="removeSkill${id}">Remove</button>
+									</div>
+									<hr>`);
 }
 
 function setSkillEditable(id,value) {
