@@ -78,6 +78,17 @@ public class ProfileREST {
 
 	}
 	
+	@PostMapping("/get_main_info_user")
+	public synchronized String getMainInfoUser(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+
+		Gson gson = new Gson();
+		
+		User user = Servlets.getLoggedUser(req);
+		
+		return gson.toJson(user);
+
+	}
+	
 	@PostMapping("/save_bio")
 	public synchronized String saveBio(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 

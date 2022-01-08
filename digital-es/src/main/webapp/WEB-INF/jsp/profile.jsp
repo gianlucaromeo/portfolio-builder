@@ -144,19 +144,13 @@
 							<h3 class="text-dark mb-4">Profile</h3>
 						</div>
 					</div>
-					<div class="row mb-4">
-						<div class="text-center">
-							<button class="btn btn-primary btn-sm" type="submit"
-								id="edit_all_btn">Edit your profile</button>
-						</div>
-					</div>
 					<div class="row mb-3">
 						<div class="col-lg-4">
 							<div class="card mb-3">
 								<div class="card-body shadow">
-								 
+										<button class="btn btn-primary btn-sm" type="submit"
+										id="edit_all_btn">Edit your profile</button>
 									<div class="text-center">
-
 										<img class="rounded-circle mb-3 mt-4" src="${profilePicture}"
 											width="160" height="160" id="profile_picture">
 										<div class="mb-3">
@@ -181,10 +175,6 @@
 														id="image_label" for="image_chooser"
 														class="labelImage"> Or click here to select your
 														photo </label>
-												</div>
-												<div class="col-sm-6">
-													<img class="img-fluid" src="undefined" width="160"
-														height="160" id="profile_picture">
 												</div>
 											</div>
 										</form>
@@ -235,8 +225,9 @@
 											<div class="row">
 												<h4 class="small fw-bold">Level (0-100)</h4>
 											</div>
-											<input class="form-control" type="text" id="firstLevel"
-												placeholder="e.g.: 85" name="first_level">
+											<input class="form-control" type="number" id="firstLevel"
+												placeholder="e.g.: 85" name="first_level"
+												min="0" step="5" max="100">
 										</div>
 									</div>
 

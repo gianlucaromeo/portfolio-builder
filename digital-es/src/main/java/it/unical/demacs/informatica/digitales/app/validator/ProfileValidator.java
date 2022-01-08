@@ -124,6 +124,9 @@ public static int checkLevel(int level) {
 }
 
 public static String checkLink(String link) {
+	if(link.equals(""))
+		return link;
+	
 	return LINK_PATTERN.matcher(link).matches() ? link : Protocol.ERROR;
 }
 
@@ -142,12 +145,12 @@ public static String checkDateOfBirth(String dateOfBirth) {
 }
 
 public static String checkEmail(String email) {
-//	boolean emailExists = UserDAOImpl.getInstance().checkEmailExists(email);
-//	return emailExists ? Protocol.EMAIL_DUPLICATED_ERROR : Protocol.OK;
 	return email;
 }
 
 public static String checkPhoneNumber(String phone) {
+	if(phone.equals(""))
+		return phone;
 
 	return PHONE_PATTERN.matcher(phone).matches() ? phone : Protocol.ERROR;
 }

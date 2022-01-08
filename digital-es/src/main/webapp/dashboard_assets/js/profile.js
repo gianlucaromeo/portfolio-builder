@@ -7,6 +7,7 @@ function start() {
 	editAll(true);
 	loadCurriculumSkills();
 	refactUndefinedImage();
+	$("#editUserSettings").hide(); //I don't think they should be modified
 }
 function loadEvents() {
 	loadProfileImageEvent()
@@ -30,7 +31,18 @@ function loadEvents() {
 function setEditAll() {
 	$("#edit_all_btn").click(function(e){
 		e.preventDefault();
-		editAll(false);
+		if($("#edit_all_btn").text()=="Edit your profile") {
+			editBioArea(false);
+			$("#edit_all_btn").text("Undo");
+			return;
+		}
+		if($("#edit_all_btn").text()=="Undo") {
+			editBioArea(true);
+			$("#edit_all_btn").text("Edit your profile");
+			loadMainInformations();
+			return;
+		}
+//		editAll(false);
 	});
 }
 
@@ -43,19 +55,60 @@ function setUserSettingsEdit() {
 function setConctactSettingsEdit() {
 	$("#editContactSettings").click(function(e){
 		e.preventDefault();
-		contactEdit(false);
+		if($("#editContactSettings").text()=="Edit Contact Settings") {
+			contactEdit(false);
+			$("#editContactSettings").text("Undo");
+			return;
+		}
+		if($("#editContactSettings").text()=="Undo") {
+			contactEdit(true);
+			$("#editContactSettings").text("Edit Contact Settings");
+			
+			$("#contactEmail").removeClass("is-invalid");
+			$("#phoneNumber").removeClass("is-invalid");
+			$("#secPhoneNumber").removeClass("is-invalid");
+			$("#facebook").removeClass("is-invalid");
+			$("#twitter").removeClass("is-invalid");
+			$("#instagram").removeClass("is-invalid");
+			
+			loadMainInformations();
+
+			return;
+		}
 	});
 }
 function setMainSkillEdit() {
 	$("#editMainSkill").click(function(e){
 		e.preventDefault();
-		mainSkillEdit(false);
+		if($("#editMainSkill").text()=="Edit Skills") {
+			mainSkillEdit(false);
+			$("#editMainSkill").text("Undo")
+			return;
+		}
+		if($("#editMainSkill").text()=="Undo") {
+			$("#editMainSkill").text("Edit Skills")
+			loadMainInformations();
+			mainSkillEdit(true);
+			return;
+		}
+
 	});
 }
 function setSkillsEdit() {
 	$("#editSkills").click(function(e){
 		e.preventDefault();
-		skillsEdit(false);
+		if($("#editSkills").text()=="Edit Skills") {
+			skillsEdit(false);
+			$("#editSkills").text("Undo");
+			return;
+		}
+		if($("#editSkills").text()=="Undo") {
+			$("#editSkills").text("Edit Skills");
+			$("#firstSkill").removeClass("is-invalid");
+			$("#firstLevel").removeClass("is-invalid");
+			skillsEdit(true);
+			return;
+		}
 	});
 }
 function saveBiography() {
@@ -75,6 +128,7 @@ function saveBiography() {
 			console.log(data);
 		});
 		bioEdit(true);
+		$("#edit_all_btn").text("Edit your profile")
 	});
 }
 
@@ -167,7 +221,8 @@ function saveContacts2(validated1) {
 			validated2=contactValidation2(data);
 			if(validated1&&validated2) {
 			contactEdit(true);
-			console.log("VALID DATATATATATTATATATATATT");
+			$("#editContactSettings").text("Edit Contact Settings");
+			console.log("VALID DATA");
 			}
 		});
 }
@@ -241,6 +296,7 @@ function saveMainSkills() {
 		}).done(function(data) {
 			console.log(data);
 			mainSkillEdit(true);
+			$("#editMainSkill").text("Edit Skills")
 		});
 	});
 }
@@ -270,8 +326,9 @@ function appendSkill(skill) {
 											<div class="row">
 												<h4 class="small fw-bold">Level (0-100)</h4>
 											</div>
-											<input class="form-control" type="text" id="level${id}"
-												placeholder="e.g.: 85" name="level${id}" value="${level}">
+											<input class="form-control" type="number" id="level${id}"
+												placeholder="e.g.: 85" name="level${id}" value="${level}"
+												min="0" step="5" max="100">
 										</div>
 									</div>
 
@@ -286,7 +343,7 @@ function appendSkill(skill) {
 										<div class="col-md-3">
 											<div class="mb-3">
 												<button class="btn btn-primary btn-sm" type="submit"
-													id="editSkill${id}">Edit Skill</button>
+													id="editSkill${id}">Edit</button>
 											</div>
 										</div>
 										<div class="col-md-3">
@@ -298,7 +355,7 @@ function appendSkill(skill) {
 										<div class="col-md-3">
 											<div class="mb-3">
 												<button class="btn btn-danger btn-sm" type="submit"
-													id="removeSkill${id}">Remove Skill</button>
+													id="removeSkill${id}">Remove</button>
 											</div>
 										</div>
 									</div>`);
@@ -371,6 +428,9 @@ function setCreateSkill() {
 		level:$("#firstLevel").val()
 		};
 		
+		if(newSkill.level=="") {
+			newSkill.level=-1;
+		}
 		$.ajax({
 		url: "/add_skill",
 		contentType: "application/json",
@@ -605,6 +665,27 @@ function loadMainInformations() {
 			document.querySelector("#presentation_image_3").src=data.presentationPicture3;
 			refactUndefinedImage();
 		});	
+		
+		contacts ={
+			contactEmail:"",
+			mainPhoneNumber:"",
+			secondaryPhoneNumber:""
+		};
+			$.ajax({
+			url: "/get_main_info_user",
+			contentType: "application/json",
+			data: JSON.stringify(contacts),
+			type: "post",
+			dataType: "json",
+		}).done(function(data) {
+			console.log(data);
+			
+			
+			$("#contactEmail").val(data.contactEmail);
+			$("#phoneNumber").val(data.mainPhoneNumber);
+			$("#secPhoneNumber").val(data.secondaryPhoneNumber);
+
+		});	
 
 }
 
@@ -652,6 +733,8 @@ function editAll(value) {
 		$("#biography_btn").hide();
 		$("#main_skill_btn").hide();	
 		$("#addSkillBtn").hide();
+		$("#image_chooser_profile").hide();
+		$("#image_label_profile").hide();
 	}
 	else {
 		$("#main_info_btn").show();
@@ -659,6 +742,20 @@ function editAll(value) {
 		$("#biography_btn").show();
 		$("#main_skill_btn").show();	
 		$("#addSkillBtn").show();
+		$("#image_label_profile").show();
+	}
+}
+
+function editBioArea(value) {
+	$("#biography").attr('readonly',value);	
+	if(value) {
+		$("#biography_btn").hide();
+		$("#image_chooser_profile").hide();
+		$("#image_label_profile").hide();
+	}
+	else {
+		$("#biography_btn").show();
+		$("#image_label_profile").show();
 	}
 }
 
