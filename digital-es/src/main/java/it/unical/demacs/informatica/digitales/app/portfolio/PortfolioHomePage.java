@@ -23,6 +23,7 @@ public class PortfolioHomePage {
 	
 	@GetMapping("/{username}/posts")
 	public String showUserPostsPage(@PathVariable String username, HttpServletRequest req) {
+		System.out.println(username);
 		return PostsHandler.initPostsPage(req, username);
 	}
 	
