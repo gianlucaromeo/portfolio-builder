@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>CV - Brand</title> <
+<title>Curriculum - ${firstName} ${lastName}</title> <
 <link rel="stylesheet"
 	href="../../portfolio_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -22,7 +22,7 @@
 	<nav
 		class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
 		<div class="container">
-			<a class="navbar-brand logo" href="#">Brand</a>
+			<a class="navbar-brand logo" href="#">${firstName} ${lastName}</a>
 			<button data-bs-toggle="collapse" class="navbar-toggler"
 				data-bs-target="#navbarNav">
 				<span class="visually-hidden">Toggle navigation</span><span
@@ -31,137 +31,108 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item"><a class="nav-link" href="homepage">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="posts">Posts</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="curriculum">CV</a></li>
+					<li class="nav-item"><a class="nav-link" href="projects">Projects</a></li>
+					<li class="nav-item"><a class="nav-link" href="posts">Posts</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="curriculum">CV</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<main class="page cv-page">
-		<section class="portfolio-block block-intro border-bottom">
+		<section class="portfolio-block block-intro">
 			<div class="container">
 				<div class="avatar"
-					style="background-image: url(&amp;quot;assets/img/avatars/avatar.jpg&amp;quot;);"></div>
+					style="background-image: url(${profilePicture});"></div>
 				<div class="about-me">
-					<p>
-						Hello! I am <strong>John Smith</strong>. I work as interface and
-						front end developer. I have passion for pixel perfect, minimal and
-						easy to use interfaces.
-					</p>
-					<a class="btn btn-outline-primary" role="button" href="#">Hire
-						me</a>
+					<c:if test="${biography == null}">
+						<p>
+							Hello! I am <strong>${firstName} ${lastName}</strong>.
+						</p>
+					</c:if>
+					<c:if test="${biography != null}">
+						<p>${biography}.</p>
+					</c:if>
+					<a class="btn btn-outline-primary" role="button" href="curriculum">See
+						my CV</a>
 				</div>
 			</div>
 		</section>
+
 		<section class="portfolio-block cv">
 			<div class="container">
+
+				<!-- WORK EXPERIENCES -->
 				<div class="work-experience group">
 					<div class="heading">
 						<h2 class="text-center">Work Experience</h2>
 					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-6">
-								<h3>Web Developer</h3>
-								<h4 class="organization">Amazing Co.</h4>
+
+					<c:forEach items="${experiences}" var="exp">
+						<c:if test="${exp.type == 'WORK'}">
+
+							<div class="item">
+								<div class="row">
+									<div class="col-md-6">
+										<h3>${exp.title}</h3>
+										<h4 class="organization">${exp.place}</h4>
+									</div>
+									<div class="col-md-6">
+										<span class="period">${exp.startDate} - ${exp.endDate}</span>
+									</div>
+								</div>
+								<p class="text-muted">${exp.description}</p>
 							</div>
-							<div class="col-md-6">
-								<span class="period">10/2013 - 04/2015</span>
-							</div>
-						</div>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Aenean eget velit ultricies, feugiat est sed,
-							efficitur nunc, vivamus vel accumsan dui.</p>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-6">
-								<h3>Front End Developer</h3>
-								<h4 class="organization">Innovative Org.</h4>
-							</div>
-							<div class="col-md-6">
-								<span class="period">05/2015 - 12/2017</span>
-							</div>
-						</div>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Aenean eget velit ultricies, feugiat est sed,
-							efficitur nunc, vivamus vel accumsan dui.</p>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-6">
-								<h3>Web Developer</h3>
-								<h4 class="organization">Special Inc.</h4>
-							</div>
-							<div class="col-md-6">
-								<span class="period">12/2017 - Present</span>
-							</div>
-						</div>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Aenean eget velit ultricies, feugiat est sed,
-							efficitur nunc, vivamus vel accumsan dui.</p>
-					</div>
+
+						</c:if>
+					</c:forEach>
+
 				</div>
+				<!-- END WORK EXPERIENCES -->
+
+				<!-- EDUCATION EXPERIENCES -->
 				<div class="education group">
 					<div class="heading">
 						<h2 class="text-center">Education</h2>
 					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-6">
-								<h3>High School</h3>
-								<h4 class="organization">Albert Einstein School</h4>
+
+					<c:forEach items="${experiences}" var="exp">
+						<c:if test="${exp.type == 'EDUCATION'}">
+
+							<div class="item">
+								<div class="row">
+									<div class="col-md-6">
+										<h3>${exp.title}</h3>
+										<h4 class="organization">${exp.place}</h4>
+									</div>
+									<div class="col-md-6">
+										<span class="period">${exp.startDate} - ${exp.endDate}</span>
+									</div>
+								</div>
+								<p class="text-muted">${exp.description}</p>
 							</div>
-							<div class="col-6">
-								<span class="period">09/2005 - 05/2010</span>
-							</div>
-						</div>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Aenean eget velit ultricies, feugiat est sed,
-							efficitur nunc, vivamus vel accumsan dui.</p>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-6">
-								<h3>Applied Physics</h3>
-								<h4 class="organization">Stephen Hawking College</h4>
-							</div>
-							<div class="col-md-6">
-								<span class="period">09/2010 - 06/2015</span>
-							</div>
-						</div>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Aenean eget velit ultricies, feugiat est sed,
-							efficitur nunc, vivamus vel accumsan dui.</p>
-					</div>
+
+						</c:if>
+					</c:forEach>
+
 				</div>
+				<!-- END EDUCATION EXPERIENCES -->
+
 				<div class="group">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="skills portfolio-info-card">
 								<h2>Skills</h2>
-								<h3>HTML</h3>
-								<div class="progress">
-									<div class="progress-bar" aria-valuenow="100" aria-valuemin="0"
-										aria-valuemax="100" style="width: 100%;">
-										<span class="visually-hidden">100%</span>
+								<c:forEach items="${skills}" var="skill">
+									<h3>${skill.title}</h3>
+									<div class="progress">
+										<div class="progress-bar" aria-valuenow="${skill.level}"
+											aria-valuemin="0" aria-valuemax="100"
+											style="width: ${skill.level}%;">
+											<span class="visually-hidden">${skill.level}%</span>
+										</div>
 									</div>
-								</div>
-								<h3>PHP</h3>
-								<div class="progress">
-									<div class="progress-bar" aria-valuenow="90" aria-valuemin="0"
-										aria-valuemax="100" style="width: 90%;">
-										<span class="visually-hidden">90%</span>
-									</div>
-								</div>
-								<h3>JavaScript</h3>
-								<div class="progress">
-									<div class="progress-bar" aria-valuenow="50" aria-valuemin="0"
-										aria-valuemax="100" style="width: 50%;">
-										<span class="visually-hidden">50%</span>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -172,7 +143,7 @@
 										<i class="icon ion-android-calendar icon"></i>
 									</div>
 									<div class="col-9">
-										<span>10/10/1990</span>
+										<span>${dateOfBirth}</span>
 									</div>
 								</div>
 								<div class="row">
@@ -180,29 +151,52 @@
 										<i class="icon ion-person icon"></i>
 									</div>
 									<div class="col-9">
-										<span>John Smith</span>
+										<span>${firstName} ${lastName}</span>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-1">
-										<i class="icon ion-ios-telephone icon"></i>
+								<c:if test="${phoneNumber != null}">
+									<div class="row">
+										<div class="col-1">
+											<i class="icon ion-ios-telephone icon"></i>
+										</div>
+										<div class="col-9">
+											<span>${phoneNumber}</span>
+										</div>
 									</div>
-									<div class="col-9">
-										<span>+235 3217 424</span>
+								</c:if>
+								<c:if test="${secondaryPhoneNumber != null}">
+									<div class="row">
+										<div class="col-1">
+											<i class="icon ion-ios-telephone icon"></i>
+										</div>
+										<div class="col-9">
+											<span>(Secondary) ${secondaryPhoneNumber}</span>
+										</div>
 									</div>
-								</div>
+								</c:if>				
 								<div class="row">
 									<div class="col-1">
 										<i class="icon ion-at icon"></i>
 									</div>
 									<div class="col-9">
-										<span>lorem@email.com</span>
+										<span>${email}</span>
 									</div>
 								</div>
+								<c:if test="${contactEmail != null}">
+								<div class="row">
+									<div class="col-1">
+										<i class="icon ion-at icon"></i>
+									</div>
+									<div class="col-9">
+										<span>(Contact) ${contactEmail}</span>
+									</div>
+								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
 				</div>
+				<!-- HOBBIES
 				<div class="hobbies group">
 					<div class="heading">
 						<h2 class="text-center">Hobbies</h2>
@@ -213,6 +207,7 @@
 						pretium vitae, dapibus sodales ante. Suspendisse potenti. Duis
 						nunc eros.</p>
 				</div>
+				 -->
 			</div>
 		</section>
 	</main>

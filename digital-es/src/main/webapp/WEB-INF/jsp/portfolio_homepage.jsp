@@ -69,9 +69,10 @@
 						</c:if>
 					</c:forEach>
 					<c:if test="${atLeastOnePresentationPicture == false}">
-					<div class="col-md-6 col-lg-4 item zoom-on-hover">
-								<a href="#"><img class="img-fluid image" src="../../portfolio_assets/img/default/default_presentation_image.jfif"></a>
-							</div>
+						<div class="col-md-6 col-lg-4 item zoom-on-hover">
+							<a href="#"><img class="img-fluid image"
+								src="../../portfolio_assets/img/default/default_presentation_image.jfif"></a>
+						</div>
 					</c:if>
 				</div>
 			</div>
@@ -146,7 +147,8 @@
 					<a href="${facebookLink}"><i class="icon ion-social-facebook"></i></a>
 				</c:if>
 				<c:if test="${instagramLink != null}">
-					<a href="${instagramLink}"><i class="icon ion-social-instagram-outline"></i></a>
+					<a href="${instagramLink}"><i
+						class="icon ion-social-instagram-outline"></i></a>
 				</c:if>
 				<c:if test="${twitterLink != null}">
 					<a href="${twitterLink}"><i class="icon ion-social-twitter"></i></a>
