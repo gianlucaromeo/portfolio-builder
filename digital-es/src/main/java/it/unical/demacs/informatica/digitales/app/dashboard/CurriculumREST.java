@@ -78,6 +78,7 @@ public class CurriculumREST {
 		curriculumExperience = gson.fromJson(req.getReader(), CurriculumExperience.class);
 		
 		CurriculumExperienceDAOImpl.getInstance().create(curriculumExperience);
+		curriculumExperience.setId(CurriculumExperienceDAOImpl.getInstance().findId(curriculumExperience));
 		
 		return gson.toJson(curriculumExperience);
 		

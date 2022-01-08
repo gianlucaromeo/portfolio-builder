@@ -33,7 +33,6 @@ public class CurriculumExperienceDAOImpl extends DAOImpl implements DAO<Curricul
 			
 			p = con.prepareStatement(query);
 			
-			
 			p.setLong(1, curriculumExperience.getUserId());
 			p.setString(2, curriculumExperience.getTitle());
 			p.setString(3, curriculumExperience.getPlace());
