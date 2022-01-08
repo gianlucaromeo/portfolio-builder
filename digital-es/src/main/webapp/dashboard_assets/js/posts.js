@@ -444,9 +444,10 @@ function doCreateOnDOM(data) {
 		$("#popupNewBtn").trigger('click');
 
 		$("#closeNewPopupBtn").click(function() {
-			resetFieldsNewPost();
 			addPost(data);
-			postsMap.set(data.id, data);
+			resetFieldsNewPost();
+			refactButton(data.id, true);
+			
 			
 		});
 
