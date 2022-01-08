@@ -35,7 +35,7 @@ public class CurriculumHandler {
 		
 		Set<CurriculumExperience> experiences = CurriculumExperienceDAOImpl.getInstance().findAllByUserId(user.getId());
 		experiences.forEach((exp) -> {
-			if (exp.getEndDate() == null) {
+			if (exp.getEndDate() == null || exp.getEndDate().equals("")) {
 				exp.setEndDate("To Present");
 			}
 		});
