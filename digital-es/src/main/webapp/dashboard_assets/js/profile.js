@@ -31,14 +31,14 @@ function loadEvents() {
 function setEditAll() {
 	$("#edit_all_btn").click(function(e){
 		e.preventDefault();
-		if($("#edit_all_btn").text()=="Edit your profile") {
+		if($("#edit_all_btn").text()=="Edit") {
 			editBioArea(false);
 			$("#edit_all_btn").text("Undo");
 			return;
 		}
 		if($("#edit_all_btn").text()=="Undo") {
 			editBioArea(true);
-			$("#edit_all_btn").text("Edit your profile");
+			$("#edit_all_btn").text("Edit");
 			loadMainInformations();
 			return;
 		}
@@ -55,14 +55,14 @@ function setUserSettingsEdit() {
 function setConctactSettingsEdit() {
 	$("#editContactSettings").click(function(e){
 		e.preventDefault();
-		if($("#editContactSettings").text()=="Edit Contact Settings") {
+		if($("#editContactSettings").text()=="Edit") {
 			contactEdit(false);
 			$("#editContactSettings").text("Undo");
 			return;
 		}
 		if($("#editContactSettings").text()=="Undo") {
 			contactEdit(true);
-			$("#editContactSettings").text("Edit Contact Settings");
+			$("#editContactSettings").text("Edit");
 			
 			$("#contactEmail").removeClass("is-invalid");
 			$("#phoneNumber").removeClass("is-invalid");
@@ -80,13 +80,13 @@ function setConctactSettingsEdit() {
 function setMainSkillEdit() {
 	$("#editMainSkill").click(function(e){
 		e.preventDefault();
-		if($("#editMainSkill").text()=="Edit Skills") {
+		if($("#editMainSkill").text()=="Edit") {
 			mainSkillEdit(false);
 			$("#editMainSkill").text("Undo")
 			return;
 		}
 		if($("#editMainSkill").text()=="Undo") {
-			$("#editMainSkill").text("Edit Skills")
+			$("#editMainSkill").text("Edit")
 			loadMainInformations();
 			mainSkillEdit(true);
 			return;
@@ -97,13 +97,13 @@ function setMainSkillEdit() {
 function setSkillsEdit() {
 	$("#editSkills").click(function(e){
 		e.preventDefault();
-		if($("#editSkills").text()=="Edit Skills") {
+		if($("#editSkills").text()=="Edit") {
 			skillsEdit(false);
 			$("#editSkills").text("Undo");
 			return;
 		}
 		if($("#editSkills").text()=="Undo") {
-			$("#editSkills").text("Edit Skills");
+			$("#editSkills").text("Edit");
 			$("#firstSkill").removeClass("is-invalid");
 			$("#firstLevel").removeClass("is-invalid");
 			skillsEdit(true);
