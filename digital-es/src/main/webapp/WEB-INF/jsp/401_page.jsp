@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<title>404 - Not Found</title>
+<title>401 - Not Authorized</title>
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/error_page.css">
 </head>
@@ -18,14 +18,14 @@
 	<div class="star star5"></div>
 
 	<div class="error">
-		<div class="error__title">404</div>
-		<div class="error__subtitle">Not Found...</div>
-		<div class="error__description">we couldn't find that page :(</div>
+		<div class="error__title">401</div>
+		<div class="error__subtitle">Not Authorized...</div>
+		<div class="error__description">you do not have access to this content :( <br> please make sure you are logged in</div>
 		<a href="/dashboard/sign_up">  
-		<button class="error__button error__button--active">GO TO SIGN UP</button>
+		<button class="error__button error__button--active">SIGN UP</button>
 		</a>
 		<a href="/dashboard/login">  
-		<button class="error__button">GO TO LOGIN</button>
+		<button class="error__button">LOGIN</button>
 		</a>
 	</div>
 

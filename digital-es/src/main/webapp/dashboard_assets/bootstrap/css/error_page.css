@@ -115,21 +115,22 @@ html, body {
   top: 400px;
   transform: translateY(-60%);
   font-family: "Righteous", cursive;
-  color: #363e49;
+  color: black;
 }
 
 .error__title {
   font-size: 10em;
-  color: #ffffff;
+  color: black;
 }
 
 .error__subtitle {
   font-size: 2em;
-  color: #ffffff;
+  color: black;
 }
 
 .error__description {
   opacity: 0.5;
+  color: black;
 }
 
 .error__button {
@@ -138,10 +139,10 @@ html, body {
   margin-right: 0.5em;
   padding: 0.5em 2em;
   outline: none;
-  border: 2px solid #ffffff;
+  border: 2px solid black;
   background-color: transparent;
   border-radius: 8em;
-  color: #576375;
+  color: black;
   cursor: pointer;
   transition-duration: 0.2s;
   font-size: 0.75em;
@@ -155,7 +156,7 @@ html, body {
 .error__button--active {
   background-color: #e67e22;
   border: 2px solid #e67e22;
-  color: white;
+  color: black;
 }
 
 .error__button--active:hover {
