@@ -17,18 +17,18 @@ public class PortfolioHomePage {
 	}
 	
 	@GetMapping("/{username}/projects")
-	public String showUserProjectsPage() {
-		return "portfolio_projects";
+	public String showUserProjectsPage(@PathVariable String username, HttpServletRequest req) {
+		return ProjectsHandler.initProjectsPage(req, username);
 	}
 	
 	@GetMapping("/{username}/posts")
-	public String showUserPostsPage() {
-		return "portfolio_posts";
+	public String showUserPostsPage(@PathVariable String username, HttpServletRequest req) {
+		return PostsHandler.initPostsPage(req, username);
 	}
 	
 	@GetMapping("/{username}/curriculum")
-	public String showUserCurriculumPage() {
-		return "portfolio_cv";
+	public String showUserCurriculumPage(@PathVariable String username, HttpServletRequest req) {
+		return CurriculumHandler.initCurriculumPage(req, username);
 	}
 	
 }
