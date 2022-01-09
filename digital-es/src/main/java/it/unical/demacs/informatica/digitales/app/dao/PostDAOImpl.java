@@ -273,7 +273,7 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 	}
 
-	public List<Post> findAllByUserIdNotBanned(long userId) {
+	public synchronized List<Post> findAllByUserIdNotBanned(long userId) {
 		List<Post> posts = new ArrayList<Post>();
 		
 		con = DBUtil.getInstance().getConnection();
@@ -309,5 +309,33 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 		return posts;
 	}
+	public synchronized long findNextId() {
+		
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String query = "SELECT last_value AS id FROM posts_id_seq;";
+
+		try {
+			
+			p = con.prepareStatement(query);
+			
+			rs = p.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getLong("id")+1;
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[PostDAOImpl] [findNextId]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+		
+		return -1;
+	}
+	
+	
 	
 }
