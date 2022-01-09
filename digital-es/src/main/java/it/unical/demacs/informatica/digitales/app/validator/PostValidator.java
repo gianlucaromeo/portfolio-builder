@@ -54,7 +54,7 @@ public class PostValidator {
 	}
 	
 	public static String validateRefLink(String link) {
-		if(link.equals("")) return "...";
+		if(link.equals("")) return "";
 		else
 			return LINK_PATTERN.matcher(link).matches() ? link : Protocol.POST_EMPTY_FIELD;
 	}

@@ -2,6 +2,8 @@ package it.unical.demacs.informatica.digitales.app.validator;
 
 import java.util.regex.Pattern;
 
+import org.joda.time.DateTime;
+
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
 import it.unical.demacs.informatica.digitales.app.beans.validation.CurriculumExperienceValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -19,14 +21,16 @@ public class CurriculumExperienceValidator {
 		
 		CurriculumExperienceValidatorResponse resp = new CurriculumExperienceValidatorResponse();
 		
-		resp.setId(experience.getId());
+		//resp.setId(experience.getId());
 		resp.setDescription(checkDescription(experience.getDescription()));
 		resp.setStartDate(checkStartDate(experience.getStartDate()));
-		resp.setEndDate(checkEndDate(experience.getEndDate()));
+		resp.setEndDate(checkEndDate(experience.getEndDate(), experience.getEndDate()));
 		resp.setTitle(checkTitle(experience.getTitle()));
 		resp.setDescription(checkDescription(experience.getDescription()));
 		resp.setPlace(checkPlace(experience.getPlace()));
 		resp.setType(checkType(experience.getType()));
+		
+		resp.setValid(isValid(resp));
 		
 		return resp;
 		
@@ -42,6 +46,9 @@ public class CurriculumExperienceValidator {
 	}
 
 	private static String checkPlace(String place) {
+		if (place == null || place.equals("")) {
+			return Protocol.OK;
+		}
 		return PLACE_PATTERN.matcher(place).matches() ? Protocol.OK : Protocol.ERROR;
 	}
 
@@ -50,13 +57,15 @@ public class CurriculumExperienceValidator {
 	}
 
 	private static String checkStartDate(String startDate) {
-		// TODO Auto-generated method stub
-		return Protocol.OK;
+		boolean startsAfterToday = startDate.compareTo(DateTime.now().toString("yyyy-MM-dd")) >= 0;
+		System.out.println("Date starts after today: " + startsAfterToday);
+		return startsAfterToday ? Protocol.ERROR : Protocol.OK;
 	}
 
-	private static String checkEndDate(String endDate) {
-		// TODO Auto-generated method stub
-		return Protocol.OK;
+	private static String checkEndDate(String endDate, String startDate) {
+		boolean endsBeforeItStarts = endDate.compareTo(startDate) > 0;
+		System.out.println("Date ends before it starts: " + endsBeforeItStarts);
+		return endsBeforeItStarts ? Protocol.ERROR : Protocol.OK;
 	}
 
 	private static String checkDescription(String description) {
@@ -64,7 +73,7 @@ public class CurriculumExperienceValidator {
 		return Protocol.OK;
 	}
 	
-	public static boolean isValid(CurriculumExperienceValidatorResponse resp) {
+	private static boolean isValid(CurriculumExperienceValidatorResponse resp) {
 		return resp.getTitle().equals(Protocol.OK) &&
 				resp.getDescription().equals(Protocol.OK) &&
 				resp.getStartDate().equals(Protocol.OK) &&

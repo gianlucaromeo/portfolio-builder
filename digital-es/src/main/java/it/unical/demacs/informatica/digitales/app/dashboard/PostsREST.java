@@ -46,7 +46,9 @@ public class PostsREST {
 		newPost.setLastEditDate("");
 
 		if (PostValidator.isValidPost(newPost)) {
+			long id=PostDAOImpl.getInstance().findNextId();
 			PostDAOImpl.getInstance().create(post);
+			newPost.setId(id);
 		}
 
 		return gson.toJson(newPost);

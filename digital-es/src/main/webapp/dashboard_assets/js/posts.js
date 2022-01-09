@@ -184,7 +184,6 @@ function refactPostFields(id, value) {
 	}
 	if ($("#newPostImage").attr('src') === 'undefined') {
 		$("#newPostImage").hide();
-
 	}
 
 }
@@ -349,6 +348,7 @@ function setOnDiscardChanges(postId) {
 		$("#postLinkRefId" + postId).val(oldPost.refLink);
 		refactPostFields(postId, true);
 		refactButton(postId, true);
+		updatedPostValid(postId);
 	});
 }
 function setEventOnSave(postId) {
@@ -422,11 +422,7 @@ function setEventChangePhoto(id) {
 function doCreateOnDOM(data) {
 	console.log(data);
 
-
-
-	$("#newPostTitle").removeClass("is-invalid");
-	$("#newPostDSescription").removeClass("is-invalid");
-	$("#newPostRefLink").removeClass("is-invalid");
+	newPostValid();
 	var isValidPost = true;
 	if (data.title === "post_field_empty" || data.title === "post_title_not_correct") {
 		$("#newPostTitle").addClass("is-invalid");
@@ -455,12 +451,20 @@ function doCreateOnDOM(data) {
 
 	}
 }
+function newPostValid(){
+	$("#newPostTitle").removeClass("is-invalid");
+	$("#newPostDSescription").removeClass("is-invalid");
+	$("#newPostRefLink").removeClass("is-invalid");
+}
+
+function updatedPostValid(id){
+	$("#postTitleId" + id).removeClass("is-invalid");
+	$("#postDescriptionId" + id).removeClass("is-invalid");
+	$("#postLinkRefId" + id).removeClass("is-invalid");
+}
 
 function doUpdateOnDOM(data) {
-	console.log(data);
-	$("#postTitleId" + data.id).removeClass("is-invalid");
-	$("#postDescriptionId" + data.id).removeClass("is-invalid");
-	$("#postLinkRefId" + data.id).removeClass("is-invalid");
+	updatedPostValid(data.id);
 	var isValidPost = true;
 	if (data.title === "post_field_empty" || data.title === "post_title_not_correct") {
 		$("#postTitleId" + data.id).addClass("is-invalid");
@@ -479,8 +483,8 @@ function doUpdateOnDOM(data) {
 		$("#closeSavePopupBtn" + data.id).click(function() {
 			$("#post" + data.id).remove()
 			addPost(data);
-			refactPostFields(postId, true);
-			refactButton(postId, true);
+			refactPostFields(data.id, true);
+			refactButton(data.id, true);
 		});
 
 

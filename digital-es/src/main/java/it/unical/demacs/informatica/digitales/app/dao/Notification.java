@@ -1,0 +1,38 @@
+package it.unical.demacs.informatica.digitales.app.dao;
+
+public class Notification {
+	private String contentTitle;
+	private String reason;
+	private String contentDescription;
+	
+	public Notification() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getTitle() {
+		return contentTitle;
+	}
+
+	public void setTitle(String title) {
+		this.contentTitle = title;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getContentDescription() {
+		return contentDescription;
+	}
+
+	public void setContentDescription(String contentDescription) {
+		this.contentDescription = contentDescription;
+	}
+	
+	
+	
+}

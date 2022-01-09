@@ -200,7 +200,7 @@
 												<h4 class="small fw-bold">Place</h4>
 											</div>
 											<input class="form-control" type="text" id="experiencePlace"
-												placeholder="Place..." name="experience_place"
+												placeholder="Place..."
 												value="">
 										</div>
 										<!-- END PLACE -->
@@ -224,7 +224,7 @@
 												<h4 class="small fw-bold">Description</h4>
 											</div>
 											<textarea class="form-control" id="experienceDescription"
-												rows="4" name="experience_description"></textarea>
+												rows="4"></textarea>
 										</div>
 										<!-- END DESCRIPTION -->
 
