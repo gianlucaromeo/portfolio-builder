@@ -218,7 +218,7 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost> {
 
 		con = DBUtil.getInstance().getConnection();
 
-		String query = "SELECT * FROM removed_posts WHERE user_id=?;";
+		String query = "SELECT * FROM removed_posts WHERE post_id IN (SELECT id FROM posts WHERE user_id=?);";
 
 		try {
 
@@ -238,7 +238,7 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost> {
 			}
 
 		} catch (SQLException e) {
-			System.err.println("[RemovedPostDAOImpl] [findAll]: ");
+			System.err.println("[RemovedPostDAOImpl] [findByUserId]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();

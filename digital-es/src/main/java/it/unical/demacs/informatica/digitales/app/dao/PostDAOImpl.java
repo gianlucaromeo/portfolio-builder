@@ -208,7 +208,7 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		
 	}
 	
-	public List<Post> findAllByUserId(long userId) {
+	public synchronized List<Post> findAllByUserId(long userId) {
 		System.out.println(userId);
 		List<Post> posts = new ArrayList<Post>();
 		
@@ -237,7 +237,7 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 			}
 			
 		} catch (SQLException e) {
-			System.err.println("[PostDAOImpl] [findAll]: ");
+			System.err.println("[PostDAOImpl] [findAllByUserId]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();
@@ -301,7 +301,7 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 			}
 			
 		} catch (SQLException e) {
-			System.err.println("[PostDAOImpl] [findAll]: ");
+			System.err.println("[PostDAOImpl] [findAllByUserIdNotBanned]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();

@@ -222,7 +222,7 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 
 		con = DBUtil.getInstance().getConnection();
 
-		String query = "SELECT * FROM removed_projects WHERE user_id=?;";
+		String query = "SELECT * FROM removed_projects WHERE project_id IN (SELECT id FROM projects WHERE user_id=?);";
 
 		try {
 

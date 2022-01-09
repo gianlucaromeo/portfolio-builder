@@ -27,6 +27,7 @@ import it.unical.demacs.informatica.digitales.app.beans.validation.PostValidator
 import it.unical.demacs.informatica.digitales.app.dao.BannedUserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.Notification;
+import it.unical.demacs.informatica.digitales.app.dao.NotificationSettings;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
@@ -47,7 +48,11 @@ public class NotificationREST {
 		if (user == null) {
 			return gson.toJson(Protocol.ERROR);
 		}
+		System.out.println(user.getId());
+		
+	
 		List<Notification> notifications= new ArrayList<Notification>();
+		
 		List<RemovedPost> remPosts = RemovedPostDAOImpl.getInstance().findByUserId(user.getId());
 		for(var remPost : remPosts) {
 			Notification n= new Notification();
@@ -55,8 +60,12 @@ public class NotificationREST {
 			n.setReason(remPost.getReason());
 			n.setTitle(p.getTitle());
 			n.setContentDescription(p.getDescription());
+			n.setType(NotificationSettings.POST);
+			n.setId(notifications.size());
+			n.setContentId(p.getId());
 			notifications.add(n);
 		}
+		
 		List<RemovedProject> remProjects = RemovedProjectDAOImpl.getInstance().findByUserId(user.getId());
 		for(var remProject : remProjects) {
 			Notification n= new Notification();
@@ -64,8 +73,13 @@ public class NotificationREST {
 			n.setReason(remProject.getReason());
 			n.setTitle(p.getTitle());
 			n.setContentDescription(p.getDescription());
+			n.setType(NotificationSettings.PROJECT);
+			n.setId(notifications.size());
+			n.setContentId(p.getId());
 			notifications.add(n);
 		}
+		
+		
 		return gson.toJson(notifications);
 
 	

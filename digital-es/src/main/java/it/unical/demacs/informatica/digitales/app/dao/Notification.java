@@ -4,10 +4,55 @@ public class Notification {
 	private String contentTitle;
 	private String reason;
 	private String contentDescription;
+	private String type;
+	private long contentId;
+	private long id;
 	
 	public Notification() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public long getContentId() {
+		return contentId;
+	}
+
+
+	public void setContentId(long contentId) {
+		this.contentId = contentId;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getId() {
+		return id;
+	}
+	
+	public String getContentTitle() {
+		return contentTitle;
+	}
+
+
+
+	public void setContentTitle(String contentTitle) {
+		this.contentTitle = contentTitle;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 
 	public String getTitle() {
 		return contentTitle;
