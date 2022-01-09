@@ -32,4 +32,9 @@ public class PortfolioHomePage {
 		return CurriculumHandler.initCurriculumPage(req, username);
 	}
 	
+	@GetMapping("/{username}/password_reset")
+	public String showPasswordReset(@PathVariable String username, HttpServletRequest req) {
+		return PasswordResetHandler.initResetPasswordPage(req, username);
+	}
+	
 }
