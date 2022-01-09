@@ -87,4 +87,13 @@ public class CurriculumExperienceValidatorResponse {
 		this.type = type;
 	}
 
+	@Override
+	public String toString() {
+		return "CurriculumExperienceValidatorResponse [id=" + id + ", userId=" + userId + ", title=" + title
+				+ ", place=" + place + ", startDate=" + startDate + ", endDate=" + endDate + ", description="
+				+ description + ", type=" + type + ", valid=" + valid + "]";
+	}
+
+	
+	
 }

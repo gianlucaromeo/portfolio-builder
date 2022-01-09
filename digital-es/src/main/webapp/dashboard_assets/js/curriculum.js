@@ -93,6 +93,24 @@ function initDoneBtn() {
 		};
 
 		//console.log(new_data);
+		if (new_title == '') {
+			console.log("Title is empty" + new_title);
+			validateDiv("experienceTitle", false);
+			return;
+		}
+
+		if (new_dateStart == '' || new_dateStart == undefined) {
+			console.log("Date start is " + new_dateStart);
+			validateDiv("datePickerFrom", false);
+			return;
+		}
+
+		if (new_type == '' || new_type == undefined) {
+			console.log("Type is " + new_type);
+			validateDiv("experienceType", false);
+			return;
+		}
+
 		addExperience(new_data);
 
 	});
@@ -156,7 +174,12 @@ function setSaveBtnAction(exp) {
 		new_data = fetchNewData(exp);
 		//console.log(new_data);
 
-		updateExperience(new_data);
+		if (new_data == null) {
+			console.log("Edit error");
+		} else {
+			updateExperience(new_data);
+		}
+		
 	})
 }
 
@@ -182,6 +205,24 @@ function fetchNewData(exp) {
 		description: new_description
 	};
 
+	if (new_title == '') {
+		console.log("Title is empty" + new_title);
+		validateDiv("title_" + exp.id, false);
+		return null;
+	}
+
+	if (new_dateStart == '' || new_dateStart == undefined) {
+		console.log("Date start is " + new_dateStart);
+		validateDiv("#dpFrom_" + exp.id, false);
+		return null;
+	}
+
+	if (new_type == '' || new_type == undefined) {
+		console.log("Type is " + new_type);
+		validateDiv("#typeSelect_" + exp.id, false);
+		return null;
+	}
+
 	return new_data;
 
 }
@@ -198,8 +239,21 @@ function updateExperience(new_experience_data) {
 
 	}).done(function(data) {
 
-		all_experiences.set(new_experience_data.id, new_experience_data);
-		updateExperienceDiv(new_experience_data);
+		if (data.valid == false) {
+			console.log("data not valid");
+			checkUpdateTitle(data);
+			checkUpdateDateFrom(data);
+			checkUpdateDateTo(data);
+			checkUpdatePlace(data);
+			checkUpdateType(data);
+			checkUpdateDescription(data);
+		} else {
+			console.log("data are valid: id=" + data.id);
+			all_experiences.set(new_experience_data.id, new_experience_data);
+			updateExperienceDiv(new_experience_data);
+		}
+
+		
 
 	});
 
@@ -217,10 +271,24 @@ function addExperience(new_experience) {
 
 	}).done(function(data) {
 
-		all_experiences.set(data.id, data);
-		initExperience(data, data.id, false);
-		cleanAddNewExperienceFields();
-		hideNewExperienceDiv();
+		if (data == "experience exists") {
+			console.log("Experience already exists");
+		} else if (data.valid == false) {
+			console.log("data not valid");
+			checkTitle(data);
+			checkDateFrom(data);
+			checkDateTo(data);
+			checkPlace(data);
+			checkType(data);
+			checkDescription(data);
+		} else {
+			console.log("data are valid: id=" + data.id);
+			all_experiences.set(data.id, data);
+			initExperience(data, data.id, false);
+			cleanAddNewExperienceFields();
+			hideNewExperienceDiv();
+		}
+
 
 	});
 
@@ -464,7 +532,7 @@ function buildPlaceDiv(exp) {
 					<h4 class="small fw-bold">Place</h4>
 				</div>
 				<input class="form-control" type="text" id="${div_id}"
-					placeholder="experience_place" name="experience_place"
+					placeholder=""
 					value="${exp.place}">
 			</div>
 			<!-- END PLACE -->`;
@@ -514,6 +582,61 @@ function buildTitleDiv(exp) {
 					value="${exp.title}">
 			</div>
 			<!-- END TITLE -->`;
+}
+
+function checkTitle(data) {
+	validateDiv("experienceTitle", data.title == "ok");
+}
+
+function checkDateFrom(data) {
+	validateDiv("datePickerFrom", data.startDate == "ok");
+}
+
+function checkDateTo(data) {
+	validateDiv("datePickerTo", data.endDate == "ok");
+}
+
+function checkPlace(data) {
+	validateDiv("experiencePlace", data.place == "ok");
+}
+
+function checkType(data) {
+	validateDiv("experienceType", data.type == "ok");
+}
+
+function checkDescription(data) {
+	validateDiv("experienceDescription", data.description == "ok");
+}
+
+function checkUpdateTitle(data) {
+	validateDiv("title_" + data.id, data.title == "ok");
+}
+
+function checkUpdateDateFrom(data) {
+	validateDiv("dpFrom_" + data.id, data.startDate == "ok");
+}
+
+function checkUpdateDateTo(data) {
+	validateDiv("dpTo_" + data.id, data.endDate == "ok");
+}
+
+function checkUpdatePlace(data) {
+	validateDiv("place_" + data.id, data.place == "ok");
+}
+
+function checkUpdateType(data) {
+	validateDiv("typeSelect_" + data.id, data.type == "ok");
+}
+
+function checkUpdateDescription(data) {
+	validateDiv("description_" + data.id, data.description == "ok");
+}
+
+function validateDiv(divId, isValid) {
+	div = $("#" + divId);
+	div.removeClass("is-invalid");
+	div.removeClass("is-valid");
+	div.addClass(isValid ? "is-valid" : "is-invalid");
 }
 
 /* ========================= END BUILD GUI ============================ */
