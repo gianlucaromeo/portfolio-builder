@@ -2,11 +2,14 @@ package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
@@ -213,5 +216,40 @@ public class RemovedProjectDAOImpl extends DAOImpl implements DAO<RemovedProject
 		
 		return Protocol.OK;
 	}
+
+	public synchronized List<RemovedProject> findByUserId(long id) {
+		List<RemovedProject> projects = new ArrayList<RemovedProject>();
+
+		con = DBUtil.getInstance().getConnection();
+
+		String query = "SELECT * FROM removed_projects WHERE user_id=?;";
+
+		try {
+
+			p = con.prepareStatement(query);
+			p.setLong(1, id);
+			rs = p.executeQuery();
+			
+
+			while (rs.next()) {
+				RemovedProject removedProject = new RemovedProject();
+				removedProject.setModeratorId(rs.getLong("moderator_id"));
+				removedProject.setReason(rs.getString("reason"));
+				removedProject.setProjectId(rs.getLong("project_id"));
+				removedProject.setSeenByUser(rs.getBoolean("seen_by_user"));
+				removedProject.setId(rs.getLong("id"));
+				projects.add(removedProject);
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[RemovedPostDAOImpl] [findAll]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return projects;
+	}
+
 	
 }

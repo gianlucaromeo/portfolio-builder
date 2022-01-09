@@ -151,7 +151,7 @@
 						<!-- HEADER PAGE TITLE -->
 						<div class="row">
 							<div class="col-md-2">
-								<h2 class="text-dark mb-4">Posts</h2>
+								<h2 class="text-dark mb-4">Users</h2>
 							</div>
 						</div>
 						<!-- END HEADER PAGE TITLE -->
