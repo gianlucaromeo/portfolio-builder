@@ -27,19 +27,18 @@ public class ResetPasswordValidator {
 	}
 
 	public static String checkPassword(String password) {
-		return PASSWORD_PATTERN.matcher(password).matches() ? Protocol.OK : Protocol.ERROR;
+		return PASSWORD_PATTERN.matcher(password).matches() ? password : Protocol.ERROR;
 	}
 	
 	public static String decodeToken(String token) {
+		token=token.replace("ç", "/");
 		Set<User> users=UserDAOImpl.getInstance().findAll();
 		String selectedUsername="NOT AN USER";
 		for(User u:users) {
-			String tokenizedUser=BCrypt.hashpw(u.getUsername(), BCrypt.gensalt(12));
-			tokenizedUser.replace("/","");
-			if(tokenizedUser.equals(token)) {
+			if(BCrypt.checkpw(u.getUsername(),token)) {
 				selectedUsername=u.getUsername();
 				break;
-			}		
+			}	
 		}
 		return selectedUsername;
 	}

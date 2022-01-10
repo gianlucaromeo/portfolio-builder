@@ -34,7 +34,7 @@
 							<div class="text-center">
 								<h4 class="text-dark mb-4">Insert your new password</h4>
 							</div>
-							<form class="user" id="forgotPasswordForm" action="sign_up" method="post">
+							<form class="user" id="forgotPasswordForm" action="/dashboard/login" method="post">
 
 							<div class="row mb-3" id="passwordContainer">	
 								<div class="mb-3">
@@ -64,7 +64,7 @@
 									type="button" onclick="resetPassword()" id="resetBtn">Confirm</button>
 							</form>
 							<div class="text-center">
-								<a class="small" href="login">Return to Login</a>
+								<a class="small" href="/dashboard/login">Return to Login</a>
 							</div>
 							<div class="text-center"><a class="small" href="/dashboard/sign_up">Create an Account!</a></div>
 							

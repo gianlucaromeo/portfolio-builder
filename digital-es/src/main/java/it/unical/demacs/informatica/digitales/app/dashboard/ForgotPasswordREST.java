@@ -17,17 +17,18 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 @RestController
 public class ForgotPasswordREST {
 	
-	@PostMapping("/get_password_and_email_from_username")
+	@PostMapping("/get_email_from_username")
 	public String signUpAction(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		
 		User user = new User();
 		user = gson.fromJson(req.getReader(), User.class);
 		
-		user=UserDAOImpl.getInstance().findByUsername(user.getUsername());
+		User selectedUser=UserDAOImpl.getInstance().findByUsername(user.getUsername());
 		
-		if(user==null)
+		if(selectedUser==null)
 			return null;
+		user.setEmail(selectedUser.getEmail());
 		String userToJSON = gson.toJson(user);
 		return userToJSON;
 	}
