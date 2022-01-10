@@ -144,7 +144,7 @@ public class Servlets {
 
 	}
 
-	private static void deleteCookie(HttpServletResponse resp, Cookie cookie) {
+	public static void deleteCookie(HttpServletResponse resp, Cookie cookie) {
 		if (cookie != null) {
 			cookie.setMaxAge(0);
 			cookie.setValue(null);

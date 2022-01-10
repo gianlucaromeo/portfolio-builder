@@ -11,6 +11,8 @@
 <link rel="stylesheet"
 	href="../../dashboard_assets/bootstrap/css/posts.css">
 <link rel="stylesheet"
+	href="../../dashboard_assets/bootstrap/css/notification.css">
+<link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 <link rel="stylesheet"
 	href="../../dashboard_assets/fonts/fontawesome-all.min.css">
@@ -78,12 +80,13 @@
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
 										data-bs-toggle="dropdown" href="#"><span
-										class="badge bg-danger badge-counter" id="notificationsNumberSpan"></span><i
+										class="badge bg-danger badge-counter"
+										id="notificationsNumberSpan"></span><i
 										class="fas fa-bell fa-fw"></i></a>
 									<div
 										class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in"
 										id="alertDiv">
-										<h6 class="dropdown-header">alerts center</h6>
+										<h6 class="dropdown-header" id="alertCenter">alerts center</h6>
 
 
 
@@ -106,15 +109,10 @@
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i
-											class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
-											class="dropdown-item" href="#"><i
-											class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a
-											class="dropdown-item" href="#"><i
-											class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
-											log</a>
+											class="fas fa-info-circle fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Info</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#"><i
-											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+										<a class="dropdown-item" href="do_logout"><i
+											class="fas fa-sign-out-alt fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
 									</div>
 								</div>
 							</li>

@@ -18,7 +18,7 @@ function getNotifications() {
 		notifications = data;
 		console.log(notifications);
 		if (notifications.length === 0) {
-			console.log("no data");
+			addNoNotification();
 		} else {
 			$("#notificationsNumberSpan").text(notifications.length);
 			notificationsNumber=notifications.length;
@@ -33,7 +33,7 @@ function getNotifications() {
 
 
 function addNotification(notification){
-	$("#alertDiv").append(`<a class="dropdown-item d-flex align-items-center" href="#" id="notificationId${notification.id}">
+	$("#alertDiv").append(`<a class="dropdown-item d-flex align-items-center" id="notificationId${notification.id}">
 											<div class="me-3">
 												<div class="bg-warning icon-circle">
 													<i class="fas fa-exclamation-triangle text-white"></i>
@@ -62,6 +62,14 @@ function addNotification(notification){
 			
 			
 		});
+}
+
+function addNoNotification(){
+	$("#alertDiv").append(`
+							<div class="text-center" style="margin-top:20px">
+								<p>There are no notifications :)</p>
+			
+							</div>`);
 }
 
 function deletePost(notification){
@@ -99,6 +107,7 @@ function refactNotifications(notification){
 	$("#notificationsNumberSpan").text(displayedNotificationsNumber);
 	
 }
+
 setTimeout(() => {
 	getNotifications();
 }, 300)

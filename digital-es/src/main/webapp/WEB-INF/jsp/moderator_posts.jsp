@@ -71,53 +71,10 @@
 
 						<ul class="navbar-nav flex-nowrap ms-auto">
 
-							<li class="nav-item dropdown no-arrow mx-1">
-								<div class="nav-item dropdown no-arrow">
-									<a class="dropdown-toggle nav-link" aria-expanded="false"
-										data-bs-toggle="dropdown" href="#"><span
-										class="badge bg-danger badge-counter">3+</span><i
-										class="fas fa-bell fa-fw"></i></a>
-									<div
-										class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-										<h6 class="dropdown-header">alerts center</h6>
-										<a class="dropdown-item d-flex align-items-center" href="#">
-											<div class="me-3">
-												<div class="bg-primary icon-circle">
-													<i class="fas fa-file-alt text-white"></i>
-												</div>
-											</div>
-											<div>
-												<span class="small text-gray-500">December 12, 2019</span>
-												<p>A new monthly report is ready to download!</p>
-											</div>
-										</a><a class="dropdown-item d-flex align-items-center" href="#">
-											<div class="me-3">
-												<div class="bg-success icon-circle">
-													<i class="fas fa-donate text-white"></i>
-												</div>
-											</div>
-											<div>
-												<span class="small text-gray-500">December 7, 2019</span>
-												<p>$290.29 has been deposited into your account!</p>
-											</div>
-										</a><a class="dropdown-item d-flex align-items-center" href="#">
-											<div class="me-3">
-												<div class="bg-warning icon-circle">
-													<i class="fas fa-exclamation-triangle text-white"></i>
-												</div>
-											</div>
-											<div>
-												<span class="small text-gray-500">December 2, 2019</span>
-												<p>Spending Alert: We've noticed unusually high spending
-													for your account.</p>
-											</div>
-										</a><a class="dropdown-item text-center small text-gray-500"
-											href="#">Show All Alerts</a>
-									</div>
-								</div>
-							</li>
+							
 
 							<div class="d-none d-sm-block topbar-divider"></div>
+							
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
@@ -128,15 +85,10 @@
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i
-											class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
-											class="dropdown-item" href="#"><i
-											class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a
-											class="dropdown-item" href="#"><i
-											class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
-											log</a>
+											class="fas fa-info-circle fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Info</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#"><i
-											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+										<a class="dropdown-item" href="do_logout"><i
+											class="fas fa-sign-out-alt fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
 									</div>
 								</div>
 							</li>
@@ -145,141 +97,136 @@
 				</nav>
 
 
-		<!--  MAIN CONTAINER -->
-		<div class="container-fluid">
+				<!--  MAIN CONTAINER -->
+				<div class="container-fluid">
 
-			<!-- DISPLAY ELEMENTS IN ROW  -->
-			<div class="row">
+					<!-- DISPLAY ELEMENTS IN ROW  -->
+					<div class="row">
 
-				<!-- HEADER PAGE TITLE -->
-				<div class="row">
-					<div class="col-md-2">
-						<h2 class="text-dark mb-4">Posts</h2>
-					</div>
-				</div>
-				<!-- END HEADER PAGE TITLE -->
-
-				<!-- MAIN CARDS CONTAINER -->
-				<div class="row">
-
-					<!-- USERS CARD -->
-					<div class="col-12 col-lg-5">
-						<div class="card shadow mb-3">
-
-							<!-- USERS CARD HEADER -->
-							<div class="card-header py-3">
-								<p class="text-primary m-0 fw-bold">Users</p>
+						<!-- HEADER PAGE TITLE -->
+						<div class="row">
+							<div class="col-md-2">
+								<h2 class="text-dark mb-4">Posts</h2>
 							</div>
-							<!-- END USERS CARD HEADER -->
+						</div>
+						<!-- END HEADER PAGE TITLE -->
 
-							<!-- USERS CARD BODY -->
-							<div class="card-body shadow">
+						<!-- MAIN CARDS CONTAINER -->
+						<div class="row">
 
-								<div class="table-responsive table mt-2" id="dataTable"
-									role="grid" aria-describedby="dataTable_info">
-									<table class="table my-0" id="dataTable">
-										<thead>
-											<tr>
-												<td><strong>Username</strong></td>
-												<td><strong>Email</strong></td>
-												<td><strong>Date of birth</strong></td>
-											</tr>
-										</thead>
-										<tbody id="usersTableBody">
+							<!-- USERS CARD -->
+							<div class="col-12 col-lg-5">
+								<div class="card shadow mb-3">
 
-										</tbody>
-										<tfoot>
-											<tr>
-												<td><strong>Username</strong></td>
-												<td><strong>Email</strong></td>
-												<td><strong>Date of birth</strong></td>
-											</tr>
-										</tfoot>
-									</table>
+									<!-- USERS CARD HEADER -->
+									<div class="card-header py-3">
+										<p class="text-primary m-0 fw-bold">Users</p>
+									</div>
+									<!-- END USERS CARD HEADER -->
+
+									<!-- USERS CARD BODY -->
+									<div class="card-body shadow">
+
+										<div class="table-responsive table mt-2" id="dataTable"
+											role="grid" aria-describedby="dataTable_info">
+											<table class="table my-0" id="dataTable">
+												<thead>
+													<tr>
+														<td><strong>Username</strong></td>
+														<td><strong>Email</strong></td>
+														<td><strong>Date of birth</strong></td>
+													</tr>
+												</thead>
+												<tbody id="usersTableBody">
+
+												</tbody>
+												<tfoot>
+													<tr>
+														<td><strong>Username</strong></td>
+														<td><strong>Email</strong></td>
+														<td><strong>Date of birth</strong></td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+
+									</div>
+									<!-- END USERS CARD BODY -->
+
 								</div>
-
 							</div>
-							<!-- END USERS CARD BODY -->
+							<!-- END USERS CARD -->
+
+
+							<!-- CURRICULUMS CARD -->
+							<div class="col-12 col-lg-7 " id="postsContainer">
+								<div class="card shadow mb-3">
+
+									<!-- CURRICULUMS CARD HEADER -->
+									<div class="card-header py-3">
+										<p class="text-primary m-0 fw-bold" id="userPostText">User's
+											Posts ${currentUserSelected}</p>
+									</div>
+									<!-- END CURRICULUMS CARD HEADER -->
+
+									<!-- USERS CURRICULUMS CARD BODY -->
+									<div class="card-body shadow">
+
+										<div class="table-responsive table mt-2"
+											id="dataTableDivPosts" role="grid"
+											aria-describedby="dataTable_info">
+											<table class="table my-0" id="dataTablePost">
+												<thead>
+													<tr>
+														<th>Picture</th>
+														<th>Title</th>
+														<th id="postDescriptionCol">Description</th>
+														<th>Reference Link</th>
+														<th id="postDateCol">Publication Date</th>
+														<th id="postStatusCol">Status</th>
+													</tr>
+												</thead>
+												<tbody id="postsTableBody"></tbody>
+												<tfoot>
+													<tr>
+														<th>Picture</th>
+														<th>Title</th>
+														<th>Description</th>
+														<th>Reference Link</th>
+														<th>Publication Date</th>
+														<th>Status</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+
+									</div>
+									<!-- END CURRICULUMS CARD BODY -->
+
+								</div>
+							</div>
+							<!-- END CURRICULUMS CARD -->
+
+
 
 						</div>
+						<!-- END MAIN CARDS CONTAINER -->
+
 					</div>
-					<!-- END USERS CARD -->
-
-
-					<!-- CURRICULUMS CARD -->
-					<div class="col-12 col-lg-7 " id="postsContainer">
-						<div class="card shadow mb-3">
-
-							<!-- CURRICULUMS CARD HEADER -->
-							<div class="card-header py-3">
-								<p class="text-primary m-0 fw-bold" id="userPostText">User's Posts ${currentUserSelected}</p>
-							</div>
-							<!-- END CURRICULUMS CARD HEADER -->
-
-							<!-- USERS CURRICULUMS CARD BODY -->
-							<div class="card-body shadow">
-
-								<div class="table-responsive table mt-2" id="dataTableDivPosts"
-									role="grid" aria-describedby="dataTable_info">
-									<table class="table my-0" id="dataTablePost">
-										<thead>
-											<tr>
-												<th>Picture</th>
-												<th>Title</th>
-												<th id="postDescriptionCol">Description</th>
-												<th>Reference Link</th>
-												<th id="postDateCol">Publication Date</th>
-												<th id="postStatusCol">Status</th>
-											</tr>
-										</thead>
-										<tbody id="postsTableBody"></tbody>
-										<tfoot>
-											<tr>
-												<th>Picture</th>
-												<th>Title</th>
-												<th>Description</th>
-												<th>Reference Link</th>
-												<th>Publication Date</th>
-												<th>Status</th>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-
-							</div>
-							<!-- END CURRICULUMS CARD BODY -->
-
-						</div>
-					</div>
-					<!-- END CURRICULUMS CARD -->
-
-
+					<!-- END DISPLAY ELEMENTS IN ROW  -->
 
 				</div>
-				<!-- END MAIN CARDS CONTAINER -->
+				<!-- END MAIN CONTAINER -->
 
 			</div>
-			<!-- END DISPLAY ELEMENTS IN ROW  -->
-
-		</div>
-		<!-- END MAIN CONTAINER -->
-
-
-
-
-
-
-
-	</div>
-	<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../dashboard_assets/js/bs-init.js"></script>
-	<script src="../../dashboard_assets/js/theme.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"
-		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/moderatorPosts.js"></script>
-	<script src="../../dashboard_assets/js/jquery-ui.min.js"></script>
-
+			<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
+			<script src="../../dashboard_assets/js/bs-init.js"></script>
+			<script src="../../dashboard_assets/js/theme.js"></script>
+			<script src="https://code.jquery.com/jquery-3.6.0.js"
+				integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+				crossorigin="anonymous"></script>
+			<script src="../../dashboard_assets/js/moderatorPosts.js"></script>
+			<script src="../../dashboard_assets/js/jquery-ui.min.js"></script>
 </body>
 
 </html>
