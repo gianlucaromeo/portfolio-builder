@@ -52,6 +52,15 @@ public class ProjectsREST {
 		project.setId(id);
 		ProjectDAOImpl.getInstance().delete(project);
 	}
+	@PostMapping("delete_project_notification")
+	public String deleteProjectNotification(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
+		Gson gson = new Gson();
+		Integer id = gson.fromJson(req.getReader(), Integer.class);
+		Project project = new Project();
+		project.setId(id);
+		ProjectDAOImpl.getInstance().delete(project);
+		return id.toString();
+	}
 
 	@PostMapping("edit_project")
 	public String editProject(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {

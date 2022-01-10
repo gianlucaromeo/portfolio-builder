@@ -2,6 +2,8 @@
  * 
  */
 
+var notificationsNumber;
+
 function getNotifications() {
 
 	$.ajax({
@@ -19,6 +21,7 @@ function getNotifications() {
 			console.log("no data");
 		} else {
 			$("#notificationsNumberSpan").text(notifications.length);
+			notificationsNumber=notifications.length;
 			notifications.forEach((notification) => {
 				addNotification(notification);
 			});
@@ -53,7 +56,7 @@ function addNotification(notification){
 			if(notification.type==="project"){
 				deleteProject(notification);
 			}else if(notification.type==="post"){
-				deletePost(notification.id);
+				deletePost(notification);
 			}
 			
 			
@@ -71,20 +74,30 @@ function deletePost(notification){
 			dataType: "json",
 
 		}).done(function() {
-			$("#notificationId" + notification.id).remove();
+			refactNotifications(notification);
+			
 		});
 }
 
 function deleteProject(notification){
 	$.ajax({
-			url: "/delete_project",
+			url: "/delete_project_notification",
 			contentType: "application/json",
 			data: JSON.stringify(notification.contentId),
 			type: "post",
 			dataType: "json",
 		}).done(function() {
-			$("#notificationId" + notification.id).remove();
+			refactNotifications(notification);
 		});
+}
+function refactNotifications(notification){
+	console.log(notification.id);
+	$("#notificationId" + notification.id).remove();
+	notificationsNumber--;
+	
+	let displayedNotificationsNumber= (notificationsNumber===0) ? "" : notificationsNumber;
+	$("#notificationsNumberSpan").text(displayedNotificationsNumber);
+	
 }
 setTimeout(() => {
 	getNotifications();
