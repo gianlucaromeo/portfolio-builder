@@ -112,11 +112,7 @@
 									class="btn btn-primary d-block btn-google btn-user w-100 mb-2"
 									role="button" id="googleLoginBtn"><i class="fab fa-google"></i>&nbsp;
 									Login with Google</a>
-								<div id="fb-root">
-									<a class="btn btn-primary d-block btn-facebook btn-user w-100"
-										role="button" id="facebookSignUpBtn"><i
-										class="fab fa-facebook-f"></i>&nbsp; Register with Facebook</a>
-								</div>
+								
 								<hr>
 							</form>
 							<div class="text-center">

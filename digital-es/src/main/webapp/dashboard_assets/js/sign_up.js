@@ -178,6 +178,9 @@ function removeErrorsDivs() {
 	removeNameInvalidDiv();
 	removeNameInvalidDiv(); // twice for both First and Last name
 }
+function removeDateInvalidDiv(){
+	$("#dateInvalid").remove();
+}
 
 function removeUsernameInvalidDiv() {
 	$("#usernameInvalid").remove();

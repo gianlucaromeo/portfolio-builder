@@ -30,11 +30,7 @@
                                     <form class="user" id="loginForm" action="login" method="post">
                                         <div class="mb-3"><input class="form-control form-control-user" type="text" id="username" aria-describedby="usernameHelp" placeholder="Enter your username..." name="username"></div>
                                         <div class="mb-3"><input class="form-control form-control-user" type="password" id="passwordInput" placeholder="Password" name="password"></div>
-                                        <div class="mb-3">
-                                            <div class="custom-control custom-checkbox small">
-                                                <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Remember Me</label></div>
-                                            </div>
-                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit" id="loginBtn">Login</button>
+                                       <button class="btn btn-primary d-block btn-user w-100" type="submit" id="loginBtn">Login</button>
                                         <hr>
 									<a
 									class="btn btn-primary d-block btn-google btn-user w-100 mb-2"
