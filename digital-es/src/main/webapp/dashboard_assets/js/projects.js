@@ -1,8 +1,13 @@
 
-setCreateProject();
-setChangeImage();
-loadProjects();
-handleDragEvent();
+start();
+
+function start() {
+	setCreateProject();
+	setChangeImage();
+	loadProjects();
+	handleDragEvent();	
+	$("#project_image").hide();
+}
 
 function loadProjects() {
 	
@@ -86,6 +91,12 @@ function handleDragEvent() {
     	reader.readAsDataURL(file)
     	reader.onloadend = function() {
       		document.querySelector("#project_image").src=reader.result;
+			if($("#project_image").attr("src")==="undefined"){
+				$("#project_image").hide();
+			}else{
+				$("#project_image").show();
+			}
+			
 		}
 	}
 }
@@ -106,7 +117,7 @@ function setEvents(projectId) {
 }
 
 function setOnDelete(id) {
-	$("#delete"+id).click(function(e) {
+	$("#confirmDelete"+id).click(function(e) {
 		e.preventDefault();
 		console.log(id);
 		$.ajax({
@@ -116,27 +127,12 @@ function setOnDelete(id) {
 			type: "post",
 			dataType: "json",
 		}).done(function() {
-
 		});
-
 		$("#project"+id).remove();
-
 	});
 }
 
 function setOnConfirmEdit(id) {
-	var canvas = document.createElement("canvas");
-	context = canvas.getContext('2d');
-	base_image = new Image();
-	base_image.src = $("#project_image"+id).src;
-	base_image.onload = function() {
-		context.drawImage(base_image, 100, 100);
-	}
-
-	console.log(base_image);
-		
-	var image64 =canvas.toDataURL();
-	console.log(image64);
 	
 	$("#confirm"+id).click(function(e) {
 		selectedProject={
@@ -187,6 +183,14 @@ function editValidation(data) {
 				restore(data.id,data);
 				setEditable(data.id,true);
 				resetButtons(data.id,false);
+				
+				$("#popupSaveBtn" + data.id).trigger('click');
+
+				$("#closeSavePopupBtn" + data.id).click(function() {
+					restore(data.id,data);
+					setEditable(data.id,true);
+					resetButtons(data.id,false);
+				});
 	}
 }
 
@@ -294,12 +298,15 @@ function appendProject(project) {
 											<div class="col mb-3">
 												<button id="confirm${id}" class="btn btn-primary btn-sm" type="submit">CONFIRM</button>
 											</div>
+											`+ getPopUpOnSave(id) + `
 											<div class="col mb-3">
 												<button id="discard${id}" class="btn btn-danger btn-sm" type="submit">UNDO</button>
 											</div>
 											<div class="col mb-3">
-												<button id="delete${id}" class="btn btn-danger btn-sm" type="submit">DELETE</button>
+												<button id="delete${id}" class="btn btn-danger btn-sm" type="submit"
+												data-bs-toggle="modal" data-bs-target="#modalId${id}">DELETE</button>
 											</div>
+											`+ getPopUpOnDelete(id) + `
 										</div>
 									</div>
 								</div>
@@ -312,18 +319,6 @@ function setCreateProject() {
 	
 	projectBtn.click(function(e){
 		e.preventDefault();
-		
-		var canvas = document.createElement("canvas");
-		context = canvas.getContext('2d');
-
-		base_image = new Image();
-		base_image.src = $("#project_image").attr("src");
-		base_image.onload = function() {
-			context.drawImage(base_image, 100, 100);
-		}
-		console.log(base_image);		
-		
-		var image64 =canvas.toDataURL();
 		
 		newProject={
 		id:-1,
@@ -373,8 +368,12 @@ function createValidation(data) {
 		isValidProject = false;
 	}
 	if (isValidProject) {
-				addProject(data);
-				resetTemplate();
+				$("#popupNewBtn").trigger('click');
+				
+				$("#closeNewPopupBtn").click(function() {
+					addProject(data);
+					resetTemplate();
+				});
 	}
 }
 
@@ -386,7 +385,11 @@ function setChangeImage() {
 		reader.addEventListener("load", ()=> {
 			newImage=reader.result;
 			document.querySelector("#project_image").src=newImage;	
-			
+			if($("#project_image").attr("src")==="undefined"){
+				$("#project_image").hide();
+			}else{
+				$("#project_image").show();
+			}
 		});
 		reader.readAsDataURL(this.files[0]);
 	});
@@ -410,6 +413,7 @@ function resetTemplate() {
 	$("#project_description").val("");
 	$("#project_image").attr("src","undefined");
 	$("#project_link").val("");
+	$("#project_image").hide();
 }
 
 function resetButtons(id,value) {
@@ -435,4 +439,53 @@ function restore(id,project) {
 			$("#project_description"+id).val(project.description);
 			$("#project_image"+id).attr("src",project.picture);
 			$("#project_link"+id).val(project.linkRef);
+}
+
+function getPopUpOnSave(id) {
+	var saveButton = `<button type="button" class="btn btn-primary btn-sm"
+							data-bs-toggle="modal" data-bs-target="#modalIdSavePopup${id}"
+							id="popupSaveBtn${id}" hidden></button>
+						<!-- Modal -->
+						<div class="modal fade" id="modalIdSavePopup${id}" tabindex="-1"
+							aria-labelledby="modalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="modalLabel">Update</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">Project successfully updated</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary"
+											data-bs-dismiss="modal" id="closeSavePopupBtn${id}">Ok</button>
+									</div>
+								</div>
+							</div>
+						</div>`;
+	return saveButton;
+}
+
+function getPopUpOnDelete(id) {
+	var deleteButton = `<!-- Modal -->
+						<div class="modal fade" id="modalId${id}" tabindex="-1"
+							aria-labelledby="modalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="modalLabel">Delete</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">Are you sure you want to delete this project?</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal"">Close</button>
+										<button type="button" class="btn btn-danger" id="confirmDelete${id}"
+											data-bs-dismiss="modal">Delete</button>
+									</div>
+								</div>
+							</div>
+						</div>`;
+	return deleteButton;
 }

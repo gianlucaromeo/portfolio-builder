@@ -1,6 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.Cookie;
@@ -15,13 +16,9 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
-import it.unical.demacs.informatica.digitales.app.beans.validation.PostValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ProjectValidatorResponse;
-import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
-import it.unical.demacs.informatica.digitales.app.validator.PostValidator;
 import it.unical.demacs.informatica.digitales.app.validator.ProjectValidator;
 
 @RestController
@@ -37,8 +34,9 @@ public class ProjectsREST {
 		if (user == null) {
 			return Protocol.ERROR;
 		}
-
-		Set<Project> projects = ProjectDAOImpl.getInstance().findAllByUserId(user.getId());
+		
+		List<Project> projects = ProjectDAOImpl.getInstance().findAllByUserIdNotRemoved(user.getId());
+		
 		String projectsToJSON = gson.toJson(projects);
 		return projectsToJSON;
 
