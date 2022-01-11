@@ -14,6 +14,7 @@ function sendEmail(receiver) {
 		dataType: "json"
 		}).done(function(data) {
 			var token=data.token;
+			console.log(data.token);
 			var html='<a href="http://localhost:8080/users/'+token+'/password_reset">Click Here to reset your password</a>';
 			var templateParams = {
 	  			   from_name: "DigitalES",

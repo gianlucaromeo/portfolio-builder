@@ -2,6 +2,7 @@ package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,8 +14,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.unical.demacs.informatica.digitales.app.beans.EmailConfirmation;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ResetPasswordValidatorResponse;
+import it.unical.demacs.informatica.digitales.app.dao.EmailConfirmationdDaoImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.validator.ResetPasswordValidator;
 
@@ -26,11 +29,15 @@ public class ResetPasswordControllerREST {
 		Gson gson = new Gson();
 		ResetPasswordValidatorResponse res = new ResetPasswordValidatorResponse();
 		res = gson.fromJson(req.getReader(),ResetPasswordValidatorResponse.class);
-
-		res.setToken(BCrypt.hashpw(res.getToken(), BCrypt.gensalt(12)));
-		res.setToken(res.getToken().replace("/", "ç"));
-
-		return gson.toJson(res);
+		
+		User user=UserDAOImpl.getInstance().findByUsername(res.getToken());
+		
+		EmailConfirmation emailConfirmation = new EmailConfirmation();
+		emailConfirmation.setUserId(user.getId());
+		emailConfirmation.setToken(createToken());
+		EmailConfirmationdDaoImpl.getInstance().create(emailConfirmation);
+		
+		return gson.toJson(emailConfirmation);
 	}
 	
 	@PostMapping("reset_password")
@@ -41,14 +48,23 @@ public class ResetPasswordControllerREST {
 		
 		ResetPasswordValidator.validatePassword(res);
 		
-		User selectedUser=UserDAOImpl.getInstance().findByUsername(res.getToken());
-		System.out.println(selectedUser);
+		long userId = EmailConfirmationdDaoImpl.getInstance().findUserId(res.getToken());
+		User selectedUser=UserDAOImpl.getInstance().findById(userId);
 		if(selectedUser!=null&&res.getPassword().equals(res.getRepeatPassword())) {
+			
 			selectedUser.setPassword(res.getPassword());
-			System.out.println("PASSWORD UPDATED:"+res.getPassword());
+			
 			UserDAOImpl.getInstance().update(selectedUser);
+			EmailConfirmation eC=new EmailConfirmation();
+			eC.setUserId(userId);
+			eC.setToken(res.getToken());
+			EmailConfirmationdDaoImpl.getInstance().delete(eC);
 		}
 		return gson.toJson(res);
 	}
-
+	
+	private String createToken() {
+		return UUID.randomUUID().toString();
+	}
 }
+

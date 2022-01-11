@@ -20,27 +20,12 @@ public class ResetPasswordValidator {
 	}
 	
 	public static ResetPasswordValidatorResponse validatePassword(ResetPasswordValidatorResponse resp) {
-
-		resp.setToken(decodeToken(resp.getToken()));
 		resp.setPassword(checkPassword(resp.getPassword()));
 		return resp;	
 	}
 
 	public static String checkPassword(String password) {
 		return PASSWORD_PATTERN.matcher(password).matches() ? password : Protocol.ERROR;
-	}
-	
-	public static String decodeToken(String token) {
-		token=token.replace("ç", "/");
-		Set<User> users=UserDAOImpl.getInstance().findAll();
-		String selectedUsername="NOT AN USER";
-		for(User u:users) {
-			if(BCrypt.checkpw(u.getUsername(),token)) {
-				selectedUsername=u.getUsername();
-				break;
-			}	
-		}
-		return selectedUsername;
 	}
 	
 }
