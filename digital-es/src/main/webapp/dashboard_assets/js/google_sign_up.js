@@ -52,6 +52,7 @@ function attachGoogleLogin(element) {
 
 }
 
+var signUpWithGoogle = false;
 function disableInputFields() {
 	$("#inputEmail").attr('readonly', true);
 	$("#firstName").attr('readonly', true);
@@ -59,6 +60,7 @@ function disableInputFields() {
 	$("#username").attr('readonly', true);
 	$("#passwordInput").attr('readonly', true);
 	$("#repeatPasswordInput").attr('readonly', true);
+	signUpWithGoogle = true;
 }
 
 function addLabelOnDatePicker() {

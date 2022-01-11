@@ -46,7 +46,7 @@ signUpBtn.on("click", function(e) {
 		if (signup_fieldsAreValid) {
 			// Send data to Server and check if the User can be registered
 			sendData(signup_fields);
-		}	
+		}
 	}
 
 });
@@ -92,22 +92,83 @@ function sendData(signup_fields) {
 		hideErrorsDiv();
 
 		userDataValidated = true;
-		
+
 		checkPasswordValidation(data);
 		checkFirstNameValidation(data);
 		checkLastNameValidation(data);
 		checkUsernameValidation(data);
 		checkDateOfBirthValidation(data);
 		checkEmailValidation(data);
-		
+
 		if (userDataValidated) {
-			signUpForm.submit();
+			if (signUpWithGoogle) {
+				signUpWithGoogle(userData);
+			} else {
+				signUp(userData);
+				//signUpForm.submit();
+			}
 		}
 
 	});
 
 }
 
+function signUpWithGoogle(userData) {
+
+	$.ajax({
+
+		url: "/sign_up_with_google",
+		contentType: "application/json",
+		data: JSON.stringify(userData),
+		type: "post",
+
+	});
+
+}
+
+function signUp(userData) {
+
+	$.ajax({
+
+		url: "/dashboard/sign_up",
+		contentType: "application/json",
+		data: JSON.stringify(userData),
+		type: "post",
+		dataType: "json"
+
+	}).done(function(emailConfirmation) {
+		
+		console.log(emailConfirmation);
+		token = emailConfirmation.token;
+		sendEmail(userData.email, token)
+		//window.location.href = "/dashboard/confirm_email";
+		
+	});
+
+}
+
+emailjs.init("user_8pSYeKRzRGlH0I3n8Mv49"); //please encrypted user id for malicious attacks
+function sendEmail(receiver, token) {
+	
+	console.log("TOKEN: " + token);
+	html = `<a href="http://localhost:8080/confirm_email/${token}">Confirm your email!</a>`;
+	
+	var templateParams = {
+		from_name: "DigitalES",
+		to_name: receiver,
+		message: "Hello, if you want to confirm your registration, please click the link below",
+		my_html: html,
+		//reply_to
+	};
+
+	emailjs.send("service_p1x7zca", "template_1cxbziq", templateParams)
+		.then(function(response) {
+			console.log('SUCCESS!', response.status, response.text);
+		}, function(error) {
+			console.log('FAILED...', error);
+		});
+};
+//sendEmail("mymail@gmail.com");  //testing if the email is sent when page loaded
 
 /* ===================== HIDE ERROR DIVS ======================== */
 
@@ -119,7 +180,7 @@ function hideErrorsDiv() {
 }
 
 function hidePasswordDontMatchDiv() {
-	$("#passwordsDontMatch").hide();	
+	$("#passwordsDontMatch").hide();
 }
 
 function hidePasswordNotValidDiv() {
@@ -127,7 +188,7 @@ function hidePasswordNotValidDiv() {
 }
 
 function hideDateOfBirthNotValidDiv() {
-	$("#dateInvalid").hide();	
+	$("#dateInvalid").hide();
 }
 
 function hideEmailNotValidDiv() {
@@ -159,7 +220,7 @@ function addNameNotValidDiv(fieldName) {
 		`<div id="nameInvalid" class="text-danger">
 			Please check the ${fieldName} field and try again.
 	     </div>`
-	 );
+	);
 }
 
 function addUsernameNotValidDiv(errorText) {
@@ -178,17 +239,17 @@ function removeErrorsDivs() {
 	removeNameInvalidDiv();
 	removeNameInvalidDiv(); // twice for both First and Last name
 }
-function removeDateInvalidDiv(){
+function removeDateInvalidDiv() {
 	$("#dateInvalid").remove();
 }
 
 function removeUsernameInvalidDiv() {
 	$("#usernameInvalid").remove();
-	
+
 }
 
 function removeNameInvalidDiv() {
-	$("#nameInvalid").remove();	
+	$("#nameInvalid").remove();
 }
 
 
@@ -228,38 +289,38 @@ function checkLastNameValidation(data) {
 }
 
 function checkUsernameValidation(data) {
-	
+
 	username.addClass("is-invalid");
-	
+
 	switch (data.usernameResp) {
-		
+
 		case "error":
 			userDataValidated = false;
 			addUsernameNotValidDiv("Please check your username and try again.")
 			break;
-			
+
 		case "username duplicated error":
 			userDataValidated = false;
 			addUsernameNotValidDiv("Username already exists.")
 			break;
-			
+
 		case "username length error":
 			userDataValidated = false;
 			addUsernameNotValidDiv(
-				"Username must contains at least 8 characters." 
-			  + "\nUsername cannot contain more than 20 characters.")
+				"Username must contains at least 8 characters."
+				+ "\nUsername cannot contain more than 20 characters.")
 			break;
-			
+
 		case "ok":
 			username.removeClass("is-invalid");
 			username.addClass("is-valid");
 			break;
-			
+
 		default:
 			break;
-			
+
 	}
-	
+
 }
 
 function checkDateOfBirthValidation(data) {

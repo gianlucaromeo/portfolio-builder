@@ -128,7 +128,7 @@ public class Servlets {
 
 	}
 
-	private static void fetchUserData(HttpServletRequest req, String username) {
+	public static void fetchUserData(HttpServletRequest req, String username) {
 
 		User user = (User) UserDAOImpl.getInstance().findByUsername(username);
 

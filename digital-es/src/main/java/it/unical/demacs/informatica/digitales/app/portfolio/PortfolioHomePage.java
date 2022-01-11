@@ -1,6 +1,9 @@
 package it.unical.demacs.informatica.digitales.app.portfolio;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class PortfolioHomePage {
 
-	@GetMapping(value = {"/{username}", "/{username}/homepage"})
+	@GetMapping("/{username}")
+	public void showUserHomePageRedirect(@PathVariable String username, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.sendRedirect("/users/" + username + "/homepage");
+	}
+	
+	@GetMapping(value = {"/{username}/", "/{username}/homepage"})
 	public String showUserHomePage(@PathVariable String username, HttpServletRequest req) {
 		return HomePageHandler.initHomePage(req, username);
 	}

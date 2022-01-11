@@ -23,4 +23,9 @@ public class DashboardHomePageController {
 		return "forgot_password";
 	}
 	
+	@GetMapping("confirm_email")
+	public String showConfirmEmailPage() {
+		return "confirm_email";
+	}
+
 }

@@ -54,7 +54,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 			p.setString(7, user.getMainPhoneNumber());
 			p.setString(8, user.getSecondaryPhoneNumber());
 			p.setString(9, user.getContactEmail());
-			p.setBoolean(10, user.isConfirmed());
+			p.setBoolean(10, false);
 			p.setString(11, user.getSignUpDate());
 
 			p.executeUpdate();
