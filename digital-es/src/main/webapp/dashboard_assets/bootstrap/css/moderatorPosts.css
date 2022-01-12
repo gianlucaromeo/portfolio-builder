@@ -16,14 +16,18 @@
   margin-bottom: 10px;
 }
 
-#dataTable{
+#dataTableDiv{
 	overflow-y:scroll;
-	height:600px;
+	height: 400px;
+}
+
+#dataTablePost th{
+    width: 100px;
 }
 #dataTablePost {
     table-layout: fixed;
 }
-#dataTablePost td{
+#dataTablePost #postDescriptionCol{
     word-wrap:break-word;
 }
 #dataTablePost #postDescriptionCol{
@@ -38,3 +42,10 @@
 .userRow{
 	cursor: pointer;
 }
+
+td.highlight {
+	background-color: #20c997;
+	color: white;
+	
+}
+

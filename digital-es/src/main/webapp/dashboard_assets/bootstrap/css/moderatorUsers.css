@@ -39,7 +39,7 @@
   padding: 30px;
 }
 
-#dataTable{
+#dataTableDiv{
 	overflow-y:scroll;
 	overflow-y:none;
 	height:600px;
@@ -47,9 +47,7 @@
 #dataTablePost {
     table-layout: fixed;
 }
-#dataTable td{
-    word-wrap:break-word;
-}
+
 
 #dataTable #usersStatus{
     width: 100px;

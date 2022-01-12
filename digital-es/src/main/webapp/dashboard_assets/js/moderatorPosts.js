@@ -4,6 +4,7 @@
 var banReasons=[];
 var currentUserSelected="";
 var userMap=new Map();
+var lastUserClicked;
 
 function start(){
 	getBanReasons();
@@ -44,10 +45,9 @@ function createUserRow(userData){
 	//console.log(userData);
 	
 		return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
-				<td><img class="rounded-circle me-2" width="30" height="30"
+				<td id="userTdId${userData.id}"><img class="rounded-circle me-2" width="30" height="30"
 					src="undefined" id="profileImageUserId${userData.id}">${userData.username}</td>
-				<td>${userData.email}</td>
-				<td>${userData.dateOfBirth}</td>
+				
 			</tr>`;
 }
 
@@ -76,9 +76,13 @@ function setUserTableUserImage(id){
 
 function setEventOnUserRow(id){
 	$("#rowUserId"+id).click(function() {
+		
 		currentUserSelected=userMap.get(id).username;
 		$("#userPostText").text(currentUserSelected+ "'s Posts");
 		$("#postsTableBody").empty();
+		$("#userTdId"+lastUserClicked).removeClass("highlight");
+		$("#userTdId"+id).addClass("highlight");
+		lastUserClicked=id;
 		$.ajax({
 
 			url: "/get_users_posts_by_id_not_banned",

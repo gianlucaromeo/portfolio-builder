@@ -115,7 +115,7 @@
 						<div class="row">
 
 							<!-- USERS CARD -->
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-3">
 								<div class="card shadow mb-3">
 
 									<!-- USERS CARD HEADER -->
@@ -127,14 +127,13 @@
 									<!-- USERS CARD BODY -->
 									<div class="card-body shadow">
 
-										<div class="table-responsive table mt-2" id="dataTable"
+										<div class="table-responsive table mt-2" id="dataTableDiv"
 											role="grid" aria-describedby="dataTable_info">
 											<table class="table my-0" id="dataTable">
 												<thead>
 													<tr>
 														<td><strong>Username</strong></td>
-														<td><strong>Email</strong></td>
-														<td><strong>Date of birth</strong></td>
+														
 													</tr>
 												</thead>
 												<tbody id="usersTableBody">
@@ -143,8 +142,7 @@
 												<tfoot>
 													<tr>
 														<td><strong>Username</strong></td>
-														<td><strong>Email</strong></td>
-														<td><strong>Date of birth</strong></td>
+														
 													</tr>
 												</tfoot>
 											</table>
@@ -159,7 +157,7 @@
 
 
 							<!-- CURRICULUMS CARD -->
-							<div class="col-12 col-lg-7 " id="postsContainer">
+							<div class="col-12 col-lg-9 col-md-12 " id="postsContainer">
 								<div class="card shadow mb-3">
 
 									<!-- CURRICULUMS CARD HEADER -->
