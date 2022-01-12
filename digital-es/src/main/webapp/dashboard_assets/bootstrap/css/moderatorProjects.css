@@ -1,3 +1,7 @@
 .moderator-projects-user:hover {
 	cursor: pointer;
 }
+
+td.highlight {
+	background-color:green;
+}

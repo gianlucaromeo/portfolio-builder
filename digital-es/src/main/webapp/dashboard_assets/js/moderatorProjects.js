@@ -203,7 +203,11 @@ function addClickOnConfirmRemoveProjectBtn(projectId) {
 
 function addClickOnRow(userId) {
 	$("#tr_user_" + userId).click(function() {
+		$("#td_user_"+selectedUserId).removeClass("highlight");
 		selectedUserId = userId;
+		
+		$("#td_user_"+userId).addClass("highlight");
+		
 		console.log("Clicked on userid: " + userId);
 		fetchUserProjects();
 	});
@@ -214,7 +218,7 @@ function buildUserRow(user) {
 	clearUsersTable();
 
 	row = `<tr class="shadow-sm p-3 mb-5 moderator-projects-user" id="tr_user_${user.id}">
-				<td><img class="rounded-circle me-2" width="30" height="30"
+				<td id="td_user_${user.id}"><img class="rounded-circle me-2" width="30" height="30"
 					src="" id="profilePicture_${user.id}">${user.username}</td>
 			</tr>`;
 
