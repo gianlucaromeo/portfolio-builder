@@ -93,6 +93,9 @@ public class Servlets {
 		return location;
 
 	}
+	public static String redirectOnPage(String location) {
+		return location;
+	}
 
 	public static String redirectModerator(HttpServletRequest req, String location) {
 

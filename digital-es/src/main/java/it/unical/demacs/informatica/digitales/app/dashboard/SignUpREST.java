@@ -21,7 +21,7 @@ import com.google.gson.JsonSyntaxException;
 import it.unical.demacs.informatica.digitales.app.beans.EmailConfirmation;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
-import it.unical.demacs.informatica.digitales.app.dao.EmailConfirmationdDaoImpl;
+import it.unical.demacs.informatica.digitales.app.dao.EmailConfirmationDaoImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
@@ -69,7 +69,7 @@ public class SignUpREST {
 			EmailConfirmation emailConfirmation = new EmailConfirmation();
 			emailConfirmation.setUserId(user.getId());
 			emailConfirmation.setToken(createToken());
-			EmailConfirmationdDaoImpl.getInstance().create(emailConfirmation);
+			EmailConfirmationDaoImpl.getInstance().create(emailConfirmation);
 			
 			System.out.println(emailConfirmation.getToken());
 			
@@ -87,19 +87,20 @@ public class SignUpREST {
 		
 		System.out.println("Confirmed");
 		
-		long userId = EmailConfirmationdDaoImpl.getInstance().findUserId(token);
+		long userId = EmailConfirmationDaoImpl.getInstance().findUserId(token);
 		User user = UserDAOImpl.getInstance().findById(userId);
 		System.out.println("user id " + userId);
 		System.out.println("User. " + user);
 		
 		if (user == null) {
-			//Servlets.redirect(req, "404_page");
+			resp.sendRedirect("/dashboard/404_page");
+			return Protocol.ERROR;
 		}
 			
 		EmailConfirmation confirmation = new EmailConfirmation();
 		confirmation.setToken(token);
 		confirmation.setUserId(userId);	
-		EmailConfirmationdDaoImpl.getInstance().delete(confirmation);
+		EmailConfirmationDaoImpl.getInstance().delete(confirmation);
 		
 		user.setConfirmed(true);
 		UserDAOImpl.getInstance().update(user);

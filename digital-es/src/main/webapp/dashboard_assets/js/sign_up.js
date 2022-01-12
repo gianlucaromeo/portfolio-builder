@@ -45,7 +45,7 @@ signUpBtn.on("click", function(e) {
 	if (checkPasswordMatch()) {
 		if (signup_fieldsAreValid) {
 			// Send data to Server and check if the User can be registered
-			sendData(signup_fields);
+				sendData(signup_fields);	
 		}
 	}
 
@@ -92,21 +92,24 @@ function sendData(signup_fields) {
 		hideErrorsDiv();
 
 		userDataValidated = true;
-
 		checkPasswordValidation(data);
 		checkFirstNameValidation(data);
 		checkLastNameValidation(data);
 		checkUsernameValidation(data);
 		checkDateOfBirthValidation(data);
 		checkEmailValidation(data);
+		
+		console.log(signUpWithGoogleChoose);
+		if (signUpWithGoogleChoose) {
+			console.log(userData)
+			signUpWithGoogle(userData);
+		}
+		else if (userDataValidated) {
 
-		if (userDataValidated) {
-			if (signUpWithGoogle) {
-				signUpWithGoogle(userData);
-			} else {
-				signUp(userData);
-				//signUpForm.submit();
-			}
+			signUp(userData);
+			
+			//signUpForm.submit();
+
 		}
 
 	});
@@ -121,10 +124,18 @@ function signUpWithGoogle(userData) {
 		contentType: "application/json",
 		data: JSON.stringify(userData),
 		type: "post",
+		dataType: "json",
 
+	}).done(function(data) {
+		if(data==="ok"){
+			window.location.href = "/dashboard/profile";
+		}
+		
 	});
 
 }
+
+
 
 function signUp(userData) {
 

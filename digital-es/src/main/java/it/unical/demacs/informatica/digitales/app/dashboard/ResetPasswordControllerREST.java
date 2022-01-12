@@ -17,7 +17,7 @@ import com.google.gson.JsonSyntaxException;
 import it.unical.demacs.informatica.digitales.app.beans.EmailConfirmation;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ResetPasswordValidatorResponse;
-import it.unical.demacs.informatica.digitales.app.dao.EmailConfirmationdDaoImpl;
+import it.unical.demacs.informatica.digitales.app.dao.EmailConfirmationDaoImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.validator.ResetPasswordValidator;
 
@@ -35,7 +35,7 @@ public class ResetPasswordControllerREST {
 		EmailConfirmation emailConfirmation = new EmailConfirmation();
 		emailConfirmation.setUserId(user.getId());
 		emailConfirmation.setToken(createToken());
-		EmailConfirmationdDaoImpl.getInstance().create(emailConfirmation);
+		EmailConfirmationDaoImpl.getInstance().create(emailConfirmation);
 		
 		return gson.toJson(emailConfirmation);
 	}
@@ -48,7 +48,7 @@ public class ResetPasswordControllerREST {
 		
 		ResetPasswordValidator.validatePassword(res);
 		
-		long userId = EmailConfirmationdDaoImpl.getInstance().findUserId(res.getToken());
+		long userId = EmailConfirmationDaoImpl.getInstance().findUserId(res.getToken());
 		User selectedUser=UserDAOImpl.getInstance().findById(userId);
 		if(selectedUser!=null&&res.getPassword().equals(res.getRepeatPassword())) {
 			
@@ -58,7 +58,7 @@ public class ResetPasswordControllerREST {
 			EmailConfirmation eC=new EmailConfirmation();
 			eC.setUserId(userId);
 			eC.setToken(res.getToken());
-			EmailConfirmationdDaoImpl.getInstance().delete(eC);
+			EmailConfirmationDaoImpl.getInstance().delete(eC);
 		}
 		return gson.toJson(res);
 	}

@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class GoogleSignUpREST {
 
 		String username = "googleUser" + usersCounter;
 		while (UserDAOImpl.getInstance().checkUsernameExists(username)) {
-			System.out.println("Username " + username + " already exists");
+			//System.out.println("Username " + username + " already exists");
 			usersCounter++;
 			username = "googleUser" + usersCounter;
 		}
@@ -45,27 +46,50 @@ public class GoogleSignUpREST {
 		boolean usernameExists = UserDAOImpl.getInstance().checkUsernameExists(username);
 		return usernameExists ? Protocol.ERROR : Protocol.OK;
 	}
+	
+	@PostMapping("/check_google_user_exists")
+	public String checkGoogleUserExists(HttpServletRequest req)
+			throws JsonSyntaxException, JsonIOException, IOException {
+		String email= new Gson().fromJson(req.getReader(), String.class);
+		
+		String username = UserDAOImpl.getInstance().getUsernameByEmail(email);
+		//System.out.println(username);
+		if(username!=null)
+			return new Gson().toJson(email);
+		else
+			return new Gson().toJson(null);
+	}
 
-	@PostMapping("/dashboard/sign_up_with_google")
+	@PostMapping("/sign_up_with_google")
 	public String signUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Gson gson = new Gson();
 		User user = new User();
 		user = gson.fromJson(req.getReader(), User.class);
-
-		UserDAOImpl.getInstance().create(user);
+		System.out.println(user);
 		
-		user.setId(UserDAOImpl.getInstance().findId(user));
+		String username= UserDAOImpl.getInstance().getUsernameByEmail(user.getEmail());
+		System.out.println(username);
+		if(username==null) {
+			user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
+			UserDAOImpl.getInstance().create(user);
+			
+			
+			user.setId(UserDAOImpl.getInstance().findId(user));
 
-		UserMainInformations info = new UserMainInformations();
-		info.setUserId(user.getId());
-		UserMainInformationsDAOImpl.getInstance().create(info);
+			UserMainInformations info = new UserMainInformations();
+			info.setUserId(user.getId());
+			UserMainInformationsDAOImpl.getInstance().create(info);
+			username=user.getUsername();
+		}
+		
+		
+	
+		System.out.println(username);
+		Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, username);
+		resp.addCookie(cookie);
 
-		Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, user.getUsername());
-
-		Servlets.redirectLogin(resp, cookie);
-
-		return Protocol.OK;
+		return gson.toJson(Protocol.OK);
 		
 	}
 

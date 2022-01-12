@@ -52,5 +52,11 @@ public class AdminPageController {
 	public synchronized String showPostsPageGET(HttpServletResponse resp, HttpServletRequest req) {
 		return Servlets.redirect(req, "posts");
 	}
+	@GetMapping("/404_page")
+	public synchronized String go404PageGET(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		return Servlets.redirectOnPage("404_page");
+
+	}
 	
 }

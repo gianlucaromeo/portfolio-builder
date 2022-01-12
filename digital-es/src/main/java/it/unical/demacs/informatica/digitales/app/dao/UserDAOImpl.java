@@ -250,7 +250,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 	}
 
-	public boolean checkUsernameExists(String username) {
+	public synchronized boolean checkUsernameExists(String username) {
 
 		con = DBUtil.getInstance().getConnection();
 
@@ -477,7 +477,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 	}
 
-	public boolean checkUsernameExistsNotBanned(String username) {
+	public synchronized boolean checkUsernameExistsNotBanned(String username) {
 		con = DBUtil.getInstance().getConnection();
 
 		String query = "SELECT * from users WHERE username=? AND id NOT IN (SELECT user_id FROM banned_users);";
@@ -493,7 +493,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 			}
 
 		} catch (SQLException e) {
-			System.err.println("[UserDAOImpl] [checkUsernameExists]: ");
+			System.err.println("[UserDAOImpl] [checkUsernameExistsNotBanned]: ");
 			e.printStackTrace();
 			return false;
 		} finally {

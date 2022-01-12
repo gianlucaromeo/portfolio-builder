@@ -39,20 +39,56 @@ function attachGoogleLogin(element) {
 			$("#firstName").val(googleUser.getBasicProfile().getGivenName());
 			$("#lastName").val(googleUser.getBasicProfile().getFamilyName());
 			$("#inputEmail").val(googleUser.getBasicProfile().getEmail());
-
+			checkGoogleUserExists($("#inputEmail").val());
 			setPasswordFields();
 			setUsernameField();
 
 			disableInputFields();
 			addLabelOnDatePicker();
-
+			
 		}, function(error) {
-			alert(JSON.stringify(error, undefined, 2));
+			
 		});
 
 }
+function checkGoogleUserExists(email) {
+	console.log("check");
 
-var signUpWithGoogle = false;
+	$.ajax({
+
+		url: "/check_google_user_exists",
+		contentType: "application/json",
+		data: JSON.stringify(email),
+		type: "post",
+		dataType: "json",
+
+	}).done(function(data) {
+		console.log("user:" + data);
+
+		if (data !== null) {
+			login(data);
+		}else{
+			console.log("not exists");
+		}
+	});
+
+}
+function login(email) {
+	$.ajax({
+		url: "/google_login",
+		contentType: "application/json",
+		data: JSON.stringify(email),
+		type: "post",
+		dataType: "json"
+	}).done(function(data) {
+		console.log(data);
+		if (data === "ok") {
+			window.location.href = "/dashboard/profile";
+		}
+	});
+}
+
+var signUpWithGoogleChoose = false;
 function disableInputFields() {
 	$("#inputEmail").attr('readonly', true);
 	$("#firstName").attr('readonly', true);
@@ -60,7 +96,7 @@ function disableInputFields() {
 	$("#username").attr('readonly', true);
 	$("#passwordInput").attr('readonly', true);
 	$("#repeatPasswordInput").attr('readonly', true);
-	signUpWithGoogle = true;
+	signUpWithGoogleChoose = true;
 }
 
 function addLabelOnDatePicker() {

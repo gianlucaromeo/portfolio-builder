@@ -13,18 +13,18 @@ import it.unical.demacs.informatica.digitales.app.beans.EmailConfirmation;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class EmailConfirmationdDaoImpl extends DAOImpl implements DAO<EmailConfirmation> {
+public class EmailConfirmationDaoImpl extends DAOImpl implements DAO<EmailConfirmation> {
 
-	private static EmailConfirmationdDaoImpl instance = null;
+	private static EmailConfirmationDaoImpl instance = null;
 
-	public static EmailConfirmationdDaoImpl getInstance() {
+	public static EmailConfirmationDaoImpl getInstance() {
 		if (instance == null) {
-			instance = new EmailConfirmationdDaoImpl();
+			instance = new EmailConfirmationDaoImpl();
 		}
 		return instance;
 	}
 
-	private EmailConfirmationdDaoImpl() {
+	private EmailConfirmationDaoImpl() {
 
 	}
 
