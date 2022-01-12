@@ -26,7 +26,7 @@ function start() {
 		posts = data;
 
 		if (posts.length === 0) {
-			console.log("no data");
+			$("#postsContainer").hide();
 		} else {
 			posts.forEach(post => {
 				addPost(post);
@@ -65,10 +65,13 @@ function addPost(post) {
 	setEventChangePhoto(post.id);
 	setOnDiscardChanges(post.id);
 	refactButton(post.id, true);
+	showPostDiv();
 
 
 }
-
+function showPostDiv(){
+	$("#postsContainer").show();
+}
 /**
 * Inserisco il post in run time al caricamento della pagina, prendo tutti i post e li inserisco in un div
 * in cui ho inserito l'auto scroll una volta superata la grandezza predefinita (vedere funzione start parte finale e vedere posts.css
