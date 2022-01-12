@@ -170,7 +170,7 @@
 									<!-- USERS CURRICULUMS CARD BODY -->
 									<div class="card-body shadow">
 
-										<div class="table-responsive table mt-2"
+										<div class="table-responsive table mt-2 "
 											id="dataTableDivPosts" role="grid"
 											aria-describedby="dataTable_info">
 											<table class="table my-0" id="dataTablePost">

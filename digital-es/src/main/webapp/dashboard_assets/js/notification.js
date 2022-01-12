@@ -14,14 +14,15 @@ function getNotifications() {
 		dataType: "json",
 
 	}).done(function(data) {
-		
+
 		notifications = data;
 		console.log(notifications);
 		if (notifications.length === 0) {
 			addNoNotification();
 		} else {
-			$("#notificationsNumberSpan").text(notifications.length);
-			notificationsNumber=notifications.length;
+			
+			notificationsNumber = notifications.length;
+			$("#notificationsNumberSpan").text(notificationsNumber);
 			notifications.forEach((notification) => {
 				addNotification(notification);
 			});
@@ -32,7 +33,7 @@ function getNotifications() {
 }
 
 
-function addNotification(notification){
+function addNotification(notification) {
 	$("#alertDiv").append(`<a class="dropdown-item d-flex align-items-center" id="notificationId${notification.id}">
 											<div class="me-3">
 												<div class="bg-warning icon-circle">
@@ -49,22 +50,22 @@ function addNotification(notification){
 											
 											
 										</a>`);
-										
-	
-		$("#seenId"+notification.id).click(function(event) {
-			event.preventDefault();
-			if(notification.type==="project"){
-				deleteProject(notification);
-			}else if(notification.type==="post"){
-				deletePost(notification);
-			}
-			
-			
-			
-		});
+
+
+	$("#seenId" + notification.id).click(function(event) {
+		event.preventDefault();
+		if (notification.type === "project") {
+			deleteProject(notification);
+		} else if (notification.type === "post") {
+			deletePost(notification);
+		}
+
+
+
+	});
 }
 
-function addNoNotification(){
+function addNoNotification() {
 	$("#alertDiv").append(`
 							<div class="text-center" style="margin-top:20px">
 								<p>There are no notifications :)</p>
@@ -72,40 +73,40 @@ function addNoNotification(){
 							</div>`);
 }
 
-function deletePost(notification){
+function deletePost(notification) {
 	$.ajax({
 
-			url: "/delete_post",
-			contentType: "application/json",
-			data: JSON.stringify(notification.contentId),
-			type: "post",
-			dataType: "json",
+		url: "/delete_post",
+		contentType: "application/json",
+		data: JSON.stringify(notification.contentId),
+		type: "post",
+		dataType: "json",
 
-		}).done(function() {
-			refactNotifications(notification);
-			
-		});
+	}).done(function() {
+		refactNotifications(notification);
+
+	});
 }
 
-function deleteProject(notification){
+function deleteProject(notification) {
 	$.ajax({
-			url: "/delete_project_notification",
-			contentType: "application/json",
-			data: JSON.stringify(notification.contentId),
-			type: "post",
-			dataType: "json",
-		}).done(function() {
-			refactNotifications(notification);
-		});
+		url: "/delete_project_notification",
+		contentType: "application/json",
+		data: JSON.stringify(notification.contentId),
+		type: "post",
+		dataType: "json",
+	}).done(function() {
+		refactNotifications(notification);
+	});
 }
-function refactNotifications(notification){
+function refactNotifications(notification) {
 	console.log(notification.id);
 	$("#notificationId" + notification.id).remove();
 	notificationsNumber--;
-	
-	let displayedNotificationsNumber= (notificationsNumber===0) ? "" : notificationsNumber;
+
+	let displayedNotificationsNumber = (notificationsNumber === 0) ? "" : notificationsNumber;
 	$("#notificationsNumberSpan").text(displayedNotificationsNumber);
-	
+
 }
 
 setTimeout(() => {
