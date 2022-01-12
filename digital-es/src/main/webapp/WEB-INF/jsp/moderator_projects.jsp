@@ -120,7 +120,7 @@
 									<!-- USERS CARD BODY -->
 									<div class="card-body shadow">
 
-										<div class="table-responsive table mt-2" id="dataTable"
+										<div class="table-responsive table mt-2" id="dataTableDiv"
 											role="grid" aria-describedby="dataTable_info">
 											<table class="table my-0" id="dataTable">
 												<thead>

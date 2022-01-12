@@ -2,7 +2,13 @@
 	cursor: pointer;
 }
 
+#dataTableDiv{
+	overflow-y:scroll;
+	overflow-y:none;
+	height:400px;
+}
 td.highlight {
 	background-color: #20c997;
 	color: white;
+	
 }
