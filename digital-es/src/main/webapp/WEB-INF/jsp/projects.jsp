@@ -122,7 +122,7 @@
 						</div>
 					</div>
 
-					<div id="firstProject" class="row mb-3 justify-content-center">
+					<div class="row mb-3 justify-content-center">
 						<!-- INIZIO PROJECT TEMPLATE -->
 						<!-- METTERE 4 INVECE DI 12 PER NON AVERE SOLO TEMPLATE SOPRA -->
 						
@@ -150,18 +150,6 @@
 										</form>
 									</div>
 
-									<!-- 
-									<div class="text-center">
-										<img 
-											src="undefined"
-											width="160" height="160" id="project_image">
-										<div class="row" style="margin-top: 20px;"id="divNewImage">
-											<div class="text-center"> 
-											
-											</div>
-										</div>
-									</div>
-									 -->
 									<div class="row">
 										<div class="col-md-12">
 											<label class="form-label" for="project_title"><strong>Project
@@ -238,6 +226,10 @@
 						</div>
 					</div>
 					<!-- FINE PROJECT TEMPLATE -->
+
+					<div id="firstProject" class="row mb-3 justify-content-center">
+					
+					</div>	
 
 				</div>
 			</div>
