@@ -17,7 +17,7 @@ function getNotifications() {
 
 		notifications = data;
 		console.log(notifications);
-		if (notifications.length === 0) {
+		if (notifications.length <= 0 ) {
 			addNoNotification();
 		} else {
 			
