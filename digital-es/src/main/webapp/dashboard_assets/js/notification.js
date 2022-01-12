@@ -2,7 +2,7 @@
  * 
  */
 
-var notificationsNumber;
+var notificationsNumber = 0;
 
 function getNotifications() {
 

@@ -29,10 +29,6 @@
 </head>
 
 <body id="page-top">
-
-
-
-
 	<div id="wrapper">
 		<nav
 			class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
@@ -86,7 +82,8 @@
 									<div
 										class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in"
 										id="alertDiv">
-										<h6 class="dropdown-header" id="alertCenter">alerts center</h6>
+										<h6 class="dropdown-header" id="alertCenter">alerts
+											center</h6>
 
 
 
@@ -119,10 +116,13 @@
 						</ul>
 					</div>
 				</nav>
+				
 				<div class="container-fluid">
 					<h3 class="text-dark mb-4">Posts</h3>
-					<div class="row mb-3 ">
-						<div class="col-lg-12">
+
+					<!-- ADD -->
+					<div class="row mb-3 justify-content-center">
+						<div class="col-12 col-lg-6">
 							<div class="card mb-3">
 								<div class="card-body shadow postClass">
 									<div class="text-center">
@@ -169,6 +169,7 @@
 												<button type="button" class="btn btn-primary btn-sm"
 													data-bs-toggle="modal" data-bs-target="#modalIdNewPopup"
 													id="popupNewBtn" hidden></button>
+
 												<!-- Modal -->
 												<div class="modal fade" id="modalIdNewPopup" tabindex="-1"
 													aria-labelledby="modalLabel" aria-hidden="true">
@@ -187,35 +188,39 @@
 														</div>
 													</div>
 												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="row" id="postsContainer">
-								<div class="col">
-									<div class="card shadow mb-3">
-										<div class="card-header py-3">
-											<p class="text-primary m-0 fw-bold">Published Posts</p>
-										</div>
-										<div class="card-body">
-											<form>
-												<div class="col-md-12 col-lg-12 col-sm-12 text-center"
-													id="postsSection"></div>
 
 											</form>
+
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</div>
 					</div>
 
+
+					<div class="row" id="postsContainer">
+						<div class="col">
+							<div class="card shadow mb-3">
+								<div class="card-header py-3">
+									<p class="text-primary m-0 fw-bold">Published Posts</p>
+								</div>
+								<div class="card-body">
+									<form>
+										<div class="col-md-12 col-lg-12 col-sm-12 text-center"
+											id="postsSection"></div>
+
+									</form>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
 				</div>
 			</div>
+			
 			<footer class="bg-white sticky-footer">
 				<div class="container my-auto">
 					<div class="text-center my-auto copyright">

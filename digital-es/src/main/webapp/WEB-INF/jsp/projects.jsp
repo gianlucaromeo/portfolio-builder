@@ -41,10 +41,10 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link"
-						href="profile"><i class="fas fa-user"></i><span>Profile</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="projects"><i
-							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="profile"><i
+							class="fas fa-user"></i><span>Profile</span></a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="projects"><i class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="posts"><i
 							class="far fa-comments"></i><span>Posts</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="curriculum"><i
@@ -65,13 +65,14 @@
 							id="sidebarToggleTop" type="button">
 							<i class="fas fa-bars"></i>
 						</button>
-						
-						<ul class="navbar-nav flex-nowrap ms-auto">							
+
+						<ul class="navbar-nav flex-nowrap ms-auto">
 							<li class="nav-item dropdown no-arrow mx-1">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
 										data-bs-toggle="dropdown" href="#"><span
-										class="badge bg-danger badge-counter" id="notificationsNumberSpan"></span><i
+										class="badge bg-danger badge-counter"
+										id="notificationsNumberSpan"></span><i
 										class="fas fa-bell fa-fw"></i></a>
 									<div
 										class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in"
@@ -88,9 +89,9 @@
 									</div>
 								</div>
 							</li>
-							
+
 							<div class="d-none d-sm-block topbar-divider"></div>
-							
+
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
@@ -111,42 +112,44 @@
 						</ul>
 					</div>
 				</nav>
-			</div>
-			
-					<div class="container-fluid">
-					
+
+
+				<div class="container-fluid">
+
 					<div class="row">
 						<div class="col-md-2">
 							<h3 class="text-dark mb-4">Projects</h3>
 						</div>
 					</div>
-					
-					<div id="firstProject" class="row mb-3">
-						<!-- INIZIO PROJECT TEMPLATE --><!-- METTERE 4 INVECE DI 12 PER NON AVERE SOLO TEMPLATE SOPRA -->
-						<div class="col-lg-12">
+
+					<div id="firstProject" class="row mb-3 justify-content-center">
+						<!-- INIZIO PROJECT TEMPLATE -->
+						<!-- METTERE 4 INVECE DI 12 PER NON AVERE SOLO TEMPLATE SOPRA -->
+						
+						<div class="col-12 col-lg-6">
 							<div class="card mb-3">
 								<div class="card-body shadow" id="project_container">
-								
+
 									<div id="drop-area">
 										<form class="image_form">
 											<div class="row">
 												<div class="col-sm-6">
-											    	<p>Drop your Image here</p>
-											    	<input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-											    	<input type="file" accept="image/jpg, image/png" id="image_chooser" class="editPhotoChooser col-12"/> 
-													<label id="image_label" for="image_chooser" class="labelImage">
-														Or click here to select your photo
-													</label>
+													<p>Drop your Image here</p>
+													<input type="file" id="fileElem" multiple accept="image/*"
+														onchange="handleFiles(this.files)"> <input
+														type="file" accept="image/jpg, image/png"
+														id="image_chooser" class="editPhotoChooser col-12" /> <label
+														id="image_label" for="image_chooser" class="labelImage">
+														Or click here to select your photo </label>
 												</div>
 												<div class="col-sm-6">
-													<img 
-													src="undefined"
-													width="160" height="160" id="project_image">
+													<img src="undefined" width="160" height="160"
+														id="project_image">
 												</div>
 											</div>
-									  	</form>
+										</form>
 									</div>
-									
+
 									<!-- 
 									<div class="text-center">
 										<img 
@@ -161,88 +164,91 @@
 									 -->
 									<div class="row">
 										<div class="col-md-12">
-											<label class="form-label" for="project_title"><strong>Project Title</strong></label>
+											<label class="form-label" for="project_title"><strong>Project
+													Title</strong></label>
 											<form>
 												<div class="mb-3">
-													<input class="form-control" type="text"
-																id="project_title" placeholder="The title of your project"
-																name="project_title">
+													<input class="form-control" type="text" id="project_title"
+														placeholder="The title of your project"
+														name="project_title">
 												</div>
 											</form>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="col-md-12">
-											<label class="form-label" for="project_description"><strong>Project description</strong></label>
+											<label class="form-label" for="project_description"><strong>Project
+													description</strong></label>
 											<form>
 												<div class="mb-3">
-													<textarea class="form-control" id="project_description" rows="4" maxlength="250"  style="resize: none;"
+													<textarea class="form-control" id="project_description"
+														rows="4" maxlength="250" style="resize: none;"
 														name="project_description"></textarea>
 												</div>
 											</form>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="col-md-12">
 											<label class="form-label" for="project_link"><strong>Link</strong></label>
 											<form>
 												<div class="mb-3">
-													<input class="form-control" type="text"
-																id="project_link" placeholder="Link to your project"
-																name="project_link">
+													<input class="form-control" type="text" id="project_link"
+														placeholder="Link to your project" name="project_link">
 												</div>
-												
+
 											</form>
 										</div>
 										<div class="row text-center">
 											<div class="col mb-3">
-												<button id="projectBtn" class="btn btn-primary btn-sm" type="submit">ADD PROJECT</button>
+												<button id="projectBtn" class="btn btn-primary btn-sm"
+													type="submit">ADD PROJECT</button>
 											</div>
 										</div>
-										
+
 										<button type="button" class="btn btn-primary btn-sm"
-												data-bs-toggle="modal" data-bs-target="#modalIdNewPopup"
-												id="popupNewBtn" hidden></button>
-											<!-- Modal -->
-											<div class="modal fade" id="modalIdNewPopup" tabindex="-1"
-												aria-labelledby="modalLabel" aria-hidden="true">
-												<div class="modal-dialog">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="modalLabel">New Project</h5>
-															<button type="button" class="btn-close"
-																data-bs-dismiss="modal" aria-label="Close"></button>
-														</div>
-														<div class="modal-body">Project successfully added</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-primary"
-																data-bs-dismiss="modal" id="closeNewPopupBtn">Ok</button>
-														</div>
+											data-bs-toggle="modal" data-bs-target="#modalIdNewPopup"
+											id="popupNewBtn" hidden></button>
+										<!-- Modal -->
+										<div class="modal fade" id="modalIdNewPopup" tabindex="-1"
+											aria-labelledby="modalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="modalLabel">New Project</h5>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">Project successfully added</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															data-bs-dismiss="modal" id="closeNewPopupBtn">Ok</button>
 													</div>
 												</div>
 											</div>
-										
+										</div>
+
 									</div>
-									
+
 								</div>
-								
+
 							</div>
 						</div>
-						<!-- FINE PROJECT TEMPLATE -->
-						
 					</div>
+					<!-- FINE PROJECT TEMPLATE -->
+
 				</div>
-				
+			</div>
+
 		</div>
-	</div>
-	<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../dashboard_assets/js/bs-init.js"></script>
-	<script src="../../dashboard_assets/js/theme.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"
-		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-		crossorigin="anonymous"></script>
-	<script src="../../dashboard_assets/js/projects.js"></script>
-	<script src="../../dashboard_assets/js/notification.js"></script>
+		<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../../dashboard_assets/js/bs-init.js"></script>
+		<script src="../../dashboard_assets/js/theme.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous"></script>
+		<script src="../../dashboard_assets/js/projects.js"></script>
+		<script src="../../dashboard_assets/js/notification.js"></script>
 </body>

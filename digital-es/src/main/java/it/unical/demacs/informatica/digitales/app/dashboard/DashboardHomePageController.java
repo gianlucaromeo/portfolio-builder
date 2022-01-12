@@ -1,5 +1,9 @@
 package it.unical.demacs.informatica.digitales.app.dashboard;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dashboard")
 public class DashboardHomePageController {
 
+	@GetMapping("/login/")
+	public void loginPageRedirect(HttpServletResponse resp) throws IOException {
+		resp.sendRedirect("/dashboard/login");
+	}
+	
 	@GetMapping(value = {"/login", "/", ""})
 	public String showLoginPage() {
 		return "login";

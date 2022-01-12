@@ -3,7 +3,7 @@ var removeProjectReasons = [];
 var allUsers = {};
 var allProfilePictures = {};
 
-var selectedUserId = 8;
+var selectedUserId = -1;
 var selectedUserProjects = {};
 
 function fetchReasons() {
@@ -71,6 +71,7 @@ function fetchUserProjects() {
 
 		if (selectedUserProjects.length == 0) {
 			console.log("Users has no projects.");
+			buildNoProjectsRow();
 		} else {
 			console.log("User has " + selectedUserProjects.length + " projects. Building..")
 			selectedUserProjects.forEach(project => buildProjectRow(project));
@@ -136,6 +137,17 @@ function buildRemoveBtn(projectId) {
 					</div>
 				</div>
 			</div>`;
+}
+
+function buildNoProjectsRow() {
+	row = `<tr class="shadow-sm p-3 mb-5" id="noProjects">
+				<td class="align-middle">No Projects</td>
+				<td class="align-middle">No Projects</td>
+				<td class="align-middle">No Projects</td>
+				<td class="align-middle">No Projects</td>
+			</tr>`;
+
+	$("#projectsTableBody").append(row);
 }
 
 function buildProjectRow(project) {
@@ -221,9 +233,11 @@ window.onload = (event) => {
 	fetchAllUsers();
 };
 
+/*
 setTimeout(() => {
 	fetchUserProjects();
 }, 4000)
+*/
 
 /*
 const qrcode = new QRCode(document.getElementById('qrcode'), {

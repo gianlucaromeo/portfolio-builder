@@ -81,6 +81,7 @@ public class GoogleSignUpREST {
 			info.setUserId(user.getId());
 			UserMainInformationsDAOImpl.getInstance().create(info);
 			username=user.getUsername();
+			System.out.println("Sign up with google");
 		}
 		
 		

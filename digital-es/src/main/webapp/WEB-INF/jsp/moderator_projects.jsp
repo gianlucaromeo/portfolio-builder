@@ -54,6 +54,7 @@
 				</div>
 			</div>
 		</nav>
+
 		<div class="d-flex flex-column" id="content-wrapper">
 			<div id="content">
 				<nav
@@ -67,17 +68,17 @@
 						<ul class="navbar-nav flex-nowrap ms-auto">
 
 							<div class="d-none d-sm-block topbar-divider"></div>
-							
+
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
-										data-bs-toggle="dropdown" href="#"><span
+										data-bs-toggle="dropdown"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">${username}</span><img
 										class="border rounded-circle img-profile"
 										src="${profilePicture}"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-										<a class="dropdown-item" href="#"><i
+										<a class="dropdown-item"><i
 											class="fas fa-info-circle fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Info</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="do_logout"><i
@@ -88,7 +89,7 @@
 						</ul>
 					</div>
 				</nav>
-
+				
 				<!--  MAIN CONTAINER -->
 				<div class="container-fluid">
 
@@ -201,7 +202,7 @@
 				<!-- END MAIN CONTAINER -->
 
 			</div>
-			
+
 			<footer class="bg-white sticky-footer">
 				<div class="container my-auto">
 					<div class="text-center my-auto copyright">
