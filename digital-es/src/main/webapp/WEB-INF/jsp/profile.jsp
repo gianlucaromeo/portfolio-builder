@@ -41,8 +41,8 @@
 				</a>
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
-					<li class="nav-item"><a class="nav-link active"
-						href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
+					<li class="nav-item"><a class="nav-link active" href="profile"><i
+							class="fas fa-user"></i><span>Profile</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="projects"><i
 							class="fas fa-project-diagram"></i><span>Projects</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="posts"><i
@@ -72,7 +72,8 @@
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
 										data-bs-toggle="dropdown" href="#"><span
-										class="badge bg-danger badge-counter" id="notificationsNumberSpan"></span><i
+										class="badge bg-danger badge-counter"
+										id="notificationsNumberSpan"></span><i
 										class="fas fa-bell fa-fw"></i></a>
 									<div
 										class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in"
@@ -91,7 +92,7 @@
 							</li>
 
 							<div class="d-none d-sm-block topbar-divider"></div>
-							
+
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
@@ -122,8 +123,12 @@
 						<div class="col-lg-4">
 							<div class="card mb-3">
 								<div class="card-body shadow">
-									<button class="btn btn-primary btn-sm float-end" type="submit"
-										id="edit_all_btn">Edit</button>
+									<div class="row">
+										<div class="col">
+											<button class="btn btn-primary btn-sm float-end"
+												type="submit" id="edit_all_btn">Edit</button>
+										</div>
+									</div>
 									<div class="text-center">
 										<img class="rounded-circle mb-3 mt-4" src="${profilePicture}"
 											width="160" height="160" id="profile_picture">
@@ -134,26 +139,6 @@
 												class="labelImage"> Change Image </label>
 										</div>
 									</div>
-
-
-									<!-- DROP AREA 
-								<div id="drop-area-1" class="drop-area">
-										<form class="image_form">
-											<div class="row">
-												<div class="col-sm-6">
-													<p>Drop your Image here</p>
-													<input type="file" id="fileElem" multiple accept="image/*"
-														onchange="handleFiles(this.files)"> <input
-														type="file" accept="image/jpg, image/png"
-														id="image_chooser" class="editPhotoChooser col-12" /> <label
-														id="image_label" for="image_chooser"
-														class="labelImage"> Or click here to select your
-														photo </label>
-												</div>
-											</div>
-										</form>
-									</div>
-								-->
 									<div class="row">
 										<div class="col-md-12">
 											<label class="form-label" for="biography"><strong>Biography</strong></label>
@@ -179,8 +164,8 @@
 											<h6 class="text-primary fw-bold m-0">Your Skills</h6>
 										</div>
 										<div class="col-2">
-											<button class="btn btn-primary btn-sm float-end" type="submit"
-												id="editSkills">Edit</button>
+											<button class="btn btn-primary btn-sm float-end"
+												type="submit" id="editSkills">Edit</button>
 										</div>
 									</div>
 								</div>
@@ -287,12 +272,12 @@
 									<div class="card shadow mb-3">
 										<div class="card-header py-3">
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-10">
 													<p class="text-primary m-0 fw-bold">User Settings</p>
 												</div>
-												<div class="col-md-3">
-													<button class="btn btn-primary btn-sm" type="submit"
-														id="editUserSettings">Edit User Settings</button>
+												<div class="col-2">
+													<button class="btn btn-primary btn-sm float-end"
+														type="submit" id="editUserSettings">Edit</button>
 												</div>
 											</div>
 										</div>
@@ -300,7 +285,7 @@
 										<div class="card-body">
 											<form>
 												<div class="row">
-													<div class="col">
+													<div class="col-12 col-md-6 col-lg-6">
 														<div class="mb-3">
 															<label class="form-label" for="username"><strong>Username</strong></label><input
 																class="form-control" type="text" id="username"
@@ -308,7 +293,7 @@
 																value="${username}">
 														</div>
 													</div>
-													<div class="col">
+													<div class="col-12 col-md-6 col-lg-6">
 														<div class="mb-3">
 															<label class="form-label" for="email"><strong>Email
 																	Address</strong></label><input class="form-control" type="email"
@@ -318,7 +303,7 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col">
+													<div class="col-12 col-md-6 col-lg-6">
 														<div class="mb-3">
 															<label class="form-label" for="first_name"><strong>First
 																	Name</strong></label><input class="form-control" type="text"
@@ -326,7 +311,7 @@
 																name="first_name" value="${firstName}">
 														</div>
 													</div>
-													<div class="col">
+													<div class="col-12 col-md-6 col-lg-6">
 														<div class="mb-3">
 															<label class="form-label" for="last_name"><strong>Last
 																	Name</strong></label><input class="form-control" type="text"
@@ -372,20 +357,21 @@
 										</div>
 										<div class="card-body">
 											<form>
+
 												<div class="mb-3">
 													<label class="form-label" for="contact_email"><strong>Contact
 															email</strong></label><input class="form-control" type="text"
 														id="contactEmail" placeholder="" name="contact_email">
 												</div>
 												<div class="row">
-													<div class="col">
+													<div class="col-12 col-md-6 col-lg-6">
 														<div class="mb-3">
 															<label class="form-label" for="city"><strong>Phone
 																	number</strong></label><input class="form-control" type="text"
 																id="phoneNumber" placeholder="" name="phone_number">
 														</div>
 													</div>
-													<div class="col">
+													<div class="col-12 col-md-6 col-lg-6">
 														<div class="mb-3">
 															<label class="form-label" for="sec_phone_number"><strong>Phone
 																	number (2)</strong></label><input class="form-control" type="text"
@@ -394,14 +380,14 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-4">
+														<div class="col-12 col-md-4 col-lg-4">
 															<div class="mb-3 text-center">
 																<label class="form-label" for="twitter"><strong><i
 																		class="fab fa-twitter"></i></strong></label><input class="form-control"
 																	type="text" id="twitter" placeholder="" name="twitter">
 															</div>
 														</div>
-														<div class="col-4">
+														<div class="col-12 col-md-4 col-lg-4">
 															<div class="mb-3 text-center">
 																<label class="form-label" for="facebook"><strong><i
 																		class="fab fa-facebook"></i></strong></label><input
@@ -409,7 +395,7 @@
 																	placeholder="" name="facebook">
 															</div>
 														</div>
-														<div class="col-4">
+														<div class="col-12 col-md-4 col-lg-4">
 															<div class="mb-3 text-center">
 																<label class="form-label" for="instagram"><strong><i
 																		class="fab fa-instagram"></i></strong></label><input
@@ -529,14 +515,14 @@
 
 						<div class="card-body">
 							<div class="row">
-								<div class="col-6 mb-3">
+								<div class="col-12 col-md-6 col-lg-6 mb-3">
 									<div class="row">
 										<h4 class="small fw-bold">Skill (1)</h4>
 									</div>
 									<input class="form-control" type="text" id="mainSkill1"
 										placeholder="e.g.: Web Development" name="main_skill">
 								</div>
-								<div class="col-6 mb-3">
+								<div class="col-12 col-md-6 col-lg-6 mb-3">
 									<div class="row">
 										<h4 class="small fw-bold">Description (1)</h4>
 									</div>
@@ -546,15 +532,17 @@
 								</div>
 							</div>
 
+							<hr />
+
 							<div class="row">
-								<div class="col-6 mb-3">
+								<div class="col-12 col-md-6 col-lg-6 mb-3">
 									<div class="row">
 										<h4 class="small fw-bold">Skill (2)</h4>
 									</div>
 									<input class="form-control" type="text" id="mainSkill2"
 										placeholder="e.g.: Web Development" name="main_skill">
 								</div>
-								<div class="col-6 mb-3">
+								<div class="col-12 col-md-6 col-lg-6 mb-3">
 									<div class="row">
 										<h4 class="small fw-bold">Description (2)</h4>
 									</div>
@@ -564,15 +552,17 @@
 								</div>
 							</div>
 
+							<hr />
+
 							<div class="row">
-								<div class="col-6 mb-3">
+								<div class="col-12 col-md-6 col-lg-6 mb-3">
 									<div class="row">
 										<h4 class="small fw-bold">Skill (3)</h4>
 									</div>
 									<input class="form-control" type="text" id="mainSkill3"
 										placeholder="e.g.: Web Development" name="main_skill">
 								</div>
-								<div class="col-6 mb-3">
+								<div class="col-12 col-md-6 col-lg-6 mb-3">
 									<div class="row">
 										<h4 class="small fw-bold">Description (3)</h4>
 									</div>

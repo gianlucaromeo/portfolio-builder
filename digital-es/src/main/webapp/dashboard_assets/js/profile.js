@@ -7,7 +7,7 @@ function start() {
 	editAll(true);
 	loadCurriculumSkills();
 	refactUndefinedImage();
-	$("#editUserSettings").hide(); //I don't think they should be modified
+	//$("#editUserSettings").hide(); //I don't think they should be modified
 }
 function loadEvents() {
 	loadProfileImageEvent()
@@ -785,7 +785,7 @@ function contactEdit(value) {
 
 function mainInfoEdit(value) {
 	$("#username").attr('readonly',value);	
-	$("#email").attr('readonly',value);	
+	//$("#email").attr('readonly',value);	
 	$("#firstName").attr('readonly',value);	
 	$("#lastName").attr('readonly',value);	
 	$("#datePicker").attr('readonly',value);	

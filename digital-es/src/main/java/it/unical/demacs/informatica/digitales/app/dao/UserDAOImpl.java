@@ -504,4 +504,6 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 	}
 
+	
+
 }

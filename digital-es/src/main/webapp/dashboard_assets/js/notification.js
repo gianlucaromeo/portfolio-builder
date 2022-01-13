@@ -111,6 +111,6 @@ function refactNotifications(notification) {
 
 setTimeout(() => {
 	getNotifications();
-}, 300)
+}, 1000)
 
 
