@@ -49,7 +49,26 @@ function setEditAll() {
 function setUserSettingsEdit() {
 	$("#editUserSettings").click(function(e){
 		e.preventDefault();
-		mainInfoEdit(false);
+		if($("#editUserSettings").text()=="Edit") {
+			mainInfoEdit(false);
+			$("#editUserSettings").text("Undo");
+			return;
+		}
+		if($("#editUserSettings").text()=="Undo") {
+			mainInfoEdit(true);
+			$("#editUserSettings").text("Edit");
+			
+			$("#username").removeClass("is-invalid");
+			$("#email").removeClass("is-invalid");
+			$("#firstName").removeClass("is-invalid");
+			$("#lastName").removeClass("is-invalid");
+			$("#datePicker").removeClass("is-invalid");
+			
+			loadMainInformations();
+
+			return;
+		}
+
 	});
 }
 function setConctactSettingsEdit() {
@@ -128,7 +147,7 @@ function saveBiography() {
 			console.log(data);
 		});
 		bioEdit(true);
-		$("#edit_all_btn").text("Edit your profile")
+		$("#edit_all_btn").text("Edit");
 	});
 }
 
@@ -182,6 +201,7 @@ function mainInfoValidation(data) {
 	}
 	if (isValid) {
 				mainInfoEdit(true);
+				$("#editUserSettings").text("Edit");
 	}
 }
 
@@ -221,7 +241,7 @@ function saveContacts2(validated1) {
 			validated2=contactValidation2(data);
 			if(validated1&&validated2) {
 			contactEdit(true);
-			$("#editContactSettings").text("Edit Contact Settings");
+			$("#editContactSettings").text("Edit");
 			console.log("VALID DATA");
 			}
 		});
@@ -296,7 +316,7 @@ function saveMainSkills() {
 		}).done(function(data) {
 			console.log(data);
 			mainSkillEdit(true);
-			$("#editMainSkill").text("Edit Skills")
+			$("#editMainSkill").text("Edit")
 		});
 	});
 }
