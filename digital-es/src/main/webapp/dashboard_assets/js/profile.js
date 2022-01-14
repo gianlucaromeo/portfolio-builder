@@ -689,6 +689,11 @@ function loadMainInformations() {
 		}).done(function(data) {
 			console.log(data);
 			
+			$("#username").val(data.username);
+			$("#email").val(data.email);
+			$("#firstName").val(data.firstName);
+			$("#lastName").val(data.lastName);
+			$("#datePicker").val(data.dateOfBirth);
 			
 			$("#contactEmail").val(data.contactEmail);
 			$("#phoneNumber").val(data.mainPhoneNumber);
