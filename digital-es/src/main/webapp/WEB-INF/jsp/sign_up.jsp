@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Register - Portfolio Builder</title>
+<title>PB - Register</title>
 
 
 <link rel="stylesheet"
@@ -21,13 +21,26 @@
 </head>
 
 <body class="bg-gradient-primary">
+
+	<div class="row justify-content-center mt-3">
+		<div class="col-12 text-center">
+			<a class="btn btn-light text-primary m-2" role="button" href="/home"><i
+				class="fas fa-home p-3"></i>Visit our Homepage</a>
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="card shadow-lg o-hidden border-0 my-5">
+			<div class="card-header py-3 text-center">
+				<h6 class="text-primary fw-bold m-0">Portfolio Builder - Sign
+					Up!</h6>
+			</div>
 			<div class="card-body p-0">
 				<div class="row">
 					<div class="col-lg-5 d-none d-lg-flex">
 						<div class="flex-grow-1 bg-register-image"
 							style="background-image: url(&quot;../../dashboard_assets/img/app_images/sign-up-img.png&quot;);"></div>
+						<div class="vr"></div>
 					</div>
 					<div class="col-lg-7">
 						<div class="p-5">
@@ -112,7 +125,7 @@
 									class="btn btn-primary d-block btn-google btn-user w-100 mb-2"
 									role="button" id="googleLoginBtn"><i class="fab fa-google"></i>&nbsp;
 									Login with Google</a>
-								
+
 								<hr>
 							</form>
 							<div class="text-center">

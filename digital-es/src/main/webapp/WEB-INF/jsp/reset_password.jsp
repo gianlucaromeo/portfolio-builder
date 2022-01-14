@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Forgot Password</title>
+<title>PB - Reset Password</title>
 
 
 <link rel="stylesheet"
@@ -21,61 +21,81 @@
 </head>
 
 <body class="bg-gradient-primary">
+
+	<div class="row justify-content-center mt-3">
+		<div class="col-12 text-center">
+			<a class="btn btn-light text-primary m-2" role="button" href="/home"><i
+				class="fas fa-home p-3"></i>Visit our Homepage</a>
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="card shadow-lg o-hidden border-0 my-5">
+			<div class="card-header py-3 text-center">
+				<h6 class="text-primary fw-bold m-0">Portfolio Builder - Reset
+					Your Password</h6>
+			</div>
 			<div class="card-body p-0">
 				<div class="row">
 					<div class="col-lg-5 d-none d-lg-flex">
 						<div class="flex-grow-1 bg-register-image"
-							style="background-image: url(&quot;../../dashboard_assets/img/dogs/image2.jpeg&quot;);"></div>
+							style="background-image: url(&quot;../../dashboard_assets/img/app_images/reset-password-img.jpg&quot;);"></div>
+						<div class="vr"></div>
 					</div>
 					<div class="col-lg-7">
 						<div class="p-5">
 							<div class="text-center">
-								<h4 class="text-dark mb-4">Insert your new password</h4>
+								<h4 class="text-dark mb-4">Reset Password</h4>
 							</div>
-							<form class="user" id="forgotPasswordForm" action="/dashboard/login" method="post">
+							<form class="user" id="forgotPasswordForm"
+								action="/dashboard/login" method="post">
 
-							<div class="row mb-3" id="passwordContainer">	
-								<div class="mb-3">
-									<input class="form-control form-control-user" type="password"
-										id="password" aria-describedby="passwordHelp"
-										placeholder="Insert your new password" name="password" minlength="8" maxlength="20" >
+								<div class="row mb-3" id="passwordContainer">
+									<div class="mb-3">
+										<input class="form-control form-control-user" type="password"
+											id="password" aria-describedby="passwordHelp"
+											placeholder="Insert New Password" name="password"
+											minlength="8" maxlength="20">
+									</div>
 								</div>
-							</div>
-							<div class="row mb-3" id="passwordContainer">	
-								<div class="mb-3">
-									<input class="form-control form-control-user" type="password"
-										id="repeatPassword" aria-describedby="passwordHelp"
-										placeholder="Repeat Password" name="repeatPassword" minlength="8" maxlength="20" >
+								<div class="row mb-3" id="passwordContainer">
+									<div class="mb-3">
+										<input class="form-control form-control-user" type="password"
+											id="repeatPassword" aria-describedby="passwordHelp"
+											placeholder="Repeat Password" name="repeatPassword"
+											minlength="8" maxlength="20">
+									</div>
 								</div>
-							</div>
-							
-							
-							<div id="passwordInvalid" class="text-danger">
-								Remember: Your Password must contain: <br>- At least 8 characters and at
-								most 20 characters. <br>- At least one digit [0-9]. <br>-
-								Both lower and uppercase letters . <br>- At least a
-								special character [@$!%*?&].
-							</div>
-							
-							
+
+
+								<div id="passwordInvalid" class="text-secondary mb-4">
+									Remember: Your Password must contain: <br>- At least 8
+									characters and at most 20 characters. <br>- At least one
+									digit [0-9]. <br>- Both lower and uppercase letters . <br>-
+									At least a special character [@$!%*?&].
+								</div>
+
+
 								<button class="btn btn-primary d-block btn-user w-100"
 									type="button" onclick="resetPassword()" id="resetBtn">Confirm</button>
 							</form>
 							<div class="text-center">
 								<a class="small" href="/dashboard/login">Return to Login</a>
 							</div>
-							<div class="text-center"><a class="small" href="/dashboard/sign_up">Create an Account!</a></div>
-							
-							<input type="text" id="tokenValue" value="${token}" hidden >
+							<div class="text-center">
+								<a class="small" href="/dashboard/sign_up">Create an
+									Account!</a>
+							</div>
+
+							<input type="text" id="tokenValue" value="${token}" hidden>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 	<script src="../../dashboard_assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../../dashboard_assets/js/bs-init.js"></script>
 	<script src="../../dashboard_assets/js/theme.js"></script>

@@ -1,63 +1,71 @@
-
+<!DOCTYPE html>
 <html>
+
 <head>
-<title>401 - Not Authorized</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PB - Not Authorized</title>
+
+<link href="https://fonts.googleapis.com/css?family=Cabin:400,700"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:900"
+	rel="stylesheet">
+
+<link type="text/css" rel="stylesheet"
+	href="../../app_assets/bootstrap/css/error_page.css" />
+<link type="text/css" rel="stylesheet"
+	href="../../app_assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
-	href="../../dashboard_assets/bootstrap/css/error_page.css">
+	href="../../portfolio_assets/bootstrap/css/bootstrap.min.css">
 </head>
-<body>
-	<div class="moon"></div>
-	<div class="moon__crater moon__crater1"></div>
-	<div class="moon__crater moon__crater2"></div>
-	<div class="moon__crater moon__crater3"></div>
 
-	<div class="star star1"></div>
-	<div class="star star2"></div>
-	<div class="star star3"></div>
-	<div class="star star4"></div>
-	<div class="star star5"></div>
-
-	<div class="error">
-		<div class="error__title">401</div>
-		<div class="error__subtitle">Not Authorized...</div>
-		<div class="error__description">you do not have access to this content :( <br> please make sure you are logged in</div>
-		<a href="/dashboard/sign_up">  
-		<button class="error__button error__button--active">SIGN UP</button>
-		</a>
-		<a href="/dashboard/login">  
-		<button class="error__button">LOGIN</button>
-		</a>
-	</div>
-
-	<div class="astronaut">
-		<div class="astronaut__backpack"></div>
-		<div class="astronaut__body"></div>
-		<div class="astronaut__body__chest"></div>
-		<div class="astronaut__arm-left1"></div>
-		<div class="astronaut__arm-left2"></div>
-		<div class="astronaut__arm-right1"></div>
-		<div class="astronaut__arm-right2"></div>
-		<div class="astronaut__arm-thumb-left"></div>
-		<div class="astronaut__arm-thumb-right"></div>
-		<div class="astronaut__leg-left"></div>
-		<div class="astronaut__leg-right"></div>
-		<div class="astronaut__foot-left"></div>
-		<div class="astronaut__foot-right"></div>
-		<div class="astronaut__wrist-left"></div>
-		<div class="astronaut__wrist-right"></div>
-
-		<div class="astronaut__cord">
-			<canvas id="cord" height="500px" width="500px"></canvas>
+<body class="gradient">
+	<nav
+		class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+		<div class="container">
+			<a class="navbar-brand logo" href="/home">Portfolio Builder</a>
+			<button data-bs-toggle="collapse" class="navbar-toggler"
+				data-bs-target="#navbarNav">
+				<span class="visually-hidden">Toggle navigation</span><span
+					class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="/dashboard/login">Login</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/dashboard/sign_up">Sign Up</a></li>
+				</ul>
+			</div>
 		</div>
+	</nav>
 
-		<div class="astronaut__head">
-			<canvas id="visor" width="60px" height="60px"></canvas>
-			<div class="astronaut__head-visor-flare1"></div>
-			<div class="astronaut__head-visor-flare2"></div>
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h3>Oops! Not authorized.</h3>
+				<h1>
+					<span>4</span><span>0</span><span>1</span>
+				</h1>
+			</div>
+			<h2>You cannot access this page. Please login or sign up.</h2>
+			<div class="row justify-content-center">
+				<div class="col-12 col-md-6 col-lg-6">
+					<a class="btn btn-primary m-2 gradient error-btn-redirect" role="button"
+						href="/dashboard/login">Login</a>
+				</div>
+				<div class="col-12 col-md-6 col-lg-6">
+					<a class="btn btn-primary m-2 gradient error-btn-redirect" role="button"
+						href="/dashboard/sign_up">Sign Up</a>
+				</div>
+			</div>
 		</div>
 	</div>
-	
-	<script src="../../dashboard_assets/js/404.js"></script>
+
+	<script src="../../app_assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../app_assets/js/bs-init.js"></script>
 </body>
 
 </html>

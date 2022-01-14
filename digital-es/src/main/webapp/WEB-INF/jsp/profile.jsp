@@ -102,8 +102,7 @@
 										src="${profilePicture}"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-										<a class="dropdown-item" href="#"><i
-											class="fas fa-info-circle fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Info</a>
+										
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="do_logout"><i
 											class="fas fa-sign-out-alt fa-md fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
