@@ -149,7 +149,7 @@
 
 												<div class="mb-3">
 													<button class="btn btn-primary btn-sm" type="submit"
-														id="biography_btn">Save Biography</button>
+														id="biography_btn">Save</button>
 												</div>
 											</form>
 										</div>
