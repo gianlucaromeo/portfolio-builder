@@ -58,5 +58,11 @@ public class AdminPageController {
 		return Servlets.redirectOnPage("404_page");
 
 	}
+	@GetMapping("/500_page")
+	public synchronized String go500PageGET(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		return Servlets.redirectOnPage("500_page");
+
+	}
 	
 }
