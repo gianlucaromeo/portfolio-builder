@@ -15,12 +15,9 @@ public class PasswordResetHandler {
 		
 		long userId = EmailConfirmationDaoImpl.getInstance().findUserId(username);
 		User user = UserDAOImpl.getInstance().findById(userId);
-		System.out.println("user id " + userId);
-		System.out.println("User. " + user);
 		
-		if (user == null) {
-			//Servlets.redirect(req, "404_page");
-		}
+		if (user == null) 
+			return Servlets.redirectOnPage("404_page");		
 		
 		return "reset_password";
 	}
