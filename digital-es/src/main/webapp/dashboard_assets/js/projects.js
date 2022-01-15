@@ -18,13 +18,11 @@ function loadProjects() {
 		dataType: "json",
 
 	}).done(function(projects) {
-		console.log(projects);
 
 		if (projects.length===0) {
 			console.log("user has no projects");
 		} else {
 			projects.forEach(project => addProject(project));
-			projects.forEach(project => console.log(project));
 
 		}
 });
@@ -102,6 +100,8 @@ function handleDragEvent() {
 }
 
 function addProject(project) {
+	console.log("AGGIUNGENDO PROJECT");
+	console.log(project.id);
 	appendProject(project);
 	setEditable(project.id,true);
 	setEvents(project.id);
@@ -175,7 +175,7 @@ function editValidation(data) {
 	} if (data.description === "project_field_empty") {
 		$("#project_description"+data.id).addClass("is-invalid");
 		isValidProject = false;
-	} if (data.linkRef === "project_field_empty"||data.linkRef === "...") {
+	} if (data.linkRef === "project_field_empty") {
 		$("#project_link"+data.id).addClass("is-invalid");
 		isValidProject = false;
 	}
@@ -238,7 +238,7 @@ function appendProject(project) {
 	let linkRef = project.linkRef;
 	
 	first=$("#firstProject");
-	first.append(`<div class="col-lg-4" id="project${id}">
+	first.append(`<div class="col-lg-6" id="project${id}">
 							<div class="card mb-3">
 								<div class="card-body shadow" id="project_container">
 									<div class="text-center">
@@ -320,7 +320,7 @@ function setCreateProject() {
 	projectBtn.click(function(e){
 		e.preventDefault();
 		
-		newProject={
+		var newProject={
 		id:-1,
 		userId:-1,
 		title:$("#project_title").val(),
@@ -346,8 +346,7 @@ function setCreateProject() {
 }
 
 function createValidation(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	console.log("START VALIDATION; VALIDATING THIS DATA:"+ data.id);
 	
 	$("#project_title").removeClass("is-invalid");
 	$("#project_description").removeClass("is-invalid");
@@ -360,7 +359,7 @@ function createValidation(data) {
 	} if (data.description === "project_field_empty") {
 		$("#project_description").addClass("is-invalid");
 		isValidProject = false;
-	} if (data.linkRef === "project_field_empty"||data.linkRef === "...") {
+	} if (data.linkRef === "project_field_empty") {
 		$("#project_link").addClass("is-invalid");
 		isValidProject = false;
 	} if (data.picture === "undefined") {
@@ -368,12 +367,12 @@ function createValidation(data) {
 		isValidProject = false;
 	}
 	if (isValidProject) {
-				$("#popupNewBtn").trigger('click');
+			addProject(data);
+			resetTemplate();
+			$("#popupNewBtn").trigger('click');
 				
-				$("#closeNewPopupBtn").click(function() {
-					addProject(data);
-					resetTemplate();
-				});
+			$("#closeNewPopupBtn").click(function() {
+			});
 	}
 }
 

@@ -49,7 +49,7 @@ public class ProjectValidator {
 	}
 	
 	public static String validateLinkRef(String link) {
-		if(link.equals("")) return "...";
+		if(link.equals("")) return "#";
 		else
 			return LINK_PATTERN.matcher(link).matches() ? link : Protocol.PROJECT_EMPTY_FIELD;
 	}
