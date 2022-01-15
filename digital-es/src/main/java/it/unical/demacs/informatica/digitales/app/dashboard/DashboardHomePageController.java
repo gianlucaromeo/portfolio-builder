@@ -19,27 +19,29 @@ public class DashboardHomePageController {
 	
 	@GetMapping(value = {"/login", "/", ""})
 	public String showLoginPage() {
-		return "login";
+		return "app_login";
 	}
 	
 	@GetMapping("sign_up")
 	public String showSingUpPage() {
-		return "sign_up";
+		return "app_signup";
 	}
 	
 	@GetMapping("forgot_password")
 	public String showForgotPasswordPage() {
-		return "forgot_password";
+		return "app_forgot_password";
 	}
 	
+	/*
 	@GetMapping("confirm_email")
 	public String showConfirmEmailPage() {
 		return "confirm_email";
 	}
+	*/
 	
 	@GetMapping("email_confirmation_page")
 	public String showConfirmEmailInfoPage() {
-		return "email_confirmation_page";
+		return "app_email_confirmation_info";
 	}
 
 }

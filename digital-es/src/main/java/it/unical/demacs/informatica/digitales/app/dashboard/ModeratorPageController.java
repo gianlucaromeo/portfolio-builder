@@ -24,11 +24,6 @@ public class ModeratorPageController {
 		return Servlets.redirectModerator(req, "moderator_projects");
 	}
 
-	@GetMapping("/all_curriculums")
-	public synchronized String goToAllCurriculumsPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		return Servlets.redirectModerator(req, "moderator_curriculums");
-	}
-
 	@GetMapping("/all_users")
 	public synchronized String goToAllUsersPageGET(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		return Servlets.redirectModerator(req, "moderator_users");
@@ -37,11 +32,6 @@ public class ModeratorPageController {
 	@PostMapping("/all_users")
 	public synchronized String goToAllUsersPagePOST(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		return Servlets.redirectModerator(req, "moderator_users");
-	}
-	
-	@GetMapping("/testing_text")
-	public synchronized String testingText(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		return Servlets.redirect(req, "text_moderator_testing");
 	}
 	
 }

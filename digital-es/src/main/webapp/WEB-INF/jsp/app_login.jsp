@@ -91,7 +91,7 @@
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://apis.google.com/js/client.js"></script>
 	<script src="https://apis.google.com/js/api:client.js"></script>
-	<script src="../../dashboard_assets/js/google_login.js"></script>
+	<script src="../../app_assets/js/googleLogin.js"></script>
 </body>
 
 </html>

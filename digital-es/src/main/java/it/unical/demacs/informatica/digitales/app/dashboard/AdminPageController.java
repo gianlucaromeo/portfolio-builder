@@ -27,29 +27,29 @@ public class AdminPageController {
 	
 	@PostMapping("/profile")
 	public synchronized String goToUserAdminPage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		return Servlets.redirect(req, "profile");
+		return Servlets.redirect(req, "dashboard_profile");
 	}
 
 	@GetMapping("/profile")
 	public synchronized String goToUserAdminPageGET(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		return Servlets.redirect(req, "profile");
+		return Servlets.redirect(req, "dashboard_profile");
 
 	}
 
 	@GetMapping("/projects")
 	public synchronized String showProjectsPageGET(HttpServletRequest req, HttpServletResponse resp) {
-		return Servlets.redirect(req, "projects");
+		return Servlets.redirect(req, "dashboard_projects");
 	}
 
 	@GetMapping("/curriculum")
 	public synchronized String showCurriculumPageGET(HttpServletResponse resp, HttpServletRequest req) {
-		return Servlets.redirect(req, "curriculum");
+		return Servlets.redirect(req, "dashboard_cv");
 	}
 
 	@GetMapping("/posts")
 	public synchronized String showPostsPageGET(HttpServletResponse resp, HttpServletRequest req) {
-		return Servlets.redirect(req, "posts");
+		return Servlets.redirect(req, "dashboard_posts");
 	}
 	
 	@GetMapping("/404_page")

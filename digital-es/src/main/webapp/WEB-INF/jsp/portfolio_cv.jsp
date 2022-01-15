@@ -159,7 +159,7 @@
 										<span>${firstName} ${lastName}</span>
 									</div>
 								</div>
-								<c:if test="${phoneNumber != null}">
+								<c:if test="${phoneNumber != null && phoneNumber != ''}">
 									<div class="row">
 										<div class="col-1">
 											<i class="icon ion-ios-telephone icon"></i>
@@ -169,7 +169,7 @@
 										</div>
 									</div>
 								</c:if>
-								<c:if test="${secondaryPhoneNumber != null}">
+								<c:if test="${secondaryPhoneNumber != null && secondaryPhoneNumber != ''}">
 									<div class="row">
 										<div class="col-1">
 											<i class="icon ion-ios-telephone icon"></i>
@@ -187,7 +187,7 @@
 										<span>${email}</span>
 									</div>
 								</div>
-								<c:if test="${contactEmail != null}">
+								<c:if test="${contactEmail != null && contactEmail != ''}">
 									<div class="row">
 										<div class="col-1">
 											<i class="icon ion-at icon"></i>

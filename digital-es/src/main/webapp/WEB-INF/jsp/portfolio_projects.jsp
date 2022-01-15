@@ -54,7 +54,8 @@
 			<c:if test="${emptyProject==false}">
 				<div class="container">
 					<div class="heading">
-						<h2>Here are all my projects</h2>
+						<h2>my projects</h2>
+						<hr>
 					</div>
 					<div class="row" style="display: flex;">
 						<c:forEach items="${projects}" var="project">
