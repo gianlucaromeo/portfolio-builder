@@ -151,8 +151,8 @@ function signUp(userData) {
 		
 		console.log(emailConfirmation);
 		token = emailConfirmation.token;
-		sendEmail(userData.email, token)
-		//window.location.href = "/dashboard/confirm_email";
+		sendEmail(userData.email, token);
+		window.location.href = "/dashboard/email_confirmation_page";
 		
 	});
 

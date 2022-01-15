@@ -36,5 +36,10 @@ public class DashboardHomePageController {
 	public String showConfirmEmailPage() {
 		return "confirm_email";
 	}
+	
+	@GetMapping("email_confirmation_page")
+	public String showConfirmEmailInfoPage() {
+		return "email_confirmation_page";
+	}
 
 }
