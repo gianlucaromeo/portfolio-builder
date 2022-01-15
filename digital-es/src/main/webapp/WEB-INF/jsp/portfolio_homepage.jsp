@@ -22,6 +22,10 @@
 	<nav
 		class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
 		<div class="container">
+			<div class="pe-3" id="profileImageLogo">
+				<img class="border rounded-circle img-profile"
+					src="${profilePicture }" height="32" width="32">
+			</div>
 			<a class="navbar-brand logo" href="#">${firstName} ${lastName}</a>
 			<button data-bs-toggle="collapse" class="navbar-toggler"
 				data-bs-target="#navbarNav">
@@ -143,15 +147,17 @@
 	<footer class="page-footer">
 		<div class="container">
 			<div class="social-icons">
-				<c:if test="${facebookLink != null}">
-					<a href="${facebookLink}"><i class="icon ion-social-facebook"></i></a>
+				<c:if test="${facebookLink != null && facebookLink != ''}">
+					<a href="https://${facebookLink}"><i
+						class="icon ion-social-facebook"></i></a>
 				</c:if>
-				<c:if test="${instagramLink != null}">
-					<a href="${instagramLink}"><i
+				<c:if test="${instagramLink != null && instagramLink != ''}">
+					<a href="https://${instagramLink}"><i
 						class="icon ion-social-instagram-outline"></i></a>
 				</c:if>
-				<c:if test="${twitterLink != null}">
-					<a href="${twitterLink}"><i class="icon ion-social-twitter"></i></a>
+				<c:if test="${twitterLink != null && twitterLink != ''}">
+					<a href="https://${twitterLink}"><i
+						class="icon ion-social-twitter"></i></a>
 				</c:if>
 			</div>
 		</div>

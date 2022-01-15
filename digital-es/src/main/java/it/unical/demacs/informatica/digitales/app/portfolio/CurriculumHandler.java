@@ -21,7 +21,7 @@ public class CurriculumHandler {
 		if (!UserDAOImpl.getInstance().checkUsernameExists(username)) {
 			return "404_page";
 		}
-		
+
 		User user = UserDAOImpl.getInstance().findByUsername(username);
 		UserMainInformations userInfo = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
@@ -29,10 +29,11 @@ public class CurriculumHandler {
 		req.setAttribute("lastName", user.getLastName());
 		req.setAttribute("username", username);
 
-		req.setAttribute("profilePicture", UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
+		req.setAttribute("profilePicture",
+				UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
 
 		req.setAttribute("biography", userInfo.getBio());
-		
+
 		Set<CurriculumExperience> experiences = CurriculumExperienceDAOImpl.getInstance().findAllByUserId(user.getId());
 		experiences.forEach((exp) -> {
 			if (exp.getEndDate() == null || exp.getEndDate().equals("")) {
@@ -43,13 +44,22 @@ public class CurriculumHandler {
 
 		Set<CurriculumSkill> skills = CurriculumSkillDAOImpl.getInstance().findAllByUserId(user.getId());
 		req.setAttribute("skills", skills);
-		
+
 		req.setAttribute("dateOfBirth", user.getDateOfBirth());
 		req.setAttribute("phoneNumber", user.getMainPhoneNumber());
 		req.setAttribute("secondaryPhoneNumber", user.getSecondaryPhoneNumber());
 		req.setAttribute("email", user.getEmail());
 		req.setAttribute("contactEmail", user.getContactEmail());
-		
+
+		// link
+		req.setAttribute("facebookLink", userInfo.getFacebookLinkRef());
+		req.setAttribute("instagramLink", userInfo.getInstagramLinkRef());
+		req.setAttribute("twitterLink", userInfo.getTwitterLinkRef());
+
+		// foto profilo
+		req.setAttribute("profilePicture",
+				UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
+
 		return "portfolio_cv";
 
 	}

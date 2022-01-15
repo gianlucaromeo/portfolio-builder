@@ -10,10 +10,6 @@
 	transition: all 180ms linear;
 }
 
-#profileImageLogo {
-	margin-right: 10px;
-}
-
 .social-timeline-left {
 	position: absolute;
 	padding-top: 10px;

@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>${firstName} ${lastName} - Posts</title>
+<title>Posts - ${firstName} ${lastName}</title>
 <link rel="stylesheet"
 	href="../../portfolio_assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -24,11 +24,11 @@
 	<nav
 		class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
 		<div class="container ">
-			<div id="profileImageLogo">
+			<div class="pe-3" id="profileImageLogo">
 				<img class="border rounded-circle img-profile"
 					src="${profilePicture }" height="32" width="32">
 			</div>
-			<a class="navbar-brand logo" href="#">${firstName} ${lastName}</a>
+			<a class="navbar-brand logo" href="/users/${username}/homepage">${firstName} ${lastName}</a>
 			<button data-bs-toggle="collapse" class="navbar-toggler"
 				data-bs-target="#navbarNav">
 				<span class="visually-hidden">Toggle navigation</span><span
@@ -158,13 +158,17 @@
 
 	<footer class="page-footer">
 		<div class="container">
-			<div class="links">
-				<a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a>
-			</div>
 			<div class="social-icons">
-				<a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
-					class="icon ion-social-instagram-outline"></i></a><a href="#"><i
-					class="icon ion-social-twitter"></i></a>
+				<c:if test="${facebookLink != null && facebookLink != ''}">
+					<a href="https://${facebookLink}"><i class="icon ion-social-facebook"></i></a>
+				</c:if>
+				<c:if test="${instagramLink != null && instagramLink != ''}">
+					<a href="https://${instagramLink}"><i
+						class="icon ion-social-instagram-outline"></i></a>
+				</c:if>
+				<c:if test="${twitterLink != null && twitterLink != ''}">
+					<a href="https://${twitterLink}"><i class="icon ion-social-twitter"></i></a>
+				</c:if>
 			</div>
 		</div>
 	</footer>

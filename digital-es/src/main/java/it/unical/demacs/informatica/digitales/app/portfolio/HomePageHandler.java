@@ -28,7 +28,8 @@ public class HomePageHandler {
 		req.setAttribute("username", username);
 
 		// foto profilo
-		req.setAttribute("profilePicture", UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
+		req.setAttribute("profilePicture",
+				UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
 
 		// bio
 		req.setAttribute("biography", userInfo.getBio());
@@ -55,6 +56,10 @@ public class HomePageHandler {
 		req.setAttribute("facebookLink", userInfo.getFacebookLinkRef());
 		req.setAttribute("instagramLink", userInfo.getInstagramLinkRef());
 		req.setAttribute("twitterLink", userInfo.getTwitterLinkRef());
+
+		// foto profilo
+		req.setAttribute("profilePicture",
+				UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
 
 		return "portfolio_homepage";
 
