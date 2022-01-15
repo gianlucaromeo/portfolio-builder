@@ -21,6 +21,7 @@ public class CurriculumExperienceValidator {
 		
 		CurriculumExperienceValidatorResponse resp = new CurriculumExperienceValidatorResponse();
 		
+		
 		resp.setDescription(checkDescription(experience.getDescription()));
 		resp.setStartDate(checkStartDate(experience.getStartDate()));
 		resp.setEndDate(checkEndDate(experience.getEndDate(), experience.getEndDate()));
