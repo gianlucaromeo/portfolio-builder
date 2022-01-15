@@ -26,25 +26,30 @@ public class PostsHandler {
 		// Nome e Cognome e username
 		req.setAttribute("firstName", user.getFirstName());
 		req.setAttribute("lastName", user.getLastName());
-		//req.setAttribute("username", username);
+		// req.setAttribute("username", username);
 
 		// foto profilo
-		req.setAttribute("profilePicture", UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
+		req.setAttribute("profilePicture",
+				UserMainInformationsDAOImpl.getInstance().findProfileImageById(user.getId()));
 
 		// bio
 		req.setAttribute("biography", userInfo.getBio());
-		
-		List<Post> posts= new ArrayList<Post>();
-		posts=PostDAOImpl.getInstance().findAllByUserIdNotBanned(user.getId());
-		
-		
+
+		List<Post> posts = new ArrayList<Post>();
+		posts = PostDAOImpl.getInstance().findAllByUserIdNotBanned(user.getId());
+
 		req.setAttribute("almostOnePost", true);
-		if(posts.isEmpty()) {
+		if (posts.isEmpty()) {
 			req.setAttribute("almostOnePost", false);
-		}else {
+		} else {
 			Collections.reverse(posts);
 		}
 		req.setAttribute("posts", posts);
+
+		// link
+		req.setAttribute("facebookLink", userInfo.getFacebookLinkRef());
+		req.setAttribute("instagramLink", userInfo.getInstagramLinkRef());
+		req.setAttribute("twitterLink", userInfo.getTwitterLinkRef());
 
 		System.out.println("in redirect posts");
 		return "portfolio_posts";
