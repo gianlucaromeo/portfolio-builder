@@ -16,7 +16,7 @@ function getNotifications() {
 	}).done(function(data) {
 
 		notifications = data;
-		console.log(notifications);
+		
 		if (notifications.length <= 0 ) {
 			addNoNotification();
 		} else {
@@ -100,7 +100,7 @@ function deleteProject(notification) {
 	});
 }
 function refactNotifications(notification) {
-	console.log(notification.id);
+	
 	$("#notificationId" + notification.id).remove();
 	notificationsNumber--;
 

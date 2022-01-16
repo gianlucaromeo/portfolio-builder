@@ -15,7 +15,7 @@ function fetchUserId() {
 		dataType: "json"
 	}).done(function(data) {
 		user_id = JSON.stringify(data);
-		console.log("User id retrieved. Value: " + user_id);
+		
 	});
 }
 
@@ -92,21 +92,21 @@ function initDoneBtn() {
 			description: new_description
 		};
 
-		//console.log(new_data);
+		
 		if (new_title == '') {
-			console.log("Title is empty" + new_title);
+			
 			validateDiv("experienceTitle", false);
 			return;
 		}
 
 		if (new_dateStart == '' || new_dateStart == undefined) {
-			console.log("Date start is " + new_dateStart);
+			
 			validateDiv("datePickerFrom", false);
 			return;
 		}
 
 		if (new_type == '' || new_type == undefined) {
-			console.log("Type is " + new_type);
+			
 			validateDiv("experienceType", false);
 			return;
 		}
@@ -172,10 +172,10 @@ function setSaveBtnAction(exp) {
 		e.preventDefault();
 		// TODO: Ask if User wants to edit the experience with a friendly pop-up!
 		new_data = fetchNewData(exp);
-		//console.log(new_data);
+		
 
 		if (new_data == null) {
-			console.log("Edit error");
+			
 		} else {
 			updateExperience(new_data);
 		}
@@ -206,19 +206,19 @@ function fetchNewData(exp) {
 	};
 
 	if (new_title == '') {
-		console.log("Title is empty" + new_title);
+		
 		validateDiv("title_" + exp.id, false);
 		return null;
 	}
 
 	if (new_dateStart == '' || new_dateStart == undefined) {
-		console.log("Date start is " + new_dateStart);
+		
 		validateDiv("#dpFrom_" + exp.id, false);
 		return null;
 	}
 
 	if (new_type == '' || new_type == undefined) {
-		console.log("Type is " + new_type);
+		
 		validateDiv("#typeSelect_" + exp.id, false);
 		return null;
 	}
@@ -240,7 +240,7 @@ function updateExperience(new_experience_data) {
 	}).done(function(data) {
 
 		if (data.valid == false) {
-			console.log("data not valid");
+			
 			checkUpdateTitle(data);
 			checkUpdateDateFrom(data);
 			checkUpdateDateTo(data);
@@ -248,7 +248,7 @@ function updateExperience(new_experience_data) {
 			checkUpdateType(data);
 			checkUpdateDescription(data);
 		} else {
-			console.log("data are valid: id=" + data.id);
+			
 			all_experiences.set(new_experience_data.id, new_experience_data);
 			updateExperienceDiv(new_experience_data);
 		}
@@ -272,9 +272,9 @@ function addExperience(new_experience) {
 	}).done(function(data) {
 
 		if (data == "experience exists") {
-			console.log("Experience already exists");
+			
 		} else if (data.valid == false) {
-			console.log("data not valid");
+			
 			checkTitle(data);
 			checkDateFrom(data);
 			checkDateTo(data);
@@ -282,7 +282,7 @@ function addExperience(new_experience) {
 			checkType(data);
 			checkDescription(data);
 		} else {
-			console.log("data are valid: id=" + data.id);
+			
 			all_experiences.set(data.id, data);
 			initExperience(data, data.id, false);
 			cleanAddNewExperienceFields();
@@ -452,7 +452,7 @@ function buildCardBody(exp) {
 function buildCardHeader(type) {
 	div_class = "card-header py-3 ";
 	div_class += type === "WORK" ? "work-experience" : "education-experience";
-	console.log(type);
+	
 	return `<div class="${div_class}">
 				<h6 class="text-light fw-bold m-0">Experience</h6>
 			</div>`;

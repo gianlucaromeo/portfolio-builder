@@ -19,16 +19,16 @@ function start() {
 		dataType: "json",
 
 	}).done(function(data) {
-		//console.log(data);
+		
 		users = data;
 
 		if (users.length !== 0) {
-			//console.log("no data");
+			
 
 			users.forEach(user => {
 				addUserOnTable(user);
 				userMap.set(user.id, user);
-				//console.log(user);
+				
 			});
 		}
 
@@ -42,7 +42,7 @@ function addUserOnTable(user) {
 }
 
 function createUserRow(userData) {
-	//console.log(userData);
+	
 
 	return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
 				<td id="userTdId${userData.id}"><img class="rounded-circle me-2" width="30" height="30"
@@ -61,8 +61,8 @@ function setUserTableUserImage(id) {
 		dataType: "json",
 
 	}).done(function(profileImage) {
-		//console.log(data);
-		//console.log($("#profileImageUserId"+id));
+		
+		
 
 		if (profileImage !== "error") {
 			$("#profileImageUserId" + id).attr("src", profileImage);
@@ -92,15 +92,15 @@ function setEventOnUserRow(id) {
 			dataType: "json",
 
 		}).done(function(data) {
-			//console.log(data);
+			
 			posts = data;
-			//console.log(posts);
+			
 			if (posts.length === 0) {
 				addUserPost(null);
 			} else {
 				posts.forEach(post => {
 					addUserPost(post);
-					//console.log(post);
+					
 				});
 			}
 
@@ -115,7 +115,7 @@ function setEventOnUserRow(id) {
 function addUserPost(post) {
 	prependPost(post);
 	if (post !== null) {
-		console.log(post.picture);
+		
 		if (post.picture === "undefined" || post.picture === undefined) {
 			$("#imageId" + post.id).hide();
 
@@ -138,7 +138,7 @@ function setEventOnConfirmBan(id) {
 	}
 	$("#confirmDelete" + id).click(function(e) {
 		e.preventDefault();
-		console.log(id);
+		
 		$.ajax({
 
 			url: "/remove_post_action",
@@ -162,10 +162,10 @@ function setEventOnConfirmBan(id) {
 }
 function setBanReasonsOnDelete(id) {
 	banReasons.forEach(function(reason) {
-		//console.log(reason);
+		
 		appendReason(reason, id);
 
-		//console.log(reason);
+		
 	});
 }
 
@@ -230,14 +230,14 @@ function getDeleteButton(id) {
 							</div>
 						</div>`;
 
-	//console.log(banReasons);
+	
 
 
 	return deleteButton;
 }
 function appendReason(reason, id) {
 	$("#reasonsSelectId" + id).append(`<option value="${reason}">${reason}</option>`);
-	//console.log($("#reasonsSelectId" + id).val();
+	
 }
 function getBanReasons() {
 	$.ajax({
@@ -249,9 +249,9 @@ function getBanReasons() {
 
 	}).done(function(data) {
 		reasons = JSON.parse(data);
-		//console.log(reasons);
+		
 		if (reasons.length !== 0) {
-			console.log("ciao")
+			
 			setBanReasons(reasons);
 		}
 
@@ -260,7 +260,7 @@ function getBanReasons() {
 
 function setBanReasons(reasons) {
 	banReasons = reasons;
-	//	console.log(banReasons);
+	//	
 }
 
 

@@ -8,7 +8,7 @@ var selectedUserProjects = {};
 
 function fetchReasons() {
 
-	console.log("Fetching reasons..");
+	
 
 	$.ajax({
 
@@ -21,8 +21,8 @@ function fetchReasons() {
 	}).done(function(reasons) {
 
 		removeProjectReasons = reasons;
-		console.log("Reasons fetched.")
-		console.log(reasons);
+		
+		
 
 	});
 
@@ -30,7 +30,7 @@ function fetchReasons() {
 
 function fetchAllUsers() {
 
-	console.log("Fetching users..")
+	
 
 	$.ajax({
 
@@ -53,7 +53,7 @@ function fetchAllUsers() {
 function fetchUserProjects() {
 
 	if (selectedUserId < 0) {
-		console.log("Invalid user id.");
+		
 		return;
 	}
 
@@ -70,12 +70,12 @@ function fetchUserProjects() {
 		clearProjectsTable();
 
 		if (selectedUserProjects.length == 0) {
-			console.log("Users has no projects.");
+			
 			buildNoProjectsRow();
 		} else {
-			console.log("User has " + selectedUserProjects.length + " projects. Building..")
+			
 			selectedUserProjects.forEach(project => buildProjectRow(project));
-			console.log("User's projects built.")
+			
 		}
 
 	});
@@ -190,14 +190,14 @@ function addClickOnConfirmRemoveProjectBtn(projectId) {
 
 		}).done(function(status) {
 			if (status == "ok") {
-				console.log("Project removed.")
+				
 			} else {
-				console.log("Remove project status error: " + status);
+				
 			}
 			fetchUserProjects();
 		});
 
-		//console.log("Remove project. Id: " + removeProjectRequest.id + ". Reason: " + removeProjectRequest.reason);
+		
 	});
 }
 
@@ -208,7 +208,7 @@ function addClickOnRow(userId) {
 
 		$("#td_user_" + userId).addClass("highlight");
 
-		console.log("Clicked on userid: " + userId);
+		
 		fetchUserProjects();
 	});
 }
@@ -224,7 +224,7 @@ function buildUserRow(user) {
 
 	$("#allUsersTableBody").append(row);
 	addClickOnRow(user.id);
-	//console.log("Row appended to tbody. Username: " + user.username);
+	
 
 }
 
@@ -232,7 +232,7 @@ function buildUserRow(user) {
 
 
 window.onload = (event) => {
-	console.log("Load page Projects for Moderators.")
+	
 	fetchReasons();
 	fetchAllUsers();
 };

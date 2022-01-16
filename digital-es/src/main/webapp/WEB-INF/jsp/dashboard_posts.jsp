@@ -95,6 +95,8 @@
 									</div>
 								</div>
 							</li>
+							
+							<div class="d-none d-sm-block topbar-divider"></div>
 
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">

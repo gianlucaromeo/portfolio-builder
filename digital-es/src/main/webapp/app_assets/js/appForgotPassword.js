@@ -14,7 +14,7 @@ function sendEmail(receiver) {
 		dataType: "json"
 	}).done(function(data) {
 		var token = data.token;
-		console.log(data.token);
+		
 		var html = '<a href="http://localhost:8080/users/' + token + '/password_reset">Click Here to reset your password</a>';
 		var templateParams = {
 			from_name: "DigitalES",
@@ -23,10 +23,10 @@ function sendEmail(receiver) {
 		};
 		emailjs.send("service_p1x7zca", "template_m85gci9", templateParams)
 			.then(function(response) {
-				console.log('SUCCESS!', response.status, response.text);
+				
 				alert("An email with your password has been sent to the email associated with your username");
 			}, function(error) {
-				console.log('FAILED...', error);
+				
 			});
 	});
 
@@ -61,7 +61,7 @@ function resetPassword() {
 		repeatPassword: repeatPassword.val(),
 		token: token.val()
 	};
-	console.log(values);
+	
 	$.ajax({
 		url: "/reset_password",
 		contentType: "application/json",
@@ -69,7 +69,7 @@ function resetPassword() {
 		type: "post",
 		dataType: "json"
 	}).done(function(data) {
-		console.log(data);
+		
 		if (checkPasswordMatch(password, repeatPassword) && checkPasswordValid(password, repeatPassword, data.password)) {
 			alert("Your Password has been updated successfully");
 			password.removeClass("is-invalid");

@@ -52,7 +52,7 @@ function attachGoogleLogin(element) {
 
 }
 function checkGoogleUserExists(email) {
-	console.log("check");
+	
 
 	$.ajax({
 
@@ -63,12 +63,12 @@ function checkGoogleUserExists(email) {
 		dataType: "json",
 
 	}).done(function(data) {
-		console.log("user:" + data);
+		
 
 		if (data !== null) {
 			login(data);
 		}else{
-			console.log("not exists");
+			
 		}
 	});
 
@@ -81,7 +81,7 @@ function login(email) {
 		type: "post",
 		dataType: "json"
 	}).done(function(data) {
-		console.log(data);
+		
 		if (data === "ok") {
 			window.location.href = "/dashboard/profile";
 		}
@@ -145,7 +145,7 @@ function generatePassword() {
 var generatedUsername = generateUsername();
 
 function setUsernameField() {
-	console.log("Generated username: " + generatedUsername);
+	
 	$("#username").val(generatedUsername);
 }
 
