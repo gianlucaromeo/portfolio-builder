@@ -1,6 +1,5 @@
 package it.unical.demacs.informatica.digitales.app.portfolio;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;

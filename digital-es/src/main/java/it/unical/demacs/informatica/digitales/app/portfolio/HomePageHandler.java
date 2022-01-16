@@ -1,6 +1,5 @@
 package it.unical.demacs.informatica.digitales.app.portfolio;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
