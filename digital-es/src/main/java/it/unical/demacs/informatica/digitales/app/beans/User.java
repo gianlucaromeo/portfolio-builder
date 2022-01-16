@@ -18,7 +18,7 @@ public class User {
 	private String contactEmail;
 	private boolean confirmed;
 	private String signUpDate;
-	
+
 	public String getSignUpDate() {
 		return signUpDate;
 	}
@@ -34,69 +34,86 @@ public class User {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
-	
+
 	public User() {
 	}
 
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getMainPhoneNumber() {
 		return mainPhoneNumber;
 	}
+
 	public void setMainPhoneNumber(String mainPhoneNumber) {
 		this.mainPhoneNumber = mainPhoneNumber;
 	}
+
 	public String getSecondaryPhoneNumber() {
 		return secondaryPhoneNumber;
 	}
+
 	public void setSecondaryPhoneNumber(String secondaryPhoneNumber) {
 		this.secondaryPhoneNumber = secondaryPhoneNumber;
 	}
+
 	public String getContactEmail() {
 		return contactEmail;
 	}
+
 	public void setContactEmail(String contactEmail) {
 		this.contactEmail = contactEmail;
 	}
+
 	public boolean isConfirmed() {
 		return confirmed;
 	}
+
 	public void setConfirmed(boolean confirmed) {
 		this.confirmed = confirmed;
 	}
@@ -132,7 +149,5 @@ public class User {
 				+ mainPhoneNumber + ", secondaryPhoneNumber=" + secondaryPhoneNumber + ", contactEmail=" + contactEmail
 				+ ", confirmed=" + confirmed + "]";
 	}
-	
-	
-	
+
 }

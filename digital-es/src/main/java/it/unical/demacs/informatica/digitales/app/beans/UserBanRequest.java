@@ -1,14 +1,12 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
-
 public class UserBanRequest {
 
 	private Integer userId;
 	private String reason;
 	private String dateStart;
 	private String dateEnd;
-	
-	
+
 	public UserBanRequest() {
 		// TODO Auto-generated constructor stub
 	}
@@ -44,6 +42,5 @@ public class UserBanRequest {
 	public void setDateEnd(String dateEnd) {
 		this.dateEnd = dateEnd;
 	}
-	
-	
+
 }

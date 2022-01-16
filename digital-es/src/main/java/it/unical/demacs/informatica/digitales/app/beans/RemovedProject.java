@@ -3,13 +3,13 @@ package it.unical.demacs.informatica.digitales.app.beans;
 import java.util.Objects;
 
 public class RemovedProject {
-	
+
 	private long id;
 	private long moderatorId;
 	private long projectId;
 	private String reason;
 	private boolean seenByUser;
-	
+
 	public RemovedProject() {
 	}
 
@@ -76,8 +76,5 @@ public class RemovedProject {
 		return "RemovedProject [id=" + id + ", moderatorId=" + moderatorId + ", projectId=" + projectId + ", reason="
 				+ reason + ", seenByUser=" + seenByUser + "]";
 	}
-	
-	
-	
-	
+
 }

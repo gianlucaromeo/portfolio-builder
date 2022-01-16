@@ -7,7 +7,7 @@ public class RemoveProjectRequest {
 
 	public RemoveProjectRequest() {
 	}
-	
+
 	public long getId() {
 		return id;
 	}

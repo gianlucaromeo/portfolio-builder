@@ -19,7 +19,7 @@ import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.Post;
-import it.unical.demacs.informatica.digitales.app.beans.PostBanRequest;
+import it.unical.demacs.informatica.digitales.app.beans.RemovePostRequest;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
@@ -113,7 +113,7 @@ public class ModeratorPostsREST {
 			throws JsonSyntaxException, JsonIOException, IOException {
 
 		Gson gson = new Gson();
-		PostBanRequest banReq = gson.fromJson(req.getReader(), PostBanRequest.class);
+		RemovePostRequest banReq = gson.fromJson(req.getReader(), RemovePostRequest.class);
 		Post post = new Post();
 
 		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");

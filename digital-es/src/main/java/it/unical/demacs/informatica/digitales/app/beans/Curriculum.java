@@ -3,31 +3,34 @@ package it.unical.demacs.informatica.digitales.app.beans;
 import java.util.Objects;
 
 public class Curriculum {
-	private long id; 
+	private long id;
 	private long userId;
 	private String hobbiesDescription;
-	
 
-	
 	public Curriculum() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public long getUserId() {
 		return userId;
 	}
+
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+
 	public String getHobbiesDescription() {
 		return hobbiesDescription;
 	}
+
 	public void setHobbiesDescription(String hobbiesDescription) {
 		this.hobbiesDescription = hobbiesDescription;
 	}
@@ -53,8 +56,5 @@ public class Curriculum {
 	public String toString() {
 		return "Curriculum [id=" + id + ", userId=" + userId + ", hobbiesDescription=" + hobbiesDescription + "]";
 	}
-
-	
-	
 
 }

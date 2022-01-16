@@ -1,10 +1,11 @@
 package it.unical.demacs.informatica.digitales.app.beans;
 
-public class PostBanRequest {
+public class RemovePostRequest {
+
 	private Integer postId;
 	private String reason;
-	
-	public PostBanRequest() {
+
+	public RemovePostRequest() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -23,7 +24,5 @@ public class PostBanRequest {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	
-	
 
 }
