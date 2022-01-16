@@ -63,6 +63,8 @@ public class ModeratorProjectsREST {
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
 			reasons.add(RemoveProjectReasons.INAPPROPRIATE_CONTENT);
+			reasons.add(RemoveProjectReasons.TEXT_NOT_COMPLY);
+			reasons.add(RemoveProjectReasons.INAPPROPRIATE_PICTURE);
 			String reasonsToJSON = gson.toJson(reasons);
 			return reasonsToJSON;
 		}

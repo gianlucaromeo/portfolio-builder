@@ -74,9 +74,9 @@ public class ModeratorPostsREST {
 
 	}
 
-
 	@PostMapping("/get_users_posts_by_id_not_banned")
-	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp) throws JsonSyntaxException, JsonIOException, IOException {
+	public String getUserPostsAction(HttpServletRequest req, HttpServletResponse resp)
+			throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 
@@ -101,6 +101,8 @@ public class ModeratorPostsREST {
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
 			reasons.add(RemovePostReasons.TEXT_NOT_COMPLY);
+			reasons.add(RemovePostReasons.INAPPROPRIATE_CONTENT);
+			reasons.add(RemovePostReasons.INAPPROPRIATE_PICTURE);
 			String reasonsToJSON = gson.toJson(reasons);
 			return reasonsToJSON;
 		}
