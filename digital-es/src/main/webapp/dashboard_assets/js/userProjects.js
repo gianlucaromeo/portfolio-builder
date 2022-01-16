@@ -244,7 +244,7 @@ function appendProject(project) {
 									<div class="text-center">
 										<img 
 											src="${imagePath}"
-											width="160" height="160" id="project_image${id}">
+											width="160" height="160" id="project_image${id}" class="img-fluid">
 										<div class="row" style="margin-top: 20px;"id="divNewImage${id}">
 											<div class="text-center"> 
 											<input type="file" accept="image/jpg, image/png" id="image_chooser${id}" class="editPhotoChooser col-12"/> 
@@ -292,17 +292,17 @@ function appendProject(project) {
 											</form>
 										</div>
 										<div class="row text-center">
-											<div class="col mb-3">
+											<div class="col-md-3 col-sm-12 mb-3">
 												<button id="edit${id}" class="btn btn-primary btn-sm" type="submit">EDIT</button>
 											</div>
-											<div class="col mb-3">
+											<div class="col-md-3 col-sm-12 mb-3">
 												<button id="confirm${id}" class="btn btn-primary btn-sm" type="submit">CONFIRM</button>
 											</div>
 											`+ getPopUpOnSave(id) + `
-											<div class="col mb-3">
+											<div class="col-md-3 col-sm-12 mb-3">
 												<button id="discard${id}" class="btn btn-danger btn-sm" type="submit">UNDO</button>
 											</div>
-											<div class="col mb-3">
+											<div class="col-md-3 col-sm-12 mb-3">
 												<button id="delete${id}" class="btn btn-danger btn-sm" type="submit"
 												data-bs-toggle="modal" data-bs-target="#modalId${id}">DELETE</button>
 											</div>
