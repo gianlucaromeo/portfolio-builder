@@ -135,6 +135,7 @@ function saveBiography() {
 		e.preventDefault();
 		biography ={
 			bio:$("#biography").val(),
+			profilePicture:$("#profile_picture").attr("src"),
 		};
 		console.log(biography.bio);
 			$.ajax({
@@ -146,7 +147,7 @@ function saveBiography() {
 		}).done(function(data) {
 			console.log(data);
 		});
-		bioEdit(true);
+		editBioArea(true);
 		$("#edit_all_btn").text("Edit");
 	});
 }
@@ -606,7 +607,6 @@ function setOnChangeImage(id) {
 function saveImages() {
 	console.log(newImages);
 	var newImages={
-			profilePicture:$("#profile_picture").attr("src"),
 			presentationPicture1:$("#presentation_image_1").attr("src"),
 			presentationPicture2:$("#presentation_image_2").attr("src"),
 			presentationPicture3:$("#presentation_image_3").attr("src"),
@@ -656,6 +656,7 @@ function loadMainInformations() {
 		}).done(function(data) {
 			console.log(data);
 			$("#biography").val(data.bio);
+			document.querySelector("#profile_picture").src=data.profilePicture;
 			
 			
 			$("#mainSkill1").val(data.specialSkillName1);
@@ -819,16 +820,6 @@ function mainInfoEdit(value) {
 	}
 	else {
 		$("#main_info_btn").show();
-	}
-}
-
-function bioEdit(value) {
-	$("#biography").attr('readonly',value);	
-	if(value) {
-		$("#biography_btn").hide();
-	}
-	else {
-		$("#biography_btn").show();
 	}
 }
 
