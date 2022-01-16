@@ -92,7 +92,7 @@
 																				data-toggle="dropdown" aria-haspopup="true"
 																				aria-expanded="true" role="tooltip"></span>
 
-																			<div class="f-w-600">${firstName}${lastName}</div>
+																			<div class="f-w-600">${firstName} ${lastName}</div>
 																			<c:if
 																				test="${post.lastEditDate == '' || post.lastEditDate == null}">
 																				<div class="social-time text-muted">Posted on:
