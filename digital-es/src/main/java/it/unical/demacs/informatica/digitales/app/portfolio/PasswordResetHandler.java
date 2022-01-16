@@ -19,6 +19,6 @@ public class PasswordResetHandler {
 		if (user == null) 
 			return Servlets.redirectOnPage("404_page");		
 		
-		return "reset_password";
+		return "app_reset_password";
 	}
 }

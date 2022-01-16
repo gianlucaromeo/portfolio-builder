@@ -23,48 +23,47 @@ import it.unical.demacs.informatica.digitales.app.validator.ResetPasswordValidat
 
 @RestController
 public class ResetPasswordControllerREST {
-	
+
 	@PostMapping("get_token")
 	public String getToken(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		ResetPasswordValidatorResponse res = new ResetPasswordValidatorResponse();
-		res = gson.fromJson(req.getReader(),ResetPasswordValidatorResponse.class);
-		
-		User user=UserDAOImpl.getInstance().findByUsername(res.getToken());
-		
+		res = gson.fromJson(req.getReader(), ResetPasswordValidatorResponse.class);
+
+		User user = UserDAOImpl.getInstance().findByUsername(res.getToken());
+
 		EmailConfirmation emailConfirmation = new EmailConfirmation();
 		emailConfirmation.setUserId(user.getId());
 		emailConfirmation.setToken(createToken());
 		EmailConfirmationDaoImpl.getInstance().create(emailConfirmation);
-		
+
 		return gson.toJson(emailConfirmation);
 	}
-	
+
 	@PostMapping("reset_password")
 	public String resetPassword(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
 		ResetPasswordValidatorResponse res = new ResetPasswordValidatorResponse();
-		res = gson.fromJson(req.getReader(),ResetPasswordValidatorResponse.class);
-		
+		res = gson.fromJson(req.getReader(), ResetPasswordValidatorResponse.class);
+
 		ResetPasswordValidator.validatePassword(res);
-		
+
 		long userId = EmailConfirmationDaoImpl.getInstance().findUserId(res.getToken());
-		User selectedUser=UserDAOImpl.getInstance().findById(userId);
-		if(selectedUser!=null&&res.getPassword().equals(res.getRepeatPassword())) {
-			
+		User selectedUser = UserDAOImpl.getInstance().findById(userId);
+		if (selectedUser != null && res.getPassword().equals(res.getRepeatPassword())) {
+
 			selectedUser.setPassword(res.getPassword());
-			
+
 			UserDAOImpl.getInstance().update(selectedUser);
-			EmailConfirmation eC=new EmailConfirmation();
+			EmailConfirmation eC = new EmailConfirmation();
 			eC.setUserId(userId);
 			eC.setToken(res.getToken());
 			EmailConfirmationDaoImpl.getInstance().delete(eC);
 		}
 		return gson.toJson(res);
 	}
-	
+
 	private String createToken() {
 		return UUID.randomUUID().toString();
 	}
 }
-
