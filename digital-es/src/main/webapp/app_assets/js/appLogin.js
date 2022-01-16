@@ -19,7 +19,7 @@ loginBtn.on("click", function(e) {
 
 	var login_fieldsAreValid = true;
 	login_fields.forEach(field => {
-		if (field.val() == null || field.val() === "") {
+		if (field.val() == null || field.val() == "" || field.val() == undefined) {
 			console.log("Field " + field.val());
 			field.addClass("is-invalid");
 			login_fieldsAreValid = false;

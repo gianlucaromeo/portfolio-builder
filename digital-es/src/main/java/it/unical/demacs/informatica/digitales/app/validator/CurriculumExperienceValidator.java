@@ -11,8 +11,8 @@ import it.unical.demacs.informatica.digitales.app.settings.CurriculumSettings;
 
 public class CurriculumExperienceValidator {
 
-	private static final String TITLE_RGX = "^[0-9a-zA-Z\\s]+$";
-	private static final String PLACE_RGX = "^[0-9a-zA-Z\\s]+$";
+	private static final String TITLE_RGX = "^[0-9a-zA-Z\\s!\"#$%&'()*+,-./:;<=>?@]+$";
+	private static final String PLACE_RGX = "^[0-9a-zA-Z\\s!\"#$%&'()*+,-./:;<=>?@]+$";
 	
 	private static final Pattern TITLE_PATTERN = Pattern.compile(TITLE_RGX);
 	private static final Pattern PLACE_PATTERN = Pattern.compile(PLACE_RGX);
