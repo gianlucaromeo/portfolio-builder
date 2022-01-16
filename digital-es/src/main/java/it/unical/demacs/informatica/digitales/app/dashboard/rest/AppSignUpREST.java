@@ -48,7 +48,6 @@ public class AppSignUpREST {
 	public String signUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		User user = new User();
-		// fetchUserData(user, req);
 		user = new Gson().fromJson(req.getReader(), User.class);
 		user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
 
@@ -61,11 +60,6 @@ public class AppSignUpREST {
 			UserMainInformations info = new UserMainInformations();
 			info.setUserId(user.getId());
 			UserMainInformationsDAOImpl.getInstance().create(info);
-
-			// Cookie cookie = Servlets.initLoggedUsernameCookie(req,resp,
-			// user.getUsername());
-
-			// Servlets.redirectLogin(resp, cookie);
 			EmailConfirmation emailConfirmation = new EmailConfirmation();
 			emailConfirmation.setUserId(user.getId());
 			emailConfirmation.setToken(createToken());
@@ -112,16 +106,6 @@ public class AppSignUpREST {
 
 		return Protocol.OK;
 
-	}
-	
-	private void fetchUserData(User user, HttpServletRequest req) {
-		user.setFirstName(req.getParameter("first_name"));
-		user.setLastName(req.getParameter("last_name"));
-		user.setUsername(req.getParameter("username"));
-		user.setEmail(req.getParameter("email"));
-		user.setPassword(req.getParameter("password"));
-		user.setDateOfBirth(req.getParameter("date_of_birth"));
-		user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
 	}
 
 	private String createToken() {

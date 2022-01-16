@@ -1,12 +1,10 @@
 package it.unical.demacs.informatica.digitales.app.dashboard.rest;
 
 import java.io.IOException;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
