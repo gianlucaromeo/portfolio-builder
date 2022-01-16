@@ -19,6 +19,12 @@
 	href="../../app_assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="../../portfolio_assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/fonts/fontawesome-all.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/fonts/font-awesome.min.css">
+<link rel="stylesheet"
+	href="../../dashboard_assets/fonts/fontawesome5-overrides.min.css">
 </head>
 
 <body class="gradient">
@@ -44,6 +50,9 @@
 
 	<div id="notfound">
 		<div class="notfound">
+			<h1>
+				<i class="far fa-check-circle"></i>
+			</h1>
 			<div class="notfound-404">
 				<h4>Confirm Your Email</h4>
 				<h2>An E-Mail has been sent to your address.</h2>

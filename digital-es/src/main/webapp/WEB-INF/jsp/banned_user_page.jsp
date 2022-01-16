@@ -44,6 +44,7 @@
 	<div id="notfound">
 		<div class="notfound">
 			<div class="notfound-404">
+				<h3>Oops! There's a problem!</h3>
 				<h1>
 					<span>B</span><span>A</span><span>N</span>
 				</h1>
