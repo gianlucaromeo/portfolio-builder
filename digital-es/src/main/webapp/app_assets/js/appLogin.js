@@ -20,16 +20,16 @@ loginBtn.on("click", function(e) {
 	var login_fieldsAreValid = true;
 	login_fields.forEach(field => {
 		if (field.val() == null || field.val() == "" || field.val() == undefined) {
-			console.log("Field " + field.val());
+			
 			field.addClass("is-invalid");
 			login_fieldsAreValid = false;
 		} else {
-			console.log("field ok : " + field.val());
+			
 		}
 	});
 
 	if (login_fieldsAreValid) {
-		console.log("inseide")
+		
 		sendData(login_fields);
 	}
 
@@ -65,8 +65,8 @@ function sendData(login_fields) {
 
 	}).done(function(data) {
 
-		console.log(data.username);
-		console.log(data.password);
+		
+		
 		login_fields.forEach(field => field.removeClass("is-invalid"));
 
 		removeErrorLabels();

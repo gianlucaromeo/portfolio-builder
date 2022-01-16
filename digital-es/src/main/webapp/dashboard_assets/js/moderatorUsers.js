@@ -7,7 +7,7 @@ var banReasons = [];
 function start() {
 	getBanReasons();
 
-	console.log(banReasons)
+	
 	$.ajax({
 
 		url: "/get_users_data_action",
@@ -16,15 +16,15 @@ function start() {
 		dataType: "json",
 
 	}).done(function(data) {
-		//console.log(data);
+		
 		users = data;
 
 		if (users.length !== 0) {
-			//console.log("no data");
+			
 
 			users.forEach(user => {
 				addUserOnTable(user);
-				//console.log(user);
+				
 			});
 		}
 
@@ -40,7 +40,7 @@ function addUserOnTable(user) {
 }
 
 function createUserRow(userData) {
-	//console.log(userData);
+	
 	;
 	return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
 				<td><img class="rounded-circle me-2" width="30" height="30"
@@ -61,8 +61,8 @@ function setUserTableUserImage(id) {
 		dataType: "json",
 
 	}).done(function(profileImage) {
-		//console.log(data);
-		//console.log($("#profileImageUserId"+id));
+		
+		
 
 		if (profileImage !== "error") {
 			$("#profileImageUserId" + id).attr("src", profileImage);
@@ -83,7 +83,7 @@ function setEventOnConfirmBan(id) {
 		e.preventDefault();
 
 		let selectedReason = $('#reasonsSelectId' + id + ' option:selected').val();
-		console.log(selectedReason);
+		
 
 		let end = $("#datePickerExpiration").val();
 
@@ -94,7 +94,7 @@ function setEventOnConfirmBan(id) {
 			dateEnd: end
 
 		}
-		console.log(id);
+		
 		$.ajax({
 
 			url: "/ban_user",
@@ -157,7 +157,7 @@ function getBanButton(id) {
 							</div>
 						</div>`;
 
-	//console.log(banReasons);
+	
 
 
 	return banButton;
@@ -174,9 +174,9 @@ function getBanReasons() {
 
 	}).done(function(data) {
 		reasons = JSON.parse(data);
-		console.log(reasons);
+		
 		if (reasons.length !== 0) {
-			console.log("ciao")
+			
 			setBanReasons(reasons);
 		}
 
@@ -185,19 +185,19 @@ function getBanReasons() {
 
 function setBanReasons(reasons) {
 	banReasons = reasons;
-	//	console.log(banReasons);
+	//	
 }
 
 function appendReason(reason, id) {
 	$("#reasonsSelectId" + id).append(`<option value="${reason}">${reason}</option>`);
-	//console.log($("#reasonsSelectId" + id).val();
+	
 }
 function setBanReasonsOnPopUp(id) {
 	banReasons.forEach(function(reason) {
-		//console.log(reason);
+		
 		appendReason(reason, id);
 
-		//console.log(reason);
+		
 	});
 }
 

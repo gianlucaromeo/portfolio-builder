@@ -99,9 +99,9 @@ function sendData(signup_fields) {
 		checkDateOfBirthValidation(data);
 		checkEmailValidation(data);
 		
-		console.log(signUpWithGoogleChoose);
+		
 		if (signUpWithGoogleChoose) {
-			console.log(userData)
+			
 			signUpWithGoogle(userData);
 		}
 		else if (userDataValidated) {
@@ -149,7 +149,7 @@ function signUp(userData) {
 
 	}).done(function(emailConfirmation) {
 		
-		console.log(emailConfirmation);
+		
 		token = emailConfirmation.token;
 		sendEmail(userData.email, token);
 		window.location.href = "/dashboard/email_confirmation_page";
@@ -161,7 +161,7 @@ function signUp(userData) {
 emailjs.init("user_8pSYeKRzRGlH0I3n8Mv49"); //please encrypted user id for malicious attacks
 function sendEmail(receiver, token) {
 	
-	console.log("TOKEN: " + token);
+	
 	html = `<a href="http://localhost:8080/confirm_email/${token}">Confirm your email!</a>`;
 	
 	var templateParams = {
@@ -174,9 +174,9 @@ function sendEmail(receiver, token) {
 
 	emailjs.send("service_p1x7zca", "template_1cxbziq", templateParams)
 		.then(function(response) {
-			console.log('SUCCESS!', response.status, response.text);
+			
 		}, function(error) {
-			console.log('FAILED...', error);
+			
 		});
 };
 //sendEmail("mymail@gmail.com");  //testing if the email is sent when page loaded

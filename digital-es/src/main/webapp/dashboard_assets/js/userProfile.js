@@ -137,7 +137,7 @@ function saveBiography() {
 			bio:$("#biography").val(),
 			profilePicture:$("#profile_picture").attr("src"),
 		};
-		console.log(biography.bio);
+		
 			$.ajax({
 			url: "/save_bio",
 			contentType: "application/json",
@@ -145,7 +145,7 @@ function saveBiography() {
 			type: "post",
 			dataType: "json",
 		}).done(function(data) {
-			console.log(data);
+			
 		});
 		editBioArea(true);
 		$("#edit_all_btn").text("Edit");
@@ -175,8 +175,8 @@ function saveMainInfo() {
 }
 
 function mainInfoValidation(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	
+	
 	
 	$("#username").removeClass("is-invalid");
 	$("#email").removeClass("is-invalid");
@@ -243,14 +243,14 @@ function saveContacts2(validated1) {
 			if(validated1&&validated2) {
 			contactEdit(true);
 			$("#editContactSettings").text("Edit");
-			console.log("VALID DATA");
+			
 			}
 		});
 }
 
 function contactValidation1(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	
+	
 	
 	$("#contactEmail").removeClass("is-invalid");
 	$("#phoneNumber").removeClass("is-invalid");
@@ -273,8 +273,8 @@ function contactValidation1(data) {
 }
 
 function contactValidation2(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	
+	
 	
 	$("#facebook").removeClass("is-invalid");
 	$("#twitter").removeClass("is-invalid");
@@ -307,7 +307,7 @@ function saveMainSkills() {
 			specialSkillName3:$("#mainSkill3").val(),
 			specialSkillDescr3:$("#mainSkillDescr3").val(),
 		};
-		console.log(mainSkills);
+		
 			$.ajax({
 			url: "/save_main_skills",
 			contentType: "application/json",
@@ -315,7 +315,7 @@ function saveMainSkills() {
 			type: "post",
 			dataType: "json",
 		}).done(function(data) {
-			console.log(data);
+			
 			mainSkillEdit(true);
 			$("#editMainSkill").text("Edit")
 		});
@@ -408,7 +408,7 @@ function setSkillEvents(id) {
 	
 	$("#removeSkill"+id).click(function(e){
 		e.preventDefault();
-		console.log(id);
+		
 		$.ajax({
 			url: "/remove_skill",
 			contentType: "application/json",
@@ -458,8 +458,8 @@ function setCreateSkill() {
 }
 
 function skillValidation(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	
+	
 	
 	$("#firstSkill").removeClass("is-invalid");
 	$("#firstLevel").removeClass("is-invalid");
@@ -478,8 +478,8 @@ function skillValidation(data) {
 }
 
 function editSkillValidation(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	
+	
 	
 	$("#skill"+data.id).removeClass("is-invalid");
 	$("#level"+data.id).removeClass("is-invalid");
@@ -553,7 +553,7 @@ function handleDragEvent(id) {
 	function handleDrop(e) {
 	let dt = e.dataTransfer;
   	let files = dt.files;
-	console.log(files);
+	
 	handleFiles(files);
 	}
 	
@@ -605,14 +605,14 @@ function setOnChangeImage(id) {
 }
 
 function saveImages() {
-	console.log(newImages);
+	
 	var newImages={
 			presentationPicture1:$("#presentation_image_1").attr("src"),
 			presentationPicture2:$("#presentation_image_2").attr("src"),
 			presentationPicture3:$("#presentation_image_3").attr("src"),
 		};
 		
-		console.log(newImages);
+		
 		$.ajax({
 			url: "/save_presentation_image",
 			contentType: "application/json",
@@ -654,7 +654,7 @@ function loadMainInformations() {
 			type: "post",
 			dataType: "json",
 		}).done(function(data) {
-			console.log(data);
+			
 			$("#biography").val(data.bio);
 			document.querySelector("#profile_picture").src=data.profilePicture;
 			
@@ -688,7 +688,7 @@ function loadMainInformations() {
 			type: "post",
 			dataType: "json",
 		}).done(function(data) {
-			console.log(data);
+			
 			
 			$("#username").val(data.username);
 			$("#email").val(data.email);
@@ -711,10 +711,10 @@ function loadCurriculumSkills() {
 		type: "post",
 		dataType: "json",
 	}).done(function(skills) {
-		console.log(skills);
+		
 
 		if (skills.length===0) {
-			console.log("user has no skills");
+			
 		} else {
 			skills.forEach(skill => addSkill(skill));
 		}

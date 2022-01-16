@@ -22,7 +22,7 @@ function start() {
 		dataType: "json",
 
 	}).done(function(data) {
-		//console.log(data);
+		
 		posts = data;
 
 		if (posts.length === 0) {
@@ -33,12 +33,11 @@ function start() {
 
 				postsMap.set(post.id, post);
 			});
-			//posts.forEach(post => console.log(post));
 		}
 
 	});
 
-	//console.log("start " + postsMap.size);
+	
 
 
 }
@@ -58,8 +57,8 @@ function start() {
 * 	
  */
 function addPost(post) {
-	//console.log("faccio add post");
-	//console.log(post);
+	
+	
 	postsMap.set(post.id, post);
 	prependPost(post);
 	refactPostFields(post.id, true);
@@ -70,7 +69,7 @@ function addPost(post) {
 	setOnDiscardChanges(post.id);
 	refactButton(post.id, true);
 	showPostDiv();
-	//console.log("add " + postsMap.size);
+	
 
 }
 function showPostDiv() {
@@ -98,7 +97,7 @@ function createPost(post) {
 	let refLink = post.refLink;
 
 
-	//console.log(post.pubblicationDate);
+	
 	return `<div  id="post${id}">
 				<div class="postClass card border-0">
 								<br/>
@@ -292,7 +291,7 @@ function setEventOnDelete(id) {
 
 	$("#confirmDelete" + id).click(function(e) {
 		e.preventDefault();
-		//console.log(id);
+		
 		$.ajax({
 
 			url: "/delete_post",
@@ -304,7 +303,7 @@ function setEventOnDelete(id) {
 		}).done(function(id) {
 			$("#post" + id).remove();
 			postsMap.delete(id);
-			//console.log(postsMap.size);
+			
 			if (postsMap.size===0) {
 				$("#postsContainer").hide();
 			}
@@ -350,7 +349,7 @@ function setOnDiscardChanges(postId) {
 
 		oldPost = postsMap.get(postId);
 
-		//console.log(oldPost);
+		
 		$("#postTitleId" + postId).val(oldPost.title);
 		$("#postDescriptionId" + postId).val(oldPost.description);
 		$("#postLinkRefId" + postId).val(oldPost.refLink);
@@ -428,7 +427,7 @@ function setEventChangePhoto(id) {
 
 //***************************************************************************************DOM MANIPULATION************************************************* */
 function doCreateOnDOM(data) {
-	//console.log(data);
+	
 
 	newPostValid();
 	var isValidPost = true;

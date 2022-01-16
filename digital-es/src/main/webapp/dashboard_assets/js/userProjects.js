@@ -20,7 +20,7 @@ function loadProjects() {
 	}).done(function(projects) {
 
 		if (projects.length===0) {
-			console.log("user has no projects");
+			
 		} else {
 			projects.forEach(project => addProject(project));
 
@@ -59,7 +59,7 @@ function handleDragEvent() {
 	function handleDrop(e) {
 	let dt = e.dataTransfer;
   	let files = dt.files;
-	console.log(files);
+	
 	handleFiles(files);
 	}
 	
@@ -100,8 +100,8 @@ function handleDragEvent() {
 }
 
 function addProject(project) {
-	console.log("AGGIUNGENDO PROJECT");
-	console.log(project.id);
+	
+	
 	appendProject(project);
 	setEditable(project.id,true);
 	setEvents(project.id);
@@ -119,7 +119,7 @@ function setEvents(projectId) {
 function setOnDelete(id) {
 	$("#confirmDelete"+id).click(function(e) {
 		e.preventDefault();
-		console.log(id);
+		
 		$.ajax({
 			url: "/delete_project",
 			contentType: "application/json",
@@ -162,8 +162,8 @@ function setOnConfirmEdit(id) {
 }
 
 function editValidation(data) {
-	console.log("START EDIT VALIDATION; VALIDATING THIS DATA:");
-	console.log(data);
+	
+	
 	
 	$("#project_title"+data.id).removeClass("is-invalid");
 	$("#project_description"+data.id).removeClass("is-invalid");
@@ -197,7 +197,7 @@ function editValidation(data) {
 function setOnDiscard(id) {
 	$("#discard"+id).click(function(e) {
 		e.preventDefault();
-		console.log(id);
+		
 		$.ajax({
 			url: "/restore_project",
 			contentType: "application/json",
@@ -346,7 +346,7 @@ function setCreateProject() {
 }
 
 function createValidation(data) {
-	console.log("START VALIDATION; VALIDATING THIS DATA:"+ data.id);
+	
 	
 	$("#project_title").removeClass("is-invalid");
 	$("#project_description").removeClass("is-invalid");
