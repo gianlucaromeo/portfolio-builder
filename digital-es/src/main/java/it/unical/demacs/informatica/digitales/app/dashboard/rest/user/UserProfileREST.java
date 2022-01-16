@@ -114,8 +114,6 @@ public class UserProfileREST {
 
 		Gson gson = new Gson();
 		User newMainInfo = gson.fromJson(req.getReader(), User.class);
-		System.out.println(newMainInfo);
-
 		User user = AppServletsHandler.getLoggedUser(req);
 
 		ProfileValidatorResponse validation = ProfileValidator.validateMainInfo(newMainInfo, user);
@@ -141,12 +139,10 @@ public class UserProfileREST {
 
 		Gson gson = new Gson();
 		User newUser = gson.fromJson(req.getReader(), User.class);
-		System.out.println("NEW DATA");
-		System.out.println(newUser);
+	
 
 		User user = AppServletsHandler.getLoggedUser(req);
-		System.out.println("CURRENT");
-		System.out.println(user);
+	
 
 		ProfileValidatorResponse validation = ProfileValidator.validateContacts1(newUser);
 		if (ProfileValidator.isValidContacts1(validation)) {
@@ -168,7 +164,7 @@ public class UserProfileREST {
 		User user = AppServletsHandler.getLoggedUser(req);
 
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
-//		System.out.println(newMainInfo);
+
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
 		ProfileValidatorResponse validation = ProfileValidator.validateContacts2(newMainInfo);
@@ -191,7 +187,6 @@ public class UserProfileREST {
 		User user = AppServletsHandler.getLoggedUser(req);
 
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
-		System.out.println(newMainInfo);
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
 		info.setSpecialSkillName1(newMainInfo.getSpecialSkillName1());
@@ -227,7 +222,6 @@ public class UserProfileREST {
 		User user = AppServletsHandler.getLoggedUser(req);
 
 		CurriculumSkill newSkill = gson.fromJson(req.getReader(), CurriculumSkill.class);
-		System.out.println(newSkill);
 		ProfileValidatorResponse resp = ProfileValidator.validateSkill(newSkill);
 
 		if (ProfileValidator.isValidSkill(resp)) {
@@ -248,7 +242,6 @@ public class UserProfileREST {
 		User user = AppServletsHandler.getLoggedUser(req);
 
 		CurriculumSkill newSkill = gson.fromJson(req.getReader(), CurriculumSkill.class);
-		System.out.println(newSkill);
 		ProfileValidatorResponse resp = ProfileValidator.validateSkill(newSkill);
 		resp.setId(newSkill.getId());
 
