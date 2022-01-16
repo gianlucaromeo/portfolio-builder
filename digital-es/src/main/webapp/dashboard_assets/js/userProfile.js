@@ -2,7 +2,7 @@
 start();
 
 function start() {
-	loadMainInformations();
+	loadMainInformations("firstLoad");
 	loadEvents();
 	editAll(true);
 	loadCurriculumSkills();
@@ -623,7 +623,7 @@ function saveImages() {
 	refactUndefinedImage();
 }
 
-function loadMainInformations() {
+function loadMainInformations(value) {
 	
 	$("#firstSkill").val("");
 	$("#firstLevel").val("");
@@ -656,7 +656,8 @@ function loadMainInformations() {
 		}).done(function(data) {
 			
 			$("#biography").val(data.bio);
-			document.querySelector("#profile_picture").src=data.profilePicture;
+			if(value!=="firstLoad")
+				document.querySelector("#profile_picture").src=data.profilePicture;
 			
 			
 			$("#mainSkill1").val(data.specialSkillName1);
