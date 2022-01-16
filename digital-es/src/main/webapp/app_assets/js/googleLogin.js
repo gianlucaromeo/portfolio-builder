@@ -58,8 +58,10 @@ function doLogin(email){
 	}).done(function(data) {
 		if (data === "ok") {	
 			window.location.href = "/dashboard/profile";
-		} else  {
+		} else if(data==="error"){
 			window.location.href = "/dashboard/sign_up";
+		}else if(data==="banned_user"){
+			window.location.href = "/dashboard/banned_user";
 		}
 	});
 }

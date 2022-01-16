@@ -38,16 +38,22 @@ public class AppLoginREST {
 	}
 
 	@PostMapping("/dashboard/login")
-	public synchronized void login(HttpServletRequest req, HttpServletResponse resp) {
+	public synchronized void login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		UserAuthentication userAuth = new UserAuthentication();
 		userAuth.setUsername(req.getParameter("username"));
 
 		User user = new User();
+		boolean bannedUser=false;
 		Moderator moderator = new Moderator();
 
 		moderator = ModeratorDAOImpl.getInstance().findByUsername(userAuth.getUsername());
 		user = UserDAOImpl.getInstance().findByUsername(userAuth.getUsername());
-		if (user != null) {
+		bannedUser= UserDAOImpl.getInstance().isBannedByUsername(userAuth.getUsername());
+		System.out.println(bannedUser);
+		if(bannedUser) {
+			resp.sendRedirect("/dashboard/banned_user");
+			return;
+		}else if(user != null) {
 			Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, user.getUsername());
 			AppServletsHandler.redirectLogin(resp, cookie);
 			return;
@@ -57,5 +63,6 @@ public class AppLoginREST {
 		}
 
 	}
+	//Yy$q*4Bi!1w3
 
 }

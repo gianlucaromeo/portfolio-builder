@@ -27,15 +27,20 @@ public class AppGoogleLoginREST {
 		Gson gson = new Gson();
 		String email = new String();
 		email = gson.fromJson(req.getReader(), String.class);
-
 		if (UserDAOImpl.getInstance().checkEmailExists(email)) {
 
 			String username = UserDAOImpl.getInstance().getUsernameByEmail(email);
-			Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, username);
-			resp.addCookie(cookie);
-			// Servlets.redirectLogin(resp, cookie);
+			boolean bannedUser= UserDAOImpl.getInstance().isBannedByUsername(username);
+			if(bannedUser) {
+				return gson.toJson(Protocol.BANNED_USER);
+			}else {
+				Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, username);
+				resp.addCookie(cookie);
+				// Servlets.redirectLogin(resp, cookie);
 
-			return gson.toJson(Protocol.OK);
+				return gson.toJson(Protocol.OK);
+			}
+			
 		}
 
 		return gson.toJson(Protocol.ERROR);

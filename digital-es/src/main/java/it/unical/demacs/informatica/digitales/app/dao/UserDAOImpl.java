@@ -495,4 +495,32 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 	}
 
+	public synchronized boolean isBannedByUsername(String username) {
+		boolean banned=false;
+
+		con = DBUtil.getInstance().getConnection();
+
+		String query = "SELECT * FROM users WHERE username=? AND id IN (SELECT user_id FROM banned_users);";
+
+		try {
+
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+
+			rs = p.executeQuery();
+
+			if (rs.next()) {
+				banned=true;
+			}
+
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [isBannedByUsername]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return banned;
+	}
+
 }

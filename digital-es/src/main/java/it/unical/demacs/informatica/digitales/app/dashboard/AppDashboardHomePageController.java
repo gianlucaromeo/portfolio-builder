@@ -36,5 +36,9 @@ public class AppDashboardHomePageController {
 	public String showConfirmEmailInfoPage() {
 		return "app_email_confirmation_info";
 	}
+	@GetMapping("banned_user")
+	public String showBannedUserPage() {
+		return "banned_user_page";
+	}
 
 }

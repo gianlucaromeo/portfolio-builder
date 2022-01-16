@@ -1,5 +1,7 @@
 package it.unical.demacs.informatica.digitales.app.database.protocol;
 
+import com.google.gson.JsonElement;
+
 public class Protocol {
 
 	public final static String OK = "ok";
@@ -14,6 +16,7 @@ public class Protocol {
 	public final static String LOGIN_ERROR = "login error"; // Generic
 	public final static String USERNAME_NOT_VALID_ERROR = "username not valid error";
 	public final static String LOGIN_PASSWORD_ERROR = "login password error";
+	public final static String BANNED_USER = "banned_user";
 
 	/* CURRICULUM EXPERIENCES */
 	public final static String NO_USER_EXPERIENCES = "no curriculum experiences";
@@ -28,6 +31,7 @@ public class Protocol {
 	public final static String PROJECT_EMPTY_FIELD = "project_field_empty";
 	public final static String PROJECT_TITLE_NOT_VALID = "project_title_not_valid";
 	public final static String PROJECT_LINK_NO_VALID = "project_link_not_valid";
+
 
 	
 }
