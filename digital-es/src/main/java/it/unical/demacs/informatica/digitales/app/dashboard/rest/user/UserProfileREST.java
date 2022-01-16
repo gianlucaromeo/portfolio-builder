@@ -213,8 +213,6 @@ public class UserProfileREST {
 		Gson gson = new Gson();
 
 		User user = AppServletsHandler.getLoggedUser(req);
-		System.out.println("USER WHEN LOADING SKILL");
-		System.out.println(user);
 		Set<CurriculumSkill> skills = CurriculumSkillDAOImpl.getInstance().findAllByUserId(user.getId());
 		String skillsToJSON = gson.toJson(skills);
 		return skillsToJSON;

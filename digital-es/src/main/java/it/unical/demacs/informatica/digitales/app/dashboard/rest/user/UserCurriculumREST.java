@@ -70,7 +70,6 @@ public class UserCurriculumREST {
 			CurriculumExperienceDAOImpl.getInstance().update(curriculumExperience);
 			curriculumExperience.setId(CurriculumExperienceDAOImpl.getInstance().findId(curriculumExperience));
 		} else {
-			System.out.println("In UPDATE CURR: " + resp.toString());
 			return gson.toJson(resp);
 		}
 
@@ -98,7 +97,6 @@ public class UserCurriculumREST {
 			}
 		}
 
-		System.out.println("Add Curr. RESP: " + resp.toString());
 		return gson.toJson(resp);
 
 	}
