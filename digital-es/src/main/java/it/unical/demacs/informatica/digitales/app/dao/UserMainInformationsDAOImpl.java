@@ -257,7 +257,11 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		} finally {
 			closeAll();
 		}
-
+		UserMainInformations userInfo= findById(id);
+		String defaultImage=getDefaultAvatarIMage64();
+		
+		userInfo.setProfilePicture(defaultImage);
+		update(userInfo);
 		return getDefaultAvatarIMage64();
 	}
 
@@ -289,5 +293,6 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		return "error";
 
 	}
+	
 
 }
