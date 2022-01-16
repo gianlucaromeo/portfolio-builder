@@ -1,13 +1,10 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.unical.demacs.informatica.digitales.app.beans.Curriculum;
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
-import it.unical.demacs.informatica.digitales.app.dao.DAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 

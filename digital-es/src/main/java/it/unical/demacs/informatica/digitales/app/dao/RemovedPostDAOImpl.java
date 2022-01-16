@@ -1,13 +1,11 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;

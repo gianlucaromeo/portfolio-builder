@@ -2,8 +2,6 @@ package it.unical.demacs.informatica.digitales.app.beans;
 
 import java.util.Objects;
 
-import org.joda.time.DateTime;
-
 public class User {
 
 	private long id;

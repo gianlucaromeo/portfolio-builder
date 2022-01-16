@@ -1,17 +1,11 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
-import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
-import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
-import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
