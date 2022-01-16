@@ -1,13 +1,8 @@
 package it.unical.demacs.informatica.digitales.app.validator;
 
-import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
-import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ResetPasswordValidatorResponse;
-import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class ResetPasswordValidator {
