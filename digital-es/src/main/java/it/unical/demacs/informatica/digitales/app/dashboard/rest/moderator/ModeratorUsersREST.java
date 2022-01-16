@@ -24,7 +24,7 @@ import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
-import it.unical.demacs.informatica.digitales.app.settings.BanReasonsUser;
+import it.unical.demacs.informatica.digitales.app.settings.BanUserReasons;
 
 @RestController
 public class ModeratorUsersREST {
@@ -65,7 +65,7 @@ public class ModeratorUsersREST {
 		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
-			reasons.add(BanReasonsUser.POLICY_RULES);
+			reasons.add(BanUserReasons.POLICY_RULES);
 			String reasonsToJSON = gson.toJson(reasons);
 			return reasonsToJSON;
 		}

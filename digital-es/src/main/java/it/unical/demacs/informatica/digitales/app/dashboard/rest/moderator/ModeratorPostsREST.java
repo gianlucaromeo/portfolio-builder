@@ -29,7 +29,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
-import it.unical.demacs.informatica.digitales.app.settings.BanReasons;
+import it.unical.demacs.informatica.digitales.app.settings.RemovePostReasons;
 
 @RestController
 public class ModeratorPostsREST {
@@ -100,7 +100,7 @@ public class ModeratorPostsREST {
 		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
-			reasons.add(BanReasons.TEXT_NOT_COMPLY);
+			reasons.add(RemovePostReasons.TEXT_NOT_COMPLY);
 			String reasonsToJSON = gson.toJson(reasons);
 			return reasonsToJSON;
 		}
