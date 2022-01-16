@@ -1,7 +1,9 @@
 package it.unical.demacs.informatica.digitales.app.dashboard;
 
 import java.io.IOException;
+import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.unical.demacs.informatica.digitales.app.beans.CurriculumExperience;
+import it.unical.demacs.informatica.digitales.app.beans.User;
+import it.unical.demacs.informatica.digitales.app.dao.CurriculumExperienceDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 
 @Controller
 @RequestMapping("/dashboard")

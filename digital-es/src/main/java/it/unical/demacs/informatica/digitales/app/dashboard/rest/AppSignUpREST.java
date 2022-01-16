@@ -113,6 +113,16 @@ public class AppSignUpREST {
 		return Protocol.OK;
 
 	}
+	
+	private void fetchUserData(User user, HttpServletRequest req) {
+		user.setFirstName(req.getParameter("first_name"));
+		user.setLastName(req.getParameter("last_name"));
+		user.setUsername(req.getParameter("username"));
+		user.setEmail(req.getParameter("email"));
+		user.setPassword(req.getParameter("password"));
+		user.setDateOfBirth(req.getParameter("date_of_birth"));
+		user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
+	}
 
 	private String createToken() {
 		return UUID.randomUUID().toString();
