@@ -1,4 +1,4 @@
-emailjs.init("user_8pSYeKRzRGlH0I3n8Mv49");
+emailjs.init("user_OVRlRtT0ckdLLMRvS39z1");
 
 function sendEmail(receiver) {
 
@@ -17,11 +17,11 @@ function sendEmail(receiver) {
 		
 		var html = '<a href="http://localhost:8080/users/' + token + '/password_reset">Click Here to reset your password</a>';
 		var templateParams = {
-			from_name: "DigitalES",
+			from_name: "Portfolio Builder",
 			to_name: receiver,
 			my_html: html
 		};
-		emailjs.send("service_p1x7zca", "template_m85gci9", templateParams)
+		emailjs.send("service_ia6pdau", "template_29txnm1", templateParams)
 			.then(function(response) {
 				
 				alert("An email with your password has been sent to the email associated with your username");

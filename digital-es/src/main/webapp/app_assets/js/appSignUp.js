@@ -152,34 +152,34 @@ function signUp(userData) {
 		
 		token = emailConfirmation.token;
 		sendEmail(userData.email, token);
-		window.location.href = "/dashboard/email_confirmation_page";
+		setTimeout(() => {
+			window.location.href = "/dashboard/email_confirmation_page";
+		}, 2000)
+
 		
 	});
 
 }
 
-emailjs.init("user_8pSYeKRzRGlH0I3n8Mv49"); //please encrypted user id for malicious attacks
+emailjs.init("user_OVRlRtT0ckdLLMRvS39z1");
 function sendEmail(receiver, token) {
 	
 	
 	html = `<a href="http://localhost:8080/confirm_email/${token}">Confirm your email!</a>`;
 	
 	var templateParams = {
-		from_name: "DigitalES",
+		from_name: "Portfolio Builder",
 		to_name: receiver,
 		message: "Hello, if you want to confirm your registration, please click the link below",
 		my_html: html,
 		//reply_to
 	};
 
-	emailjs.send("service_p1x7zca", "template_1cxbziq", templateParams)
+	emailjs.send("service_ia6pdau", "template_0bwkalm", templateParams)
 		.then(function(response) {
-			
 		}, function(error) {
-			
 		});
 };
-//sendEmail("mymail@gmail.com");  //testing if the email is sent when page loaded
 
 /* ===================== HIDE ERROR DIVS ======================== */
 
