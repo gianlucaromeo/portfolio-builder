@@ -121,7 +121,7 @@
 																				</div>
 																				<p class="text-muted">${post.description}</p>
 																				<c:if
-																			test="${post.refLink != '...' && post.refLink != null}">
+																			test="${post.refLink != '...' && post.refLink != null && post.refLink != ''}">
 																			<p class="text-muted">Reference Link: <a href="${post.refLink}">${post.refLink}</a> </p>
 																		</c:if>
 																				
