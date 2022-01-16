@@ -53,8 +53,7 @@ public class UserProfileREST {
 
 		User user = AppServletsHandler.getLoggedUser(req);
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
-
-		info.setProfilePicture(newMainInfo.getProfilePicture());
+;
 		info.setPresentationPicture1(newMainInfo.getPresentationPicture1());
 		info.setPresentationPicture2(newMainInfo.getPresentationPicture2());
 		info.setPresentationPicture3(newMainInfo.getPresentationPicture3());
@@ -101,6 +100,7 @@ public class UserProfileREST {
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
 		info.setBio(newMainInfo.getBio());
+		info.setProfilePicture(newMainInfo.getProfilePicture());
 
 		UserMainInformationsDAOImpl.getInstance().update(info);
 
