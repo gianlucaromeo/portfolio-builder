@@ -12,7 +12,6 @@ import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ProfileValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 public class ProfileValidator {
