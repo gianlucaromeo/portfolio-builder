@@ -12,8 +12,7 @@ public class CurriculumExperienceValidatorResponse {
 	private String type;
 	private boolean valid;
 
-	public CurriculumExperienceValidatorResponse() {
-	}
+	public CurriculumExperienceValidatorResponse() {}
 
 	public boolean isValid() {
 		return valid;

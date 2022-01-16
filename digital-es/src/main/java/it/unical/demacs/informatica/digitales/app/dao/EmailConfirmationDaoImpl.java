@@ -10,7 +10,9 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 public class EmailConfirmationDaoImpl extends DAOImpl implements DAO<EmailConfirmation> {
 
 	private static EmailConfirmationDaoImpl instance = null;
-
+	
+	private EmailConfirmationDaoImpl() {}
+	
 	public static EmailConfirmationDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new EmailConfirmationDaoImpl();
@@ -18,9 +20,7 @@ public class EmailConfirmationDaoImpl extends DAOImpl implements DAO<EmailConfir
 		return instance;
 	}
 
-	private EmailConfirmationDaoImpl() {
-
-	}
+	
 
 	@Override
 	public String create(EmailConfirmation emailConfirmation) {
@@ -52,7 +52,6 @@ public class EmailConfirmationDaoImpl extends DAOImpl implements DAO<EmailConfir
 
 	public long findUserId(String token) {
 
-		System.out.println("token : " + token);
 		long userId = -1; // target
 		
 		con = DBUtil.getInstance().getConnection();

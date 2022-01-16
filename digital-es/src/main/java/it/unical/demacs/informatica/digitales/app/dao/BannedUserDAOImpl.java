@@ -12,6 +12,8 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 	
 	private static BannedUserDAOImpl instance = null;
 	
+	private BannedUserDAOImpl() {}
+	
 	public static BannedUserDAOImpl getInstance() {
 		if (instance == null) {
 			instance = new BannedUserDAOImpl();
@@ -19,9 +21,7 @@ public class BannedUserDAOImpl extends DAOImpl implements DAO<BannedUser> {
 		return instance;
 	}
 	
-	private BannedUserDAOImpl() {
-		
-	}
+	
 	
 	@Override
 	public String create(BannedUser bannedUser) {

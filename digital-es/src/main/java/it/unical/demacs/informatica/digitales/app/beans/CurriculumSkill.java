@@ -9,9 +9,7 @@ public class CurriculumSkill {
 	private String title;
 	private int level;
 
-	public CurriculumSkill() {
-		// TODO Auto-generated constructor stub
-	}
+	public CurriculumSkill() {}
 
 	public long getId() {
 		return id;

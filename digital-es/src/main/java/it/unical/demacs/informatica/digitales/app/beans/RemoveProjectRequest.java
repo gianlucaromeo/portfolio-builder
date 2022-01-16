@@ -5,8 +5,7 @@ public class RemoveProjectRequest {
 	private long id;
 	private String reason;
 
-	public RemoveProjectRequest() {
-	}
+	public RemoveProjectRequest() {}
 
 	public long getId() {
 		return id;

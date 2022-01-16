@@ -10,8 +10,7 @@ public class RemovedPost {
 	private long postId;
 	private boolean seenByUser;
 
-	public RemovedPost() {
-	}
+	public RemovedPost() {}
 
 	public long getId() {
 		return id;

@@ -5,9 +5,7 @@ public class EmailConfirmation {
 	private long userId;
 	private String token;
 
-	public EmailConfirmation() {
-		// TODO Auto-generated constructor stub
-	}
+	public EmailConfirmation() {}
 
 	public long getUserId() {
 		return userId;

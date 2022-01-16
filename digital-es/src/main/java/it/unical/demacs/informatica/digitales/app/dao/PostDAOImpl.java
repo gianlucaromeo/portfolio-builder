@@ -14,6 +14,8 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	
 	private static PostDAOImpl instance = null;
 	
+	private PostDAOImpl() {}
+	
 	public static PostDAOImpl getInstance() {
 		if (instance == null) {
 			instance = new PostDAOImpl();
@@ -21,8 +23,6 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 		return instance;
 	}
 	
-	private PostDAOImpl() {
-	}
 	
 	
 	@Override
@@ -207,7 +207,6 @@ public class PostDAOImpl extends DAOImpl implements DAO<Post> {
 	}
 	
 	public synchronized List<Post> findAllByUserId(long userId) {
-		System.out.println(userId);
 		List<Post> posts = new ArrayList<Post>();
 		
 		con = DBUtil.getInstance().getConnection();

@@ -13,9 +13,7 @@ public class CurriculumExperience {
 	private String description;
 	private String type;
 
-	public CurriculumExperience() {
-		// TODO Auto-generated constructor stub
-	}
+	public CurriculumExperience() {}
 
 	public long getId() {
 		return id;

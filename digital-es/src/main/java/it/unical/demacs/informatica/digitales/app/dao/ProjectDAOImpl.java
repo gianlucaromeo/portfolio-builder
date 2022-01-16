@@ -14,14 +14,13 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project> {
 
 	private static ProjectDAOImpl instance = null;
 
+	private ProjectDAOImpl() {}
+
 	public static ProjectDAOImpl getInstance() {
 		if (instance == null) {
 			instance = new ProjectDAOImpl();
 		}
 		return instance;
-	}
-
-	private ProjectDAOImpl() {
 	}
 
 	@Override
@@ -231,22 +230,22 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project> {
 		return projects;
 
 	}
-	
+
 	public List<Project> findAllByUserIdNotRemoved(long userId) {
-		
+
 		List<Project> projects = new ArrayList<Project>();
-		
+
 		con = DBUtil.getInstance().getConnection();
-		
+
 		String query = "SELECT * FROM projects WHERE user_id=? AND id NOT IN (SELECT project_id FROM removed_projects);";
 
 		try {
-			
+
 			p = con.prepareStatement(query);
 			p.setLong(1, userId);
-			
+
 			rs = p.executeQuery();
-			
+
 			while (rs.next()) {
 				Project project = new Project();
 				project.setId(rs.getLong("id"));
@@ -257,14 +256,14 @@ public class ProjectDAOImpl extends DAOImpl implements DAO<Project> {
 				project.setLinkRef(rs.getString("link_ref"));
 				projects.add(project);
 			}
-			
+
 		} catch (SQLException e) {
 			System.err.println("[ProjectsDAOImpl] [findAllByUserIdNotRemoved]: ");
 			e.printStackTrace();
 		} finally {
 			closeAll();
 		}
-		
+
 		return projects;
 	}
 

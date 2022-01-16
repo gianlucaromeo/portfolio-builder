@@ -39,9 +39,6 @@ public class AppLoginREST {
 
 	@PostMapping("/dashboard/login")
 	public synchronized void login(HttpServletRequest req, HttpServletResponse resp) {
-
-		System.out.println("DO LOGIN");
-
 		UserAuthentication userAuth = new UserAuthentication();
 		userAuth.setUsername(req.getParameter("username"));
 

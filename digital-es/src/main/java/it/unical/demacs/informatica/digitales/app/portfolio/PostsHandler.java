@@ -51,7 +51,6 @@ public class PostsHandler {
 		req.setAttribute("instagramLink", userInfo.getInstagramLinkRef());
 		req.setAttribute("twitterLink", userInfo.getTwitterLinkRef());
 
-		System.out.println("in redirect posts");
 		return "portfolio_posts";
 	}
 }

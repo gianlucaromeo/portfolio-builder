@@ -8,9 +8,7 @@ public class Notification {
 	private long contentId;
 	private long id;
 	
-	public Notification() {
-		// TODO Auto-generated constructor stub
-	}
+	public Notification() {}
 	
 	
 	public long getContentId() {

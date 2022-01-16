@@ -14,15 +14,13 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 	private static UserDAOImpl instance = null;
 
+	private UserDAOImpl() {}
+
 	public static UserDAOImpl getInstance() {
 		if (instance == null) {
 			instance = new UserDAOImpl();
 		}
 		return instance;
-	}
-
-	private UserDAOImpl() {
-
 	}
 
 	private int SALT = 12;
@@ -496,7 +494,5 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 		return false;
 
 	}
-
-	
 
 }

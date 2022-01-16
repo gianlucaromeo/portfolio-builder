@@ -5,9 +5,7 @@ public class RemovePostRequest {
 	private Integer postId;
 	private String reason;
 
-	public RemovePostRequest() {
-		// TODO Auto-generated constructor stub
-	}
+	public RemovePostRequest() {}
 
 	public Integer getPostId() {
 		return postId;

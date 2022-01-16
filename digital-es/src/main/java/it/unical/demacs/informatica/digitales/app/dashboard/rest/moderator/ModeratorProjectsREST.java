@@ -77,7 +77,6 @@ public class ModeratorProjectsREST {
 	public String banPost(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
 
-		System.out.println("REMOVE PROJECT REQUEST");
 		Gson gson = new Gson();
 		RemoveProjectRequest removeProjectReq = gson.fromJson(req.getReader(), RemoveProjectRequest.class);
 		Project projectToRemove = new Project();
@@ -92,12 +91,11 @@ public class ModeratorProjectsREST {
 				removedProject.setProjectId(removeProjectReq.getId());
 				removedProject.setReason(removeProjectReq.getReason());
 				removedProject.setSeenByUser(false);
-				System.out.println("REMOVE PROJECT REQUEST OK");
 				return RemovedProjectDAOImpl.getInstance().create(removedProject);
 			}
 		}
 
-		System.out.println("REMOVE PROJECT REQUEST ERROR");
+		
 		return Protocol.ERROR;
 
 	}

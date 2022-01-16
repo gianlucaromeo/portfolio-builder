@@ -65,12 +65,9 @@ public class AppSignUpREST {
 			emailConfirmation.setToken(createToken());
 			EmailConfirmationDaoImpl.getInstance().create(emailConfirmation);
 
-			System.out.println(emailConfirmation.getToken());
-
 			return new Gson().toJson(emailConfirmation);
 
 		} else {
-			System.out.println(res);
 			return res;
 		}
 
@@ -80,12 +77,8 @@ public class AppSignUpREST {
 	public String emailConfirmationAction(@PathVariable String token, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		System.out.println("Confirmed");
-
 		long userId = EmailConfirmationDaoImpl.getInstance().findUserId(token);
 		User user = UserDAOImpl.getInstance().findById(userId);
-		System.out.println("user id " + userId);
-		System.out.println("User. " + user);
 
 		if (user == null) {
 			resp.sendRedirect("/dashboard/404_page");

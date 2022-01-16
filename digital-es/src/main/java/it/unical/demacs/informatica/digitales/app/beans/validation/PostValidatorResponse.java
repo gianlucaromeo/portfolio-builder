@@ -13,9 +13,7 @@ public class PostValidatorResponse {
 	boolean validation=true;
 	
 	
-	public PostValidatorResponse() {
-		// TODO Auto-generated constructor stub
-	}
+	public PostValidatorResponse() {}
 	public boolean isValidation() {
 		return validation;
 	}

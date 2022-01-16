@@ -17,6 +17,8 @@ public class User {
 	private boolean confirmed;
 	private String signUpDate;
 
+	public User() {}
+	
 	public String getSignUpDate() {
 		return signUpDate;
 	}
@@ -33,8 +35,6 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public User() {
-	}
 
 	public long getId() {
 		return id;

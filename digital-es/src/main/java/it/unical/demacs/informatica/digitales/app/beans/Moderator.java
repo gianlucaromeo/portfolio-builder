@@ -9,8 +9,7 @@ public class Moderator {
 	private String password;
 	private String email;
 
-	public Moderator() {
-	}
+	public Moderator() {}
 
 	public long getId() {
 		return id;

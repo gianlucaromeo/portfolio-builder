@@ -9,9 +9,7 @@ public class ProjectValidatorResponse {
 	private String picture;
 	private boolean validation=true;
 	
-	public ProjectValidatorResponse() {
-		// TODO Auto-generated constructor stub
-	}
+	public ProjectValidatorResponse() {}
 	public boolean isValidation() {
 		return validation;
 	}

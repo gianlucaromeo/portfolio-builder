@@ -20,13 +20,13 @@ import it.unical.demacs.informatica.digitales.app.beans.RemovedPost;
 import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.Notification;
-import it.unical.demacs.informatica.digitales.app.dao.NotificationSettings;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
+import it.unical.demacs.informatica.digitales.app.settings.NotificationSettings;
 
 @RestController
 public class AppNotificationREST {
@@ -40,7 +40,6 @@ public class AppNotificationREST {
 		if (user == null) {
 			return gson.toJson(Protocol.ERROR);
 		}
-		System.out.println(user.getId());
 
 		List<Notification> notifications = new ArrayList<Notification>();
 

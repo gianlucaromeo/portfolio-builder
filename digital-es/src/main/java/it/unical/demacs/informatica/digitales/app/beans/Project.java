@@ -11,8 +11,7 @@ public class Project {
 	private String picture;
 	private String linkRef;
 
-	public Project() {
-	}
+	public Project() {}
 
 	public long getId() {
 		return id;

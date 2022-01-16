@@ -7,9 +7,7 @@ public class UserBanRequest {
 	private String dateStart;
 	private String dateEnd;
 
-	public UserBanRequest() {
-		// TODO Auto-generated constructor stub
-	}
+	public UserBanRequest() {}
 
 	public Integer getUserId() {
 		return userId;

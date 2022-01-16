@@ -32,7 +32,6 @@ public class AppGoogleSignUpREST {
 
 		String username = "googleUser" + usersCounter;
 		while (UserDAOImpl.getInstance().checkUsernameExists(username)) {
-			// System.out.println("Username " + username + " already exists");
 			usersCounter++;
 			username = "googleUser" + usersCounter;
 		}
@@ -54,7 +53,6 @@ public class AppGoogleSignUpREST {
 		String email = new Gson().fromJson(req.getReader(), String.class);
 
 		String username = UserDAOImpl.getInstance().getUsernameByEmail(email);
-		// System.out.println(username);
 		if (username != null)
 			return new Gson().toJson(email);
 		else
@@ -67,10 +65,8 @@ public class AppGoogleSignUpREST {
 		Gson gson = new Gson();
 		User user = new User();
 		user = gson.fromJson(req.getReader(), User.class);
-		System.out.println(user);
-
 		String username = UserDAOImpl.getInstance().getUsernameByEmail(user.getEmail());
-		System.out.println(username);
+
 		if (username == null) {
 			user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
 			UserDAOImpl.getInstance().create(user);
@@ -81,10 +77,7 @@ public class AppGoogleSignUpREST {
 			info.setUserId(user.getId());
 			UserMainInformationsDAOImpl.getInstance().create(info);
 			username = user.getUsername();
-			System.out.println("Sign up with google");
 		}
-
-		System.out.println(username);
 		Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, username);
 		resp.addCookie(cookie);
 

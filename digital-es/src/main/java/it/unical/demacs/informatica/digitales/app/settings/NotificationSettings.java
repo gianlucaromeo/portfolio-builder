@@ -1,5 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dao;
-
+package it.unical.demacs.informatica.digitales.app.settings;
 public class NotificationSettings {
 	
 	public final static String PROJECT="project";

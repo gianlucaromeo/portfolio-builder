@@ -11,9 +11,7 @@ public class BannedUser {
 	private String dateStart;
 	private String dateEnd;
 
-	public BannedUser() {
-		// TODO Auto-generated constructor stub
-	}
+	public BannedUser() {}
 
 	public long getId() {
 		return id;

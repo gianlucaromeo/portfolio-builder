@@ -15,8 +15,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImp
  * */
 public class AppServletsHandler {
 
-	private AppServletsHandler() {
-	}
+	private AppServletsHandler() {}
 
 	public static Cookie getCookie(HttpServletRequest request, String name) {
 		if (request.getCookies() != null) {

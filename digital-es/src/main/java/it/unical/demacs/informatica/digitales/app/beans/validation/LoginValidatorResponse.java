@@ -5,9 +5,7 @@ public class LoginValidatorResponse {
 	String usernameResp;
 	String passwordResp;
 	
-	public LoginValidatorResponse() {
-		
-	}
+	public LoginValidatorResponse() {}
 	
 	public String getUsernameResp() {
 		return usernameResp;

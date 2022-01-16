@@ -10,8 +10,7 @@ public class RemovedProject {
 	private String reason;
 	private boolean seenByUser;
 
-	public RemovedProject() {
-	}
+	public RemovedProject() {}
 
 	public long getId() {
 		return id;

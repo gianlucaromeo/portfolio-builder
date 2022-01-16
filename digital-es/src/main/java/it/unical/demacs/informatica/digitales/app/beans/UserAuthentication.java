@@ -5,9 +5,7 @@ public class UserAuthentication {
 	String username;
 	String password;
 
-	public UserAuthentication() {
-
-	}
+	public UserAuthentication() {}
 
 	public String getUsername() {
 		return username;

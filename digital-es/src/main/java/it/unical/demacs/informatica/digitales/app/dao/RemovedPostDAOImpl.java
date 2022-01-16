@@ -14,14 +14,13 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost> {
 
 	private static RemovedPostDAOImpl instance = null;
 
+	private RemovedPostDAOImpl() {}
+
 	public static RemovedPostDAOImpl getInstance() {
 		if (instance == null) {
 			instance = new RemovedPostDAOImpl();
 		}
 		return instance;
-	}
-
-	private RemovedPostDAOImpl() {
 	}
 
 	@Override
@@ -223,7 +222,6 @@ public class RemovedPostDAOImpl extends DAOImpl implements DAO<RemovedPost> {
 			p = con.prepareStatement(query);
 			p.setLong(1, id);
 			rs = p.executeQuery();
-			
 
 			while (rs.next()) {
 				RemovedPost removedPost = new RemovedPost();

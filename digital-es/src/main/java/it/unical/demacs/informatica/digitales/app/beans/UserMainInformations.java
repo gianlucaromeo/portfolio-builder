@@ -22,8 +22,7 @@ public class UserMainInformations {
 	private String instagramLinkRef;
 	private String twitterLinkRef;
 
-	public UserMainInformations() {
-	}
+	public UserMainInformations() {}
 
 	public long getUserId() {
 		return userId;

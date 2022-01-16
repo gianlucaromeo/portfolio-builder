@@ -7,9 +7,7 @@ public class Curriculum {
 	private long userId;
 	private String hobbiesDescription;
 
-	public Curriculum() {
-		// TODO Auto-generated constructor stub
-	}
+	public Curriculum() {}
 
 	public long getId() {
 		return id;

@@ -36,7 +36,7 @@ public class ProfileValidatorResponse {
 	//CURRICULUM SKILL
 	private String title;
 	private int level;
-	
+	public ProfileValidatorResponse() {}
 	
 	public long getId() {
 		return id;

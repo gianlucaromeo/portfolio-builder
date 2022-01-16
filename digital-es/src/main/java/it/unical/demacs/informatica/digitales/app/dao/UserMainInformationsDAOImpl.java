@@ -11,8 +11,7 @@ import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMainInformations> {
 	private static UserMainInformationsDAOImpl instance = null;
 
-	private UserMainInformationsDAOImpl() {
-	}
+	private UserMainInformationsDAOImpl() {}
 
 	public static UserMainInformationsDAOImpl getInstance() {
 		if (instance == null)

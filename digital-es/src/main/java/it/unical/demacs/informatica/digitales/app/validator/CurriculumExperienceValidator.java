@@ -58,13 +58,11 @@ public class CurriculumExperienceValidator {
 
 	private static String checkStartDate(String startDate) {
 		boolean startsAfterToday = startDate.compareTo(DateTime.now().toString("yyyy-MM-dd")) >= 0;
-		System.out.println("Date starts after today: " + startsAfterToday);
 		return startsAfterToday ? Protocol.ERROR : Protocol.OK;
 	}
 
 	private static String checkEndDate(String endDate, String startDate) {
 		boolean endsBeforeItStarts = endDate.compareTo(startDate) > 0;
-		System.out.println("Date ends before it starts: " + endsBeforeItStarts);
 		return endsBeforeItStarts ? Protocol.ERROR : Protocol.OK;
 	}
 

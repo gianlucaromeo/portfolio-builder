@@ -13,8 +13,7 @@ public class Post {
 	private String refLink;
 	private long userId;
 
-	public Post() {
-	}
+	public Post() {}
 
 	public long getId() {
 		return id;

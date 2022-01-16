@@ -11,9 +11,7 @@ public class SignUpFormValidatorResponse {
 	private String usernameResp;
 	private String passwordResp;
 	
-	public SignUpFormValidatorResponse() {
-		// TODO Auto-generated constructor stub
-	}
+	public SignUpFormValidatorResponse() {}
 	
 	public String getDateOfBirthResp() {
 		return dateOfBirthResp;
