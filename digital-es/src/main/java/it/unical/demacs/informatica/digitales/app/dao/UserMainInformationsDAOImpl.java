@@ -262,7 +262,7 @@ public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMain
 		
 		userInfo.setProfilePicture(defaultImage);
 		update(userInfo);
-		return getDefaultAvatarIMage64();
+		return defaultImage;
 	}
 
 	private synchronized String getDefaultAvatarIMage64() {
