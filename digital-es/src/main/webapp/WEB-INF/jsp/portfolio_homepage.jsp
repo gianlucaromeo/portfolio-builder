@@ -67,7 +67,7 @@
 				<div class="row g-0 justify-content-center">
 					<c:forEach items="${presentationPictures}" var="pic">
 						<c:if test="${pic != 'undefined' && pic != null}">
-							<div class="col-md-6 col-lg-4 item zoom-on-hover">
+							<div class="col-md-6 col-lg-4 item zoom-on-hover bg-light">
 								<a href="#"><img class="img-fluid image" src="${pic}"></a>
 							</div>
 						</c:if>
