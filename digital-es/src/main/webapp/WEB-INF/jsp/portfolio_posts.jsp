@@ -92,7 +92,7 @@
 																				data-toggle="dropdown" aria-haspopup="true"
 																				aria-expanded="true" role="tooltip"></span>
 
-																			<div class="f-w-600">${firstName}${lastName}</div>
+																			<div class="f-w-600">${firstName} ${lastName}</div>
 																			<c:if
 																				test="${post.lastEditDate == '' || post.lastEditDate == null}">
 																				<div class="social-time text-muted">Posted on:
@@ -121,7 +121,7 @@
 																				</div>
 																				<p class="text-muted">${post.description}</p>
 																				<c:if
-																			test="${post.refLink != '...' && post.refLink != null}">
+																			test="${post.refLink != '...' && post.refLink != null && post.refLink != ''}">
 																			<p class="text-muted">Reference Link: <a href="${post.refLink}">${post.refLink}</a> </p>
 																		</c:if>
 																				
