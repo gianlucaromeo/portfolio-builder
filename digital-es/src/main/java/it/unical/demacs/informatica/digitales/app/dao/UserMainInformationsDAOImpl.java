@@ -1,19 +1,12 @@
 package it.unical.demacs.informatica.digitales.app.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.unical.demacs.informatica.digitales.app.beans.BannedUser;
-import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.database.DBUtil;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
-import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
 
 public class UserMainInformationsDAOImpl extends DAOImpl implements DAO<UserMainInformations> {
 	private static UserMainInformationsDAOImpl instance = null;
