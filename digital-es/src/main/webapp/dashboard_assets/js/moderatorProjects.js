@@ -203,11 +203,11 @@ function addClickOnConfirmRemoveProjectBtn(projectId) {
 
 function addClickOnRow(userId) {
 	$("#tr_user_" + userId).click(function() {
-		$("#td_user_"+selectedUserId).removeClass("highlight");
+		$("#td_user_" + selectedUserId).removeClass("highlight");
 		selectedUserId = userId;
-		
-		$("#td_user_"+userId).addClass("highlight");
-		
+
+		$("#td_user_" + userId).addClass("highlight");
+
 		console.log("Clicked on userid: " + userId);
 		fetchUserProjects();
 	});

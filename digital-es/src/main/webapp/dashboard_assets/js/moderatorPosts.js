@@ -1,15 +1,15 @@
 /**
  * 
  */
-var banReasons=[];
-var currentUserSelected="";
-var userMap=new Map();
+var banReasons = [];
+var currentUserSelected = "";
+var userMap = new Map();
 var lastUserClicked;
 
-function start(){
+function start() {
 	getBanReasons();
-	
-	
+
+
 	$("#postsContainer").hide();
 	$.ajax({
 
@@ -24,7 +24,7 @@ function start(){
 
 		if (users.length !== 0) {
 			//console.log("no data");
-		
+
 			users.forEach(user => {
 				addUserOnTable(user);
 				userMap.set(user.id, user);
@@ -35,23 +35,23 @@ function start(){
 	});
 }
 
-function addUserOnTable(user){
+function addUserOnTable(user) {
 	$("#usersTableBody").append(createUserRow(user));
 	setUserTableUserImage(user.id);
 	setEventOnUserRow(user.id);
 }
 
-function createUserRow(userData){
+function createUserRow(userData) {
 	//console.log(userData);
-	
-		return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
+
+	return `<tr id="rowUserId${userData.id}" class="shadow-sm p-3 mb-5">
 				<td id="userTdId${userData.id}"><img class="rounded-circle me-2" width="30" height="30"
 					src="undefined" id="profileImageUserId${userData.id}">${userData.username}</td>
 				
 			</tr>`;
 }
 
-function setUserTableUserImage(id){
+function setUserTableUserImage(id) {
 	$.ajax({
 
 		url: "/get_user_profile_image",
@@ -63,26 +63,26 @@ function setUserTableUserImage(id){
 	}).done(function(profileImage) {
 		//console.log(data);
 		//console.log($("#profileImageUserId"+id));
-			
-		if(profileImage!=="error"){
-			$("#profileImageUserId"+id).attr("src", profileImage);
+
+		if (profileImage !== "error") {
+			$("#profileImageUserId" + id).attr("src", profileImage);
 		}
-			
+
 
 	});
-	
-	
+
+
 }
 
-function setEventOnUserRow(id){
-	$("#rowUserId"+id).click(function() {
-		
-		currentUserSelected=userMap.get(id).username;
-		$("#userPostText").text(currentUserSelected+ "'s Posts");
+function setEventOnUserRow(id) {
+	$("#rowUserId" + id).click(function() {
+
+		currentUserSelected = userMap.get(id).username;
+		$("#userPostText").text(currentUserSelected + "'s Posts");
 		$("#postsTableBody").empty();
-		$("#userTdId"+lastUserClicked).removeClass("highlight");
-		$("#userTdId"+id).addClass("highlight");
-		lastUserClicked=id;
+		$("#userTdId" + lastUserClicked).removeClass("highlight");
+		$("#userTdId" + id).addClass("highlight");
+		lastUserClicked = id;
 		$.ajax({
 
 			url: "/get_users_posts_by_id_not_banned",
@@ -105,8 +105,8 @@ function setEventOnUserRow(id){
 			}
 
 		});
-		
-		
+
+
 		$("#postsContainer").show();
 
 	});
@@ -124,15 +124,15 @@ function addUserPost(post) {
 		setBanReasonsOnDelete(post.id);
 		setEventOnConfirmBan(post.id);
 		//setEventOnDelete(post.id);
-	}else{
+	} else {
 		$("#noImage").hide();
 	}
-	
+
 }
 
-function setEventOnConfirmBan(id){
-	let selectedReason= $('#reasonsSelectId'+id+' option:selected').val();
-	var banRequest={
+function setEventOnConfirmBan(id) {
+	let selectedReason = $('#reasonsSelectId' + id + ' option:selected').val();
+	var banRequest = {
 		postId: id,
 		reason: selectedReason
 	}
@@ -148,23 +148,23 @@ function setEventOnConfirmBan(id){
 			dataType: "json",
 
 		}).done(function(id) {
-			if(id!==-1){
+			if (id !== -1) {
 				$("#post" + id).remove();
 			}
-			
+
 		});
 
 
 		//$("#modalId"+id).modal('toggle');
 
 	});
-	
+
 }
-function setBanReasonsOnDelete(id){
+function setBanReasonsOnDelete(id) {
 	banReasons.forEach(function(reason) {
 		//console.log(reason);
 		appendReason(reason, id);
-		
+
 		//console.log(reason);
 	});
 }
@@ -173,10 +173,10 @@ function prependPost(post) {
 	$("#postsTableBody").prepend(createPost(post));
 }
 
-function createPost(post){
-	if(post!==null){
-		let refLink = (post.refLink!="")? "None" : post.refLink;
-		
+function createPost(post) {
+	if (post !== null) {
+		let refLink = (post.refLink != "") ? "None" : post.refLink;
+
 		return `<tr class="shadow-sm p-3 mb-5" id="post${post.id}">
 				<td class="align-middle"><img class=" me-2" width="100" height="50"
 					src="${post.picture}" id="imageId${post.id}"></td>
@@ -186,9 +186,9 @@ function createPost(post){
 				<td class="align-middle">${post.pubblicationDate}</td>
 				<td class="align-middle">${getDeleteButton(post.id)}</td>
 			</tr>`;
-	
+
 	}
-	else{
+	else {
 		return `<tr class="shadow-sm p-3 mb-5" id="noPost">
 				<td class="align-middle">NO POSTS YET</td>
 				<td class="align-middle">NO POSTS YET</td>
@@ -198,7 +198,7 @@ function createPost(post){
 				<td class="align-middle">NO POSTS YET</td>
 			</tr>`;
 	}
-	
+
 }
 
 function getDeleteButton(id) {
@@ -231,36 +231,36 @@ function getDeleteButton(id) {
 						</div>`;
 
 	//console.log(banReasons);
-	
-	
+
+
 	return deleteButton;
 }
-function appendReason(reason, id){
+function appendReason(reason, id) {
 	$("#reasonsSelectId" + id).append(`<option value="${reason}">${reason}</option>`);
 	//console.log($("#reasonsSelectId" + id).val();
 }
-function getBanReasons(){
+function getBanReasons() {
 	$.ajax({
 
 		url: "/get_ban_reasons",
 		contentType: "application/json",
 		type: "post",
-		
+
 
 	}).done(function(data) {
-		reasons=JSON.parse(data);
+		reasons = JSON.parse(data);
 		//console.log(reasons);
 		if (reasons.length !== 0) {
 			console.log("ciao")
-			setBanReasons(reasons);	
-		} 
+			setBanReasons(reasons);
+		}
 
 	});
 }
 
-function setBanReasons(reasons){
-	banReasons=reasons;
-//	console.log(banReasons);
+function setBanReasons(reasons) {
+	banReasons = reasons;
+	//	console.log(banReasons);
 }
 
 
