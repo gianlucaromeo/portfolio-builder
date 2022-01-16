@@ -1,14 +1,12 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest.user;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,12 +18,12 @@ import it.unical.demacs.informatica.digitales.app.beans.Post;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.validation.PostValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.validator.PostValidator;
 
 @RestController
-public class PostsREST {
+public class UserPostsREST {
 
 	@PostMapping("/create_post")
 	public String createPost(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
@@ -34,7 +32,7 @@ public class PostsREST {
 		Post post = new Post();
 		post = gson.fromJson(req.getReader(), Post.class);
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		if (user == null) {
 			return gson.toJson(Protocol.ERROR);
 		}
@@ -46,7 +44,7 @@ public class PostsREST {
 		newPost.setLastEditDate("");
 
 		if (PostValidator.isValidPost(newPost)) {
-			long id=PostDAOImpl.getInstance().findNextId();
+			long id = PostDAOImpl.getInstance().findNextId();
 			PostDAOImpl.getInstance().create(post);
 			newPost.setId(id);
 		}
@@ -85,10 +83,10 @@ public class PostsREST {
 
 	@PostMapping("/get_posts_data_action")
 	public String getPostsDataAction(HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		if (user == null) {
 			return Protocol.ERROR;
 		}

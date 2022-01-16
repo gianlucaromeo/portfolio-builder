@@ -1,10 +1,8 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest.moderator;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +22,7 @@ import it.unical.demacs.informatica.digitales.app.beans.RemovedProject;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedProjectDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.settings.RemoveProjectReasons;
 
@@ -38,7 +37,7 @@ public class ModeratorProjectsREST {
 
 		Long id = gson.fromJson(req.getReader(), Long.class);
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 
 		if (moderatorCookie != null) {
 
@@ -48,19 +47,19 @@ public class ModeratorProjectsREST {
 			String projectsToJSON = gson.toJson(projects);
 
 			return projectsToJSON;
-			
+
 		}
 
 		return Protocol.ERROR;
 
 	}
-	
+
 	@PostMapping("/get_remove_projects_reasons")
 	public String getBanReasons(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
-		
+
 		Gson gson = new Gson();
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
 			reasons.add(RemoveProjectReasons.INAPPROPRIATE_CONTENT);
@@ -78,10 +77,10 @@ public class ModeratorProjectsREST {
 
 		System.out.println("REMOVE PROJECT REQUEST");
 		Gson gson = new Gson();
-		RemoveProjectRequest removeProjectReq =  gson.fromJson(req.getReader(), RemoveProjectRequest.class);
+		RemoveProjectRequest removeProjectReq = gson.fromJson(req.getReader(), RemoveProjectRequest.class);
 		Project projectToRemove = new Project();
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			projectToRemove = ProjectDAOImpl.getInstance().findById(removeProjectReq.getId());
 			if (projectToRemove != null) {

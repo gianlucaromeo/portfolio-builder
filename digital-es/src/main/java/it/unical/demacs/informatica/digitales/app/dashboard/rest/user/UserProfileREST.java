@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest.user;
 
 import java.io.IOException;
 import java.util.Set;
@@ -15,29 +15,26 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.unical.demacs.informatica.digitales.app.beans.CurriculumSkill;
-import it.unical.demacs.informatica.digitales.app.beans.Project;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.beans.validation.ProfileValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumSkillDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dao.ProjectDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
-import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
-import it.unical.demacs.informatica.digitales.app.settings.ProfileSettings;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.validator.ProfileValidator;
 
 @RestController
-public class ProfileREST {
+public class UserProfileREST {
 
 	@PostMapping("/get_profile_picture")
 	public synchronized String getProfilePicture(HttpServletRequest req)
 			throws JsonSyntaxException, JsonIOException, IOException {
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		if (user == null) {
-			return Servlets.redirect(req, "error_page");
+			return AppServletsHandler.redirect(req, "error_page");
 		}
 
 		long userId = user.getId();
@@ -54,7 +51,7 @@ public class ProfileREST {
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
 		info.setProfilePicture(newMainInfo.getProfilePicture());
@@ -74,7 +71,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
 		return gson.toJson(info);
@@ -87,7 +84,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		return gson.toJson(user);
 
@@ -100,7 +97,7 @@ public class ProfileREST {
 		Gson gson = new Gson();
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		UserMainInformations info = UserMainInformationsDAOImpl.getInstance().findById(user.getId());
 
 		info.setBio(newMainInfo.getBio());
@@ -119,7 +116,7 @@ public class ProfileREST {
 		User newMainInfo = gson.fromJson(req.getReader(), User.class);
 		System.out.println(newMainInfo);
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		ProfileValidatorResponse validation = ProfileValidator.validateMainInfo(newMainInfo, user);
 		if (ProfileValidator.isValidMainInfo(validation)) {
@@ -130,9 +127,9 @@ public class ProfileREST {
 			user.setDateOfBirth(newMainInfo.getDateOfBirth());
 			UserDAOImpl.getInstance().update(user);
 //		TODO CHANGE COOKIE
-			Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, user.getUsername());
+			Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, user.getUsername());
 			resp.addCookie(cookie);
-			
+
 		}
 
 		return gson.toJson(validation);
@@ -147,7 +144,7 @@ public class ProfileREST {
 		System.out.println("NEW DATA");
 		System.out.println(newUser);
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		System.out.println("CURRENT");
 		System.out.println(user);
 
@@ -168,7 +165,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
 //		System.out.println(newMainInfo);
@@ -191,7 +188,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		UserMainInformations newMainInfo = gson.fromJson(req.getReader(), UserMainInformations.class);
 		System.out.println(newMainInfo);
@@ -215,7 +212,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		System.out.println("USER WHEN LOADING SKILL");
 		System.out.println(user);
 		Set<CurriculumSkill> skills = CurriculumSkillDAOImpl.getInstance().findAllByUserId(user.getId());
@@ -229,7 +226,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		CurriculumSkill newSkill = gson.fromJson(req.getReader(), CurriculumSkill.class);
 		System.out.println(newSkill);
@@ -250,7 +247,7 @@ public class ProfileREST {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		CurriculumSkill newSkill = gson.fromJson(req.getReader(), CurriculumSkill.class);
 		System.out.println(newSkill);

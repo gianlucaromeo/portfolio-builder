@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/dashboard")
-public class DashboardHomePageController {
+public class AppDashboardHomePageController {
 
 	@GetMapping("/login/")
 	public void loginPageRedirect(HttpServletResponse resp) throws IOException {
@@ -31,13 +31,6 @@ public class DashboardHomePageController {
 	public String showForgotPasswordPage() {
 		return "app_forgot_password";
 	}
-	
-	/*
-	@GetMapping("confirm_email")
-	public String showConfirmEmailPage() {
-		return "confirm_email";
-	}
-	*/
 	
 	@GetMapping("email_confirmation_page")
 	public String showConfirmEmailInfoPage() {

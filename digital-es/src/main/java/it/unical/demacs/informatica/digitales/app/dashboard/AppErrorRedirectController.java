@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ErrorRedirect implements ErrorController {
+public class AppErrorRedirectController implements ErrorController {
 	@RequestMapping("/error")
 	public String handleError(HttpServletRequest request, HttpServletResponse resp) {
 		try {

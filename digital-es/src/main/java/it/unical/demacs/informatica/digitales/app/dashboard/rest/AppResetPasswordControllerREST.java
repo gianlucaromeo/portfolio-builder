@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest;
 
 import java.io.IOException;
 import java.util.Set;
@@ -22,7 +22,7 @@ import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.validator.ResetPasswordValidator;
 
 @RestController
-public class ResetPasswordControllerREST {
+public class AppResetPasswordControllerREST {
 
 	@PostMapping("get_token")
 	public String getToken(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {

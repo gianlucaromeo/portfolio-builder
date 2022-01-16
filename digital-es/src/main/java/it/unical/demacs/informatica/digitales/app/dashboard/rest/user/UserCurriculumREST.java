@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest.user;
 
 import java.io.IOException;
 import java.util.Set;
@@ -21,18 +21,19 @@ import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.validation.CurriculumExperienceValidatorResponse;
 import it.unical.demacs.informatica.digitales.app.dao.CurriculumExperienceDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.validator.CurriculumExperienceValidator;
 
 @RestController
-public class CurriculumREST {
+public class UserCurriculumREST {
 
 	@PostMapping("/get_curriculum_data_action")
 	public synchronized String getCurriculumDataAction(HttpServletRequest req, HttpServletResponse resp) {
 
 		Gson gson = new Gson();
 
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 
 		if (user == null) {
 			return Protocol.ERROR;
@@ -48,7 +49,7 @@ public class CurriculumREST {
 	@PostMapping("/get_user_id_action")
 	public synchronized String getUserIdAction(HttpServletRequest req, HttpServletResponse resp) {
 		Gson gson = new Gson();
-		User user = Servlets.getLoggedUser(req);
+		User user = AppServletsHandler.getLoggedUser(req);
 		long userId = -1;
 		if (user != null) {
 			userId = user.getId();

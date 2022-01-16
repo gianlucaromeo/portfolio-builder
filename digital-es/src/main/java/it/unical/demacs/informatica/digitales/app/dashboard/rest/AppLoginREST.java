@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest;
 
 import java.io.IOException;
 
@@ -18,10 +18,11 @@ import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserAuthentication;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.validator.LoginValidator;
 
 @RestController
-public class LoginREST {
+public class AppLoginREST {
 
 	@PostMapping("/login_data_validation")
 	public synchronized String loginAction(HttpServletRequest req)
@@ -40,22 +41,22 @@ public class LoginREST {
 	public synchronized void login(HttpServletRequest req, HttpServletResponse resp) {
 
 		System.out.println("DO LOGIN");
-		
+
 		UserAuthentication userAuth = new UserAuthentication();
 		userAuth.setUsername(req.getParameter("username"));
 
 		User user = new User();
-		Moderator moderator= new Moderator();
-		
-		moderator= ModeratorDAOImpl.getInstance().findByUsername(userAuth.getUsername());
+		Moderator moderator = new Moderator();
+
+		moderator = ModeratorDAOImpl.getInstance().findByUsername(userAuth.getUsername());
 		user = UserDAOImpl.getInstance().findByUsername(userAuth.getUsername());
 		if (user != null) {
-			Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, user.getUsername());
-			Servlets.redirectLogin(resp, cookie);
+			Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, user.getUsername());
+			AppServletsHandler.redirectLogin(resp, cookie);
 			return;
-		}else if(moderator!=null) {
-			Cookie cookie = Servlets.initLoggedModeratorUsernameCookie(req, resp, moderator.getUsername());
-			Servlets.redirectModeratorLogin(resp, cookie);
+		} else if (moderator != null) {
+			Cookie cookie = AppServletsHandler.initLoggedModeratorUsernameCookie(req, resp, moderator.getUsername());
+			AppServletsHandler.redirectModeratorLogin(resp, cookie);
 		}
 
 	}

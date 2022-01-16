@@ -4,16 +4,18 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
-import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
-public class Servlets {
 
-	private Servlets() {
+/**
+ * Utility class to handle Cookies and redirects.
+ * */
+public class AppServletsHandler {
+
+	private AppServletsHandler() {
 	}
 
 	public static Cookie getCookie(HttpServletRequest request, String name) {
@@ -30,9 +32,9 @@ public class Servlets {
 
 	public static Cookie initLoggedUsernameCookie(HttpServletRequest req, HttpServletResponse resp, String username) {
 
-		Cookie cookie = Servlets.getCookie(req, "logged_username");
+		Cookie cookie = AppServletsHandler.getCookie(req, "logged_username");
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		deleteCookie(resp, moderatorCookie);
 
 		if (cookie == null) {
@@ -50,9 +52,9 @@ public class Servlets {
 
 	public static Cookie initLoggedModeratorUsernameCookie(HttpServletRequest req, HttpServletResponse resp,
 			String username) {
-		Cookie cookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie cookie = AppServletsHandler.getCookie(req, "logged_moderator");
 
-		Cookie userCookie = Servlets.getCookie(req, "logged_username");
+		Cookie userCookie = AppServletsHandler.getCookie(req, "logged_username");
 		deleteCookie(resp, userCookie);
 
 		if (cookie == null) {
@@ -81,7 +83,7 @@ public class Servlets {
 
 	public static String redirect(HttpServletRequest req, String location) {
 
-		Cookie loggedUsernameCookie = Servlets.getCookie(req, "logged_username");
+		Cookie loggedUsernameCookie = AppServletsHandler.getCookie(req, "logged_username");
 
 		if (loggedUsernameCookie == null) {
 			return "401_page";
@@ -99,12 +101,12 @@ public class Servlets {
 
 	public static String redirectModerator(HttpServletRequest req, String location) {
 
-		Cookie loggedModeratorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie loggedModeratorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 
 		if (loggedModeratorCookie == null) {
 			return "401_page";
 		}
-		// String username = loggedModeratorCookie.getValue();
+		
 		fetchModeratorData(req, loggedModeratorCookie.getValue());
 
 		return location;
@@ -119,7 +121,7 @@ public class Servlets {
 	}
 
 	public static User getLoggedUser(HttpServletRequest req) {
-		Cookie loggedUsernameCookie = Servlets.getCookie(req, "logged_username");
+		Cookie loggedUsernameCookie = AppServletsHandler.getCookie(req, "logged_username");
 
 		if (loggedUsernameCookie == null) {
 			return null;

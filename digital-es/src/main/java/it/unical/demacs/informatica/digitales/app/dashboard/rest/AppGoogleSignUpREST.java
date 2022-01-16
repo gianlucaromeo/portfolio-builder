@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest;
 
 import java.io.IOException;
 
@@ -19,10 +19,11 @@ import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.beans.UserMainInformations;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 
 @RestController
-public class GoogleSignUpREST {
+public class AppGoogleSignUpREST {
 
 	@PostMapping("/sign_up_get_new_google_username")
 	public String getNextId(HttpServletRequest req) throws JsonSyntaxException, JsonIOException, IOException {
@@ -31,7 +32,7 @@ public class GoogleSignUpREST {
 
 		String username = "googleUser" + usersCounter;
 		while (UserDAOImpl.getInstance().checkUsernameExists(username)) {
-			//System.out.println("Username " + username + " already exists");
+			// System.out.println("Username " + username + " already exists");
 			usersCounter++;
 			username = "googleUser" + usersCounter;
 		}
@@ -46,15 +47,15 @@ public class GoogleSignUpREST {
 		boolean usernameExists = UserDAOImpl.getInstance().checkUsernameExists(username);
 		return usernameExists ? Protocol.ERROR : Protocol.OK;
 	}
-	
+
 	@PostMapping("/check_google_user_exists")
 	public String checkGoogleUserExists(HttpServletRequest req)
 			throws JsonSyntaxException, JsonIOException, IOException {
-		String email= new Gson().fromJson(req.getReader(), String.class);
-		
+		String email = new Gson().fromJson(req.getReader(), String.class);
+
 		String username = UserDAOImpl.getInstance().getUsernameByEmail(email);
-		//System.out.println(username);
-		if(username!=null)
+		// System.out.println(username);
+		if (username != null)
 			return new Gson().toJson(email);
 		else
 			return new Gson().toJson(null);
@@ -67,31 +68,28 @@ public class GoogleSignUpREST {
 		User user = new User();
 		user = gson.fromJson(req.getReader(), User.class);
 		System.out.println(user);
-		
-		String username= UserDAOImpl.getInstance().getUsernameByEmail(user.getEmail());
+
+		String username = UserDAOImpl.getInstance().getUsernameByEmail(user.getEmail());
 		System.out.println(username);
-		if(username==null) {
+		if (username == null) {
 			user.setSignUpDate(DateTime.now().toString("yyyy-MM-dd"));
 			UserDAOImpl.getInstance().create(user);
-			
-			
+
 			user.setId(UserDAOImpl.getInstance().findId(user));
 
 			UserMainInformations info = new UserMainInformations();
 			info.setUserId(user.getId());
 			UserMainInformationsDAOImpl.getInstance().create(info);
-			username=user.getUsername();
+			username = user.getUsername();
 			System.out.println("Sign up with google");
 		}
-		
-		
-	
+
 		System.out.println(username);
-		Cookie cookie = Servlets.initLoggedUsernameCookie(req, resp, username);
+		Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, username);
 		resp.addCookie(cookie);
 
 		return gson.toJson(Protocol.OK);
-		
+
 	}
 
 }

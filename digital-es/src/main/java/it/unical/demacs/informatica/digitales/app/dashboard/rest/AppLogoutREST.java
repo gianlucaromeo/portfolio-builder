@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest;
 
 import java.io.IOException;
 
@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
+
 @RestController
 @RequestMapping("/dashboard")
-public class LogoutREST {
-	
-	@GetMapping(value = {"/do_logout", "/moderator/do_logout"})
+public class AppLogoutREST {
+
+	@GetMapping(value = { "/do_logout", "/moderator/do_logout" })
 	public void doLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		Cookie userCookie= Servlets.getCookie(req, "logged_username");
-		Cookie moderatorCookie= Servlets.getCookie(req, "logged_moderator");
-		
-		Servlets.deleteCookie(resp, moderatorCookie);
-		Servlets.deleteCookie(resp, userCookie);
-		
+		Cookie userCookie = AppServletsHandler.getCookie(req, "logged_username");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
+
+		AppServletsHandler.deleteCookie(resp, moderatorCookie);
+		AppServletsHandler.deleteCookie(resp, userCookie);
+
 		resp.sendRedirect("/dashboard/login");
-		
+
 	}
 
 }

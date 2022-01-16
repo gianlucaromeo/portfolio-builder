@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import it.unical.demacs.informatica.digitales.app.beans.User;
 import it.unical.demacs.informatica.digitales.app.dao.EmailConfirmationDaoImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
-import it.unical.demacs.informatica.digitales.app.dashboard.Servlets;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 
 public class PasswordResetHandler {
 
@@ -17,7 +17,7 @@ public class PasswordResetHandler {
 		User user = UserDAOImpl.getInstance().findById(userId);
 		
 		if (user == null) 
-			return Servlets.redirectOnPage("404_page");		
+			return AppServletsHandler.redirectOnPage("404_page");		
 		
 		return "app_reset_password";
 	}

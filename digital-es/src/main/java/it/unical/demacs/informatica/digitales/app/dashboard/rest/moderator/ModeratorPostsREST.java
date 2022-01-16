@@ -1,4 +1,4 @@
-package it.unical.demacs.informatica.digitales.app.dashboard;
+package it.unical.demacs.informatica.digitales.app.dashboard.rest.moderator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import it.unical.demacs.informatica.digitales.app.dao.PostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.RemovedPostDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserDAOImpl;
 import it.unical.demacs.informatica.digitales.app.dao.UserMainInformationsDAOImpl;
+import it.unical.demacs.informatica.digitales.app.dashboard.AppServletsHandler;
 import it.unical.demacs.informatica.digitales.app.database.protocol.Protocol;
 import it.unical.demacs.informatica.digitales.app.settings.BanReasons;
 
@@ -38,7 +39,7 @@ public class ModeratorPostsREST {
 
 		Gson gson = new Gson();
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 
 			Set<User> users = new HashSet<User>();
@@ -59,7 +60,7 @@ public class ModeratorPostsREST {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			String profileImage64 = "";
 			profileImage64 = UserMainInformationsDAOImpl.getInstance().findProfileImageById(id);
@@ -79,7 +80,7 @@ public class ModeratorPostsREST {
 		Gson gson = new Gson();
 		Integer id = gson.fromJson(req.getReader(), Integer.class);
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<Post> posts = new ArrayList<Post>();
 			posts = PostDAOImpl.getInstance().findAllByUserIdNotBanned(id);
@@ -96,7 +97,7 @@ public class ModeratorPostsREST {
 	public String getBanReasons(HttpServletRequest req, HttpServletResponse resp)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new Gson();
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			List<String> reasons = new ArrayList<String>();
 			reasons.add(BanReasons.TEXT_NOT_COMPLY);
@@ -116,7 +117,7 @@ public class ModeratorPostsREST {
 		RemovePostRequest banReq = gson.fromJson(req.getReader(), RemovePostRequest.class);
 		Post post = new Post();
 
-		Cookie moderatorCookie = Servlets.getCookie(req, "logged_moderator");
+		Cookie moderatorCookie = AppServletsHandler.getCookie(req, "logged_moderator");
 		if (moderatorCookie != null) {
 			post = PostDAOImpl.getInstance().findById(banReq.getPostId());
 			if (post != null) {
