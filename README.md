@@ -40,7 +40,7 @@ username: moderator3; password: moderator3;
 username: moderator4; password: moderator4;
 ```
 
-#Come è strutturato il progetto
+# Come è strutturato il progetto
 
 `it.unical.demacs.informatica.digitales.app`:
 - Contiene una classe per l'avvio dell'applicazione e una per la creazione di dati per testare le funzionalità dei moderatori.
