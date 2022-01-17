@@ -43,29 +43,31 @@ public class AppLoginREST {
 		userAuth.setUsername(req.getParameter("username"));
 
 		User user = new User();
-		boolean bannedUser=false;
-		boolean confirmed=false;
-		
+		boolean bannedUser = false;
+		boolean confirmed = false;
+
 		Moderator moderator = new Moderator();
 
-		
 		user = UserDAOImpl.getInstance().findByUsername(userAuth.getUsername());
-		bannedUser= UserDAOImpl.getInstance().isBannedByUsername(userAuth.getUsername());
-		confirmed= UserDAOImpl.getInstance().isConfirmedByUsername(userAuth.getUsername());
-		
+		bannedUser = UserDAOImpl.getInstance().isBannedByUsername(userAuth.getUsername());
+		confirmed = UserDAOImpl.getInstance().isConfirmedByUsername(userAuth.getUsername());
+
 		moderator = ModeratorDAOImpl.getInstance().findByUsername(userAuth.getUsername());
-		
-		if(bannedUser) {
+
+		if (bannedUser) {
 			resp.sendRedirect("/dashboard/banned_user");
 			return;
-		} else if(!confirmed) {
-			resp.sendRedirect("/dashboard/email_confirmation_page");
-			return;
-		}else if(user != null && confirmed) {
-			Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, user.getUsername());
-			AppServletsHandler.redirectLogin(resp, cookie);
-			return;
-		}else if (moderator != null) {
+		} else if (user != null) {
+			if (confirmed) {
+				Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, user.getUsername());
+				AppServletsHandler.redirectLogin(resp, cookie);
+				return;
+			} else {
+				resp.sendRedirect("/dashboard/email_confirmation_page");
+				return;
+			}
+
+		} else if (moderator != null) {
 			Cookie cookie = AppServletsHandler.initLoggedModeratorUsernameCookie(req, resp, moderator.getUsername());
 			AppServletsHandler.redirectModeratorLogin(resp, cookie);
 		}
