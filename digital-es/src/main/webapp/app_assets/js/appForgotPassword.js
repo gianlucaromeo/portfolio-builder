@@ -1,7 +1,6 @@
 emailjs.init("user_OVRlRtT0ckdLLMRvS39z1");
 
 function sendEmail(receiver) {
-
 	var values = {
 		token: $("#username").val()
 	};
@@ -24,7 +23,7 @@ function sendEmail(receiver) {
 		emailjs.send("service_ia6pdau", "template_29txnm1", templateParams)
 			.then(function(response) {
 				
-				alert("An email with your password has been sent to the email associated with your username");
+				window.location.href = "/dashboard/reset_password_email_sent";
 			}, function(error) {
 				
 			});

@@ -53,5 +53,11 @@ public class UserAdminPageController {
 		return AppServletsHandler.redirectOnPage("500_page");
 
 	}
+	@GetMapping("/reset_password_email_sent")
+	public synchronized String goToResetPasswordSent(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		return AppServletsHandler.redirectOnPage("reset_password_sent_email");
+
+	}
 	
 }
