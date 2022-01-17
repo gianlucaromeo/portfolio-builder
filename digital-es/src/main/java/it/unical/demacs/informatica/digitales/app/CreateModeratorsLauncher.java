@@ -4,8 +4,8 @@ import it.unical.demacs.informatica.digitales.app.beans.Moderator;
 import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
 
 /**
- * Use this class to add Moderators to the Database. Don't add manually
- * Moderators: the password must be encrypted.
+ * Use this class to add Moderators to the Database. 
+ * Don't add Moderators Data manually: the password must be encrypted.
  * 
  */
 public class CreateModeratorsLauncher {
