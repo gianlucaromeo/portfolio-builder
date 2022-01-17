@@ -1,6 +1,9 @@
 emailjs.init("user_OVRlRtT0ckdLLMRvS39z1");
 
 function sendEmail(receiver) {
+	$("#forgotPasswordBtn").remove();
+	$("#username").removeClass("is-invalid");
+	$("#username").attr('readonly', true);
 	var values = {
 		token: $("#username").val()
 	};
@@ -13,7 +16,7 @@ function sendEmail(receiver) {
 		dataType: "json"
 	}).done(function(data) {
 		var token = data.token;
-		
+
 		var html = '<a href="http://localhost:8080/users/' + token + '/password_reset">Click Here to reset your password</a>';
 		var templateParams = {
 			from_name: "Portfolio Builder",
@@ -22,16 +25,22 @@ function sendEmail(receiver) {
 		};
 		emailjs.send("service_ia6pdau", "template_29txnm1", templateParams)
 			.then(function(response) {
-				
 				window.location.href = "/dashboard/reset_password_email_sent";
 			}, function(error) {
-				
+
 			});
 	});
 
 
 };
 
+function setEventOnModal() {
+
+	$("#closeModalBtn").click(function() {
+		window.location.href = "/dashboard/login";
+	});
+}
+setEventOnModal();
 function sendForgotPassword() {
 	var user = $("#username");
 	var values = {
@@ -44,7 +53,7 @@ function sendForgotPassword() {
 		data: JSON.stringify(values),
 		type: "post",
 		dataType: "json",
-		error: function() { alert("The selected username does not exist"); },
+		error: function() { $("#username").addClass("is-invalid"); },
 	}).done(function(data) {
 		if (data.email != "")
 			sendEmail(data.email);
@@ -60,7 +69,7 @@ function resetPassword() {
 		repeatPassword: repeatPassword.val(),
 		token: token.val()
 	};
-	
+
 	$.ajax({
 		url: "/reset_password",
 		contentType: "application/json",
@@ -68,13 +77,13 @@ function resetPassword() {
 		type: "post",
 		dataType: "json"
 	}).done(function(data) {
-		
+
 		if (checkPasswordMatch(password, repeatPassword) && checkPasswordValid(password, repeatPassword, data.password)) {
-			alert("Your Password has been updated successfully");
 			password.removeClass("is-invalid");
 			repeatPassword.removeClass("is-invalid");
 			password.attr("readonly", true);
 			repeatPassword.attr("readonly", true);
+			$("#modalButton").trigger("click");
 		}
 	});
 }

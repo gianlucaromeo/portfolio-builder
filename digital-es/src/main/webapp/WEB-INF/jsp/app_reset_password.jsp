@@ -78,6 +78,30 @@
 
 								<button class="btn btn-primary d-block btn-user w-100"
 									type="button" onclick="resetPassword()" id="resetBtn">Confirm</button>
+
+								<button type="button" class="btn btn-primary btn-sm"
+									data-bs-toggle="modal" data-bs-target="#modal"
+									id="modalButton" hidden></button>
+								<!-- Modal -->
+								<div class="modal fade" id="modal" tabindex="-1"
+									aria-labelledby="modalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="modalLabel">Password Updated!</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">Password successfully updated</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary"
+													data-bs-dismiss="modal" id="closeModalBtn">Ok</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
 							</form>
 							<div class="text-center">
 								<a class="small" href="/dashboard/login">Return to Login</a>
