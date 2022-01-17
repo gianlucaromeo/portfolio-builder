@@ -70,7 +70,7 @@ username: moderator4; password: moderator4;
 - Contiene classi di Utilità per gestire la connessione al Database.
 
 `it.unical.demacs.informatica.digitales.app.database.protocol`
-- Contiente gli esiti delle risposte delle richieste durante la comunicazione Client-Server.
+- Contiene gli esiti delle risposte delle richieste durante la comunicazione Client-Server.
 
 `it.unical.demacs.informatica.digitales.app.portfolio`
 - Contiene un Controller che si occupa di gestire l'interfaccia grafica del Portoflio generato per l'Utente. All'interno del package sono presenti classi di utilità che si occupano di selezionare quali dati debbano essere visibili, in base alla pagina su cui si trova un utente che visita il Portfolio.
