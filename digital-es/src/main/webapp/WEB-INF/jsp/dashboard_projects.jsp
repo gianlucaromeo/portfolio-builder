@@ -143,7 +143,7 @@
 												</div>
 												<div class="col-sm-6">
 													<img src="undefined" width="160" height="160"
-														id="project_image">
+														id="project_image" class="img-fluid">
 												</div>
 											</div>
 										</form>
