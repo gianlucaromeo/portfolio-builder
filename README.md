@@ -10,9 +10,9 @@ Dopo aver importato il dump del Database, modificare `URL`, `USER`, `PASSWORD` d
 ```
 public class DBSettings {
 
-	public final static String `URL` = "jdbc:postgresql://localhost:5432/web-project";
-	public final static String `USER` = "postgres";
-	public final static String `PASSWORD` = "postgres";
+	public final static String *URL* = "jdbc:postgresql://localhost:5432/web-project";
+	public final static String *USER* = "postgres";
+	public final static String *PASSWORD* = "postgres";
 	
 }
 ```
