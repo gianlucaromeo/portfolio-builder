@@ -28,7 +28,8 @@
 				<img class="border rounded-circle img-profile"
 					src="${profilePicture }" height="32" width="32">
 			</div>
-			<a class="navbar-brand logo" href="/users/${username}/homepage">${firstName} ${lastName}</a>
+			<a class="navbar-brand logo" href="/users/${username}/homepage">${firstName}
+				${lastName}</a>
 			<button data-bs-toggle="collapse" class="navbar-toggler"
 				data-bs-target="#navbarNav">
 				<span class="visually-hidden">Toggle navigation</span><span
@@ -46,113 +47,125 @@
 	</nav>
 
 	<main class="page lanidng-page">
+
+
+
 		<c:if test="${almostOnePost==false}">
-			
-				<img class="img-fluid" alt="" src="../../portfolio_assets/img/no_posts.png">
+
+			<img class="img-fluid" alt=""
+				src="../../portfolio_assets/img/no_posts.png">
 
 			<!-- POST END -->
 
 		</c:if>
 		<c:if test="${almostOnePost==true}">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<div>
-						<div class="content social-timeline">
-							<div class="row">
+			<div class="container">
+				<div class="heading p-3">
+					<h2>My Posts</h2>
+					<hr>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div>
+							<div class="content social-timeline">
+								<div class="row">
 
 
-								<div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
+									<div class="col-xl-9 col-lg-8 col-md-8 col-xs-12 ">
 
-									<div class="card social-tabs"></div>
+										<div class="card social-tabs"></div>
 
-									<div class="tab-content">
+										<div class="tab-content">
 
-										<div class="tab-pane active" id="timeline">
+											<div class="tab-pane active" id="timeline">
 
 
-											<!-- POST BEGIN -->
+												<!-- POST BEGIN -->
 
-											<c:forEach items="${posts}" var="post">
-												<div class="row">
-													<div class="col-md-12 timeline-dot">
-														<div class="social-timelines p-relative">
-															<div class="row timeline-right p-t-35">
-																<div class="col-2 col-sm-2 col-xl-1">
-																	<div class="social-timelines-left">
-																		<img class="img-radius timeline-icon"
-																			src="${profilePicture}" alt="">
+												<c:forEach items="${posts}" var="post">
+													<div class="row">
+														<div class="col-md-12 timeline-dot">
+															<div class="social-timelines p-relative">
+																<div class="row timeline-right p-t-35">
+																	<div class="col-2 col-sm-2 col-xl-1">
+																		<div class="social-timelines-left">
+																			<img class="img-radius timeline-icon"
+																				src="${profilePicture}" alt="">
+																		</div>
 																	</div>
-																</div>
-																<div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
-																	<div class="card">
-																		<div class="card-block post-timelines">
-																			<span
-																				class="dropdown-toggle addon-btn text-muted f-right service-btn"
-																				data-toggle="dropdown" aria-haspopup="true"
-																				aria-expanded="true" role="tooltip"></span>
+																	<div class="col-10 col-sm-10 col-xl-11 p-l-5 p-b-35">
+																		<div class="card">
+																			<div class="card-block post-timelines">
+																				<span
+																					class="dropdown-toggle addon-btn text-muted f-right service-btn"
+																					data-toggle="dropdown" aria-haspopup="true"
+																					aria-expanded="true" role="tooltip"></span>
 
-																			<div class="f-w-600">${firstName} ${lastName}</div>
-																			<c:if
-																				test="${post.lastEditDate == '' || post.lastEditDate == null}">
-																				<div class="social-time text-muted">Posted on:
-																					${post.pubblicationDate}</div>
-																			</c:if>
-
-																			<c:if
-																				test="${post.lastEditDate != '' && post.lastEditDate != null}">
-																				<div class="social-time text-muted">Updated
-																					on: ${post.lastEditDate}</div>
-																			</c:if>
-
-
-																		</div>
-
-																		<c:if
-																			test="${post.picture != 'undefined' && post.picture != null}">
-																			<img src="${post.picture}" height="350"
-																				class=" width-100" alt="">
-																		</c:if>
-
-																		<div class="card-block">
-																			<div class="timeline-details">
-																				<div>
-																					<h4>${post.title }</h4>
-																				</div>
-																				<p class="text-muted">${post.description}</p>
+																				<div class="f-w-600">${firstName}${lastName}</div>
 																				<c:if
-																			test="${post.refLink != '...' && post.refLink != null && post.refLink != ''}">
-																			<p class="text-muted">Reference Link: <a href="${post.refLink}">${post.refLink}</a> </p>
-																		</c:if>
-																				
+																					test="${post.lastEditDate == '' || post.lastEditDate == null}">
+																					<div class="social-time text-muted">Posted
+																						on: ${post.pubblicationDate}</div>
+																				</c:if>
+
+																				<c:if
+																					test="${post.lastEditDate != '' && post.lastEditDate != null}">
+																					<div class="social-time text-muted">Updated
+																						on: ${post.lastEditDate}</div>
+																				</c:if>
+
+
 																			</div>
+
+																			<c:if
+																				test="${post.picture != 'undefined' && post.picture != null}">
+																				<div class="row justify-content-center">
+																					<img src="${post.picture}" class="scale-on-hover"
+																						alt="" style="width: 400px; height: 350px;">
+																				</div>
+																			</c:if>
+
+																			<div class="card-block">
+																				<div class="timeline-details">
+																					<div>
+																						<h4>${post.title }</h4>
+																					</div>
+																					<p class="text-muted">${post.description}</p>
+																					<c:if
+																						test="${post.refLink != '...' && post.refLink != null && post.refLink != ''}">
+																						<p class="text-muted">
+																							Reference Link: <a href="${post.refLink}">${post.refLink}</a>
+																						</p>
+																					</c:if>
+
+																				</div>
+																			</div>
+
+
 																		</div>
-
-
 																	</div>
 																</div>
 															</div>
+
 														</div>
-
 													</div>
-												</div>
-												<!-- POST END -->
-											</c:forEach>
+													<!-- POST END -->
+												</c:forEach>
 
 
+
+											</div>
 
 										</div>
-
 									</div>
 								</div>
-							</div>
 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div></div>
+			<div></div>
 		</c:if>
 	</main>
 
@@ -160,14 +173,16 @@
 		<div class="container">
 			<div class="social-icons">
 				<c:if test="${facebookLink != null && facebookLink != ''}">
-					<a href="https://${facebookLink}"><i class="icon ion-social-facebook"></i></a>
+					<a href="https://${facebookLink}"><i
+						class="icon ion-social-facebook"></i></a>
 				</c:if>
 				<c:if test="${instagramLink != null && instagramLink != ''}">
 					<a href="https://${instagramLink}"><i
 						class="icon ion-social-instagram-outline"></i></a>
 				</c:if>
 				<c:if test="${twitterLink != null && twitterLink != ''}">
-					<a href="https://${twitterLink}"><i class="icon ion-social-twitter"></i></a>
+					<a href="https://${twitterLink}"><i
+						class="icon ion-social-twitter"></i></a>
 				</c:if>
 			</div>
 		</div>

@@ -378,6 +378,7 @@
 																name="sec_phone_number">
 														</div>
 													</div>
+													<hr/>
 													<div class="row">
 														<div class="col-12 col-md-4 col-lg-4">
 															<div class="mb-3 text-center">
@@ -402,6 +403,9 @@
 																	placeholder="" name="instagram">
 															</div>
 														</div>
+													</div>
+													<div class="row">
+														<p>Please be sure your Social links do not have "https://" before "www"</p>
 													</div>
 												</div>
 												<div class="mb-3">

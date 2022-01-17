@@ -154,7 +154,7 @@ function signUp(userData) {
 		sendEmail(userData.email, token);
 		setTimeout(() => {
 			window.location.href = "/dashboard/email_confirmation_page";
-		}, 2000)
+		}, 600)
 
 		
 	});

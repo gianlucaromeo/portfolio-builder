@@ -11,7 +11,7 @@ public class ProjectValidator {
 	private static final String TITLE_RGX = "^[0-9a-zA-Z\\s!\"#$%&'()*+,-./:;<=>?@]+$";
 	private static final Pattern TITLE_PATTERN = Pattern.compile(TITLE_RGX);
 	
-	private static final String LINK_RGX = "^(?:[a-z]*?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
+	private static final String LINK_RGX = "^(?:[a-z]*?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})(.)*$";
 	private static final Pattern LINK_PATTERN = Pattern.compile(LINK_RGX);
 	
 	public static ProjectValidatorResponse validateProject(Project project) {
