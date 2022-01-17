@@ -10,7 +10,6 @@ import it.unical.demacs.informatica.digitales.app.dao.ModeratorDAOImpl;
  */
 public class CreateModeratorsLauncher {
 
-	/* Them are already saved on DataBase*/
 	public static void main(String[] args) {
 		createModerator("moderator1", "moderator1", "moderator1@portfoliobuilder.it");
 		createModerator("moderator2", "moderator2", "moderator2@portfoliobuilder.it");
