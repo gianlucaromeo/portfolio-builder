@@ -18,10 +18,10 @@ public class DBSettings {
 }
 ```
 
-Per avviare l'applicazione è sufficiente eseguire il main della classe `DigitalESApplication`.
+Per avviare l'applicazione è sufficiente eseguire il main della classe `DigitalESApplication` nel package `it.unical.demacs.informatica.digitales.app.`.
 > Se l'applicazione non viene eseguita, provare ad eseguire il main come Spring Boot App.
 
-Se il progetto è stato avviato correttamente, è possibile accedere al Sistema tramite credenziali di utenti test all'indirizzo `localhost:8080/dashboard/login`:
+Se il progetto è stato avviato correttamente, è possibile accedere alla Home Page del Sistema all'indirizzo `localhost:8080/home`, oppure tramite credenziali di utenti test all'indirizzo `localhost:8080/dashboard/login`:
 
 Utenti (per testare il progetto):
 ```
