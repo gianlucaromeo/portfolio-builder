@@ -91,7 +91,7 @@ public class AppSignUpREST {
 		EmailConfirmationDaoImpl.getInstance().delete(confirmation);
 
 		user.setConfirmed(true);
-		UserDAOImpl.getInstance().update(user);
+		UserDAOImpl.getInstance().updateConfirmation(user);
 
 		Cookie cookie = AppServletsHandler.initLoggedUsernameCookie(req, resp, user.getUsername());
 

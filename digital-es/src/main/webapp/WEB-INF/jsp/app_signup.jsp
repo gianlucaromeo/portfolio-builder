@@ -52,14 +52,12 @@
 									<div class="row mb-3">
 										<div class="col-sm-6 mb-3 mb-sm-0">
 											<input class="form-control form-control-user" type="text"
-												id="firstName" placeholder="First Name" name="first_name"
-												value="Gianluca">
+												id="firstName" placeholder="First Name" name="first_name">
 										</div>
 
 										<div class="col-sm-6">
 											<input class="form-control form-control-user" type="text"
-												id="lastName" placeholder="Last Name" name="last_name"
-												value="Romeo">
+												id="lastName" placeholder="Last Name" name="last_name">
 										</div>
 									</div>
 								</div>
@@ -70,8 +68,7 @@
 											<label class="datePickerLabel" for="datePicker">Date
 												of birth</label> <i class="fas fa-calendar input-prefix" tabindex=0></i>
 											<input placeholder="Select date" type="date" id="datePicker"
-												name="date_of_birth" class="form-control form-control-user"
-												value="2000-02-02">
+												name="date_of_birth" class="form-control form-control-user">
 											<div id="dateInvalid" class="text-danger">You must be
 												at least 18 years old.</div>
 										</div>
@@ -81,8 +78,7 @@
 									<div class="mb-3">
 										<input class="form-control form-control-user" type="email"
 											id="inputEmail" aria-describedby="emailHelp"
-											placeholder="Email Address" name="email"
-											value="gianlucaromeo@outlook.com">
+											placeholder="Email Address" name="email">
 									</div>
 									<div id="emailInvalid" class="text-danger">Email already
 										used. Please try again.</div>
@@ -92,7 +88,7 @@
 										<input class="form-control form-control-user" type="text"
 											id="username" aria-describedby="usernameHelp"
 											placeholder="Username" name="username" minlength="8"
-											maxlength="20" value="gianluca1234">
+											maxlength="20">
 									</div>
 								</div>
 								<div class="row mb-3" id="passwordsContainer">
@@ -100,13 +96,12 @@
 										<div class="col-sm-6 mb-3 mb-sm-0">
 											<input class="form-control form-control-user" type="password"
 												id="passwordInput" placeholder="Password" name="password"
-												minlength="8" maxlength="20" value="Password1234?">
+												minlength="8" maxlength="20">
 										</div>
 										<div class="col-sm-6">
 											<input class="form-control form-control-user" type="password"
 												id="repeatPasswordInput" placeholder="Repeat Password"
-												name="password_repeat" minlength="8" maxlength="20"
-												value="Password1234?">
+												name="password_repeat" minlength="8" maxlength="20">
 										</div>
 									</div>
 									<div id="passwordsDontMatch" class="text-danger">Please

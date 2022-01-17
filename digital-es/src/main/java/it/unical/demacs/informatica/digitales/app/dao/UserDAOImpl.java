@@ -14,7 +14,8 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 	private static UserDAOImpl instance = null;
 
-	private UserDAOImpl() {}
+	private UserDAOImpl() {
+	}
 
 	public static UserDAOImpl getInstance() {
 		if (instance == null) {
@@ -90,6 +91,34 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 
 		} catch (SQLException e) {
 			System.err.println("[UserDAOImpl] [update]: ");
+			e.printStackTrace();
+			return Protocol.ERROR;
+		} finally {
+			closeAll();
+		}
+
+		return Protocol.OK;
+
+	}
+	
+	public synchronized String updateConfirmation(User user) {
+
+		con = DBUtil.getInstance().getConnection();
+
+		String query = "UPDATE users SET confirmed=? WHERE id=?;";
+
+		try {
+
+			p = con.prepareStatement(query);
+
+			
+			p.setBoolean(1, user.isConfirmed());
+			p.setLong(2, user.getId());
+
+			p.executeUpdate();
+
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [updateConfirmation]: ");
 			e.printStackTrace();
 			return Protocol.ERROR;
 		} finally {
@@ -496,7 +525,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 	}
 
 	public synchronized boolean isBannedByUsername(String username) {
-		boolean banned=false;
+		boolean banned = false;
 
 		con = DBUtil.getInstance().getConnection();
 
@@ -510,7 +539,7 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 			rs = p.executeQuery();
 
 			if (rs.next()) {
-				banned=true;
+				banned = true;
 			}
 
 		} catch (SQLException e) {
@@ -521,6 +550,31 @@ public class UserDAOImpl extends DAOImpl implements DAO<User> {
 		}
 
 		return banned;
+	}
+
+	public synchronized boolean isConfirmedByUsername(String username) {
+
+		con = DBUtil.getInstance().getConnection();
+
+		String query = "SELECT * FROM users WHERE username=? AND confirmed=?;";
+
+		try {
+
+			p = con.prepareStatement(query);
+			p.setString(1, username);
+			p.setBoolean(2, true);
+			rs = p.executeQuery();
+
+			return rs.next();
+
+		} catch (SQLException e) {
+			System.err.println("[UserDAOImpl] [isBannedByUsername]: ");
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		return false;
 	}
 
 }
