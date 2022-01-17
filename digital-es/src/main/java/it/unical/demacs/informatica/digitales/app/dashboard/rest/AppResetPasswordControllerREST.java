@@ -33,6 +33,9 @@ public class AppResetPasswordControllerREST {
 		EmailConfirmation emailConfirmation = new EmailConfirmation();
 		emailConfirmation.setUserId(user.getId());
 		emailConfirmation.setToken(createToken());
+		if (EmailConfirmationDaoImpl.getInstance().findById(user.getId()) != null) {
+			EmailConfirmationDaoImpl.getInstance().delete(emailConfirmation);
+		}
 		EmailConfirmationDaoImpl.getInstance().create(emailConfirmation);
 
 		return gson.toJson(emailConfirmation);
