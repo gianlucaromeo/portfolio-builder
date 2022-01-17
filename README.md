@@ -1,2 +1,8 @@
-# digital-es
-Digital Experiences Showcase is the final group project for the "Web Computing" class at Università Della Calabria. This project lets a user create and manage its portfolio by using a private dashboard. 
+# Portfolio Builder
+###### Gianluca Romeo
+###### Cristian Domenico Dramisino
+###### Luigi Montalbano
+
+> Portfolio Builder permette la creazione di un Portfolio personale attraverso l'uso di una Dashboard privata.
+
+Dopo aver importato il dump del Database, modificare l'URL e la Password dalla classe `DBSettings` nel package `it.unical.demacs.informatica.digitales.app.database`.
